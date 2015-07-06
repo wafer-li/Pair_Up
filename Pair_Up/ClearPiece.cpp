@@ -55,4 +55,5 @@ Map clearPiece(Map temporary){
 			}
 		}
 	}
+	return temporary;
 }
