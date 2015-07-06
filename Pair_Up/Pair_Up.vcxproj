@@ -64,9 +64,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="ClearPiece.h" />
     <ClInclude Include="Map.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ClearPiece.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
   </ItemGroup>
