@@ -1,0 +1,1 @@
+static int g_score = 0;
