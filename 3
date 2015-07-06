@@ -38,20 +38,10 @@ void Map::initMap()
 //Swap
 void Map::Swap(Piece & piece1, Piece & piece2)
 {
-	if (
-		piece1.x >= 0 && piece1.x < MAX_SIZE&&piece1.y >= 0 && piece1.y < MAX_SIZE
-		&&piece2.x >= 0 && piece2.x < MAX_SIZE&&piece2.y >= 0 && piece2.y < MAX_SIZE)
-	{
-
-		Piece temp;
-		temp = piece1;
-		piece1 = piece2;
-		piece2 = temp;
-	}
-	else
-	{
-		return;
-	}
+	Piece temp;
+	temp = piece1;
+	piece1 = piece2;
+	piece2 = temp;
 }
 
 //isDead
@@ -61,7 +51,7 @@ bool Map::isDead(int x, int y)
 	
 	//Swap right
 	Swap(maplists[x][y], maplists[x + 1][y]);
-	if (judge(maplists[x][y],maplists[x + 1][y]))
+	if (judge(maplists[x][y]))
 	{
 		flag = false;
 	}
@@ -75,7 +65,7 @@ bool Map::isDead(int x, int y)
 
 	//Swap down
 	Swap(maplists[x][y], maplists[x][y + 1]);
-	if (judge(maplists[x][y], maplists[x][y + 1]))
+	if (judge(maplists[x][y]))
 	{
 		flag = false;
 	}
@@ -88,22 +78,6 @@ bool Map::isDead(int x, int y)
 	Swap(maplists[x][y], maplists[x][y + 1]);
 	
 	return flag;
-}
-
-//isDeadMap
-bool Map::isDeadMap()
-{
-	for (int i = 0; i < MAX_SIZE; i++)
-	{
-		for (int j = 0; j < MAX_SIZE; j++)
-		{
-			if (!isDead(i, j))
-			{
-				return false;
-			}
-		}
-	}
-	return true;
 }
 
 //isPass
