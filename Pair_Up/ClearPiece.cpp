@@ -1,6 +1,7 @@
 #include "ClearPiece.h"
 #include "Map.h"
 //status为访问的消除状态，color为该方块颜色
+//当确定具体的map和piece后需更改
 Map clearPiece(Map temporary){
 	//行检查
 	for (int i = 0; i < 9; i++)
