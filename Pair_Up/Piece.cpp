@@ -55,3 +55,8 @@ int Piece::getIsClear()
 {
 	return this->isClear;
 }
+
+void Piece::setIsClear(int flag)
+{
+	this->isClear = flag;
+}
