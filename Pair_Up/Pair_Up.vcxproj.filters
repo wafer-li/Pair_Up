@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="源文件\test">
+      <UniqueIdentifier>{6dbbc493-951b-4982-854c-3db981a1ba08}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Map.h">
@@ -37,6 +40,12 @@
     </ClCompile>
     <ClCompile Include="ClearPiece.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Piece.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="testClear.cpp">
+      <Filter>源文件\test</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
