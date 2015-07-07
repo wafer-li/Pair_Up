@@ -1,4 +1,5 @@
 #include <iostream>
+#include <ctime>
 #include "yage.h"
 #include "Map.h"
 #include "Piece.h"
@@ -15,15 +16,23 @@
 //g_replenishMap();
 //Update7-7：接口写好了我就写上面的函数..
 static int g_score = 0;
+
+int init(void);
 int gameMode(void);
 int recordMode(void);
 int optionMode(void);
 int exitMode(void);
 void g_game(void);
 Map g_C_P_S_R(Map oriMap);
+
 int main(int argc, char*argv[])
 {
 	meun(mouseCheck.meun);
+}
+int init(void)
+{
+	srand((unsigned)time(0));
+	return 0;
 }
 
 void meun(int playerChoose)
