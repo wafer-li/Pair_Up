@@ -20,7 +20,7 @@ public:
 	void initMap();
 
 	//Swap
-	void Swap(Piece & piece1, Piece & piece2);
+	void Swap(int x1, int y1, int x2, int y2);
 
 	//isDeadMap
 	bool isDeadMap();	//The new version is as default
