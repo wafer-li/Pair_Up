@@ -5,7 +5,6 @@
 #include <deque>
 #include "Piece.h"
 
-
 class Map{
 private:
 	static const int MAX_SIZE = 9;
