@@ -16,7 +16,7 @@ protected:
 public:
 	Map();
 	~Map();
-	
+
 	//initial & fill the map
 	void initMap();
 
