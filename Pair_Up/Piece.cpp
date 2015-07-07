@@ -4,6 +4,7 @@ using namespace std;
 //create a normal type or special type
 Piece::Piece(void)
 {
+	isClear = 0;
 	specType = 0;//initialize it as a normal piece
 	int flag = rand() % 1500 + 1;
 	if (flag >= 1490)
@@ -22,8 +23,8 @@ Piece::Piece(void)
 		if (flag == 1500)
 			specType = 6;//death
 	}
-	else
-		type = flag % 6 + 1;
+	type = flag % 6 + 1;
+	//Update7-7:tgf:特殊方块也是有基本属性的
 }
 
 
@@ -48,4 +49,9 @@ int Piece::getType()
 int Piece::getSpecType()
 {
 	return this->specType;
+}
+
+int Piece::getIsClear()
+{
+	return this->isClear;
 }
