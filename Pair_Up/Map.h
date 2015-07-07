@@ -9,7 +9,6 @@ class Map{
 private:
 	static const int MAX_SIZE = 9;
 	std::deque<Piece> maplists[MAX_SIZE];//Use deque instead of list
-	//Piece[9][9] piece;	//基于list 这个数据结构LHT你把他解决了
 	bool isPass; //当前游戏是否过关
 	int passScore;
 protected:
