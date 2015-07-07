@@ -1,5 +1,4 @@
 #include "Map.h"
-#include <time.h>
 
 //Cont
 Map::Map()
