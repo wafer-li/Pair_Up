@@ -1,17 +1,16 @@
 #include "Map.h"
 
-//Cont
+//Ctor
 Map::Map()
 {
 	//Initial the map structure
 	for (int i = 0; i < MAX_SIZE; i++)
 	{
-		Piece list = Piece();
-		maplists[i].push_front(list);
+		maplists[i] = std::deque<Piece>(MAX_SIZE);
 	}
 }
 
-//De
+//Dtor
 Map::~Map()
 {
 	/* ... */
@@ -27,7 +26,7 @@ void Map::initMap()
 	{
 		for (j = 0; j < MAX_SIZE;j++)
 		{
-			Piece list = Piece();
+			Piece list = Piece(i,j);
 			maplists[i].push_front(list);
 		}
 	}
