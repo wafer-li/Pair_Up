@@ -128,3 +128,9 @@ void Map::setPassScore(int score)
 {
 	passScore = score;
 }
+
+//Maplists
+std::deque<Piece> * Map::getMaplists()
+{
+	return maplists;
+}

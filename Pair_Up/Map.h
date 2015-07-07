@@ -35,6 +35,9 @@ public:
 	//-----int passScore----
 	int getPassScore();
 	void setPassScore(int score);
+
+	//Maplists
+	std::deque<Piece> * getMaplists();
 };
 
 
