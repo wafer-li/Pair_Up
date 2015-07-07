@@ -25,6 +25,9 @@ public:
 	//isDeadMap
 	bool isDeadMap();
 
+	//another way to judge the DeadMap
+	bool isDeadMap_();
+
 	//isDead
 	bool isDead(int x, int y);
 
