@@ -23,7 +23,7 @@ void Map::initMap()
 {
 	for (int i = 0; i < MAX_SIZE; i++)
 	{
-		for (j = 0; j < MAX_SIZE;j++)
+		for (int j = 0; j < MAX_SIZE;j++)
 		{
 			Piece list = Piece();
 			maplists[i].push_front(list);
@@ -52,6 +52,7 @@ void Map::Swap(int x1,int y1,int x2,int y2)
 }
 
 //isDead
+/*	Abandon this function temporary
 bool Map::isDead(int x, int y)
 {
 	bool flag = false;
@@ -86,6 +87,7 @@ bool Map::isDead(int x, int y)
 	
 	return flag;
 }
+*/
 
 
 //isDeadMap_The old version
