@@ -16,7 +16,6 @@ Map::~Map()
 	/* ... */
 }
 
-
 //Method
 
 //Initial the map
@@ -26,7 +25,7 @@ void Map::initMap()
 	{
 		for (j = 0; j < MAX_SIZE;j++)
 		{
-			Piece list = Piece(i,j);
+			Piece list = Piece();
 			maplists[i].push_front(list);
 		}
 	}
