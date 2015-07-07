@@ -12,10 +12,13 @@ public:
 	bool operator==(Piece &p);
 	int getType();
 	int getSpecType();
+	int getIsClear();
+	void setIsClear(int flag);
 private:
 	int type;
 	int specType;//we have 6 special spieces
-	//1.00.line 2.00.row 3.00.box 4.00.same color 5.00.unclear 6.00.death
+	//0 ori 1.line 2.row 3.box 4.same color 5.unclear 6.death
+	int isClear;
 };
 
 #endif
