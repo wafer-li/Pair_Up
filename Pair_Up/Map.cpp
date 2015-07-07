@@ -34,17 +34,17 @@ void Map::initMap()
 
 
 //Swap
-void Map::Swap(Piece & piece1, Piece & piece2)
+void Map::Swap(int x1,int y1,int x2,int y2)
 {
 	if (
-		piece1.x >= 0 && piece1.x < MAX_SIZE&&piece1.y >= 0 && piece1.y < MAX_SIZE
-		&&piece2.x >= 0 && piece2.x < MAX_SIZE&&piece2.y >= 0 && piece2.y < MAX_SIZE)
+		x1 >= 0 && x1 < MAX_SIZE && y1 >= 0 && y1 < MAX_SIZE
+		&& x2 >= 0 && x2 < MAX_SIZE && y2 >= 0 && y2 < MAX_SIZE)
 	{
 
 		Piece temp;
-		temp = piece1;
-		piece1 = piece2;
-		piece2 = temp;
+		temp = maplists[x1][y1];
+		maplists[x1][y1]= maplists[x2][y2];
+		maplists[x2][y2]= temp;
 	}
 	else
 	{
