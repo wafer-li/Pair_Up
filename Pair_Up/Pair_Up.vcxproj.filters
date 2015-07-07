@@ -18,6 +18,12 @@
     <ClInclude Include="Map.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Piece.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
