@@ -143,18 +143,19 @@ bool Map::isDeadMap_()
 		{
 			//if there were any the same color Piece at the next line.
 			if (getMaplists()[i][j].colorNum == getMaplists()[i][j + 1].colorNum){
-				if ((getMaplists()[i][j].colorNum == getMaplists()[i - 1][j - 1].colorNum) || (getMaplists()[i][j].colorNum == getMaplists()[i + 1][j - 1]) || (getMaplists()[i][j].colorNum == getMaplists()[i - 1][j + 2]) || (getMaplists()[i][j].colorNum == getMaplists()[i + 1][j + 2]))
+				if ((getMaplists()[i][j].colorNum == getMaplists()[i - 1][j - 1].colorNum) || (getMaplists()[i][j].colorNum == getMaplists()[i + 1][j - 1]) ||//对相邻行检查
+					(getMaplists()[i][j].colorNum == getMaplists()[i - 1][j + 2]) || (getMaplists()[i][j].colorNum == getMaplists()[i + 1][j + 2]))
 				{
 					return false;
 				}
-				else if (j >= 2)
+				if (j >= 2)
 				{
-					if (getMaplists()[i][j].colorNum == getMaplists()[i][j - 2])
+					if (getMaplists()[i][j].colorNum == getMaplists()[i][j - 2])//向前检查
 						return false;
 				}
-				else if (j <= 6)
+				if (j <= 6)
 				{
-					if (getMaplists()[i][j].colorNum == getMaplists()[i][j + 2])
+					if (getMaplists()[i][j].colorNum == getMaplists()[i][j + 3])//向后检查
 						return false;
 				}
 				j++;
@@ -162,7 +163,7 @@ bool Map::isDeadMap_()
 			//if there were any the same color Piece between another color
 			if (j <= 6)
 			{
-				if (getMaplists()[i][j].colorNum == getMaplists()[i][j + 2].colorNum)
+				if (getMaplists()[i][j].colorNum == getMaplists()[i][j + 2].colorNum)//对相邻行检查
 				{
 					if ((getMaplists()[i][j].colorNum == getMaplists()[i - 1][j + 1].colorNum) || (getMaplists()[i][j].colorNum == getMaplists()[i + 1][j + 1].colorNum))
 						return false;
@@ -175,20 +176,21 @@ bool Map::isDeadMap_()
 	{
 		for (int j = 0; j < 9; j++)
 		{
-			//if there were any the same color Piece at the next line.
+			//if there were any the same color Piece at the next list.
 			if (getMaplists()[j][i].colorNum == getMaplists()[j + 1][i].colorNum)
 			{
-				if ((getMaplists()[j][i].colorNum == getMaplists()[j - 1][i - 1].colorNum) || (getMaplists()[j][i].colorNum == getMaplists()[j - 1][i + 1]) || (getMaplists()[j][i].colorNum == getMaplists()[j + 2][i - 1]) || (getMaplists()[j][i].colorNum == getMaplists()[j + 2][i + 1]))
+				if ((getMaplists()[j][i].colorNum == getMaplists()[j - 1][i - 1].colorNum) || (getMaplists()[j][i].colorNum == getMaplists()[j - 1][i + 1]) ||//对相邻列检查
+					(getMaplists()[j][i].colorNum == getMaplists()[j + 2][i - 1]) || (getMaplists()[j][i].colorNum == getMaplists()[j + 2][i + 1]))
 				{
 					return false;
 				}
-				else if (j >= 2)
+				if (j >= 2)
 				{
-					if (getMaplists()[j][i].colorNum == getMaplists()[j - 2][i])
+					if (getMaplists()[j][i].colorNum == getMaplists()[j - 2][i])//向上检查
 						return false;
 				}
-				else if (j <= 6){
-					if (getMaplists()[j][i].colorNum == getMaplists()[j + 2][i])
+				if (j <= 6){
+					if (getMaplists()[j][i].colorNum == getMaplists()[j + 3][i])//向下检查
 						return false;
 				}
 				j++;
@@ -196,7 +198,7 @@ bool Map::isDeadMap_()
 			//if there were any the same color Piece between another color
 			if (j <= 6)
 			{
-				if (getMaplists()[j][i].colorNum == getMaplists()[j + 2][i].colorNum)
+				if (getMaplists()[j][i].colorNum == getMaplists()[j + 2][i].colorNum)//对相邻列检查
 				{
 					if ((getMaplists()[j][i].colorNum == getMaplists()[j + 1][i - 1].colorNum) || (getMaplists()[j][i].colorNum == getMaplists()[j + 1][i + 1].colorNum))
 						return false;
@@ -221,7 +223,8 @@ bool Map::isDeadMap_()
 				}
 				else if (j > 1)//normal suition
 				{
-					if ((getMaplists()[0][j].colorNum == getMaplists()[0][j - 2].colorNum) || (getMaplists()[0][j].colorNum == getMaplists()[0][j + 3].colorNum) || (getMaplists()[0][j].colorNum == getMaplists()[1][j - 1].colorNum) || (getMaplists()[0][j].colorNum == getMaplists()[1][j + 2].colorNum))
+					if ((getMaplists()[0][j].colorNum == getMaplists()[0][j - 2].colorNum) || (getMaplists()[0][j].colorNum == getMaplists()[0][j + 3].colorNum) ||
+						(getMaplists()[0][j].colorNum == getMaplists()[1][j - 1].colorNum) || (getMaplists()[0][j].colorNum == getMaplists()[1][j + 2].colorNum))
 						return false;
 				}
 			}
@@ -253,7 +256,8 @@ bool Map::isDeadMap_()
 				}
 				else if (j > 1)//normal suition
 				{
-					if ((getMaplists()[8][j].colorNum == getMaplists()[8][j - 2].colorNum) || (getMaplists()[8][j].colorNum == getMaplists()[8][j + 3].colorNum) || (getMaplists()[8][j].colorNum == getMaplists()[7][j - 1].colorNum) || (getMaplists()[8][j].colorNum == getMaplists()[7][j + 2].colorNum))
+					if ((getMaplists()[8][j].colorNum == getMaplists()[8][j - 2].colorNum) || (getMaplists()[8][j].colorNum == getMaplists()[8][j + 3].colorNum) ||
+						(getMaplists()[8][j].colorNum == getMaplists()[7][j - 1].colorNum) || (getMaplists()[8][j].colorNum == getMaplists()[7][j + 2].colorNum))
 						return false;
 				}
 			}
@@ -305,7 +309,8 @@ bool Map::isDeadMap_()
 				}
 				else if (j > 1)//normal suition
 				{
-					if ((getMaplists()[j][0].colorNum == getMaplists()[j - 2][0].colorNum) || (getMaplists()[j][0].colorNum == getMaplists()[j + 3][0].colorNum) || (getMaplists()[j][0].colorNum == getMaplists()[j - 1][1].colorNum) || (getMaplists()[j][0].colorNum == getMaplists()[j + 2][1].colorNum))
+					if ((getMaplists()[j][0].colorNum == getMaplists()[j - 2][0].colorNum) || (getMaplists()[j][0].colorNum == getMaplists()[j + 3][0].colorNum) ||
+						(getMaplists()[j][0].colorNum == getMaplists()[j - 1][1].colorNum) || (getMaplists()[j][0].colorNum == getMaplists()[j + 2][1].colorNum))
 						return false;
 				}
 			}
@@ -337,7 +342,8 @@ bool Map::isDeadMap_()
 				}
 				else if (j > 1)//normal suition
 				{
-					if ((getMaplists()[j][8].colorNum == getMaplists()[j - 2][8].colorNum) || (getMaplists()[j][8].colorNum == getMaplists()[j + 3][8].colorNum) || (getMaplists()[j][8].colorNum == getMaplists()[j - 1][7].colorNum) || (getMaplists()[j][8].colorNum == getMaplists()[j + 2][7].colorNum))
+					if ((getMaplists()[j][8].colorNum == getMaplists()[j - 2][8].colorNum) || (getMaplists()[j][8].colorNum == getMaplists()[j + 3][8].colorNum) ||
+						(getMaplists()[j][8].colorNum == getMaplists()[j - 1][7].colorNum) || (getMaplists()[j][8].colorNum == getMaplists()[j + 2][7].colorNum))
 						return false;
 				}
 			}
