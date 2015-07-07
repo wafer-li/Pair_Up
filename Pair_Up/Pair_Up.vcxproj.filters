@@ -18,10 +18,13 @@
     <ClInclude Include="Map.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Piece.h">
+    <ClInclude Include="ClearPiece.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Button.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Piece.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -30,6 +33,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Map.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ClearPiece.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
