@@ -3,7 +3,7 @@
 
 //include parts
 #include <deque>
-
+#include "Piece.h"
 
 class Map{
 private:
@@ -20,6 +20,7 @@ public:
 	void initMap();
 
 	//Swap
+	//7-7Update??Did here need rework??
 	void Swap(Piece & piece1, Piece & piece2);
 
 	//isDeadMap
