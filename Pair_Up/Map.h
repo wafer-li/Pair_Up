@@ -23,8 +23,8 @@ public:
 	void Swap(Piece & piece1, Piece & piece2);
 
 	//isDeadMap
-	bool isDeadMap();
-
+	bool isDeadMap();	//The new version is as default
+	
 	//another way to judge the DeadMap
 	bool isDeadMap_();
 

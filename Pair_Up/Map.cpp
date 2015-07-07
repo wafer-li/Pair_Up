@@ -88,8 +88,8 @@ bool Map::isDead(int x, int y)
 	return flag;
 }
 
-//isDeadMap
-bool Map::isDeadMap()
+//isDeadMap_The old version
+bool Map::isDeadMap_()
 {
 	for (int i = 0; i < MAX_SIZE; i++)
 	{
@@ -133,9 +133,10 @@ std::deque<Piece> * Map::getMaplists()
 	return maplists;
 }
 
+//Set this version as default,by wafer
 //another way to judge DeadMap
 //colorNum means a number instead a color
-bool Map::isDeadMap_()
+bool Map::isDeadMap()
 {
 	//from the second line(the border will be judged by another way)
 	for (int i = 1; i < 8; i++){
