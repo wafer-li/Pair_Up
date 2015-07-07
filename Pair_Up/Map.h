@@ -3,6 +3,7 @@
 
 //include parts
 #include <deque>
+#include "Piece.h"
 
 
 class Map{

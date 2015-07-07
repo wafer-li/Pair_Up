@@ -88,6 +88,7 @@ bool Map::isDead(int x, int y)
 	return flag;
 }
 
+
 //isDeadMap_The old version
 bool Map::isDeadMap_()
 {
@@ -102,35 +103,6 @@ bool Map::isDeadMap_()
 		}
 	}
 	return true;
-}
-
-//isPass
-bool Map::getIsPass()
-{
-	return isPass;
-}
-
-void Map::setIsPass(int flag)
-{
-	isPass = flag;
-}
-
-
-//PassScore
-int Map::getPassScore()
-{
-	return passScore;
-}
-
-void Map::setPassScore(int score)
-{
-	passScore = score;
-}
-
-//Maplists
-std::deque<Piece> * Map::getMaplists()
-{
-	return maplists;
 }
 
 //Set this version as default,by wafer
@@ -380,3 +352,33 @@ bool Map::isDeadMap()
 	}
 	return true;
 }
+
+//isPass
+bool Map::getIsPass()
+{
+	return isPass;
+}
+
+void Map::setIsPass(int flag)
+{
+	isPass = flag;
+}
+
+
+//PassScore
+int Map::getPassScore()
+{
+	return passScore;
+}
+
+void Map::setPassScore(int score)
+{
+	passScore = score;
+}
+
+//Maplists
+std::deque<Piece> * Map::getMaplists()
+{
+	return maplists;
+}
+
