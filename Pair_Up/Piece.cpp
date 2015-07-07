@@ -35,7 +35,8 @@ Piece::~Piece(void)
 
 bool Piece::operator==(Piece &p)
 {
-	if (type == p.type || specType == p.specType)
+	//Update by wafer:Fix bug
+	if (type == p.type )	//when the basic type are equeal, it means the object are equal
 	{
 		return true;
 	}
