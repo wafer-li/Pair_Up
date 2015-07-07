@@ -1,17 +1,11 @@
-//------------READ-ME--------------------------------------------
-//标记nedOPT的地方意味着需要优化
-//标记+的地方意味着需要添加
-//Update7-7: 现已确定方块的属性是 Piece.type		(0，6]    match to six different piece basic type
-//			 特殊方块：			Piece.specType	[0，6]	  match to seven different piece addition type
-//			specType:			0.ori	1.line	2.row	3.box	4.same_color	5.unclear	6.death
-//Update7-7:Please add getter and setter for your class :D
-//Update7-7:Please change your function name to match main function as possible~ 
 #include <iostream>
 #include <ctime>
 #include "yage.h"
 #include "Map.h"
 #include "Piece.h"
 #include "Button.h"
+//标记nedOPT的地方意味着需要优化
+//标记+的地方意味着需要添加
 //接口函数列表
 //g_makeMap();
 //g_isDead();
@@ -20,9 +14,9 @@
 //g_pairUp();
 //g_setMap();
 //g_replenishMap();
-//Update7-7：内容写好了我就写上面的函数..
+//Update7-7：接口写好了我就写上面的函数..
 static int g_score = 0;
-void meun(int);
+
 int init(void);
 int gameMode(void);
 int recordMode(void);
@@ -112,7 +106,7 @@ void g_game()
 			if (isMapDead)
 				g_makeMap();
 			else{
-				newMap = g_playerMove();//g_playerMove()->Lds -> Lc //"="need of operator overlording
+				newMap = g_playerMove();//Lc //"="need of operator overlording
 				g_C_P_S_R(newMap);
 				//+isExpMax();
 				//nedOPT:in loops,this function"isMapDead"will carry out twice with one loop
@@ -135,9 +129,4 @@ Map g_C_P_S_R (Map oriMap)
 			g_setMap();//Lht+Lds+Hjy+Tgf
 
 			g_replenishMap();//Tgf//book
-}
-
-Map g_playerMove(Map)
-{
-	// + Lds's function
 }
