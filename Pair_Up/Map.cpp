@@ -91,6 +91,7 @@ bool Map::isDead(int x, int y)
 
 
 //isDeadMap_The old version
+/* Abandon the old version due to the lack of function support
 bool Map::isDeadMap_()
 {
 	for (int i = 0; i < MAX_SIZE; i++)
@@ -105,6 +106,7 @@ bool Map::isDeadMap_()
 	}
 	return true;
 }
+*/
 
 //Set this version as default,by wafer
 //another way to judge DeadMap

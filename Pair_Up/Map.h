@@ -23,10 +23,12 @@ public:
 	void Swap(int x1, int y1, int x2, int y2);
 
 	//isDeadMap
+	//another way to judge the DeadMap
 	bool isDeadMap();	//The new version is as default
 	
-	//another way to judge the DeadMap
-	bool isDeadMap_();
+	//The old version
+	//Abandoned, due to the lack of function support
+	//bool isDeadMap_();
 
 	//isDead
 	bool isDead(int x, int y);
