@@ -1,11 +1,11 @@
--//------------READ-ME--------------------------------------------
--//标记nedOPT的地方意味着需要优化
--//标记+的地方意味着需要添加
--//Update7-7: 现已确定方块的属性是 Piece.type		(0，6]    match to six different piece basic type
--//			 特殊方块：			Piece.specType	[0，6]	  match to seven different piece addition type
--//			specType:			0.ori	1.line	2.row	3.box	4.same_color	5.unclear	6.death
--//Update7-7:Please add getter and setter for your class :D
--//Update7-7:Please change your function name to match main function as possible~ 
+//------------READ-ME--------------------------------------------
+//标记nedOPT的地方意味着需要优化
+//标记+的地方意味着需要添加
+//Update7-7: 现已确定方块的属性是 Piece.type		(0，6]    match to six different piece basic type
+//			 特殊方块：			Piece.specType	[0，6]	  match to seven different piece addition type
+//			specType:			0.ori	1.line	2.row	3.box	4.same_color	5.unclear	6.death
+//Update7-7:Please add getter and setter for your class :D
+//Update7-7:Please change your function name to match main function as possible~ 
 #include <iostream>
 #include <ctime>
 #include "yage.h"
