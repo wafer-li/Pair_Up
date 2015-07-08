@@ -30,6 +30,9 @@
     <ClInclude Include="Map_Friend.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="gameMode.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -43,6 +46,9 @@
     </ClCompile>
     <ClCompile Include="testClear.cpp">
       <Filter>源文件\test</Filter>
+    </ClCompile>
+    <ClCompile Include="gameMode.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Map_Friend.cpp">
       <Filter>源文件</Filter>
