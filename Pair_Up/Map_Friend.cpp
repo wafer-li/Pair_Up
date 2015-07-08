@@ -90,7 +90,7 @@ void RepairPiece(Map & map)
 	{
 		while (map.maplists[i].size() < map.MAX_SIZE)
 		{
-			Piece piece;
+			Piece piece = Piece();
 			map.maplists[i].push_back(piece);
 		}
 	}

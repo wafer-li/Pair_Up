@@ -25,8 +25,8 @@ void Map::initMap()
 	{
 		for (int j = 0; j < MAX_SIZE;j++)
 		{
-			Piece list = Piece();
-			maplists[i].push_front(list);
+			Piece piece = Piece();
+			maplists[i].push_back(piece);
 		}
 	}
 }
