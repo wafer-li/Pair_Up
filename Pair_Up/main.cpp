@@ -187,7 +187,7 @@ Map g_makeMap()
 {
 	//Map *newMap = new Map();
 	Map newmap;
-	return newMap;
+	return newmap;
 }
 
 void g_deleteMap(Map& deadMap)
