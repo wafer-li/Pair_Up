@@ -3,12 +3,14 @@
 //标记+的地方意味着需要添加
 //Update7-7: 现已确定方块的属性是 Piece.type		(0，6]    match to six different piece basic type
 //			 特殊方块：			Piece.specType	[0，6]	  match to seven different piece addition type
-//			specType:			0.ori	1.line	2.row	3.box	4.same_color	5.unclear	6.death
+//			specType:			0.ori-原始方块-什么都不做		1.line-消除列	2.row-消除行		3.box-消除3*3	4.same_color-消除同色	5.unclear-不可消除	6.death-直接死亡
 //Update7-7:Please add getter and setter for your class :D
 //Update7-7:Please change your function name to match main function as possible~ 
 //Update7-8:对Map类请求：增添一个数据域读取消除方块的总数
 //Update7-8:Map在中间删除元素后 其中的迭代器会失效，请注意在循环里重建新迭代器
-//Update7-8:Map队列使用左上角为坐标原点
+//Update7-8:-无效信息-Map队列使用左上角为坐标原点
+//Update7-8:Map队列更新为使用左下角为坐标原点
+//Update7-8:游戏窗口大小为1476*1016
 #include <iostream>
 #include <ctime>
 #include "yage.h"
@@ -42,7 +44,7 @@ int main(int argc, char*argv[])
 int init(void)
 {
 	srand((unsigned)time(0));
-	yage_canvas_load_image("")
+	yage_canvas_load_image("");
 		return 0;
 }
 
