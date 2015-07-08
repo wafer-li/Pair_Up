@@ -2,7 +2,7 @@
 #include "Map.h"
 
 
-Map clearPiece(Map temporary){
+Map & clearPiece(Map & temporary){
 	//ÐÐ¼ì²é
 	for (int i = 0; i < 9; i++)
 	{

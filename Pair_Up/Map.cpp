@@ -51,48 +51,76 @@ void Map::Swap(int x1,int y1,int x2,int y2)
 	}
 }
 
-//isDead
-/*	Abandon this function temporary
-bool Map::isDead(int x, int y)
+//isPieceClearable
+bool Map::isPieceClearable(int x, int y)
 {
 	bool flag = false;
-	
-	//Swap right
-	Swap(maplists[x][y], maplists[x + 1][y]);
-	if (judge(maplists[x][y],maplists[x + 1][y]))
-	{
-		flag = false;
-	}
-	else
-	{
-		flag = true;
-	}
-	
-	//Return same
-	Swap(maplists[x][y], maplists[x + 1][y]);
 
-	//Swap down
-	Swap(maplists[x][y], maplists[x][y + 1]);
-	if (judge(maplists[x][y], maplists[x][y + 1]))
+	//right
+	if (x + 2 < MAX_SIZE)
 	{
-		flag = false;
+		if (maplists[x][y] == maplists[x + 1][y] && maplists[x][y] == maplists[x + 2][y])
+		{
+			flag = true;
+		}
 	}
-	else
+
+	//left
+	if (x - 2 > 0)
 	{
-		flag = true;
+		if (maplists[x][y] == maplists[x - 1][y] && maplists[x][y] == maplists[x - 2][y])
+		{
+			flag = true;
+		}
 	}
-	
-	//Return same
-	Swap(maplists[x][y], maplists[x][y + 1]);
+
+	//top
+	if (y - 2 > 0)
+	{
+		if (maplists[x][y] == maplists[x][y - 1] && maplists[x][y] == maplists[x][y - 2])
+		{
+			flag = true;
+		}
+	}
+
+	//bottom
+	if (y + 2 < MAX_SIZE)
+	{
+		if (maplists[x][y] == maplists[x][y + 1] && maplists[x][y] == maplists[x][y + 2])
+		{
+			flag = true;
+		}
+	}
 	
 	return flag;
 }
-*/
+
+//isDead
+bool Map::isDead(int x, int y)
+{
+	//Swap right
+	Swap(x, y, x + 1, y);
+	if (isPieceClearable(x + 1,y))
+	{
+		return false;
+	}
+	//recover
+	Swap(x, y, x + 1, y);
+
+	//Swap down
+	Swap(x, y, x, y + 1);
+	if (isPieceClearable(x,y + 1))
+	{
+		return false;
+	}
+	//recover
+	Swap(x, y, x, y + 1);
+	return true;
+}
 
 
-//isDeadMap_The old version
-/* Abandon the old version due to the lack of function support
-bool Map::isDeadMap_()
+//isDeadMap
+bool Map::isDeadMap()
 {
 	for (int i = 0; i < MAX_SIZE; i++)
 	{
@@ -106,12 +134,11 @@ bool Map::isDeadMap_()
 	}
 	return true;
 }
-*/
 
 //Set this version as default,by wafer
 //another way to judge DeadMap
 // means a number instead a color
-bool Map::isDeadMap()
+bool Map::isDeadMap_()
 {
 	//from the second line(the border will be judged by another way)
 	for (int i = 1; i < 8; i++){

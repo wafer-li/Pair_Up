@@ -23,15 +23,19 @@ public:
 	void Swap(int x1, int y1, int x2, int y2);
 
 	//isDeadMap
-	//another way to judge the DeadMap
-	bool isDeadMap();	//The new version is as default
+	bool isDeadMap();
 	
-	//The old version
-	//Abandoned, due to the lack of function support
-	//bool isDeadMap_();
+	//another way to judge the DeadMap
+	bool isDeadMap_();
 
 	//isDead
 	bool isDead(int x, int y);
+
+	//isPieceClearale
+	//NOTICE:
+	//Only judge the single piece
+	//Do NOT change the Piece.isClear
+	bool isPieceClearable(int x, int y);
 
 	//-----bool isPass-----
 	bool getIsPass();
