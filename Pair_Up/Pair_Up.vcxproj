@@ -65,12 +65,16 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="Button.h" />
+    <ClInclude Include="ClearPiece.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Piece.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="ClearPiece.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="Piece.cpp" />
+    <ClCompile Include="testClear.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

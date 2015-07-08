@@ -2,27 +2,36 @@
 #define MAP_HEADER_FILE 
 
 //include parts
-#include <list>
-
+#include <deque>
+#include "Piece.h"
 
 class Map{
 private:
 	static const int MAX_SIZE = 9;
-	std::list<Piece> maplists[MAX_SIZE];	//Use list 9*9 map
-	//Piece[9][9] piece;	//基于list 这个数据结构LHT你把他解决了
+	std::deque<Piece> maplists[MAX_SIZE];//Use deque instead of list
 	bool isPass; //当前游戏是否过关
 	int passScore;
 protected:
 public:
 	Map();
 	~Map();
-	
+
 	//initial & fill the map
 	void initMap();
 
-	//isDeadMap
-	bool isDeadMap();
+	//Swap
+	void Swap(int x1, int y1, int x2, int y2);
 
+	//isDeadMap
+	//another way to judge the DeadMap
+	bool isDeadMap();	//The new version is as default
+	
+	//The old version
+	//Abandoned, due to the lack of function support
+	//bool isDeadMap_();
+
+	//isDead
+	bool isDead(int x, int y);
 
 	//-----bool isPass-----
 	bool getIsPass();
@@ -30,6 +39,9 @@ public:
 	//-----int passScore----
 	int getPassScore();
 	void setPassScore(int score);
+
+	//Maplists
+	std::deque<Piece> * getMaplists();
 };
 
 
