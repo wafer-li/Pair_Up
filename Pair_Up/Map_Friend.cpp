@@ -1,4 +1,4 @@
-//The FRIEND function of map.maplists
+//The FRIEND function of Map
 #include "Map.h"
 
 void ClearPiece(Map & map){
