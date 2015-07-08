@@ -100,7 +100,7 @@ bool Map::isDead(int x, int y)
 {
 	//Swap right
 	Swap(x, y, x + 1, y);
-	if (isPieceClearable(x + 1,y))
+	if (isPieceClearable(x + 1,y) ||isPieceClearable(x,y))
 	{
 		return false;
 	}
@@ -109,7 +109,7 @@ bool Map::isDead(int x, int y)
 
 	//Swap down
 	Swap(x, y, x, y + 1);
-	if (isPieceClearable(x,y + 1))
+	if (isPieceClearable(x,y + 1) ||isPieceClearable(x,y))
 	{
 		return false;
 	}
