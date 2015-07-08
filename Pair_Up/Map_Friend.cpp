@@ -1,6 +1,7 @@
 //The FRIEND function of Map
 #include "Map.h"
 
+//ClearPiece
 void ClearPiece(Map & map){
 	//ÐÐ¼ì²é
 	for (int i = 0; i < 9; i++)
@@ -52,6 +53,45 @@ void ClearPiece(Map & map){
 				else
 					break;
 			}
+		}
+	}
+}
+
+//RemovePiece
+int RemovePiece(Map & map)
+{
+	int count = 0;
+
+	for (int i = 0; i < map.MAX_SIZE; i++)
+	{
+		for (int j = 0; j < map.MAX_SIZE; j++)
+		{
+			std::deque<Piece>::iterator p = map.maplists[i].begin();
+
+			for (int k = 0; k != j; k++)
+			{
+				p++;
+			}
+
+			if (map.maplists[i][j].getIsClear())
+			{
+				map.maplists[i].erase(p);
+				count++;
+			}
+		}
+	}
+	return count;
+}
+
+//RepairPiece
+void RepairPiece(Map & map)
+{
+	for (int i = 0; i < map.MAX_SIZE; i++)
+	{
+		while (map.maplists[i].size() < map.MAX_SIZE)
+		{
+			Piece piece;
+			map.maplists[i].push_back(piece);
 		}
 	}
 }
