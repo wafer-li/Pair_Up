@@ -54,5 +54,4 @@ void ClearPiece(Map & map){
 			}
 		}
 	}
-	return temporary;
 }
