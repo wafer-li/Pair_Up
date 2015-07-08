@@ -66,11 +66,13 @@
   <ItemGroup>
     <ClInclude Include="Button.h" />
     <ClInclude Include="ClearPiece.h" />
+    <ClInclude Include="gameMode.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Piece.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ClearPiece.cpp" />
+    <ClCompile Include="gameMode.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Piece.cpp" />
