@@ -1,11 +1,25 @@
-#ifndef FRIEND_OF_MAP
-#define FRIEND_OF_MAP
+#ifndef FRIEND_OF_MAP_H
+#define FRIEND_OF_MAP_H
 
-/*Friend function clearPiece
+/*Friend function ClearPiece
 * Judge the whole map
 * Change the Piece.isClear
 */
-void ClearPiece(Map & map);//传入Map类，返回需要消去的Map类
+void ClearPiece(Map & map);
+
+/*Friend function RemovePiece
+* Ergodic the whole map
+* Count the number of removing-items
+* Remove Piece
+* Return the number of removing-items
+*/
 int RemovePiece(Map & map);
+
+/*Friend function RepairPiece
+* Ergodic the deque
+* If the deque are not full
+* Fill it
+*/
 void RepairPiece(Map & map);
-#endif
+
+#endif	//!FRIEND_OF_MAP
