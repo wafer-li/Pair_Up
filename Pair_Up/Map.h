@@ -4,7 +4,9 @@
 //include parts
 #include <deque>
 #include "Piece.h"
+#include "Map_Friend.h"
 
+//Class
 class Map{
 private:
 	static const int MAX_SIZE = 9;
@@ -13,8 +15,11 @@ private:
 	int passScore;
 protected:
 public:
+	/* Ctor & Dtor */
 	Map();
 	~Map();
+
+	/* MENBER */
 
 	//initial & fill the map
 	void initMap();
@@ -46,6 +51,11 @@ public:
 
 	//Maplists
 	std::deque<Piece> * getMaplists();
+
+	/*FRIEND*/
+	friend void ClearPiece(Map& map);
+	friend int RemovePiece(Map & map);
+	friend void RepairPiece(Map & map);
 };
 
 

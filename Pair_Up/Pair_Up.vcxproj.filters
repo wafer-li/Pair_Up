@@ -21,13 +21,13 @@
     <ClInclude Include="Map.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="ClearPiece.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Button.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Piece.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Map_Friend.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -38,14 +38,14 @@
     <ClCompile Include="Map.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="ClearPiece.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Piece.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="testClear.cpp">
       <Filter>源文件\test</Filter>
+    </ClCompile>
+    <ClCompile Include="Map_Friend.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
