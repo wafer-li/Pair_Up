@@ -1,6 +1,6 @@
 #include "Piece.h"
 #include <ctime>
-using namespace std;
+
 //create a normal type or special type
 Piece::Piece(void)
 {
