@@ -4,12 +4,12 @@
 #define GAMEMODE_H
 #include"Map.h"
 //swap two Piece
-Map swapPiece(int, int, int, int, Map&);
+void swapPiece(int x1, int y1, int x2, int y2, Map& map);
 
 //judege the Map for clearable(you can use it anywhere but not effecient)
-bool checkMap(Map);
+bool checkMap(Map & map);
 
 //judege the Map for clearable(more effeciently, but more parameters)
-bool checkMap(int index_x1, int index_y1, int index_x2, int index_y2, Map theMap);
+bool checkMap(int index_x1, int index_y1, int index_x2, int index_y2, Map & theMap);
 
 #endif
