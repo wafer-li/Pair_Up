@@ -389,7 +389,7 @@ bool Map::getIsPass()
 	return isPass;
 }
 
-void Map::setIsPass(int flag)
+void Map::setIsPass(bool flag)
 {
 	isPass = flag;
 }

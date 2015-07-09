@@ -43,7 +43,8 @@ public:
 
 	//-----bool isPass-----
 	bool getIsPass();
-	void setIsPass(int flag);
+	void setIsPass(bool flag);
+
 	//-----int passScore----
 	int getPassScore();
 	void setPassScore(int score);
