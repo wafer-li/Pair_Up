@@ -68,7 +68,7 @@ void resourceSkin(int skin)
 	system("PAUSE");
 }
 
-int main(int argc, char*argv[]
+int main(int argc, char*argv[])
 {
 
 	init();
@@ -133,98 +133,3 @@ int exitMode()
 
 	return 0;
 }
-
-void g_game()
-{
-	//partial variable
-	//Piece.type means basic elements of piece
-	//Piece.specType means special piece 
-	int restOfLive = 6; //初始生命值
-	bool isMapDead = false;
-	bool isExpMax = false;
-	bool g_payeseGame = true;
-
-	Map newmap = g_makeMap();//Lht+Tgf+Hjy
-	isMapDead = g_isDead();//Lht
-	while (restOfLive){
-		//if(pair_Up)
-		//+if(button.exit_inGame())
-		if (g_pauseGame()){
-		}
-		else{
-			newMap = g_checkPair();
-			if (removePiece == 0)
-			{
-				if (isMapDead)
-				{
-					g_deleteMap(newMap);
-					Map newmap = g_makeMap();
-				}
-				else
-				{
-
-					newMap = g_playerMove();//g_playerMove()->Lds -> Lc //"="need of operator overlording
-					/*
-					1.用户点下去
-					2.拖动-播放动画
-					|-不合法
-					|-合法-Map 交换数据(int,int,int,int,Map&)-bool checkMap(Map)-
-					|-不可消除-换回数据-播放动画
-					|-可消除-g-P-S-R-
-					*/
-
-					g_checkMap(oriMap);//Lc
-
-					g_P_S_R(newMap);
-					//+isExpMax();
-					//nedOPT:in loops,this function"isMapDead"will carry out twice with one loop
-					//Update7-7:slove
-					isMapDead = g_isDead();
-					if (isMapDead)
-					{
-						--restOfLive;
-					}
-				}
-			}
-			else
-			{
-				g_P_S_R(newMap);
-				//+isExpMax();
-			}
-		}
-	}
-	l_scoreUpdate();//record Game score,if the score is at the top 10 of leaderboard, congratulations and refresh the learboard
-}
-
-void g_P_S_R(Map& oriMap)
-{
-	//newMap[g_game] -> oriMap[g_C_P_S_R]
-
-	g_pairUp();//消除//Lc + Lds
-
-	//g_setMap();//掉落//Lht+Lds+Hjy+Tgf
-
-	g_replenishMap();//Push_back//Tgf//book
-}
-
-void g_playerMove(Map& oriMap)
-{
-
-	/*
-	1.用户点下去
-	2.拖动-播放动画
-	|-不合法
-	|-合法-Map 交换数据(int,int,int,int,Map&)-bool checkMap(Map)-
-	|-不可消除-换回数据-播放动画
-	|-可消除-g-P-S-R-
-	*/
-}
-
-Map g_makeMap()
-{
-	//Map *newMap = new Map();
-	Map newmap;
-	return newmap;
-}
-
-void g_deleteMap(Map& deadMap)

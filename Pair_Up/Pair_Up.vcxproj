@@ -66,6 +66,7 @@
   <ItemGroup>
     <ClInclude Include="Button.h" />
     <ClInclude Include="gameMode.h" />
+    <ClInclude Include="leaderboardMode.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Piece.h" />
   </ItemGroup>

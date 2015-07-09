@@ -119,8 +119,8 @@ bool Map::isDead(int x, int y)
 }
 
 
-//isDeadMap
-bool Map::isDeadMap()
+//g_isDeadMap
+bool Map::g_isDeadMap()
 {
 	for (int i = 0; i < MAX_SIZE; i++)
 	{
@@ -138,7 +138,7 @@ bool Map::isDeadMap()
 //Set this version as default,by wafer
 //another way to judge DeadMap
 // means a number instead a color
-bool Map::isDeadMap_()
+bool Map::g_isDeadMap_()
 {
 	//from the second line(the border will be judged by another way)
 	for (int i = 1; i < 8; i++){

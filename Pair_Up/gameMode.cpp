@@ -1,15 +1,76 @@
 #include "gameMode.h"
 
-//swap two Piece
+//gameMode entrance
+void g_game()
+{
+	//partial variable
+	//Piece.type means basic elements of piece
+	//Piece.specType means special piece 
+	int restOfLive = 6; //初始生命值
+	bool isDeadMap = false;
+	bool isExpMax = false;
+	bool pauseGame = true;
 
+	Map newMap = g_makeMap();
+	isDeadMap = newMap.g_isDeadMap();
+	while (restOfLive){
+		//if(pair_Up)
+		//+if(button.exit_inGame())
+		if (pauseGame){}
+		else{
+			g_checkMap(newMap);
+			if (removePiece(newMap) == 0)
+			{
+				if (isDeadMap)
+				{
+					g_deleteMap(newMap);
+					Map newmap = g_makeMap();
+				}
+				else
+				{
+
+					g_playerMove(newMap);//g_playerMove()->Lds -> Lc //"="need of operator overlording
+					/*
+					1.用户点下去
+					2.拖动-播放动画
+					|-不合法
+					|-合法-Map 交换数据(int,int,int,int,Map&)-bool g_checkMap(Map)-
+					|-不可消除-换回数据-播放动画
+					|-可消除-g-P-S-R-
+					*/
+
+					g_checkMap(newMap);//Lc
+
+					g_P_S_R(newMap);
+					//+isExpMax();
+					//nedOPT:in loops,this function"g_isDeadMap"will carry out twice with one loop
+					//Update7-7:slove
+					isDeadMap = newMap.g_isDeadMap();
+					if (isDeadMap)
+					{
+						--restOfLive;
+					}
+				}
+			}
+			else
+			{
+				g_P_S_R(newMap);
+				//+isExpMax();
+			}
+		}
+	}
+	l_leaderRecord();//record Game score,if the score is at the top 10 of leaderboard, congratulations and refresh the learboard
+}
+
+//swap two Piece
 void swapPiece(int x1, int y1, int x2, int y2, Map& map)
 {
-	map.Swap(x1, y1, x2, y2);
+	map.swap(x1, y1, x2, y2);
 }
 
 //judeg the Map for clearable
 //this function is not efficient, it would be more quickly if I can get the changed Pieces' index
-bool checkMap(Map & map)
+bool g_checkMap(Map & map)
 {
 	//行检查
 	for (int i = 0; i < 9; i++)
@@ -55,7 +116,7 @@ bool checkMap(Map & map)
 }
 
 //judege the Map for clearable(more effeciently but you need to tell me the Pieces' index which are changed)
-bool checkMap(int index_x1, int index_y1, int index_x2, int index_y2, Map & theMap)
+bool g_checkMap(int index_x1, int index_y1, int index_x2, int index_y2, Map & theMap)
 {
 	return (theMap.isPieceClearable(index_x1, index_y1) && theMap.isPieceClearable(index_x2, index_y2));
 }

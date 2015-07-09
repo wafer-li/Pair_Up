@@ -26,11 +26,11 @@ public:
 	//Swap
 	void swap(int x1, int y1, int x2, int y2);
 
-	//isDeadMap
-	bool isDeadMap();
+	//g_isDeadMap
+	bool g_isDeadMap();
 	
 	//another way to judge the DeadMap
-	bool isDeadMap_();
+	bool g_isDeadMap_();
 
 	//isDead
 	bool isDead(int x, int y);
