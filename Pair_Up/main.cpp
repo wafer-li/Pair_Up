@@ -17,6 +17,7 @@
 //			旧的，原始的-ori 新的-new
 //			gameMode下的函数请加 "g_" 前缀，learboardMode下的函数请加 "l_" 前缀
 //Update7-9:坐标全部使用传参处理
+//Update7-10:暂停继续按钮坐标:(85 802)(327 802)
 #include <iostream>
 #include <vector>
 #include <deque>
@@ -38,7 +39,7 @@
 //g_pairUp();
 //g_setMap();
 //g_replenishMap();
-//Update7-7：内容写好了我就写上面的函数..
+
 void resource(Option);
 void resourceSkin(int);
 int gameMode();
@@ -131,14 +132,24 @@ void resourceSkin(int skin)
 	std::vector<struct yage_canvas *> pieceSkin;
 	std::string temp;
 	std::stringstream ss;
+	//加载6*5=30张皮肤 (6种方块每个有5种特殊方块）
 	for (int i = 1; i != 7; ++i)
-	for (int j = 1; j != 7; ++j)
-	{
-		ss << "Skin" << skin << "_Piece_" << i << "_" << j << ".png";
+		for (int j = 1; j != 6; ++j)
+		{
+			ss << "Skin" << skin << "_Piece_" << i << "_" << j << ".png";
+			ss >> temp;
+			ss.clear();
+			std::cout << temp << std::endl;
+			pieceSkin.push_back(yage_canvas_load_image(temp.c_str()));
+		}
+		ss << "Skin" << skin << "_Piece_Special_1";
 		ss >> temp;
 		ss.clear();
-		std::cout << temp << std::endl;
-		pieceSkin.push_back(yage_canvas_load_image(temp.c_str()));
-	}
+		struct yage_canvas *specPiece1 = yage_canvas_load_image(temp.c_str());
+		ss << "Skin" << skin << "_Piece_Special_2";
+		ss >> temp;
+		ss.clear();
+		struct yage_canvas *specPiece2 = yage_canvas_load_image(temp.c_str());
+
 	system("PAUSE");
 }
