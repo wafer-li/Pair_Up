@@ -33,6 +33,15 @@
     <ClInclude Include="leaderboardMode.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="optionMode.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Option.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Global.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -51,6 +60,18 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Map_Friend.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="leaderboardMode.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Option.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="optionMode.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Global.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>

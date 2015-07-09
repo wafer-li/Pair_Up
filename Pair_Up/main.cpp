@@ -23,9 +23,13 @@
 #include <sstream>
 #include <ctime>
 #include "yage.h"
+#include "leaderboardMode.h"
 #include "Map.h"
 #include "Piece.h"
+#include "Global.h"
 #include "Button.h"
+#include "gameMode.h"
+#include "optionMode.h"
 //接口函数列表
 //g_makeMap();
 //g_isDead();
@@ -35,39 +39,19 @@
 //g_setMap();
 //g_replenishMap();
 //Update7-7：内容写好了我就写上面的函数..
-const static int x_scr = 1476;
-const static int y_scr = 1016;
-const static int x_map = 900;
-const static int y_map = 900;
-const static int x_piece = 100;
-const static int y_piece = 100;
-const static int x_map_LT = 519;
-const static int x_map_LB = 519;
-const static int y_map_LT = 52;
-const static int y_map_LB = 952;
-static int glo_score = 0;
-void resource(Option)
-{	
-	struct yage_canvas *Background = yage_canvas_load_image("Bk.png");
-	resourceSkin(o_skin);
-}
-void resourceSkin(int skin)
+void resource(Option);
+void resourceSkin(int);
+int gameMode();
+int leaderboardMode();//+
+int optionMode();//+
+int exitMode();
+int init(void);
+void meun(int);
+//
+int start()
 {
-	std::vector<struct yage_canvas *> pieceSkin;
-	std::string temp;
-	std::stringstream ss;
-	for (int i = 1; i != 7; ++i)
-	for (int j = 1; j != 7; ++j)
-	{
-		ss << "Skin" << skin << "_Piece_" << i << "_" << j << ".png";
-		ss >> temp;
-		ss.clear();
-		std::cout << temp << std::endl;
-		pieceSkin.push_back(yage_canvas_load_image(temp.c_str()));
-	}
-	system("PAUSE");
+	return 1;
 }
-
 int main(int argc, char*argv[])
 {
 
@@ -80,9 +64,8 @@ int main(int argc, char*argv[])
 int init(void)
 {
 	srand((unsigned)time(0));
-	yage_init(x_scr, y_scr);
+	yage_init(Global::x_scr, Global::y_scr);
 	return 0;
-
 }
 
 void meun(int playerChoose)
@@ -109,6 +92,8 @@ void meun(int playerChoose)
 			condition = exitMode();
 			break;
 		default:
+			condition = 1;
+			break;
 	}
 }
 
@@ -119,17 +104,41 @@ int gameMode()
 }
 
 int leaderboardMode()
-{
+{	
+	l_leaderboard();
 	return 1;
 }
 
 int optionMode()
-{
+{	
+	o_option();
 	return 1;
 }
 
 int exitMode()
 {
-
 	return 0;
+}
+
+void resource(Option option)
+{
+	struct yage_canvas *Background = yage_canvas_load_image("Bk.png");
+	resourceSkin(option.getSkin());
+}
+
+void resourceSkin(int skin)
+{
+	std::vector<struct yage_canvas *> pieceSkin;
+	std::string temp;
+	std::stringstream ss;
+	for (int i = 1; i != 7; ++i)
+	for (int j = 1; j != 7; ++j)
+	{
+		ss << "Skin" << skin << "_Piece_" << i << "_" << j << ".png";
+		ss >> temp;
+		ss.clear();
+		std::cout << temp << std::endl;
+		pieceSkin.push_back(yage_canvas_load_image(temp.c_str()));
+	}
+	system("PAUSE");
 }

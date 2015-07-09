@@ -1,5 +1,6 @@
 #include "gameMode.h"
-
+#include "optionMode.h"
+#include "leaderboardMode.h"
 //gameMode entrance
 void g_game()
 {
@@ -7,6 +8,7 @@ void g_game()
 	//Piece.type means basic elements of piece
 	//Piece.specType means special piece 
 	int restOfLive = 6; //初始生命值
+	int score = 0;
 	bool isDeadMap = false;
 	bool isExpMax = false;
 	bool pauseGame = true;
@@ -28,7 +30,6 @@ void g_game()
 				}
 				else
 				{
-
 					g_playerMove(newMap);//g_playerMove()->Lds -> Lc //"="need of operator overlording
 					/*
 					1.用户点下去
@@ -59,7 +60,7 @@ void g_game()
 			}
 		}
 	}
-	l_leaderRecord();//record Game score,if the score is at the top 10 of leaderboard, congratulations and refresh the learboard
+	l_inRanking(score);//record Game score,if the score is at the top 10 of leaderboard, congratulations and refresh the learboard
 }
 
 //swap two Piece
@@ -119,4 +120,35 @@ bool g_checkMap(Map & map)
 bool g_checkMap(int index_x1, int index_y1, int index_x2, int index_y2, Map & theMap)
 {
 	return (theMap.isPieceClearable(index_x1, index_y1) && theMap.isPieceClearable(index_x2, index_y2));
+}
+
+void g_P_S_R(Map& oriMap)
+{
+	//newMap[g_game] -> oriMap[g_P_S_R]
+
+	g_PairUp(oriMap);
+	//g_setMap();
+
+	g_replenishMap(oriMap);//Push_back//Tgf//book
+}
+Map g_makeMap()
+{	
+	Map *myMap = new Map();
+	Map &newMap = *myMap;
+	//Map newmap;
+	return newMap;
+}
+void g_PairUp(Map& oriMap)
+{
+	removePiece(oriMap);
+}
+
+void g_replenishMap(Map& oriMap)
+{
+	repairPiece(oriMap);
+}
+
+void g_deleteMap(Map& deadMap)
+{
+	delete &deadMap;
 }

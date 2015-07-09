@@ -5,7 +5,7 @@
 #include"Map.h"
 
 //gameMode entrance
-void g_game(viod);
+void g_game(void);
 
 //swap two Piece
 void swapPiece(int x1, int y1, int x2, int y2, Map& map);
@@ -16,20 +16,13 @@ bool g_checkMap(Map & map);
 //judge the Map for clearable(more effeciently, but more parameters)
 bool g_checkMap(int index_x1, int index_y1, int index_x2, int index_y2, Map & theMap);
 
-void g_P_S_R(Map& oriMap)
+//Binding : Pair up,clear the Map,and replenish it
+void g_P_S_R(Map&);
+
+//move the piece
+//等LDS的传上来我再分离它
+inline void g_playerMove(Map& oriMap)
 {
-	//newMap[g_game] -> oriMap[g_C_P_S_R]
-
-	g_pairUp();//消除//Lc + Lds
-
-	//g_setMap();//掉落//Lht+Lds+Hjy+Tgf
-
-	g_replenishMap();//Push_back//Tgf//book
-}
-
-void g_playerMove(Map& oriMap)
-{
-
 	/*
 	1.用户点下去
 	2.拖动-播放动画
@@ -40,12 +33,16 @@ void g_playerMove(Map& oriMap)
 	*/
 }
 
-Map g_makeMap()
-{
-	//Map *newMap = new Map();
-	Map newmap;
-	return newmap;
-}
+//create a new map
+Map g_makeMap();
 
+//消除
+void g_PairUp(Map&);
+
+//补充deque
+void g_replenishMap(Map&);
+
+//删除死图
 void g_deleteMap(Map& deadMap);
+
 #endif
