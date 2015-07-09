@@ -32,8 +32,8 @@ void Map::initMap()
 }
 
 
-//Swap
-void Map::Swap(int x1,int y1,int x2,int y2)
+//swap
+void Map::swap(int x1,int y1,int x2,int y2)
 {
 	if (
 		x1 >= 0 && x1 < MAX_SIZE && y1 >= 0 && y1 < MAX_SIZE
@@ -98,23 +98,23 @@ bool Map::isPieceClearable(int x, int y)
 //isDead
 bool Map::isDead(int x, int y)
 {
-	//Swap right
-	Swap(x, y, x + 1, y);
+	//swap right
+	swap(x, y, x + 1, y);
 	if (isPieceClearable(x + 1,y) ||isPieceClearable(x,y))
 	{
 		return false;
 	}
 	//recover
-	Swap(x, y, x + 1, y);
+	swap(x, y, x + 1, y);
 
-	//Swap down
-	Swap(x, y, x, y + 1);
+	//swap down
+	swap(x, y, x, y + 1);
 	if (isPieceClearable(x,y + 1) ||isPieceClearable(x,y))
 	{
 		return false;
 	}
 	//recover
-	Swap(x, y, x, y + 1);
+	swap(x, y, x, y + 1);
 	return true;
 }
 

@@ -1,8 +1,8 @@
 //The FRIEND function of Map
 #include "Map.h"
 
-//ClearPiece
-void ClearPiece(Map & map){
+//clearPiece
+void clearPiece(Map & map){
 	//ÐÐ¼ì²é
 	for (int i = 0; i < 9; i++)
 	{
@@ -58,7 +58,7 @@ void ClearPiece(Map & map){
 }
 
 //RemovePiece
-int RemovePiece(Map & map)
+int removePiece(Map & map)
 {
 	int count = 0;
 
@@ -84,7 +84,7 @@ int RemovePiece(Map & map)
 }
 
 //RepairPiece
-void RepairPiece(Map & map)
+void repairPiece(Map & map)
 {
 	for (int i = 0; i < map.MAX_SIZE; i++)
 	{

@@ -24,7 +24,7 @@ public:
 	void initMap();
 
 	//Swap
-	void Swap(int x1, int y1, int x2, int y2);
+	void swap(int x1, int y1, int x2, int y2);
 
 	//isDeadMap
 	bool isDeadMap();
@@ -52,9 +52,9 @@ public:
 	std::deque<Piece> * getMaplists();
 
 	/*FRIEND*/
-	friend void ClearPiece(Map& map);
-	friend int RemovePiece(Map & map);
-	friend void RepairPiece(Map & map);
+	friend void clearPiece(Map& map);
+	friend int removePiece(Map & map);
+	friend void repairPiece(Map & map);
 };
 
 //FRIEND function
@@ -63,7 +63,7 @@ public:
 * Judge the whole map
 * Change the Piece.isClear
 */
-void ClearPiece(Map & map);
+void clearPiece(Map & map);
 
 /*Friend function RemovePiece
 * Ergodic the whole map
@@ -71,14 +71,14 @@ void ClearPiece(Map & map);
 * Remove Piece
 * Return the number of removing-items
 */
-int RemovePiece(Map & map);
+int removePiece(Map & map);
 
 /*Friend function RepairPiece
 * Ergodic the deque
 * If the deque are not full
 * Fill it
 */
-void RepairPiece(Map & map);
+void repairPiece(Map & map);
 
 
 

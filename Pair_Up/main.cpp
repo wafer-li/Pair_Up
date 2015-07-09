@@ -11,7 +11,16 @@
 //Update7-8:-无效信息-Map队列使用左上角为坐标原点
 //Update7-8:Map队列更新为使用左下角为坐标原点
 //Update7-8:游戏窗口大小为1476*1016
+//Update7-9:每个Piece大小:100*100，有效区域:98*98，Map区域大小:900*900，左上原点位置:(x_map_LT,y_map_LT)，左下原点位置:(x_map_LB,y_map_LB)		
+//			每块[x][y]piece坐标的位置：
+//Update7-9:同名请求： 统一函数命名 检查是否-is 配对-pair 消除-clear 记分板（排行榜）-leaderboard 块-piece 图-map 分数-score 创造-make 判定旗帜-flag
+//			旧的，原始的-ori 新的-new
+//			gameMode下的函数请加 "g_" 前缀，learboardMode下的函数请加 "l_" 前缀
+//Update7-9:坐标全部使用传参处理
 #include <iostream>
+#include <vector>
+#include <deque>
+#include <sstream>
 #include <ctime>
 #include "yage.h"
 #include "Map.h"
@@ -26,37 +35,66 @@
 //g_setMap();
 //g_replenishMap();
 //Update7-7：内容写好了我就写上面的函数..
-static int g_score = 0;
-void meun(int);
-int init(void);
-int gameMode(void);
-int recordMode(void);
-int optionMode(void);
-int exitMode(void);
-void g_game(void);
-Map g_P_S_R(Map oriMap);
-
-int main(int argc, char*argv[])
-{
-	init();
-	meun(mouseCheck.meun);
+const static int x_scr = 1476;
+const static int y_scr = 1016;
+const static int x_map = 900;
+const static int y_map = 900;
+const static int x_piece = 100;
+const static int y_piece = 100;
+const static int x_map_LT = 519;
+const static int x_map_LB = 519;
+const static int y_map_LT = 52;
+const static int y_map_LB = 952;
+static int glo_score = 0;
+void resource(Option)
+{	
+	struct yage_canvas *Background = yage_canvas_load_image("Bk.png");
+	resourceSkin(o_skin);
 }
+void resourceSkin(int skin)
+{
+	std::vector<struct yage_canvas *> pieceSkin;
+	std::string temp;
+	std::stringstream ss;
+	for (int i = 1; i != 7; ++i)
+	for (int j = 1; j != 7; ++j)
+	{
+		ss << "Skin" << skin << "_Piece_" << i << "_" << j << ".png";
+		ss >> temp;
+		ss.clear();
+		std::cout << temp << std::endl;
+		pieceSkin.push_back(yage_canvas_load_image(temp.c_str()));
+	}
+	system("PAUSE");
+}
+
+int main(int argc, char*argv[]
+{
+
+	init();
+	meun(start());
+	yage_quit();
+	return 0;
+}
+
 int init(void)
 {
 	srand((unsigned)time(0));
-	yage_canvas_load_image("");
-		return 0;
+	yage_init(x_scr, y_scr);
+	return 0;
+
 }
 
 void meun(int playerChoose)
 {
 	int condition = 1;
+
 	while (condition)
 		switch (playerChoose)
 	{
 		case 1:
-			//start game
 			condition = gameMode();
+			//start game
 			break;
 		case 2:
 			//open record mode
@@ -82,19 +120,17 @@ int gameMode()
 
 int leaderboardMode()
 {
-	// 7.9
 	return 1;
 }
 
 int optionMode()
-// 7.9
 {
 	return 1;
 }
 
 int exitMode()
 {
-	yage_quit();
+
 	return 0;
 }
 
@@ -103,21 +139,21 @@ void g_game()
 	//partial variable
 	//Piece.type means basic elements of piece
 	//Piece.specType means special piece 
-	//specType 0.None 1.Line 2.Row 3.Tre*Tre 4.UnclearAllSamePiece 5.Unclearable 6.
 	int restOfLive = 6; //初始生命值
-	bool isMapDead = 0;//bool
-	bool isExpMax = 0;//bool
-
+	bool isMapDead = false;
+	bool isExpMax = false;
+	bool g_payeseGame = true;
 
 	Map newmap = g_makeMap();//Lht+Tgf+Hjy
 	isMapDead = g_isDead();//Lht
 	while (restOfLive){
 		//if(pair_Up)
 		//+if(button.exit_inGame())
-		if (g_pauseGame()){}
+		if (g_pauseGame()){
+		}
 		else{
 			newMap = g_checkPair();
-			if (Map.get[消除数量]() == 0)
+			if (removePiece == 0)
 			{
 				if (isMapDead)
 				{
@@ -160,7 +196,7 @@ void g_game()
 	l_scoreUpdate();//record Game score,if the score is at the top 10 of leaderboard, congratulations and refresh the learboard
 }
 
-Map& g_P_S_R(Map& oriMap)
+void g_P_S_R(Map& oriMap)
 {
 	//newMap[g_game] -> oriMap[g_C_P_S_R]
 
@@ -171,8 +207,9 @@ Map& g_P_S_R(Map& oriMap)
 	g_replenishMap();//Push_back//Tgf//book
 }
 
-Map& g_playerMove(Map&)
+void g_playerMove(Map& oriMap)
 {
+
 	/*
 	1.用户点下去
 	2.拖动-播放动画
