@@ -15,10 +15,14 @@ void clearPiece(Map & map){
 					map.maplists[i][j].setIsClear(1);
 					map.maplists[i][j - 1].setIsClear(1);
 					map.maplists[i][j - 2].setIsClear(1);
+					map.deal_SpecPiece(i, j);
+					map.deal_SpecPiece(i, j - 1);
+					map.deal_SpecPiece(i, j - 2);
 				}
 				else if (k > 2)//之后的k每次都比2大，此时新增方块必定同色
 				{
 					map.maplists[i][j].setIsClear(1);
+					map.deal_SpecPiece(i, j);
 				}
 				if (j == 8)//防止第8和第9块同色时，继续比较而造成越界
 					break;
@@ -41,10 +45,14 @@ void clearPiece(Map & map){
 					map.maplists[j][i].setIsClear(1);
 					map.maplists[j - 1][i].setIsClear(1);
 					map.maplists[j - 2][i].setIsClear(1);
+					map.deal_SpecPiece(j, i);
+					map.deal_SpecPiece(j - 1, i);
+					map.deal_SpecPiece(j - 2, i);
 				}
 				else if (k > 2)
 				{
 					map.maplists[j][i].setIsClear(1);
+					map.deal_SpecPiece(j, i);
 				}
 				if (j == 8)
 					break;

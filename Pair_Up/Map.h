@@ -12,6 +12,8 @@ private:
 	std::deque<Piece> maplists[MAX_SIZE];//Use deque instead of list
 	bool isPass; //当前游戏是否过关
 	int passScore;
+	//add the function for more conviently
+	void deal_SpecPiece(int x, int y);//this function is used by clearPiece for check special Piece and deal with them
 protected:
 public:
 	/* Ctor & Dtor */

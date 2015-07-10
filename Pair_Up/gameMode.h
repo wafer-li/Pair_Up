@@ -45,4 +45,6 @@ void g_replenishMap(Map&);
 //É¾³ıËÀÍ¼
 void g_deleteMap(Map& deadMap);
 
+//return the score
+int g_score(int num, int com);
 #endif
