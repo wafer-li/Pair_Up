@@ -150,20 +150,20 @@ bool Map::g_isDeadMap_()
 		for (int j = 0; j < 9; j++)
 		{
 			//if there were any the same color Piece at the next line.
-			if (getMaplists()[i][j]== getMaplists()[i][j + 1]){
-				if ((getMaplists()[i][j]== getMaplists()[i - 1][j - 1]) || (getMaplists()[i][j]== getMaplists()[i + 1][j - 1]) ||//对相邻行检查
-					(getMaplists()[i][j]== getMaplists()[i - 1][j + 2]) || (getMaplists()[i][j]== getMaplists()[i + 1][j + 2]))
-				{
+			if (getMaplists()[i][j].getType()== getMaplists()[i][j + 1].getType()){
+				if ((getMaplists()[i][j].getType()== getMaplists()[i - 1][j - 1].getType()) || (getMaplists()[i][j].getType()== getMaplists()[i + 1][j - 1].getType()) ||//对相邻行检查
+					(getMaplists()[i][j].getType()== getMaplists()[i - 1][j + 2].getType()) || (getMaplists()[i][j].getType()== getMaplists()[i + 1][j + 2].getType()))
+				{		 
 					return false;
 				}
 				if (j >= 2)
 				{
-					if (getMaplists()[i][j]== getMaplists()[i][j - 2])//向前检查
+					if (getMaplists()[i][j].getType()== getMaplists()[i][j - 2].getType())//向前检查
 						return false;
 				}
 				if (j <= 6)
 				{
-					if (getMaplists()[i][j]== getMaplists()[i][j + 3])//向后检查
+					if (getMaplists()[i][j].getType()== getMaplists()[i][j + 3].getType())//向后检查
 						return false;
 				}
 				j++;
@@ -171,9 +171,9 @@ bool Map::g_isDeadMap_()
 			//if there were any the same color Piece between another color
 			if (j <= 6)
 			{
-				if (getMaplists()[i][j]== getMaplists()[i][j + 2])//对相邻行检查
+				if (getMaplists()[i][j].getType()== getMaplists()[i][j + 2].getType())//对相邻行检查
 				{
-					if ((getMaplists()[i][j]== getMaplists()[i - 1][j + 1]) || (getMaplists()[i][j] == getMaplists()[i + 1][j + 1]))
+					if ((getMaplists()[i][j].getType()== getMaplists()[i - 1][j + 1].getType()) || (getMaplists()[i][j].getType() == getMaplists()[i + 1][j + 1].getType()))
 						return false;
 				}
 			}
@@ -185,20 +185,20 @@ bool Map::g_isDeadMap_()
 		for (int j = 0; j < 9; j++)
 		{
 			//if there were any the same color Piece at the next list.
-			if (getMaplists()[j][i] == getMaplists()[j + 1][i])
+			if (getMaplists()[j][i].getType() == getMaplists()[j + 1][i].getType())
 			{
-				if ((getMaplists()[j][i] == getMaplists()[j - 1][i - 1]) || (getMaplists()[j][i] == getMaplists()[j - 1][i + 1]) ||//对相邻列检查
-					(getMaplists()[j][i] == getMaplists()[j + 2][i - 1]) || (getMaplists()[j][i] == getMaplists()[j + 2][i + 1]))
+				if ((getMaplists()[j][i].getType() == getMaplists()[j - 1][i - 1].getType()) || (getMaplists()[j][i].getType() == getMaplists()[j - 1][i + 1].getType()) ||//对相邻列检查
+					(getMaplists()[j][i].getType() == getMaplists()[j + 2][i - 1].getType()) || (getMaplists()[j][i].getType() == getMaplists()[j + 2][i + 1].getType()))
 				{
 					return false;
 				}
 				if (j >= 2)
 				{
-					if (getMaplists()[j][i] == getMaplists()[j - 2][i])//向上检查
+					if (getMaplists()[j][i].getType() == getMaplists()[j - 2][i].getType())//向上检查
 						return false;
 				}
 				if (j <= 6){
-					if (getMaplists()[j][i] == getMaplists()[j + 3][i])//向下检查
+					if (getMaplists()[j][i].getType() == getMaplists()[j + 3][i].getType())//向下检查
 						return false;
 				}
 				j++;
@@ -206,9 +206,9 @@ bool Map::g_isDeadMap_()
 			//if there were any the same color Piece between another color
 			if (j <= 6)
 			{
-				if (getMaplists()[j][i] == getMaplists()[j + 2][i])//对相邻列检查
+				if (getMaplists()[j][i].getType() == getMaplists()[j + 2][i].getType())//对相邻列检查
 				{
-					if ((getMaplists()[j][i] == getMaplists()[j + 1][i - 1]) || (getMaplists()[j][i] == getMaplists()[j + 1][i + 1]))
+					if ((getMaplists()[j][i].getType() == getMaplists()[j + 1][i - 1].getType()) || (getMaplists()[j][i].getType() == getMaplists()[j + 1][i + 1].getType()))
 						return false;
 				}
 			}
@@ -220,32 +220,32 @@ bool Map::g_isDeadMap_()
 		//first line
 		if (j >= 0 && j <= 5)
 		{
-			if (getMaplists()[0][j] == getMaplists()[0][j + 1])
+			if (getMaplists()[0][j].getType() == getMaplists()[0][j + 1].getType())
 			{
-				if ((getMaplists()[0][j] == getMaplists()[0][j + 3]) || (getMaplists()[0][j] == getMaplists()[1][j + 2]))
+				if ((getMaplists()[0][j].getType() == getMaplists()[0][j + 3].getType()) || (getMaplists()[0][j].getType() == getMaplists()[1][j + 2].getType()))
 					return false;
 				else if (j == 1)
 				{
-					if (getMaplists()[0][j] == getMaplists()[1][j - 1])
+					if (getMaplists()[0][j].getType() == getMaplists()[1][j - 1].getType())
 						return false;
 				}
 				else if (j > 1)//normal suition
 				{
-					if ((getMaplists()[0][j] == getMaplists()[0][j - 2]) || (getMaplists()[0][j] == getMaplists()[0][j + 3]) ||
-						(getMaplists()[0][j] == getMaplists()[1][j - 1]) || (getMaplists()[0][j] == getMaplists()[1][j + 2]))
+					if ((getMaplists()[0][j].getType() == getMaplists()[0][j - 2].getType()) || (getMaplists()[0][j].getType() == getMaplists()[0][j + 3].getType()) ||
+						(getMaplists()[0][j].getType() == getMaplists()[1][j - 1].getType()) || (getMaplists()[0][j].getType() == getMaplists()[1][j + 2].getType()))
 						return false;
 				}
 			}
 		}
 		else if (j == 6 || j == 7)
 		{
-			if (getMaplists()[0][j] == getMaplists()[0][j + 1])
+			if (getMaplists()[0][j].getType() == getMaplists()[0][j + 1].getType())
 			{
-				if ((getMaplists()[0][j] == getMaplists()[0][j - 2]) || (getMaplists()[0][j] == getMaplists()[1][j - 1]))
+				if ((getMaplists()[0][j].getType() == getMaplists()[0][j - 2].getType()) || (getMaplists()[0][j].getType() == getMaplists()[1][j - 1].getType()))
 					return false;
 				else if (j == 6)
 				{
-					if (getMaplists()[0][j] == getMaplists()[1][j + 3])
+					if (getMaplists()[0][j].getType() == getMaplists()[1][j + 3].getType())
 						return false;
 				}
 			}
@@ -253,32 +253,32 @@ bool Map::g_isDeadMap_()
 		//last line
 		if (j >= 0 && j <= 5)
 		{
-			if (getMaplists()[8][j] == getMaplists()[8][j + 1])
+			if (getMaplists()[8][j].getType() == getMaplists()[8][j + 1].getType())
 			{
-				if ((getMaplists()[8][j] == getMaplists()[8][j + 3]) || (getMaplists()[8][j] == getMaplists()[7][j + 2]))
+				if ((getMaplists()[8][j].getType() == getMaplists()[8][j + 3].getType()) || (getMaplists()[8][j].getType() == getMaplists()[7][j + 2].getType()))
 					return false;
 				else if (j == 1)
 				{
-					if (getMaplists()[8][j] == getMaplists()[7][j - 1])
+					if (getMaplists()[8][j].getType() == getMaplists()[7][j - 1].getType())
 						return false;
 				}
 				else if (j > 1)//normal suition
 				{
-					if ((getMaplists()[8][j] == getMaplists()[8][j - 2]) || (getMaplists()[8][j] == getMaplists()[8][j + 3]) ||
-						(getMaplists()[8][j] == getMaplists()[7][j - 1]) || (getMaplists()[8][j] == getMaplists()[7][j + 2]))
+					if ((getMaplists()[8][j].getType() == getMaplists()[8][j - 2].getType()) || (getMaplists()[8][j].getType() == getMaplists()[8][j + 3].getType()) ||
+						(getMaplists()[8][j].getType() == getMaplists()[7][j - 1].getType()) || (getMaplists()[8][j].getType() == getMaplists()[7][j + 2].getType()))
 						return false;
 				}
 			}
 		}
 		else if (j == 6 || j == 7)
 		{
-			if (getMaplists()[8][j] == getMaplists()[8][j + 1])
+			if (getMaplists()[8][j].getType() == getMaplists()[8][j + 1].getType())
 			{
-				if ((getMaplists()[8][j] == getMaplists()[8][j - 2]) || (getMaplists()[8][j] == getMaplists()[7][j - 1]))
+				if ((getMaplists()[8][j].getType() == getMaplists()[8][j - 2].getType()) || (getMaplists()[8][j].getType() == getMaplists()[7][j - 1].getType()))
 					return false;
 				else if (j == 6)
 				{
-					if (getMaplists()[8][j] == getMaplists()[7][j + 3])
+					if (getMaplists()[8][j].getType() == getMaplists()[7][j + 3].getType())
 						return false;
 				}
 			}
@@ -287,14 +287,14 @@ bool Map::g_isDeadMap_()
 		//下面用中文好了，便于叙述
 		if (j <= 6)//加保险，防越界
 		{
-			if (getMaplists()[0][j] == getMaplists()[0][j + 2])
+			if (getMaplists()[0][j].getType() == getMaplists()[0][j + 2].getType())
 			{
-				if (getMaplists()[0][j] == getMaplists()[1][j + 1])
+				if (getMaplists()[0][j].getType() == getMaplists()[1][j + 1].getType())
 					return false;
 			}
-			if (getMaplists()[8][j] == getMaplists()[8][j + 2])
+			if (getMaplists()[8][j].getType() == getMaplists()[8][j + 2].getType())
 			{
-				if (getMaplists()[8][j] == getMaplists()[7][j + 1])
+				if (getMaplists()[8][j].getType() == getMaplists()[7][j + 1].getType())
 					return false;
 			}
 		}
@@ -306,32 +306,32 @@ bool Map::g_isDeadMap_()
 		//first list
 		if (j >= 0 && j <= 5)
 		{
-			if (getMaplists()[j][0] == getMaplists()[j + 1][0])
+			if (getMaplists()[j][0].getType() == getMaplists()[j + 1][0].getType())
 			{
-				if ((getMaplists()[j][0] == getMaplists()[j + 3][0]) || (getMaplists()[j][0] == getMaplists()[j + 2][1]))
+				if ((getMaplists()[j][0].getType() == getMaplists()[j + 3][0].getType()) || (getMaplists()[j][0].getType() == getMaplists()[j + 2][1].getType()))
 					return false;
 				else if (j == 1)
 				{
-					if (getMaplists()[j][0] == getMaplists()[j - 1][1])
+					if (getMaplists()[j][0].getType() == getMaplists()[j - 1][1].getType())
 						return false;
 				}
 				else if (j > 1)//normal suition
 				{
-					if ((getMaplists()[j][0] == getMaplists()[j - 2][0]) || (getMaplists()[j][0] == getMaplists()[j + 3][0]) ||
-						(getMaplists()[j][0] == getMaplists()[j - 1][1]) || (getMaplists()[j][0] == getMaplists()[j + 2][1]))
+					if ((getMaplists()[j][0].getType() == getMaplists()[j - 2][0].getType()) || (getMaplists()[j][0].getType() == getMaplists()[j + 3][0].getType()) ||
+						(getMaplists()[j][0].getType() == getMaplists()[j - 1][1].getType()) || (getMaplists()[j][0].getType() == getMaplists()[j + 2][1].getType()))
 						return false;
 				}
 			}
 		}
 		else if (j == 6 || j == 7)
 		{
-			if (getMaplists()[j][0] == getMaplists()[0][j + 1])
+			if (getMaplists()[j][0].getType() == getMaplists()[0][j + 1].getType())
 			{
-				if ((getMaplists()[j][0] == getMaplists()[j - 2][0]) || (getMaplists()[j][0] == getMaplists()[j - 1][1]))
+				if ((getMaplists()[j][0].getType() == getMaplists()[j - 2][0].getType()) || (getMaplists()[j][0].getType() == getMaplists()[j - 1][1].getType()))
 					return false;
 				else if (j == 6)
 				{
-					if (getMaplists()[j][0] == getMaplists()[j + 3][1])
+					if (getMaplists()[j][0].getType() == getMaplists()[j + 3][1].getType())
 						return false;
 				}
 			}
@@ -339,32 +339,32 @@ bool Map::g_isDeadMap_()
 		//last list
 		if (j >= 0 && j <= 5)
 		{
-			if (getMaplists()[j][8] == getMaplists()[j + 1][8])
+			if (getMaplists()[j][8].getType() == getMaplists()[j + 1][8].getType())
 			{
-				if ((getMaplists()[j][8] == getMaplists()[j + 3][8]) || (getMaplists()[j][8] == getMaplists()[j + 2][7]))
+				if ((getMaplists()[j][8].getType() == getMaplists()[j + 3][8].getType()) || (getMaplists()[j][8].getType() == getMaplists()[j + 2][7].getType()))
 					return false;
 				else if (j == 1)
 				{
-					if (getMaplists()[j][8] == getMaplists()[j - 1][7])
+					if (getMaplists()[j][8].getType() == getMaplists()[j - 1][7].getType())
 						return false;
 				}
 				else if (j > 1)//normal suition
 				{
-					if ((getMaplists()[j][8] == getMaplists()[j - 2][8]) || (getMaplists()[j][8] == getMaplists()[j + 3][8]) ||
-						(getMaplists()[j][8] == getMaplists()[j - 1][7]) || (getMaplists()[j][8] == getMaplists()[j + 2][7]))
+					if ((getMaplists()[j][8].getType() == getMaplists()[j - 2][8].getType()) || (getMaplists()[j][8].getType() == getMaplists()[j + 3][8].getType()) ||
+						(getMaplists()[j][8].getType() == getMaplists()[j - 1][7].getType()) || (getMaplists()[j][8].getType() == getMaplists()[j + 2][7].getType()))
 						return false;
 				}
 			}
 		}
 		else if (j == 6 || j == 7)
 		{
-			if (getMaplists()[j][8] == getMaplists()[j + 1][8])
+			if (getMaplists()[j][8].getType() == getMaplists()[j + 1][8].getType())
 			{
-				if ((getMaplists()[j][8] == getMaplists()[j - 2][8]) || (getMaplists()[j][8] == getMaplists()[j - 1][7]))
+				if ((getMaplists()[j][8].getType() == getMaplists()[j - 2][8].getType()) || (getMaplists()[j][8].getType() == getMaplists()[j - 1][7].getType()))
 					return false;
 				else if (j == 6)
 				{
-					if (getMaplists()[j][8] == getMaplists()[j + 3][7])
+					if (getMaplists()[j][8].getType() == getMaplists()[j + 3][7].getType())
 						return false;
 				}
 			}
@@ -373,14 +373,14 @@ bool Map::g_isDeadMap_()
 		//下面用中文好了，便于叙述
 		if (j <= 6)//加保险，防越界
 		{
-			if (getMaplists()[j][0] == getMaplists()[j + 2][0])
+			if (getMaplists()[j][0].getType() == getMaplists()[j + 2][0].getType())
 			{
-				if (getMaplists()[j][0] == getMaplists()[j + 1][1])
+				if (getMaplists()[j][0].getType() == getMaplists()[j + 1][1].getType())
 					return false;
 			}
-			if (getMaplists()[j][8] == getMaplists()[j + 2][8])
+			if (getMaplists()[j][8].getType() == getMaplists()[j + 2][8].getType())
 			{
-				if (getMaplists()[j][8] == getMaplists()[j + 1][7])
+				if (getMaplists()[j][8].getType() == getMaplists()[j + 1][7].getType())
 					return false;
 			}
 		}
