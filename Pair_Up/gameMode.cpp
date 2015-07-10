@@ -156,7 +156,7 @@ void g_deleteMap(Map& deadMap)
 }
 
 //return the score by the cleared number and the combine
-int score(int num, int com)
+int g_score(int num, int com)
 {
 	if (num >= 3)
 	{
