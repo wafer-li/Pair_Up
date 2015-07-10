@@ -1,17 +1,47 @@
 //------------READ-ME--------------------------------------------
 //标记nedOPT的地方意味着需要优化
 //标记+的地方意味着需要添加
+
 //Update7-7: 现已确定方块的属性是 Piece.type		(0，6]    match to six different piece basic type
 //			 特殊方块：			Piece.specType	[0，6]	  match to seven different piece addition type
-//			specType:			0.ori	1.line	2.row	3.box	4.same_color	5.unclear	6.death
+//			specType:			
+/*
+* 0.ori-原始方块-什么都不做		
+* 1.line-消除列
+* 2.row-消除行		
+* 3.box-消除3*3	
+* 4.same_color-消除同色
+* 5.unclear-不可消除	
+* 6.death-直接死亡
+*/
+
 //Update7-7:Please add getter and setter for your class :D
 //Update7-7:Please change your function name to match main function as possible~ 
+//Update7-8:对Map类请求：增添一个数据域读取消除方块的总数
+//Update7-8:Map在中间删除元素后 其中的迭代器会失效，请注意在循环里重建新迭代器
+//Update7-8:-无效信息-Map队列使用左上角为坐标原点
+//Update7-8:Map队列更新为使用左下角为坐标原点
+//Update7-8:游戏窗口大小为1476*1016
+//Update7-9:每个Piece大小:100*100，有效区域:98*98，Map区域大小:900*900，左上原点位置:(x_map_LT,y_map_LT)，左下原点位置:(x_map_LB,y_map_LB)		
+//			每块[x][y]piece坐标的位置：
+//Update7-9:同名请求： 统一函数命名 检查是否-is 配对-pair 消除-clear 记分板（排行榜）-leaderboard 块-piece 图-map 分数-score 创造-make 判定旗帜-flag
+//			旧的，原始的-ori 新的-new
+//			gameMode下的函数请加 "g_" 前缀，learboardMode下的函数请加 "l_" 前缀
+//Update7-9:坐标全部使用传参处理
+//Update7-10:暂停继续按钮坐标:(85 802)(327 802)
 #include <iostream>
+#include <vector>
+#include <deque>
+#include <sstream>
 #include <ctime>
 #include "yage.h"
+#include "leaderboardMode.h"
 #include "Map.h"
 #include "Piece.h"
+#include "Global.h"
 #include "Button.h"
+#include "gameMode.h"
+#include "optionMode.h"
 //接口函数列表
 //g_makeMap();
 //g_isDead();
@@ -20,41 +50,54 @@
 //g_pairUp();
 //g_setMap();
 //g_replenishMap();
-//Update7-7：内容写好了我就写上面的函数..
-static int g_score = 0;
 
-void meun(int);
+void resource(Option);
+void resourceSkin(int);
+int gameMode();
+int leaderboardMode();//+
+int optionMode();//+
+int exitMode();
 int init(void);
-int gameMode(void);
-int recordMode(void);
-int optionMode(void);
-int exitMode(void);
-void g_game(void);
-Map g_C_P_S_R(Map oriMap);
-
+void meun(int);
+//
+int start()
+{
+	return 1;
+}
 int main(int argc, char*argv[])
 {
-	meun(mouseCheck.meun);
-}
-int init(void)
-{
-	srand((unsigned)time(0));
+
+	init();
+	meun(start());
+	yage_quit();
 	return 0;
 }
 
+int init(void)
+{
+	srand((unsigned)time(0));
+	yage_init(Global::x_scr, Global::y_scr);
+	return 0;
+}
+
+//NEED TO FIX:
+//CONDITION WILL ALWAYS BE 1 IT CAUSE INFINITY LOOP
 void meun(int playerChoose)
 {
 	int condition = 1;
+
 	while (condition)
-		switch (playerChoose)
 	{
+
+		switch (playerChoose)
+		{
 		case 1:
-			//start game
 			condition = gameMode();
+			//start game
 			break;
 		case 2:
 			//open record mode
-			condition = recordMode();
+			condition = leaderboardMode();
 			break;
 		case 3:
 			//option
@@ -65,6 +108,9 @@ void meun(int playerChoose)
 			condition = exitMode();
 			break;
 		default:
+			condition = 1;
+			break;
+		}
 	}
 }
 
@@ -74,71 +120,51 @@ int gameMode()
 	return 1;
 }
 
-int recordMode()
-{
-	// 7.9
+int leaderboardMode()
+{	
+	l_leaderboard();
 	return 1;
 }
 
 int optionMode()
-// 7.9
-{
+{	
+	o_option();
 	return 1;
 }
 
 int exitMode()
 {
-	yage_quit();
-		return 0;
+	return 0;
 }
 
-void g_game()
+void resource(Option option)
 {
-	//partial variable
-	//Piece.type means basic elements of piece
-	//Piece.specType means special piece 
-	//specType 0.None 1.Line 2.Row 3.Tre*Tre 4.UnclearAllSamePiece 5.Unclearable 6.
-	int restOfLive = 6; //初始生命值
-	int isMapDead = 0;//bool
-	int isExpMax = 0;//bool
-	Map newmap;
+	struct yage_canvas *Background = yage_canvas_load_image("Bk.png");
+	resourceSkin(option.getSkin());
+}
 
-	g_makeMap();//Lht+Tgf+Hjy
-	isMapDead = g_isDead();//Lht
-	while (restOfLive){
-		//if(pair_Up)
-		//+if(button.exit_inGame())
-		if (g_pauseGame()){}
-		else{
-			if (isMapDead)
-				g_makeMap();
-			else{
-				newMap = g_playerMove();//g_playerMove()->Lds -> Lc //"="need of operator overlording
-				g_C_P_S_R(newMap);
-				//+isExpMax();
-				//nedOPT:in loops,this function"isMapDead"will carry out twice with one loop
-				//Update7-7:slove
-				isMapDead = g_isDead();
-				if (isMapDead)
-					--restOfLive;
-				}
+void resourceSkin(int skin)
+{
+	std::vector<struct yage_canvas *> pieceSkin;
+	std::string temp;
+	std::stringstream ss;
+	//加载6*5=30张皮肤 (6种方块每个有5种特殊方块）
+	for (int i = 1; i != 7; ++i)
+		for (int j = 0; j != 7; ++j)
+		{
+			ss << "Skin" << skin << "_Piece_" << i << "_" << j << ".png";
+			ss >> temp;
+			ss.clear();
+			std::cout << temp << std::endl;
+			pieceSkin.push_back(yage_canvas_load_image(temp.c_str()));
 		}
+		ss << "Skin" << skin << "_Piece_Special_1";
+		ss >> temp;
+		ss.clear();
+		struct yage_canvas *specPiece1 = yage_canvas_load_image(temp.c_str());
+		ss << "Skin" << skin << "_Piece_Special_2";
+		ss >> temp;
+		ss.clear();
+		struct yage_canvas *specPiece2 = yage_canvas_load_image(temp.c_str());
 
-	}
-}
-
-Map g_C_P_S_R (Map oriMap)
-{			//newMap[g_game] -> oriMap[g_C_P_S_R]
-			g_checkPair(oriMap);//Lc 
-
-			g_pairUp();//Lc + Lds
-
-			g_setMap();//Lht+Lds+Hjy+Tgf
-
-			g_replenishMap();//Tgf//book
-}
-
-Map g_playerMove(Map)
-{
-   // + Lds's function
 }

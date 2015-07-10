@@ -5,6 +5,7 @@
 #include <deque>
 #include "Piece.h"
 
+//Class
 class Map{
 private:
 	static const int MAX_SIZE = 9;
@@ -13,20 +14,23 @@ private:
 	int passScore;
 protected:
 public:
+	/* Ctor & Dtor */
 	Map();
 	~Map();
+
+	/* MENBER */
 
 	//initial & fill the map
 	void initMap();
 
 	//Swap
-	void Swap(int x1, int y1, int x2, int y2);
+	bool swap(int x1, int y1, int x2, int y2);
 
-	//isDeadMap
-	bool isDeadMap();
+	//g_isDeadMap
+	bool g_isDeadMap();
 	
 	//another way to judge the DeadMap
-	bool isDeadMap_();
+	bool g_isDeadMap_();
 
 	//isDead
 	bool isDead(int x, int y);
@@ -39,14 +43,44 @@ public:
 
 	//-----bool isPass-----
 	bool getIsPass();
-	void setIsPass(int flag);
+	void setIsPass(bool flag);
+
 	//-----int passScore----
 	int getPassScore();
 	void setPassScore(int score);
 
 	//Maplists
 	std::deque<Piece> * getMaplists();
+
+	/*FRIEND*/
+	friend void clearPiece(Map& map);
+	friend int removePiece(Map & map);
+	friend void repairPiece(Map & map);
 };
+
+//FRIEND function
+
+/*Friend function ClearPiece
+* Judge the whole map
+* Change the Piece.isClear
+*/
+void clearPiece(Map & map);
+
+/*Friend function RemovePiece
+* Ergodic the whole map
+* Count the number of removing-items
+* Remove Piece
+* Return the number of removing-items
+*/
+int removePiece(Map & map);
+
+/*Friend function RepairPiece
+* Ergodic the deque
+* If the deque are not full
+* Fill it
+*/
+void repairPiece(Map & map);
+
 
 
 #endif // !MAP_HEADER_FILE 

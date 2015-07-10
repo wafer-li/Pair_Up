@@ -21,13 +21,25 @@
     <ClInclude Include="Map.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="ClearPiece.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Button.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Piece.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="gameMode.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="leaderboardMode.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="optionMode.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Option.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Global.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -38,14 +50,29 @@
     <ClCompile Include="Map.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="ClearPiece.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
     <ClCompile Include="Piece.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="testClear.cpp">
       <Filter>源文件\test</Filter>
+    </ClCompile>
+    <ClCompile Include="gameMode.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Map_Friend.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="leaderboardMode.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Option.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="optionMode.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Global.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

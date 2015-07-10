@@ -1,4 +1,5 @@
 #include "Map.h"
+#include "Global.h"
 
 //Ctor
 Map::Map()
@@ -25,15 +26,15 @@ void Map::initMap()
 	{
 		for (int j = 0; j < MAX_SIZE;j++)
 		{
-			Piece list = Piece();
-			maplists[i].push_front(list);
+			Piece piece = Piece();
+			maplists[i].push_back(piece);
 		}
 	}
 }
 
 
-//Swap
-void Map::Swap(int x1,int y1,int x2,int y2)
+//swap
+bool Map::swap(int x1,int y1,int x2,int y2)
 {
 	if (
 		x1 >= 0 && x1 < MAX_SIZE && y1 >= 0 && y1 < MAX_SIZE
@@ -44,10 +45,11 @@ void Map::Swap(int x1,int y1,int x2,int y2)
 		temp = maplists[x1][y1];
 		maplists[x1][y1]= maplists[x2][y2];
 		maplists[x2][y2]= temp;
+		return true;
 	}
 	else
 	{
-		return;
+		return false;
 	}
 }
 
@@ -98,29 +100,39 @@ bool Map::isPieceClearable(int x, int y)
 //isDead
 bool Map::isDead(int x, int y)
 {
-	//Swap right
-	Swap(x, y, x + 1, y);
-	if (isPieceClearable(x + 1,y))
+	if (maplists[x][y].getSpecType() != Global::SpecType::unclearable)
 	{
-		return false;
-	}
-	//recover
-	Swap(x, y, x + 1, y);
+		//swap right
+		if (swap(x, y, x + 1, y))
+		{
+			if (isPieceClearable(x + 1, y) || isPieceClearable(x, y))
+			{
+				return false;
+			}
+			//recover
+			swap(x, y, x + 1, y);
+		}
 
-	//Swap down
-	Swap(x, y, x, y + 1);
-	if (isPieceClearable(x,y + 1))
-	{
-		return false;
+		//swap up 
+		if (swap(x, y, x, y + 1))
+		{
+			if (isPieceClearable(x, y + 1) || isPieceClearable(x, y))
+			{
+				return false;
+			}
+			//recover
+			swap(x, y, x, y + 1);
+		}
 	}
-	//recover
-	Swap(x, y, x, y + 1);
-	return true;
+	else
+	{
+		return true;
+	}
 }
 
 
-//isDeadMap
-bool Map::isDeadMap()
+//g_isDeadMap
+bool Map::g_isDeadMap()
 {
 	for (int i = 0; i < MAX_SIZE; i++)
 	{
@@ -138,7 +150,7 @@ bool Map::isDeadMap()
 //Set this version as default,by wafer
 //another way to judge DeadMap
 // means a number instead a color
-bool Map::isDeadMap_()
+bool Map::g_isDeadMap_()
 {
 	//from the second line(the border will be judged by another way)
 	for (int i = 1; i < 8; i++){
@@ -389,7 +401,7 @@ bool Map::getIsPass()
 	return isPass;
 }
 
-void Map::setIsPass(int flag)
+void Map::setIsPass(bool flag)
 {
 	isPass = flag;
 }
