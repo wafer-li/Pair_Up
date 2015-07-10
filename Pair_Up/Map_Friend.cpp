@@ -57,8 +57,6 @@ void clearPiece(Map & map){
 	}
 }
 
-//NEED TO FIX: ERASE SINGLE ITEM IN ON TURN, CAUSE THE **OUT OF RANGE** EXCEPTION
-//may be fixed
 //RemovePiece
 int removePiece(Map & map)
 {

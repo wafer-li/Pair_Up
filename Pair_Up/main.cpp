@@ -1,9 +1,20 @@
 //------------READ-ME--------------------------------------------
 //标记nedOPT的地方意味着需要优化
 //标记+的地方意味着需要添加
+
 //Update7-7: 现已确定方块的属性是 Piece.type		(0，6]    match to six different piece basic type
 //			 特殊方块：			Piece.specType	[0，6]	  match to seven different piece addition type
-//			specType:			0.ori-原始方块-什么都不做		1.line-消除列	2.row-消除行		3.box-消除3*3	4.same_color-消除同色	5.unclear-不可消除	6.death-直接死亡
+//			specType:			
+/*
+* 0.ori-原始方块-什么都不做		
+* 1.line-消除列
+* 2.row-消除行		
+* 3.box-消除3*3	
+* 4.same_color-消除同色
+* 5.unclear-不可消除	
+* 6.death-直接死亡
+*/
+
 //Update7-7:Please add getter and setter for your class :D
 //Update7-7:Please change your function name to match main function as possible~ 
 //Update7-8:对Map类请求：增添一个数据域读取消除方块的总数
@@ -69,13 +80,17 @@ int init(void)
 	return 0;
 }
 
+//NEED TO FIX:
+//CONDITION WILL ALWAYS BE 1 IT CAUSE INFINITY LOOP
 void meun(int playerChoose)
 {
 	int condition = 1;
 
 	while (condition)
-		switch (playerChoose)
 	{
+
+		switch (playerChoose)
+		{
 		case 1:
 			condition = gameMode();
 			//start game
@@ -95,6 +110,7 @@ void meun(int playerChoose)
 		default:
 			condition = 1;
 			break;
+		}
 	}
 }
 
@@ -151,5 +167,4 @@ void resourceSkin(int skin)
 		ss.clear();
 		struct yage_canvas *specPiece2 = yage_canvas_load_image(temp.c_str());
 
-	system("PAUSE");
 }
