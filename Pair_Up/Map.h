@@ -55,7 +55,7 @@ public:
 	/*FRIEND*/
 	friend void clearPiece(Map& map);
 	friend int removePiece(Map & map);
-	friend void repairPiece(Map & map);
+	friend int *repairPiece(Map & map);
 };
 
 //FRIEND function
@@ -79,7 +79,7 @@ int removePiece(Map & map);
 * If the deque are not full
 * Fill it
 */
-void repairPiece(Map & map);
+int * repairPiece(Map & map);
 
 
 
