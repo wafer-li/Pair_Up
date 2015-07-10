@@ -57,6 +57,8 @@ void clearPiece(Map & map){
 	}
 }
 
+//NEED TO FIX: ERASE SINGLE ITEM IN ON TURN, CAUSE THE **OUT OF RANGE** EXCEPTION
+//may be fixed
 //RemovePiece
 int removePiece(Map & map)
 {
@@ -64,11 +66,11 @@ int removePiece(Map & map)
 
 	for (int i = 0; i < map.MAX_SIZE; i++)
 	{
-		for (int j = 0; j < map.MAX_SIZE; j++)
+		for (int j = 0; j < map.maplists[i].size(); j++)
 		{
 			std::deque<Piece>::iterator p = map.maplists[i].begin();
 
-			for (int k = 0; k != j; k++)
+			for (int k = 0; k < j; k++)
 			{
 				p++;
 			}

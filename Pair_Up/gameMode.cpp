@@ -11,10 +11,12 @@ void g_game()
 	int score = 0;
 	bool isDeadMap = false;
 	bool isExpMax = false;
-	bool pauseGame = true;
+	bool pauseGame = false;
 
 	Map newMap = g_makeMap();
 	isDeadMap = newMap.g_isDeadMap();
+	
+	//NEED TO FIX: THE INFINITY LOOP!!!
 	while (restOfLive){
 		//if(pair_Up)
 		//+if(button.exit_inGame())

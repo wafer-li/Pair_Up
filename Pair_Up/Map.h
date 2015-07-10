@@ -24,7 +24,7 @@ public:
 	void initMap();
 
 	//Swap
-	void swap(int x1, int y1, int x2, int y2);
+	bool swap(int x1, int y1, int x2, int y2);
 
 	//g_isDeadMap
 	bool g_isDeadMap();

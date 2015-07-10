@@ -33,7 +33,7 @@ void Map::initMap()
 
 
 //swap
-void Map::swap(int x1,int y1,int x2,int y2)
+bool Map::swap(int x1,int y1,int x2,int y2)
 {
 	if (
 		x1 >= 0 && x1 < MAX_SIZE && y1 >= 0 && y1 < MAX_SIZE
@@ -44,10 +44,11 @@ void Map::swap(int x1,int y1,int x2,int y2)
 		temp = maplists[x1][y1];
 		maplists[x1][y1]= maplists[x2][y2];
 		maplists[x2][y2]= temp;
+		return true;
 	}
 	else
 	{
-		return;
+		return false;
 	}
 }
 
@@ -99,22 +100,26 @@ bool Map::isPieceClearable(int x, int y)
 bool Map::isDead(int x, int y)
 {
 	//swap right
-	swap(x, y, x + 1, y);
-	if (isPieceClearable(x + 1,y) ||isPieceClearable(x,y))
+	if (swap(x, y, x + 1, y))
 	{
-		return false;
+		if (isPieceClearable(x + 1, y) || isPieceClearable(x, y))
+		{
+			return false;
+		}
+		//recover
+		swap(x, y, x + 1, y);
 	}
-	//recover
-	swap(x, y, x + 1, y);
 
-	//swap down
-	swap(x, y, x, y + 1);
-	if (isPieceClearable(x,y + 1) ||isPieceClearable(x,y))
+	//swap up 
+	if (swap(x, y, x, y + 1))
 	{
-		return false;
+		if (isPieceClearable(x, y + 1) || isPieceClearable(x, y))
+		{
+			return false;
+		}
+		//recover
+		swap(x, y, x, y + 1);
 	}
-	//recover
-	swap(x, y, x, y + 1);
 	return true;
 }
 
