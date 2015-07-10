@@ -1,7 +1,7 @@
 #ifndef GLOBAL_H
 #define GLOBAL_H
 
-//never instantiation the class
+//WRANING:DO NOT instantiation the class
 class Global
 {
 public:

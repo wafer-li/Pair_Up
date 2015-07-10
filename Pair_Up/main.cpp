@@ -134,7 +134,7 @@ void resourceSkin(int skin)
 	std::stringstream ss;
 	//加载6*5=30张皮肤 (6种方块每个有5种特殊方块）
 	for (int i = 1; i != 7; ++i)
-		for (int j = 1; j != 6; ++j)
+		for (int j = 0; j != 7; ++j)
 		{
 			ss << "Skin" << skin << "_Piece_" << i << "_" << j << ".png";
 			ss >> temp;
