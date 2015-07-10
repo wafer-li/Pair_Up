@@ -58,42 +58,62 @@ bool Map::isPieceClearable(int x, int y)
 {
 	bool flag = false;
 
-	//right
-	if (x + 2 < MAX_SIZE)
+	//right & left
+	if (x - 1 > 0 && x + 1 < MAX_SIZE)
 	{
-		if (maplists[x][y] == maplists[x + 1][y] && maplists[x][y] == maplists[x + 2][y])
+		//middle
+		if (maplists[x][y] == maplists[x - 1][y] && maplists[x][y] == maplists[x + 1][y])
 		{
 			flag = true;
+		}
+		
+		//left
+		if (x - 2 > 0)
+		{
+			if (maplists[x][y] == maplists[x - 1][y] && maplists[x][y] == maplists[x - 2][y])
+			{
+				flag = true;
+			}
+		}
+
+		//right
+		if (x + 2 < MAX_SIZE)
+		{
+			if (maplists[x][y] == maplists[x + 1][y] && maplists[x][y] == maplists[x + 2][y])
+			{
+				flag = true;
+			}
 		}
 	}
 
-	//left
-	if (x - 2 > 0)
+	//up & down
+	if (y - 1 > 0 && y + 1 < MAX_SIZE)
 	{
-		if (maplists[x][y] == maplists[x - 1][y] && maplists[x][y] == maplists[x - 2][y])
+		//middle
+		if (maplists[x][y] == maplists[x][y + 1] && maplists[x][y] == maplists[x][y - 1])
 		{
 			flag = true;
+		}
+
+		//up
+		if (y + 2 < MAX_SIZE)
+		{
+			if (maplists[x][y] == maplists[x][y + 1] && maplists[x][y] == maplists[x][y + 2])
+			{
+				flag = true;
+			}
+		}
+
+		//down
+		if (y - 2 > 0)
+		{
+			if (maplists[x][y] == maplists[x][y - 1] && maplists[x][y] == maplists[x][y - 2])
+			{
+				flag = true;
+			}
 		}
 	}
 
-	//top
-	if (y - 2 > 0)
-	{
-		if (maplists[x][y] == maplists[x][y - 1] && maplists[x][y] == maplists[x][y - 2])
-		{
-			flag = true;
-		}
-	}
-
-	//bottom
-	if (y + 2 < MAX_SIZE)
-	{
-		if (maplists[x][y] == maplists[x][y + 1] && maplists[x][y] == maplists[x][y + 2])
-		{
-			flag = true;
-		}
-	}
-	
 	return flag;
 }
 
