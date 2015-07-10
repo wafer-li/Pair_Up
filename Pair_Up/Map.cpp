@@ -1,4 +1,5 @@
 #include "Map.h"
+#include "Global.h"
 
 //Ctor
 Map::Map()
@@ -99,26 +100,30 @@ bool Map::isPieceClearable(int x, int y)
 //isDead
 bool Map::isDead(int x, int y)
 {
-	//swap right
-	if (swap(x, y, x + 1, y))
+	if (maplists[x][y].getSpecType() == Global::SpecType::unclearable)
 	{
-		if (isPieceClearable(x + 1, y) || isPieceClearable(x, y))
-		{
-			return false;
-		}
-		//recover
-		swap(x, y, x + 1, y);
-	}
 
-	//swap up 
-	if (swap(x, y, x, y + 1))
-	{
-		if (isPieceClearable(x, y + 1) || isPieceClearable(x, y))
+		//swap right
+		if (swap(x, y, x + 1, y))
 		{
-			return false;
+			if (isPieceClearable(x + 1, y) || isPieceClearable(x, y))
+			{
+				return false;
+			}
+			//recover
+			swap(x, y, x + 1, y);
 		}
-		//recover
-		swap(x, y, x, y + 1);
+
+		//swap up 
+		if (swap(x, y, x, y + 1))
+		{
+			if (isPieceClearable(x, y + 1) || isPieceClearable(x, y))
+			{
+				return false;
+			}
+			//recover
+			swap(x, y, x, y + 1);
+		}
 	}
 	return true;
 }
