@@ -112,12 +112,12 @@ void deal_SpecPiece(int i, int n, Map& map)
 	if (map.maplists[i][n].getSpecType() == 1)
 	{
 		for (int m = 0; m < 8; m++)
-			map.maplists[i][m].setIsClear(1);
+			map.maplists[m][n].setIsClear(1);
 	}
 	if (map.maplists[i][n].getSpecType() == 2)
 	{
 		for (int m = 0; m < 8; m++)
-			map.maplists[m][n].setIsClear(1);
+			map.maplists[i][m].setIsClear(1);
 	}
 	if (map.maplists[i][n].getSpecType() == 3)
 	{
@@ -151,5 +151,37 @@ void deal_SpecPiece(int i, int n, Map& map)
 	if (map.maplists[i][n].getSpecType() == 5)
 	{
 		map.maplists[i][n].setIsClear(0);
+	}
+}
+
+//caculate the movePoint for each Piece
+void movePoint(Map& map)
+{
+	for (int i = 0; i < 9; i++)
+	{
+		for (int j = 0; j < 9; j++)
+		{
+			if (map.maplists[i][j].getIsClear() == 1)
+			{
+				for (int n = j - 1; n != 0; n--)
+				{
+					//map.maplists[i][n].setMovePoint(map.maplists[i][n].getMovePoint() + 1);
+				}
+			}
+		}
+	}
+	return;
+}
+
+//initialize the movePoint
+void ini_movePoint(Map& map)
+{
+	for (int i = 0; i < 9; i++)
+	{
+		for (int j = 0; j < 9; j++)
+		{
+			//map.maplists[i][n].setMovePoint(0);
+		}
+		}
 	}
 }
