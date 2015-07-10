@@ -121,7 +121,7 @@ bool g_checkMap(Map & map)
 //judege the Map for clearable(more effeciently but you need to tell me the Pieces' index which are changed)
 bool g_checkMap(int index_x1, int index_y1, int index_x2, int index_y2, Map & theMap)
 {
-	return (theMap.isPieceClearable(index_x1, index_y1) && theMap.isPieceClearable(index_x2, index_y2));
+	return (theMap.isPieceClearable(index_x1, index_y1) || theMap.isPieceClearable(index_x2, index_y2));
 }
 
 void g_P_S_R(Map& oriMap)
