@@ -100,9 +100,8 @@ bool Map::isPieceClearable(int x, int y)
 //isDead
 bool Map::isDead(int x, int y)
 {
-	if (maplists[x][y].getSpecType() == Global::SpecType::unclearable)
+	if (maplists[x][y].getSpecType() != Global::SpecType::unclearable)
 	{
-
 		//swap right
 		if (swap(x, y, x + 1, y))
 		{
@@ -125,7 +124,10 @@ bool Map::isDead(int x, int y)
 			swap(x, y, x, y + 1);
 		}
 	}
-	return true;
+	else
+	{
+		return true;
+	}
 }
 
 
