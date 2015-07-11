@@ -17,7 +17,10 @@ public:
 	const static int x_map_LB ;
 	const static int y_map_LT ;
 	const static int y_map_LB ;
-
+	const static int delay_fall;               //fps
+	const static int delay_add;                //fps
+	const static int delay_change;             //fps
+	const static int delay_disappear;          //ms
 //specType:	
 /*
 *0.ori-原始方块-什么都不做

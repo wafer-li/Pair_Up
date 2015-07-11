@@ -64,6 +64,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="gameMode.h" />
     <ClInclude Include="Global.h" />
@@ -74,6 +75,8 @@
     <ClInclude Include="Piece.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="button.cpp" />
     <ClCompile Include="gameMode.cpp" />
     <ClCompile Include="Global.cpp" />
     <ClCompile Include="leaderboardMode.cpp" />

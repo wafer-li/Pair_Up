@@ -34,12 +34,13 @@
 #include <deque>
 #include <sstream>
 #include <ctime>
-#include "yage.h"
+#include "graphics13.h"
 #include "leaderboardMode.h"
 #include "Map.h"
 #include "Piece.h"
 #include "Global.h"
 #include "Button.h"
+#include"Animation.h"
 #include "gameMode.h"
 #include "optionMode.h"
 //接口函数列表
@@ -60,23 +61,67 @@ int exitMode();
 int init(void);
 void meun(int);
 //
-int start()
+int start(void)
 {
-	return 1;
+	int t = 0;
+	PIMAGE A = newimage();
+	PIMAGE B = newimage();
+	PIMAGE C = newimage();
+	PIMAGE D = newimage();
+	PIMAGE BK = newimage();
+	PIMAGE A2 = newimage();
+	PIMAGE B2 = newimage();
+	PIMAGE C2 = newimage();
+	PIMAGE D2 = newimage();
+	getimage(A, "resource\\exit.png", 0, 0);
+	getimage(B, "resource\\Option.png", 0, 0);
+	getimage(C, "resource\\newGame.png", 0, 0);
+	getimage(D, "resource\\leaderboard.png", 0, 0);
+	getimage(A2, "resource\\exit-on.png", 0, 0);
+	getimage(B2, "resource\\Option-on.png", 0, 0);
+	getimage(C2, "resource\\newGame-on.png", 0, 0);
+	getimage(D2, "resource\\leaderboard-on.png", 0, 0);
+	getimage(BK, "resource\\BK.png", 0, 0);
+	
+	Button *gg = new Button(800, 400, 640, 120, 1, C, C2, C2);
+	Button *gg2 = new Button(800, 500, 640, 120, 2, D, D2, D2);
+	Button *gg3 = new Button(800, 600, 640, 120, 3, B, B2, B2);
+	
+	Button *gg4 = new Button(800, 700, 640, 120, 4, A, A2, A2);
+	for (; t == 0;){
+		t = Button::pubutton(0, 0, 1476, 1016, BK);
+
+	}
+	delete(gg2);
+	delete(gg);
+	delimage(A);
+	delimage(B);
+	delimage(C);
+	delimage(D);
+	delimage(A2);
+	delimage(B2);
+	delimage(C2);
+	delimage(D2);
+	delimage(BK);
+
+	return t;
+	
 }
 int main(int argc, char*argv[])
 {
 
 	init();
 	meun(start());
-	yage_quit();
+	//yage_quit();
+	closegraph();
 	return 0;
 }
 
 int init(void)
 {
+	initgraph(Global::x_scr, Global::x_scr);
 	srand((unsigned)time(0));
-	yage_init(Global::x_scr, Global::y_scr);
+	//yage_init(Global::x_scr, Global::y_scr);
 	return 0;
 }
 
@@ -139,7 +184,7 @@ int exitMode()
 
 void resource(Option option)
 {
-	struct yage_canvas *Background = yage_canvas_load_image("Bk.png");
+//	struct yage_canvas *Background = yage_canvas_load_image("Bk.png");
 	resourceSkin(option.getSkin());
 }
 
@@ -156,15 +201,15 @@ void resourceSkin(int skin)
 			ss >> temp;
 			ss.clear();
 			std::cout << temp << std::endl;
-			pieceSkin.push_back(yage_canvas_load_image(temp.c_str()));
+			//pieceSkin.push_back(yage_canvas_load_image(temp.c_str()));
 		}
 		ss << "Skin" << skin << "_Piece_Special_1";
 		ss >> temp;
 		ss.clear();
-		struct yage_canvas *specPiece1 = yage_canvas_load_image(temp.c_str());
+		//struct yage_canvas *specPiece1 = yage_canvas_load_image(temp.c_str());
 		ss << "Skin" << skin << "_Piece_Special_2";
 		ss >> temp;
 		ss.clear();
-		struct yage_canvas *specPiece2 = yage_canvas_load_image(temp.c_str());
+		//struct yage_canvas *specPiece2 = yage_canvas_load_image(temp.c_str());
 
 }
