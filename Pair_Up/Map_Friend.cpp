@@ -84,6 +84,7 @@ int removePiece(Map & map)
 			if (map.maplists[i][j].getIsClear())
 			{
 				p = map.maplists[i].erase(p);
+				j--;
 				count++;
 			}
 		}
