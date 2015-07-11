@@ -174,14 +174,13 @@ void movePoint(Map& map)
 }
 
 //initialize the movePoint
-void ini_movePoint(Map& map)
+void init_movePoint(Map& map)
 {
 	for (int i = 0; i < 9; i++)
 	{
 		for (int j = 0; j < 9; j++)
 		{
 			//map.maplists[i][n].setMovePoint(0);
-		}
 		}
 	}
 }
