@@ -62,13 +62,3 @@ void Piece::setIsClear(int flag)
 {
 	this->isClear = flag;
 }
-
-int Piece::getMovePoint()
-{
-	return this->movePoint;
-}
-
-void Piece::setMovePoint(int temp)
-{
-	this->movePoint = temp;
-}
