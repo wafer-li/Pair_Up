@@ -175,7 +175,7 @@ void movePoint(Map& map)
 			{
 				for (int n = j - 1; n != 0; n--)
 				{
-					//map.maplists[i][n].setMovePoint(map.maplists[i][n].getMovePoint() + 1);
+					map.maplists[i][n].setMovePoint(map.maplists[i][n].getMovePoint() + 1);
 				}
 			}
 		}
@@ -190,7 +190,6 @@ void init_movePoint(Map& map)
 	{
 		for (int j = 0; j < 9; j++)
 		{
-			//map.maplists[i][n].setMovePoint(0);
-		}
+			map.maplists[i][j].setMovePoint(0);
 	}
 }
