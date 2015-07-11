@@ -182,6 +182,5 @@ void ini_movePoint(Map& map)
 		{
 			map.maplists[i][j].setMovePoint(0);
 		}
-		}
 	}
 }
