@@ -59,7 +59,7 @@ bool Map::isPieceClearable(int x, int y)
 	bool flag = false;
 
 	//right & left
-	if (x - 1 > 0 && x + 1 < MAX_SIZE)
+	if (x - 1 >= 0 && x + 1 < MAX_SIZE)	//The Piece is not at the border
 	{
 		//middle
 		if (maplists[x][y] == maplists[x - 1][y] && maplists[x][y] == maplists[x + 1][y])
@@ -68,7 +68,7 @@ bool Map::isPieceClearable(int x, int y)
 		}
 		
 		//left
-		if (x - 2 > 0)
+		if (x - 2 >= 0)
 		{
 			if (maplists[x][y] == maplists[x - 1][y] && maplists[x][y] == maplists[x - 2][y])
 			{
@@ -85,9 +85,30 @@ bool Map::isPieceClearable(int x, int y)
 			}
 		}
 	}
+	else if (x == 0 ||x + 1 == MAX_SIZE)	//The Piece is at the border
+	{
+		//left
+		if (x - 2 >= 0)
+		{
+			if (maplists[x][y] == maplists[x - 1][y] && maplists[x][y] == maplists[x - 2][y])
+			{
+				flag = true;
+			}
+		}
+
+		//right
+		if (x + 2 < MAX_SIZE)
+		{
+			if (maplists[x][y] == maplists[x + 1][y] && maplists[x][y] == maplists[x + 2][y])
+			{
+				flag = true;
+			}
+		}
+
+	}
 
 	//up & down
-	if (y - 1 > 0 && y + 1 < MAX_SIZE)
+	if (y - 1 >= 0 && y + 1 < MAX_SIZE)
 	{
 		//middle
 		if (maplists[x][y] == maplists[x][y + 1] && maplists[x][y] == maplists[x][y - 1])
@@ -105,13 +126,34 @@ bool Map::isPieceClearable(int x, int y)
 		}
 
 		//down
-		if (y - 2 > 0)
+		if (y - 2 >= 0)
 		{
 			if (maplists[x][y] == maplists[x][y - 1] && maplists[x][y] == maplists[x][y - 2])
 			{
 				flag = true;
 			}
 		}
+	}
+	else if (y == 0 || y + 1 == MAX_SIZE)
+	{
+		//up
+		if (y + 2 < MAX_SIZE)
+		{
+			if (maplists[x][y] == maplists[x][y + 1] && maplists[x][y] == maplists[x][y + 2])
+			{
+				flag = true;
+			}
+		}
+
+		//down
+		if (y - 2 >= 0)
+		{
+			if (maplists[x][y] == maplists[x][y - 1] && maplists[x][y] == maplists[x][y - 2])
+			{
+				flag = true;
+			}
+		}
+
 	}
 
 	return flag;
