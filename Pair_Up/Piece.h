@@ -9,7 +9,7 @@ class Piece
 private:
 	int type;
 	int specType;//we have 6 special spieces
-	//0 ori 1.line 2.row 3.box 4.same color 5.unclear 6.death
+	//0 ori 1.line 2.row 3.box 4.same color 5.unclear //6.death
 	int isClear;
 
 public:
