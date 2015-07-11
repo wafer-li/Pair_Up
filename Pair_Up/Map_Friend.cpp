@@ -72,11 +72,11 @@ int removePiece(Map & map)
 
 	for (int i = 0; i < map.MAX_SIZE; i++)
 	{
-		for (int j = 0; j < map.maplists[i].size(); j++)
+		for (unsigned int j = 0; j < map.maplists[i].size(); j++)
 		{
 			std::deque<Piece>::iterator p = map.maplists[i].begin();
 
-			for (int k = 0; k < j; k++)
+			for (unsigned int k = 0; k < j; k++)
 			{
 				p++;
 			}

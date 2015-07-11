@@ -161,7 +161,7 @@ int g_score(int num, int com)
 {
 	if (num >= 3)
 	{
-		return 30.0 * pow(1.5, num - 3) * com;
+		return int (30.0 * pow(1.5, num - 3) * com);
 	}
 	else
 		//it is possible that just clear 2 Piece even 1 piece
