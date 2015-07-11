@@ -235,8 +235,6 @@ int Animation::animation_change(int i_, int n, int aa, int bb, int cc, int dd, M
 int Animation::animation_restore(int i1, int n1, int i2, int n2)
 {
 	
-	mouse_msg isdown;
-	
 	int k = 0;
 	int d = 0;
 	PIMAGE A = newimage();
@@ -304,7 +302,6 @@ int Animation::animation_restore(int i1, int n1, int i2, int n2)
 }
 int Animation::animation_move(int i1, int n1, int i2, int n2)
 {
-	mouse_msg isdown;
 	int d = 0;
 
 	putimage(x[i1][n1], y[i1][n1], BP[i1][n1]);
@@ -316,7 +313,7 @@ int Animation::animation_move(int i1, int n1, int i2, int n2)
 	getimage(BK_, 0, 0, 1476, 1016);
 	PIMAGE A = newimage();
 	if (i1 == i2&&n1<n2)
-	for (int k = 0; k <= w; k++, delay_ms(0.5))
+	for (int k = 0; k <= w; k++, delay_ms(0))
 	{
 		
 		putimage(0, 0, BK_);
@@ -326,7 +323,7 @@ int Animation::animation_move(int i1, int n1, int i2, int n2)
 
 	}
 	if (i1 == i2&&n1>n2)
-	for (int k = 0; k <= w; k++, delay_ms(0.5))
+	for (int k = 0; k <= w; k++, delay_ms(0))
 	{
 		putimage(0, 0, BK_);
 		
@@ -335,7 +332,7 @@ int Animation::animation_move(int i1, int n1, int i2, int n2)
 
 	}
 	if (n1 == n2&&i1>i2)
-	for (int k = 0; k <= h; k++, delay_ms(0.5))
+	for (int k = 0; k <= h; k++, delay_ms(0))
 	{
 		putimage(0, 0, BK_);
 		putimage_transparent(NULL, P[i1][n1], x[i1][n1], y[i1][n1] - k, BLACK);
@@ -344,7 +341,7 @@ int Animation::animation_move(int i1, int n1, int i2, int n2)
 
 	}
 	if (n1 == n2&&i1<i2)
-	for (int k = 0; k <= h; k++, delay_ms(0.5))
+	for (int k = 0; k <= h; k++, delay_ms(0))
 	{
 		putimage(0, 0, BK_);
 		putimage_transparent(NULL, P[i2][n2], x[i2][n2], y[i2][n2] - k, BLACK);

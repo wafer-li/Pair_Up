@@ -1,6 +1,7 @@
 #include "gameMode.h"
 #include "optionMode.h"
 #include "leaderboardMode.h"
+#include"Global.h"
 //gameMode entrance
 void g_game()
 {
@@ -15,8 +16,10 @@ void g_game()
 
 	Map newMap = g_makeMap();
 	isDeadMap = newMap.g_isDeadMap();
+	Animation* newAnimation = new Animation(Global::x_map_LT, Global::y_map_LT, Global::x_piece, Global::y_piece, newMap);
 	
 	//NEED TO FIX: THE INFINITY LOOP!!!
+	newAnimation->animation_add();
 	while (restOfLive){
 		//if(pair_Up)
 		//+if(button.exit_inGame())
@@ -29,10 +32,38 @@ void g_game()
 				{
 					g_deleteMap(newMap);
 					Map newmap = g_makeMap();
+					newAnimation->animation_newmap(newMap);
 				}
 				else
 				{
-					g_playerMove(newMap);//g_playerMove()->Lds -> Lc //"="need of operator overlording
+					for (;;){
+						for (; g_checkMap(newMap) == 1;)
+						{
+
+							clearPiece(newMap);
+
+							newAnimation->animation_disappear(newMap);
+							newAnimation->animation_fall(newMap);
+
+
+							g_P_S_R(newMap);
+							newAnimation->animation_add(newMap);
+							//newAnimation->animation_newmap(newMap);
+						}
+
+						//g_playerMove(newMap,newAnimation);//g_playerMove()->Lds -> Lc //"="need of operator overlording
+						
+					
+						if (!newMap.g_isDeadMap()){
+							newAnimation->puanimation(0, 0, Global::x_scr, Global::y_scr, newMap);
+
+						}
+					
+						
+						
+					
+						
+					}
 					/*
 					1.用户点下去
 					2.拖动-播放动画
@@ -42,9 +73,10 @@ void g_game()
 					|-可消除-g-P-S-R-
 					*/
 
-					g_checkMap(newMap);//Lc
-
-					g_P_S_R(newMap);
+					//g_checkMap(newMap);//Lc//////////////
+				
+					
+					
 					//+isExpMax();
 					//nedOPT:in loops,this function"g_isDeadMap"will carry out twice with one loop
 					//Update7-7:slove
@@ -57,7 +89,7 @@ void g_game()
 			}
 			else
 			{
-				g_P_S_R(newMap);
+				//g_P_S_R(newMap);
 				//+isExpMax();
 			}
 		}
@@ -127,7 +159,6 @@ bool g_checkMap(int index_x1, int index_y1, int index_x2, int index_y2, Map & th
 void g_P_S_R(Map& oriMap)
 {
 	//newMap[g_game] -> oriMap[g_P_S_R]
-	int *p = nullptr;
 
 	g_PairUp(oriMap);
 	//g_setMap();
@@ -154,16 +185,4 @@ void g_replenishMap(Map& oriMap)
 void g_deleteMap(Map& deadMap)
 {
 	delete &deadMap;
-}
-
-//return the score by the cleared number and the combine
-int g_score(int num, int com)
-{
-	if (num >= 3)
-	{
-		return int (30.0 * pow(1.5, num - 3) * com);
-	}
-	else
-		//it is possible that just clear 2 Piece even 1 piece
-		return 30;
 }

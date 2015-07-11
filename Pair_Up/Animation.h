@@ -1,6 +1,6 @@
 #ifndef __ANIMATION__
 #define __ANIMATION__
-#include"graphics13.h"
+#include"graphics15.h"
 #include<iostream>
 #include"Map.h"
 #include"Global.h"

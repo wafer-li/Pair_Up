@@ -1,4 +1,4 @@
-#include"button.h";
+#include"button.h"
 int Button::x[10] = {0};
 int Button::y[10] = { 0 };
 int Button::w[10] = { 0 };

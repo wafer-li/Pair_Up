@@ -9,10 +9,10 @@ const int Global::x_map_LT = 519;
 const int Global::x_map_LB = 519;
 const int Global::y_map_LT = 52;
 const int Global::y_map_LB = 952;
-const int Global:: delay_fall=5000;            //fps
-const int Global::delay_add = 480;             //fps
-const int Global::delay_change = 240;          //fps
-const int Global::delay_disappear = 500;     //ms 
+const int Global:: delay_fall=50000;            //fps
+const int Global::delay_add = 60000;             //fps
+const int Global::delay_change = 24000;          //fps
+const int Global::delay_disappear = 200;     //ms 
 Global::Global()
 {
 }

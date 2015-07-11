@@ -3,7 +3,8 @@
 #ifndef GAMEMODE_H
 #define GAMEMODE_H
 #include"Map.h"
-
+#include"Animation.h"
+#include"Global.h"
 //gameMode entrance
 void g_game(void);
 
@@ -21,7 +22,7 @@ void g_P_S_R(Map&);
 
 //move the piece
 //等LDS的传上来我再分离它
-inline void g_playerMove(Map& oriMap)
+inline void g_playerMove(Map& oriMap,Animation*animation )
 {
 	/*
 	1.用户点下去
@@ -31,6 +32,8 @@ inline void g_playerMove(Map& oriMap)
 	|-不可消除-换回数据-播放动画
 	|-可消除-g-P-S-R-
 	*/
+	animation->puanimation(0, 0, Global::x_scr, Global::y_scr, oriMap);
+
 }
 
 //create a new map
@@ -45,6 +48,4 @@ void g_replenishMap(Map&);
 //删除死图
 void g_deleteMap(Map& deadMap);
 
-//return the score
-int g_score(int num, int com);
 #endif
