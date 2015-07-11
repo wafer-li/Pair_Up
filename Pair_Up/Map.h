@@ -56,7 +56,6 @@ public:
 	friend void clearPiece(Map& map);
 	friend int removePiece(Map & map);
 	friend int * repairPiece(Map & map);
-	friend void repairPiece(Map & map);
 	//add the function for more conviently
 	friend void deal_SpecPiece(int x, int y, Map& map);//this function is used by clearPiece for check special Piece and deal with them
 	//caculate the movePoint for each Piece after clearPiece function

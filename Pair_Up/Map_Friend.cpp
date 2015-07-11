@@ -191,5 +191,6 @@ void init_movePoint(Map& map)
 		for (int j = 0; j < 9; j++)
 		{
 			map.maplists[i][j].setMovePoint(0);
+		}
 	}
 }

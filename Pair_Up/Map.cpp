@@ -162,34 +162,44 @@ bool Map::isPieceClearable(int x, int y)
 //isDead
 bool Map::isDead(int x, int y)
 {
+	bool flag = false;
 	if (maplists[x][y].getSpecType() != Global::SpecType::unclearable)
 	{
-	//swap right
-	if (swap(x, y, x + 1, y))
-	{
-		if (isPieceClearable(x + 1, y) || isPieceClearable(x, y))
+		//swap right
+		if (swap(x, y, x + 1, y))
 		{
-			return false;
+			if (isPieceClearable(x + 1, y) || isPieceClearable(x, y))
+			{
+				flag = false;
+			}
+			else
+			{
+				flag = true;
+			}
+			//recover
+			swap(x, y, x + 1, y);
 		}
-		//recover
-		swap(x, y, x + 1, y);
-	}
 
-	//swap up 
-	if (swap(x, y, x, y + 1))
-	{
-		if (isPieceClearable(x, y + 1) || isPieceClearable(x, y))
+		//swap up 
+		if (swap(x, y, x, y + 1))
 		{
-			return false;
+			if (isPieceClearable(x, y + 1) || isPieceClearable(x, y))
+			{
+				flag = false;
+			}
+			else
+			{
+				flag = true;
+			}
+			//recover
+			swap(x, y, x, y + 1);
 		}
-		//recover
-		swap(x, y, x, y + 1);
-	}
 	}
 	else
 	{
-	return true;
-}
+		flag = true;
+	}
+	return flag;
 }
 
 
