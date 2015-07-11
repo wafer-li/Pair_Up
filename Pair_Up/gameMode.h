@@ -17,7 +17,7 @@ bool g_checkMap(Map & map);
 bool g_checkMap(int index_x1, int index_y1, int index_x2, int index_y2, Map & theMap);
 
 //Binding : Pair up,clear the Map,and replenish it
-int *g_P_S_R(Map&);
+void g_P_S_R(Map&);
 
 //move the piece
 //等LDS的传上来我再分离它
@@ -40,7 +40,7 @@ Map g_makeMap();
 void g_PairUp(Map&);
 
 //补充deque
-int *g_replenishMap(Map&);
+void g_replenishMap(Map&);
 
 //删除死图
 void g_deleteMap(Map& deadMap);

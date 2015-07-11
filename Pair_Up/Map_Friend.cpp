@@ -94,26 +94,16 @@ int removePiece(Map & map)
 //WARNING:
 //Please ensure to DELETE the repairNum in the stage
 //RepairPiece
-int * repairPiece(Map & map)
+void repairPiece(Map & map)
 {
-	int *repairNum = new int[map.MAX_SIZE];
-
-	for (int i = 0; i < map.MAX_SIZE; i++)
-{
-		repairNum[i] = 0;
-	}
-
-
 	for (int i = 0; i < map.MAX_SIZE; i++)
 	{
 		while (map.maplists[i].size() < map.MAX_SIZE)
 		{
 			Piece piece = Piece();
 			map.maplists[i].push_back(piece);
-			repairNum[i]++;
 		}
 	}
-	return repairNum;
 }
 
 //special Piece

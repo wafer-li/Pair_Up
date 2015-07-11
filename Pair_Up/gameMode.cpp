@@ -124,7 +124,7 @@ bool g_checkMap(int index_x1, int index_y1, int index_x2, int index_y2, Map & th
 	return (theMap.isPieceClearable(index_x1, index_y1) || theMap.isPieceClearable(index_x2, index_y2));
 }
 
-int *g_P_S_R(Map& oriMap)
+void g_P_S_R(Map& oriMap)
 {
 	//newMap[g_game] -> oriMap[g_P_S_R]
 	int *p = nullptr;
@@ -132,8 +132,7 @@ int *g_P_S_R(Map& oriMap)
 	g_PairUp(oriMap);
 	//g_setMap();
 
-	p = g_replenishMap(oriMap);//Push_back//Tgf//book
-	return p;
+	g_replenishMap(oriMap);//Push_back//Tgf//book
 }
 Map g_makeMap()
 {	
@@ -147,9 +146,9 @@ void g_PairUp(Map& oriMap)
 	removePiece(oriMap);
 }
 
-int *g_replenishMap(Map& oriMap)
+void g_replenishMap(Map& oriMap)
 {
-	return(repairPiece(oriMap));
+	repairPiece(oriMap);
 }
 
 void g_deleteMap(Map& deadMap)
