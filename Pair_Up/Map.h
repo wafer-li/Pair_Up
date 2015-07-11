@@ -60,6 +60,8 @@ public:
 	friend void deal_SpecPiece(int x, int y, Map& map);//this function is used by clearPiece for check special Piece and deal with them
 	//caculate the movePoint for each Piece after clearPiece function
 	friend void movePoint(Map& map);
+	//initialize the movePoint
+	friend void ini_movePoint(Map& map);
 };
 
 //FRIEND function
