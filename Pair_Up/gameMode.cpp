@@ -121,17 +121,19 @@ bool g_checkMap(Map & map)
 //judege the Map for clearable(more effeciently but you need to tell me the Pieces' index which are changed)
 bool g_checkMap(int index_x1, int index_y1, int index_x2, int index_y2, Map & theMap)
 {
-	return (theMap.isPieceClearable(index_x1, index_y1) && theMap.isPieceClearable(index_x2, index_y2));
+	return (theMap.isPieceClearable(index_x1, index_y1) || theMap.isPieceClearable(index_x2, index_y2));
 }
 
-void g_P_S_R(Map& oriMap)
+int *g_P_S_R(Map& oriMap)
 {
 	//newMap[g_game] -> oriMap[g_P_S_R]
+	int *p = nullptr;
 
 	g_PairUp(oriMap);
 	//g_setMap();
 
-	g_replenishMap(oriMap);//Push_back//Tgf//book
+	p = g_replenishMap(oriMap);//Push_back//Tgf//book
+	return p;
 }
 Map g_makeMap()
 {	
@@ -145,12 +147,24 @@ void g_PairUp(Map& oriMap)
 	removePiece(oriMap);
 }
 
-void g_replenishMap(Map& oriMap)
+int *g_replenishMap(Map& oriMap)
 {
-	repairPiece(oriMap);
+	return(repairPiece(oriMap));
 }
 
 void g_deleteMap(Map& deadMap)
 {
 	delete &deadMap;
+}
+
+//return the score by the cleared number and the combine
+int g_score(int num, int com)
+{
+	if (num >= 3)
+	{
+		return 30.0 * pow(1.5, num - 3) * com;
+	}
+	else
+		//it is possible that just clear 2 Piece even 1 piece
+		return 30;
 }
