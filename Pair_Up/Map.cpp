@@ -231,7 +231,7 @@ bool Map::g_isDeadMap_()
 			//if there were any the same color Piece at the next line.
 			if (getMaplists()[i][j].getType() == getMaplists()[i][j + 1].getType()){
 				if ((getMaplists()[i][j].getType() == getMaplists()[i - 1][j - 1].getType()) || (getMaplists()[i][j].getType() == getMaplists()[i + 1][j - 1].getType()) ||//对相邻行检查
-					(getMaplists()[i][j].getType() == getMaplists()[i - 1][j + 2].getType()) || (getMaplists()[i][j].getType() == getMaplists()[i + 1][j + 2].getType())))
+					(getMaplists()[i][j].getType() == getMaplists()[i - 1][j + 2].getType()) || (getMaplists()[i][j].getType() == getMaplists()[i + 1][j + 2].getType()))
 				{		 
 					return false;
 				}
