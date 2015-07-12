@@ -112,48 +112,151 @@ void deal_SpecPiece(int i, int n, Map& map)
 {
 	if (map.maplists[i][n].getSpecType() == 1)
 	{
-		for (int m = 0; m < 8; m++)
-			map.maplists[m][n].setIsClear(1);
-	}
-	if (map.maplists[i][n].getSpecType() == 2)
-	{
-		for (int m = 0; m < 8; m++)
-			map.maplists[i][m].setIsClear(1);
-	}
-	if (map.maplists[i][n].getSpecType() == 3)
-	{
-		if (i > 0)
-			map.maplists[i - 1][n].setIsClear(1);
-		if (i < 8)
-			map.maplists[i + 1][n].setIsClear(1);
-		if (n > 0)
-			map.maplists[i][n - 1].setIsClear(1);
-		if (n < 8)
-			map.maplists[i][n + 1].setIsClear(1);
-		if ((i > 0) && (n > 0))
-			map.maplists[i - 1][n - 1].setIsClear(1);
-		if ((i > 0) && (n < 8))
-			map.maplists[i - 1][n + 1].setIsClear(1);
-		if ((i < 8) && (n > 0))
-			map.maplists[i + 1][n - 1].setIsClear(1);
-		if ((i < 8) && (n < 8))
-			map.maplists[i + 1][n + 1].setIsClear(1);
-	}
-	if (map.maplists[i][n].getSpecType() == 4)
-	{
-		for (int index_x = 0, index_y = 0; (index_x == 8) && (index_y == 8); index_x++, index_y++)
+		for (int m = 0; m < 9; m++)
 		{
-			if (map.maplists[i][n].getType() == map.maplists[index_x][index_y].getType())
+			if (map.maplists[m][n].getSpecType() == 5)
 			{
-				map.maplists[index_x][index_y].setIsClear(1);
+				map.maplists[m][n].setIsClear(0);
+			}
+			else
+			{
+				map.maplists[m][n].setIsClear(1);
+				//if it's the special Piece
+				deal_SpecPiece(m, n, map);
 			}
 		}
 	}
-	if (map.maplists[i][n].getSpecType() == 5)
+	else if (map.maplists[i][n].getSpecType() == 2)
 	{
-		map.maplists[i][n].setIsClear(0);
+		for (int m = 0; m < 9; m++)
+		{
+			if (map.maplists[i][m].getSpecType() == 5)
+			{
+				map.maplists[i][m].setIsClear(0);
+			}
+			else
+			{
+				map.maplists[i][m].setIsClear(1);
+				//if it's the special Piece
+				deal_SpecPiece(i, m, map);
+			}
+		}
+	}
+	else if (map.maplists[i][n].getSpecType() == 3)
+	{
+		if (i > 0)
+			if (map.maplists[i - 1][n].getSpecType() == 5)
+			{
+				map.maplists[i - 1][n].setIsClear(0);
+			}
+			else
+			{
+				map.maplists[i - 1][n].setIsClear(1);
+				//if it's the special Piece
+				deal_SpecPiece(i - 1, n, map);
+			}
+		if (i < 8)
+			if (map.maplists[i + 1][n].getSpecType() == 5)
+			{
+				map.maplists[i + 1][n].setIsClear(0);
+			}
+			else
+			{
+				map.maplists[i + 1][n].setIsClear(1);
+				//if it's the special Piece
+				deal_SpecPiece(i + 1, n, map);
+			}
+		if (n > 0)
+			if (map.maplists[i][n - 1].getSpecType() == 5)
+			{
+				map.maplists[i][n - 1].setIsClear(0);
+			}
+			else
+			{
+				map.maplists[i][n - 1].setIsClear(1);
+				//if it's the special Piece
+				deal_SpecPiece(i, n - 1, map);
+			}
+		if (n < 8)
+			if (map.maplists[i][n + 1].getSpecType() == 5)
+			{
+				map.maplists[i][n + 1].setIsClear(0);
+			}
+			else
+			{
+				map.maplists[i][n + 1].setIsClear(1);
+				//if it's the special Piece
+				deal_SpecPiece(i, n + 1, map);
+			}
+		if ((i > 0) && (n > 0))
+			if (map.maplists[i - 1][n].getSpecType() == 5)
+			{
+				map.maplists[i - 1][n].setIsClear(0);
+			}
+			else
+			{
+				map.maplists[i - 1][n - 1].setIsClear(1);
+				//if it's the special Piece
+				deal_SpecPiece(i - 1, n - 1, map);
+			}
+		if ((i > 0) && (n < 8))
+			if (map.maplists[i - 1][n + 1].getSpecType() == 5)
+			{
+				map.maplists[i - 1][n + 1].setIsClear(0);
+			}
+			else
+			{
+				map.maplists[i - 1][n + 1].setIsClear(1);
+				//if it's the special Piece
+				deal_SpecPiece(i - 1, n + 1, map);
+			}
+		if ((i < 8) && (n > 0))
+			if (map.maplists[i + 1][n - 1].getSpecType() == 5)
+			{
+				map.maplists[i + 1][n - 1].setIsClear(0);
+			}
+			else
+			{
+				map.maplists[i + 1][n - 1].setIsClear(1);
+				//if it's the special Piece
+				deal_SpecPiece(i + 1, n - 1, map);
+			}
+		if ((i < 8) && (n < 8))
+			if (map.maplists[i + 1][n + 1].getSpecType() == 5)
+			{
+				map.maplists[i + 1][n + 1].setIsClear(0);
+			}
+			else
+			{
+				map.maplists[i + 1][n + 1].setIsClear(1);
+				//if it's the special Piece
+				deal_SpecPiece(i + 1, n + 1, map);
+			}
+	}
+	else if (map.maplists[i][n].getSpecType() == 4)
+	{
+		for (int index_x = 0; index_x < 9; index_x++)
+		{
+			for (int index_y = 0; index_y < 9; index_y++)
+			{
+				if (map.maplists[index_x][index_y].getType() == map.maplists[i][n].getType())
+				{
+					if (map.maplists[index_x][index_y].getSpecType() == 5)
+					{
+						map.maplists[index_x][index_y].setIsClear(0);
+					}
+					else
+					{
+						map.maplists[index_x][index_y].setIsClear(1);
+						//if it's the special Piece
+						deal_SpecPiece(index_x, index_y, map);
+					}
+				}
+			}
+		}
 	}
 }
+
 
 //caculate the movePoint for each Piece
 void movePoint(Map& map)
