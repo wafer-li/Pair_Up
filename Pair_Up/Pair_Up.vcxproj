@@ -72,6 +72,7 @@
     <ClInclude Include="Option.h" />
     <ClInclude Include="optionMode.h" />
     <ClInclude Include="Piece.h" />
+    <ClInclude Include="Score.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gameMode.cpp" />
@@ -83,6 +84,7 @@
     <ClCompile Include="Option.cpp" />
     <ClCompile Include="optionMode.cpp" />
     <ClCompile Include="Piece.cpp" />
+    <ClCompile Include="Score.cpp" />
     <ClCompile Include="testClear.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

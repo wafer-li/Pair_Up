@@ -3,6 +3,7 @@
 #ifndef GAMEMODE_H
 #define GAMEMODE_H
 #include"Map.h"
+#include "Score.h"
 
 //gameMode entrance
 void g_game(void);
@@ -45,6 +46,7 @@ void g_replenishMap(Map&);
 //…æ≥˝À¿Õº
 void g_deleteMap(Map& deadMap);
 
-//return the score
-int g_score(int num, int com);
+//Change the score
+void g_score(int num, int com, Score & score);
+
 #endif
