@@ -33,12 +33,17 @@ int Score::countAdditionNum(int level)
 
 	if (level >= 4 && level < 7)
 	{
-		N = ((2 * level) - 5) * 1000;
+		N = ((2 * level) - 3) * 1000;
 	}
 
 	if (level >= 7 && level < 10)
 	{
 		N = ((3 * level) - 7) * 1000;
+	}
+
+	if (level >= 10)
+	{
+		N = ((4 * level) - 15) * 1000;
 	}
 
 	return N;
