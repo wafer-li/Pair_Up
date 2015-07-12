@@ -76,7 +76,7 @@ void g_game()
 					//g_checkMap(newMap);//Lc//////////////
 				
 					
-					
+
 					//+isExpMax();
 					//nedOPT:in loops,this function"g_isDeadMap"will carry out twice with one loop
 					//Update7-7:slove
@@ -197,4 +197,16 @@ void g_replenishMap(Map& oriMap)
 void g_deleteMap(Map& deadMap)
 {
 	delete &deadMap;
+}
+
+//return the score by the cleared number and the combo number
+int g_score(int num, int com)
+{
+	if (num >= 3)
+	{
+		return int(30.0 * pow(1.5, num - 3) * com);
+	}
+	else
+		//it is possible that just clear 2 Piece even 1 piece
+		return 30;
 }
