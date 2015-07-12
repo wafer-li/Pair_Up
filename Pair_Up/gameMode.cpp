@@ -121,7 +121,13 @@ bool g_checkMap(Map & map)
 				if (j == 8)//防止第8和第9块同色时，继续比较而造成越界
 					break;
 				if (map.getMaplists()[i][j].getType() == map.getMaplists()[i][j + 1].getType())//方块检查后j++调整j值
+				{
 					j++;
+					if (map.getMaplists()[i][j].getSpecType() == 5)//这里也进行了特殊方块检查
+					{
+						break;
+					}
+				}
 				else
 					break;//若方块颜色不对，那么不进行上述的状态调整过程
 			}
@@ -141,7 +147,13 @@ bool g_checkMap(Map & map)
 				if (j == 8)
 					break;
 				if (map.getMaplists()[j][i].getType() == map.getMaplists()[j + 1][i].getType())
+				{
 					j++;
+					if (map.getMaplists()[i][j].getSpecType() == 5)//这里也进行了特殊方块检查
+					{
+						break;
+					}
+				}
 				else
 					break;
 			}
