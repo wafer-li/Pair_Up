@@ -430,6 +430,12 @@ int Animation::animation_disappear(Map&oriMap)
 
 		}
 	////////////////////////////数据处理//////////////////
+	for (n_ = 0; n_ < 9; n_++)
+	{
+		d_add[n_] = 0;
+	}
+
+
 	for (i_ = 8; i_ >=0; i_--)
 	for (n_ = 8; n_ >= 0; n_--)
 	{
@@ -444,6 +450,15 @@ int Animation::animation_disappear(Map&oriMap)
 		}
 
 
+	}
+	for (i_ = 0; i_ <8; i_++)
+	for (n_ = 0; n_ < 9; n_++)
+	{
+		if ((m[i_][n_] == 1) && (m[i_ + 1][n_] == 1))
+		{
+			d_add[n_]++;
+			d[i_ + 1][n_] += d_add[n_];
+		}
 	}
 	
 	/*for (i_ = 0; i_ < 9; i_++)
