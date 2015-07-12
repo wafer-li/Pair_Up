@@ -58,104 +58,129 @@ bool Map::isPieceClearable(int x, int y)
 {
 	bool flag = false;
 
-	//right & left
-	if (x - 1 >= 0 && x + 1 < MAX_SIZE)	//The Piece is not at the border
+	if (maplists[x][y].getSpecType() != Global::SpecType::unclearable)
 	{
-		//middle
-		if (maplists[x][y] == maplists[x - 1][y] && maplists[x][y] == maplists[x + 1][y])
+
+		//right & left
+		if (x - 1 >= 0 && x + 1 < MAX_SIZE)	//The Piece is not at the border
 		{
-			flag = true;
-		}
-		
-		//left
-		if (x - 2 >= 0)
-		{
-			if (maplists[x][y] == maplists[x - 1][y] && maplists[x][y] == maplists[x - 2][y])
+			//middle
+			if (maplists[x][y] == maplists[x - 1][y] && maplists[x][y] == maplists[x + 1][y] &&
+				maplists[x + 1][y].getSpecType() != Global::SpecType::unclearable &&
+				maplists[x - 1][y].getSpecType() !=Global::SpecType::unclearable)
 			{
 				flag = true;
 			}
-		}
 
-	//right
-	if (x + 2 < MAX_SIZE)
-	{
-		if (maplists[x][y] == maplists[x + 1][y] && maplists[x][y] == maplists[x + 2][y])
-		{
-			flag = true;
-		}
-	}
-	}
-	else if (x == 0 ||x + 1 == MAX_SIZE)	//The Piece is at the border
-	{
-	//left
-		if (x - 2 >= 0)
-	{
-		if (maplists[x][y] == maplists[x - 1][y] && maplists[x][y] == maplists[x - 2][y])
-		{
-			flag = true;
+			//left
+			if (x - 2 >= 0)
+			{
+				if (maplists[x][y] == maplists[x - 1][y] && maplists[x][y] == maplists[x - 2][y] &&
+					maplists[x - 1][y].getSpecType() != Global::SpecType::unclearable &&
+					maplists[x - 2][y].getSpecType() != Global::SpecType::unclearable)
+				{
+					flag = true;
+				}
+			}
+
+			//right
+			if (x + 2 < MAX_SIZE)
+			{
+				if (maplists[x][y] == maplists[x + 1][y] && maplists[x][y] == maplists[x + 2][y] &&
+					maplists[x + 1][y].getSpecType() != Global::SpecType::unclearable &&
+					maplists[x + 2][y].getSpecType() != Global::SpecType::unclearable)
+				{
+					flag = true;
+				}
 			}
 		}
-
-		//right
-		if (x + 2 < MAX_SIZE)
+		else if (x == 0 || x + 1 == MAX_SIZE)	//The Piece is at the border
 		{
-			if (maplists[x][y] == maplists[x + 1][y] && maplists[x][y] == maplists[x + 2][y])
+			//left
+			if (x - 2 >= 0)
 			{
-				flag = true;
+				if (maplists[x][y] == maplists[x - 1][y] && maplists[x][y] == maplists[x - 2][y] &&
+					maplists[x - 1][y].getSpecType() !=Global::SpecType::unclearable &&
+					maplists[x + 2][y].getSpecType() !=Global::SpecType::unclearable)
+				{
+					flag = true;
+				}
+			}
+
+			//right
+			if (x + 2 < MAX_SIZE)
+			{
+				if (maplists[x][y] == maplists[x + 1][y] && maplists[x][y] == maplists[x + 2][y] &&
+					maplists[x + 1][y].getSpecType() !=Global::SpecType::unclearable &&
+					maplists[x + 2][y].getSpecType() != Global::SpecType::unclearable)
+				{
+					flag = true;
+				}
+			}
+
 		}
-		}
 
-	}
-
-	//up & down
-	if (y - 1 >= 0 && y + 1 < MAX_SIZE)
-	{
-		//middle
-		if (maplists[x][y] == maplists[x][y + 1] && maplists[x][y] == maplists[x][y - 1])
-	{
-			flag = true;
-	}
-
-		//up
-		if (y + 2 < MAX_SIZE)
+		//up & down
+		if (y - 1 >= 0 && y + 1 < MAX_SIZE)
 		{
-			if (maplists[x][y] == maplists[x][y + 1] && maplists[x][y] == maplists[x][y + 2])
-	{
+			//middle
+			if (maplists[x][y] == maplists[x][y + 1] && maplists[x][y] == maplists[x][y - 1] &&
+				maplists[x][y + 1].getSpecType() != Global::SpecType::unclearable &&
+				maplists[x][y - 1].getSpecType() !=Global::SpecType::unclearable)
+			{
 				flag = true;
 			}
-		}
 
-		//down
-		if (y - 2 >= 0)
-		{
-		if (maplists[x][y] == maplists[x][y - 1] && maplists[x][y] == maplists[x][y - 2])
-		{
-			flag = true;
-		}
-	}
-	}
-	else if (y == 0 || y + 1 == MAX_SIZE)
-	{
-		//up
-	if (y + 2 < MAX_SIZE)
-	{
-		if (maplists[x][y] == maplists[x][y + 1] && maplists[x][y] == maplists[x][y + 2])
-		{
-			flag = true;
-		}
-	}
-	
-		//down
-		if (y - 2 >= 0)
-		{
-			if (maplists[x][y] == maplists[x][y - 1] && maplists[x][y] == maplists[x][y - 2])
+			//up
+			if (y + 2 < MAX_SIZE)
 			{
-				flag = true;
+				if (maplists[x][y] == maplists[x][y + 1] && maplists[x][y] == maplists[x][y + 2] &&
+					maplists[x][y + 1].getSpecType() !=Global::SpecType::unclearable &&
+					maplists[x][y + 2].getSpecType() != Global::SpecType::unclearable)
+				{
+					flag = true;
+				}
+			}
+
+			//down
+			if (y - 2 >= 0)
+			{
+				if (maplists[x][y] == maplists[x][y - 1] && maplists[x][y] == maplists[x][y - 2] &&
+					maplists[x][y - 1].getSpecType() != Global::SpecType::unclearable &&
+					maplists[x][y - 2].getSpecType() != Global::SpecType::unclearable)
+
+				{
+					flag = true;
+				}
+			}
 		}
+		else if (y == 0 || y + 1 == MAX_SIZE)
+		{
+			//up
+			if (y + 2 < MAX_SIZE)
+			{
+				if (maplists[x][y] == maplists[x][y + 1] && maplists[x][y] == maplists[x][y + 2] &&
+					maplists[x][y + 1].getSpecType() !=Global::SpecType::unclearable &&
+					maplists[x][y + 2].getSpecType() !=Global::SpecType::unclearable)
+				{
+					flag = true;
+				}
+			}
+
+			//down
+			if (y - 2 >= 0)
+			{
+				if (maplists[x][y] == maplists[x][y - 1] && maplists[x][y] == maplists[x][y - 2] &&
+					maplists[x][y - 1].getSpecType() !=Global::SpecType::unclearable &&
+					maplists[x][y - 2].getSpecType() !=Global::SpecType::unclearable )
+				{
+					flag = true;
+				}
+			}
+
 		}
 
 	}
-	
 	return flag;
 }
 
