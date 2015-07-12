@@ -91,7 +91,7 @@ bool g_checkMap(Map & map)
 				if (map.getMaplists()[i][j].getType() == map.getMaplists()[i][j + 1].getType())//方块检查后j++调整j值
 				{
 					j++;
-					if (map.getMaplists[i][j].getSpecType() == 5)//这里也进行了特殊方块检查
+					if (map.getMaplists()[i][j].getSpecType() == 5)//这里也进行了特殊方块检查
 					{
 						break;
 					}
@@ -117,7 +117,7 @@ bool g_checkMap(Map & map)
 				if (map.getMaplists()[j][i].getType() == map.getMaplists()[j + 1][i].getType())
 				{
 					j++;
-					if (map.getMaplists[i][j].getSpecType() == 5)//这里也进行了特殊方块检查
+					if (map.getMaplists()[i][j].getSpecType() == 5)//这里也进行了特殊方块检查
 					{
 						break;
 					}
