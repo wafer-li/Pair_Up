@@ -43,11 +43,12 @@ void g_game()
 							clearPiece(newMap);
 
 							newAnimation->animation_disappear(newMap);
-							newAnimation->animation_fall(newMap);
+							//newAnimation->animation_fall(newMap);
 
 
 							g_P_S_R(newMap);
-							newAnimation->animation_add(newMap);
+							newAnimation->animation_fall_add(newMap);
+							//newAnimation->animation_add(newMap);
 							//newAnimation->animation_newmap(newMap);
 						}
 
