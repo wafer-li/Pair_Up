@@ -92,12 +92,13 @@ int start(void)
 	getimage(C3, "resource\\newGame-on.png", 0, 0);
 	getimage(D3, "resource\\leaderboard-on.png", 0, 0);
 	getimage(BK, "resource\\BK.png", 0, 0);
-	
+
 	Button *gg = new Button(800, 400, 640, 120, 1, C, C2, C3);
-	Button *gg2 = new Button(800, 500, 640, 120, 2, D, D2, D3);
-	Button *gg3 = new Button(800, 600, 640, 120, 3, B, B2, B3);
+	Button *gg2 = new Button(800, 521, 640, 120, 2, D, D2, D3);
+	Button *gg3 = new Button(800, 642, 640, 120, 3, B, B2, B3);
 	
-	Button *gg4 = new Button(800, 700, 640, 120, 4, A, A2, A3);
+	Button *gg4 = new Button(800, 763, 640, 120, 4, A, A2, A3);
+
 	for (; t == 0;){
 		t = Button::pubutton(0, 0, 1476, 1016, BK);
 
