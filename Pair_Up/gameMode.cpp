@@ -168,7 +168,7 @@ void g_deleteMap(Map& deadMap)
 	delete &deadMap;
 }
 
-//return the score by the cleared number and the combine
+//return the score by the cleared number and the combo number
 int g_score(int num, int com)
 {
 	if (num >= 3)
