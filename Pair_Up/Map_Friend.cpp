@@ -122,7 +122,12 @@ void repairPiece(Map & map)
 //special Piece
 void deal_SpecPiece(int i, int n, Map& map)
 {
-	if (map.maplists[i][n].getSpecType() == 1)
+	if (map.maplists[i][n].getSpecType() == 5)
+	{
+		map.maplists[i][n].setIsClear(0);
+		return;
+	}
+	else if (map.maplists[i][n].getSpecType() == 1)
 	{
 		for (int m = 0; m < 9; m++)
 		{
@@ -132,9 +137,16 @@ void deal_SpecPiece(int i, int n, Map& map)
 			}
 			else
 			{
-				map.maplists[m][n].setIsClear(1);
-				//if it's the special Piece
-				deal_SpecPiece(m, n, map);
+				if (map.maplists[m][n].getIsClear() == 1)// don not need to judge itself
+				{
+					continue;
+				}
+				else
+				{
+					map.maplists[m][n].setIsClear(1);
+					//if it's the special Piece
+					deal_SpecPiece(m, n, map);
+				}
 			}
 		}
 	}
@@ -148,13 +160,21 @@ void deal_SpecPiece(int i, int n, Map& map)
 			}
 			else
 			{
-				map.maplists[i][m].setIsClear(1);
-				//if it's the special Piece
-				deal_SpecPiece(i, m, map);
+				if (map.maplists[i][m].getIsClear() == 1)// don not need to judge itself
+				{
+					continue;
+				}
+				else
+				{
+					map.maplists[i][m].setIsClear(1);
+					//if it's the special Piece
+					deal_SpecPiece(i, m, map);
+				}
 			}
 		}
 	}
 	else if (map.maplists[i][n].getSpecType() == 3)
+	//don't need to pass a boom,because it can't back to itself;
 	{
 		if (i > 0)
 			if (map.maplists[i - 1][n].getSpecType() == 5)
@@ -163,9 +183,16 @@ void deal_SpecPiece(int i, int n, Map& map)
 			}
 			else
 			{
-				map.maplists[i - 1][n].setIsClear(1);
-				//if it's the special Piece
-				deal_SpecPiece(i - 1, n, map);
+				if (map.maplists[i - 1][n].getIsClear() == 1)// don not need to judge itself
+				{
+					// because there is no loop, so just exit the judge
+				}
+				else
+				{
+					map.maplists[i - 1][n].setIsClear(1);
+					//if it's the special Piece
+					deal_SpecPiece(i - 1, n, map);
+				}
 			}
 		if (i < 8)
 			if (map.maplists[i + 1][n].getSpecType() == 5)
@@ -174,9 +201,15 @@ void deal_SpecPiece(int i, int n, Map& map)
 			}
 			else
 			{
-				map.maplists[i + 1][n].setIsClear(1);
-				//if it's the special Piece
-				deal_SpecPiece(i + 1, n, map);
+				if (map.maplists[i + 1][n].getIsClear() == 1)// don not need to judge itself
+				{
+				}
+				else
+				{
+					map.maplists[i + 1][n].setIsClear(1);
+					//if it's the special Piece
+					deal_SpecPiece(i + 1, n, map);
+				}
 			}
 		if (n > 0)
 			if (map.maplists[i][n - 1].getSpecType() == 5)
@@ -185,9 +218,15 @@ void deal_SpecPiece(int i, int n, Map& map)
 			}
 			else
 			{
-				map.maplists[i][n - 1].setIsClear(1);
-				//if it's the special Piece
-				deal_SpecPiece(i, n - 1, map);
+				if (map.maplists[i][n - 1].getIsClear() == 1)// don not need to judge itself
+				{
+				}
+				else
+				{
+					map.maplists[i][n - 1].setIsClear(1);
+					//if it's the special Piece
+					deal_SpecPiece(i, n - 1, map);
+				}
 			}
 		if (n < 8)
 			if (map.maplists[i][n + 1].getSpecType() == 5)
@@ -196,9 +235,15 @@ void deal_SpecPiece(int i, int n, Map& map)
 			}
 			else
 			{
-				map.maplists[i][n + 1].setIsClear(1);
-				//if it's the special Piece
-				deal_SpecPiece(i, n + 1, map);
+				if (map.maplists[i][n + 1].getIsClear() == 1)// don not need to judge itself
+				{
+				}
+				else
+				{
+					map.maplists[i][n + 1].setIsClear(1);
+					//if it's the special Piece
+					deal_SpecPiece(i, n + 1, map);
+				}
 			}
 		if ((i > 0) && (n > 0))
 			if (map.maplists[i - 1][n].getSpecType() == 5)
@@ -207,9 +252,15 @@ void deal_SpecPiece(int i, int n, Map& map)
 			}
 			else
 			{
-				map.maplists[i - 1][n - 1].setIsClear(1);
-				//if it's the special Piece
-				deal_SpecPiece(i - 1, n - 1, map);
+				if (map.maplists[i - 1][n].getIsClear() == 1)// don not need to judge itself
+				{
+				}
+				else
+				{
+					map.maplists[i - 1][n - 1].setIsClear(1);
+					//if it's the special Piece
+					deal_SpecPiece(i - 1, n - 1, map);
+				}
 			}
 		if ((i > 0) && (n < 8))
 			if (map.maplists[i - 1][n + 1].getSpecType() == 5)
@@ -218,9 +269,15 @@ void deal_SpecPiece(int i, int n, Map& map)
 			}
 			else
 			{
-				map.maplists[i - 1][n + 1].setIsClear(1);
-				//if it's the special Piece
-				deal_SpecPiece(i - 1, n + 1, map);
+				if (map.maplists[i - 1][n + 1].getIsClear() == 1)// don not need to judge itself
+				{
+				}
+				else
+				{
+					map.maplists[i - 1][n + 1].setIsClear(1);
+					//if it's the special Piece
+					deal_SpecPiece(i - 1, n + 1, map);
+				}
 			}
 		if ((i < 8) && (n > 0))
 			if (map.maplists[i + 1][n - 1].getSpecType() == 5)
@@ -229,9 +286,15 @@ void deal_SpecPiece(int i, int n, Map& map)
 			}
 			else
 			{
-				map.maplists[i + 1][n - 1].setIsClear(1);
-				//if it's the special Piece
-				deal_SpecPiece(i + 1, n - 1, map);
+				if (map.maplists[i + 1][n - 1].getIsClear() == 1)// don not need to judge itself
+				{
+				}
+				else
+				{
+					map.maplists[i + 1][n - 1].setIsClear(1);
+					//if it's the special Piece
+					deal_SpecPiece(i + 1, n - 1, map);
+				}
 			}
 		if ((i < 8) && (n < 8))
 			if (map.maplists[i + 1][n + 1].getSpecType() == 5)
@@ -240,9 +303,15 @@ void deal_SpecPiece(int i, int n, Map& map)
 			}
 			else
 			{
-				map.maplists[i + 1][n + 1].setIsClear(1);
-				//if it's the special Piece
-				deal_SpecPiece(i + 1, n + 1, map);
+				if (map.maplists[i + 1][n + 1].getIsClear() == 1)// don not need to judge itself
+				{
+				}
+				else
+				{
+					map.maplists[i + 1][n + 1].setIsClear(1);
+					//if it's the special Piece
+					deal_SpecPiece(i + 1, n + 1, map);
+				}
 			}
 	}
 	else if (map.maplists[i][n].getSpecType() == 4)
@@ -259,9 +328,16 @@ void deal_SpecPiece(int i, int n, Map& map)
 					}
 					else
 					{
-						map.maplists[index_x][index_y].setIsClear(1);
-						//if it's the special Piece
-						deal_SpecPiece(index_x, index_y, map);
+						if (map.maplists[index_x][index_y].getIsClear() == 1)// don not need to judge itself
+						{
+							continue;
+						}
+						else
+						{
+							map.maplists[index_x][index_y].setIsClear(1);
+							//if it's the special Piece
+							deal_SpecPiece(index_x, index_y, map);
+						}
 					}
 				}
 			}
