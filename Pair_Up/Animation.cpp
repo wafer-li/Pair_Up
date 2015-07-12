@@ -88,7 +88,7 @@ Animation::Animation(int startx, int starty, int wide, int high,Map map)
 	{
 		if (map.getMaplists()[n_][8 - i_].getSpecType() != 0)
 		{
-			P[i_][n_] = STYPE[(map.getMaplists()[n_][8 - i_].getType()) - 1][(map.getMaplists()[n_][8 - i_].getSpecType()) ];
+			P[i_][n_] = STYPE[(map.getMaplists()[n_][8 - i_].getType()) - 1][(map.getMaplists()[n_][8 - i_].getSpecType())-1 ];
 		}
 		else {
 			P[i_][n_] = TYPE[(map.getMaplists()[n_][8 - i_].getType()) - 1];
@@ -506,7 +506,7 @@ for (n_ = 0; n_ < 9; n_++)
 {
 	if (oriMap.getMaplists()[n_][8 - i_].getSpecType() != 0)
 	{
-		P[i_][n_] = STYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1][(oriMap.getMaplists()[n_][8 - i_].getSpecType()) ];
+		P[i_][n_] = STYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1][(oriMap.getMaplists()[n_][8 - i_].getSpecType())-1 ];
 	}
 	else {
 		P[i_][n_] = TYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1];
@@ -591,7 +591,7 @@ int Animation::animation_newmap(Map&oriMap)
 	{
 		if (oriMap.getMaplists()[n_][8 - i_].getSpecType() != 0)
 		{
-			P[i_][n_] = STYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1][(oriMap.getMaplists()[n_][8 - i_].getSpecType()) ];
+			P[i_][n_] = STYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1][(oriMap.getMaplists()[n_][8 - i_].getSpecType())-1 ];
 		}
 		else {
 			P[i_][n_] = TYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1];
