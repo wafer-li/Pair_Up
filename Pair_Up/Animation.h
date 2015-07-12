@@ -12,15 +12,17 @@ private:
 	//static int R[10];
 	 int w;
 	 int h;
-	 int d[9][9];                    //掉落高度
+	 int d[9][9];     //掉落高度
+	 int d_add[9];
 	int m[9][9];                     //是否消除
 	int k[9][9];
 	 PIMAGE P[9][9];                 //方块图
 	 PIMAGE BP[9][9];                //格子图
 	 PIMAGE BG;                      // 背景
 	 PIMAGE TYPE[6];                 //所有普通方块素材图片
-	 PIMAGE STYPE[2];                //特殊方块图片
-	 int d_add[9];
+	 PIMAGE STYPE[6][4];                //特殊方块图片
+	 PIMAGE DP;                       //消除状态图
+	
 public:
 	Animation();
 	Animation(int startx, int starty, int wide, int high, Map map);                      //游戏区域起始点的横坐标 纵坐标 素材宽度 高度 Map
@@ -35,5 +37,6 @@ public:
 	 int animation_add(void);
 	 int animation_add(Map&oriMap);
 	 int animation_newmap(Map&oriMap);
+	 int animation_click(int i1,int n1, Map&oriMap);
 };
 #endif;

@@ -4,7 +4,7 @@
 #define GAMEMODE_H
 #include"Map.h"
 #include"Animation.h"
-#include"Global.h"
+#include"Global.h";
 //gameMode entrance
 void g_game(void);
 

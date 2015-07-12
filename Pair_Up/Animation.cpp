@@ -1,7 +1,8 @@
 #include"Animation.h"
 #include"gameMode.h"
-
-Animation::Animation(void)
+#include<string>
+#include<sstream>
+Animation::Animation(void)  //测试用
 {
 	int n = 0, i_ = 0;
 	int w_ = 100, h_ = 100;
@@ -46,23 +47,52 @@ Animation::Animation(void)
 Animation::Animation(int startx, int starty, int wide, int high,Map map)
 {
 	int k_ = 0, i_ = 0, n_ = 0;
+	
+	std::stringstream ss;
+	std::string Skin;
+
 	/////////////////////////////初始化各种类型素材图片////////////////////////////////
-	for (k_=0; k_ < 6; k_++)TYPE[k_] = newimage();
+	for (k_ = 0; k_ < 6; k_++){
+		TYPE[k_] = newimage();
+		
+	}
+	for (i_ = 0; i_ < 6;i_++)
+	for (k_ = 0; k_ < 4; k_++){
+		STYPE[i_][k_] = newimage();
+		ss << "resource\\skin1\\Skin1_Piece_" << i_+1 << "_" << k_ +1<< ".png";
+		ss >> Skin;
+		getimage(STYPE[i_][k_], Skin.c_str(), 0, 0);
+		ss.clear();
+
+	}
+
+	
 	BG = newimage();
+	DP = newimage();
 	getimage(TYPE[0], "resource\\skin1\\Skin1_Piece_1_0.png", 0, 0);
 	getimage(TYPE[1], "resource\\skin1\\Skin1_Piece_2_0.png", 0, 0);
 	getimage(TYPE[2], "resource\\skin1\\Skin1_Piece_3_0.png", 0, 0);
 	getimage(TYPE[3], "resource\\skin1\\Skin1_Piece_4_0.png", 0, 0);
 	getimage(TYPE[4], "resource\\skin1\\Skin1_Piece_5_0.png", 0, 0);
 	getimage(TYPE[5], "resource\\skin1\\Skin1_Piece_6_0.png", 0, 0);
+	getimage(DP, "resource\\skin1\\Skin1_Piece_Special_1.png", 0, 0);
+	
 	getimage(BG, "resource\\GBk3.png", 0, 0);
+
+	
 	//////////////////////////////确定每个方块的参数//////////////////////////////
 	w = wide;
 	h = high;
 	for (i_ = 0; i_ < 9; i_++)
 	for (n_ = 0; n_ < 9; n_++)
 	{
-		P[i_][n_] = TYPE[(map.getMaplists()[n_][8 - i_].getType())-1];
+		if (map.getMaplists()[n_][8 - i_].getSpecType() != 0)
+		{
+			P[i_][n_] = STYPE[(map.getMaplists()[n_][8 - i_].getType()) - 1][(map.getMaplists()[n_][8 - i_].getSpecType()) ];
+		}
+		else {
+			P[i_][n_] = TYPE[(map.getMaplists()[n_][8 - i_].getType()) - 1];
+		}
 		x[i_][n_] = startx + w*n_;
 		y[i_][n_] = starty + h*i_;
 		m[i_][n_] = 1;
@@ -103,11 +133,16 @@ int Animation::puanimation(int aa, int bb, int cc, int dd, Map&oriMap)
 	for (;;)
 	{
 
-		if (r == 1){
+		if ((r == 1)||(r==3)){
 			putimage(0, 0, BK__);
 			
 			break;
 
+		}
+		if (( r == 4)||(r==5)){
+			putimage(0, 0, BK__);
+			r = 0;
+			
 		}
 		_a = getmouse();
 		putimage(0, 0, BK__);
@@ -177,14 +212,23 @@ int Animation::animation_change(int i_, int n, int aa, int bb, int cc, int dd, M
 		if (!(_a.x <= cc&&_a.x >= aa&&_a.y <= dd&&_a.y >= bb))break;
 		if (_a.is_left())
 		{
-			if (!(_a.x <= x[i2][n2] + w && _a.x >= x[i2][n2] && _a.y <= y[i2][n2] + h && _a.y >= y[i2][n2]) && !(i1 != i2&&n1 != n2))
-			{
+			
+				if (!(_a.x <= x[i2][n2] + w && _a.x >= x[i2][n2] && _a.y <= y[i2][n2] + h && _a.y >= y[i2][n2]) && !(i1 != i2&&n1 != n2))
+				{
+
+					this->animation_restore(i1, n1, i2, n2);
+					k = 0;
 				
-				this->animation_restore(i1, n1, i2, n2);
-				
-			}
+				}
+				if ((i1 == i2) && (n1 == n2))
+				{
+					r=(this->animation_click(i1, n1, oriMap));
+					k = 0;
+					
+				}
+		
 			//////////////发生数据交换，判断是否能产生消除的交换/////////////////////////////////////////
-			else{
+				if (k==1){
 				r = 1;
 				oriMap.swap(n1, 8 - i1, n2, 8 - i2);
 				if (!g_checkMap(n1, 8 - i1, n2, 8 - i2,oriMap)){
@@ -234,6 +278,7 @@ int Animation::animation_change(int i_, int n, int aa, int bb, int cc, int dd, M
 }
 int Animation::animation_restore(int i1, int n1, int i2, int n2)
 {
+	
 	
 	int k = 0;
 	int d = 0;
@@ -296,12 +341,13 @@ int Animation::animation_restore(int i1, int n1, int i2, int n2)
 	
 	
 	delimage(BK_);
-	//delete(A);
+	
 	
 	return 0;
 }
 int Animation::animation_move(int i1, int n1, int i2, int n2)
 {
+	
 	int d = 0;
 
 	putimage(x[i1][n1], y[i1][n1], BP[i1][n1]);
@@ -313,7 +359,7 @@ int Animation::animation_move(int i1, int n1, int i2, int n2)
 	getimage(BK_, 0, 0, 1476, 1016);
 	PIMAGE A = newimage();
 	if (i1 == i2&&n1<n2)
-	for (int k = 0; k <= w; k++, delay_ms(0))
+	for (int k = 0; k <= w; k++, delay_fps(Global::delay_change))
 	{
 		
 		putimage(0, 0, BK_);
@@ -323,7 +369,7 @@ int Animation::animation_move(int i1, int n1, int i2, int n2)
 
 	}
 	if (i1 == i2&&n1>n2)
-	for (int k = 0; k <= w; k++, delay_ms(0))
+	for (int k = 0; k <= w; k++, delay_fps(Global::delay_change))
 	{
 		putimage(0, 0, BK_);
 		
@@ -332,7 +378,7 @@ int Animation::animation_move(int i1, int n1, int i2, int n2)
 
 	}
 	if (n1 == n2&&i1>i2)
-	for (int k = 0; k <= h; k++, delay_ms(0))
+	for (int k = 0; k <= h; k++, delay_fps(Global::delay_change))
 	{
 		putimage(0, 0, BK_);
 		putimage_transparent(NULL, P[i1][n1], x[i1][n1], y[i1][n1] - k, BLACK);
@@ -341,7 +387,7 @@ int Animation::animation_move(int i1, int n1, int i2, int n2)
 
 	}
 	if (n1 == n2&&i1<i2)
-	for (int k = 0; k <= h; k++, delay_ms(0))
+	for (int k = 0; k <= h; k++, delay_fps(Global::delay_change))
 	{
 		putimage(0, 0, BK_);
 		putimage_transparent(NULL, P[i2][n2], x[i2][n2], y[i2][n2] - k, BLACK);
@@ -361,15 +407,18 @@ int Animation::animation_move(int i1, int n1, int i2, int n2)
 }
 int Animation::animation_disappear(Map&oriMap)
 {
-	PIMAGE A = newimage();
-	getimage(A, "F:\\消消乐\\测试图\\测试图\\a3.png", 0, 0);
+
 	int i_ = 0, n_ = 0;
 	delay_ms(Global::delay_disappear);
 	for (i_ = 0; i_ < 9; i_++)
 	for (n_ = 0; n_ < 9; n_++)
 	{
 		m[i_][n_] = (oriMap.getMaplists()[n_][8 - i_].getIsClear());
-		if (m[i_][n_] == 1)putimage_transparent(NULL,A,x[i_][n_], y[i_][n_], BLACK);
+		if (m[i_][n_] == 1)
+		{
+			
+			putimage_transparent(NULL, DP, x[i_][n_], y[i_][n_], BLACK);
+		}
 
 	}
 	delay_ms(Global::delay_disappear);
@@ -396,7 +445,7 @@ int Animation::animation_disappear(Map&oriMap)
 
 	}
 	
-
+	
 	return 0;
 }
 int Animation::animation_fall(Map&oriMap)
@@ -455,7 +504,13 @@ int i_ = 0, n_ = 0, d_ = 0,c_=0;
 for (i_ = 0; i_ < 9; i_++)
 for (n_ = 0; n_ < 9; n_++)
 {
-	P[i_][n_] = TYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1];
+	if (oriMap.getMaplists()[n_][8 - i_].getSpecType() != 0)
+	{
+		P[i_][n_] = STYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1][(oriMap.getMaplists()[n_][8 - i_].getSpecType()) ];
+	}
+	else {
+		P[i_][n_] = TYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1];
+	}
 
 
 
@@ -534,7 +589,13 @@ int Animation::animation_newmap(Map&oriMap)
 	for (i_ = 0; i_ < 9; i_++)
 	for (n_ = 0; n_ < 9; n_++)
 	{
-		P[i_][n_] = TYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1];
+		if (oriMap.getMaplists()[n_][8 - i_].getSpecType() != 0)
+		{
+			P[i_][n_] = STYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1][(oriMap.getMaplists()[n_][8 - i_].getSpecType()) ];
+		}
+		else {
+			P[i_][n_] = TYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1];
+		}
 		
 		
 	
@@ -543,4 +604,83 @@ int Animation::animation_newmap(Map&oriMap)
 	
 	this->animation_add();
 	return 0;
+}
+int Animation::animation_click(int i1, int n1, Map&oriMap)
+{
+	int i_ = 0, n_ = 0, k_ = 0;
+	int i2 = 0, n2 = 0;
+	mouse_msg a_;
+	PIMAGE BK_ = newimage();
+	
+	getimage(BK_, 0, 0, 1476, 1016);
+	setcolor(WHITE);
+	for (;k_<3;)
+	{
+		a_ = getmouse();
+		if (a_.is_left())k_++;
+		for (i_ = 0; i_ < 9 && (k_ == 0);i_++)
+		for (n_ = 0; n_ < 9 && (k_ == 0); n_++)
+		{
+			if (a_.x <= x[i_][n_] + w && a_.x >= x[i_][n_] && a_.y <= y[i_][n_] + h && a_.y >= y[i_][n_])
+			{
+
+				putimage(0, 0, BK_);
+				rectangle(x[i_][n_], y[i_][n_], x[i_][n_] + w, y[i_][n_] + h);
+			}
+		}
+		
+			for (i_ = 0; i_ < 9 && (k_ == 1); i_++)
+			for (n_ = 0; n_ < 9 && (k_ == 1); n_++)
+			{
+				if (a_.x <= x[i_][n_] + w && a_.x >= x[i_][n_] && a_.y <= y[i_][n_] + h && a_.y >= y[i_][n_])
+				{
+
+					putimage(0, 0, BK_);
+					rectangle(x[i_][n_], y[i_][n_], x[i_][n_] + w, y[i_][n_] + h);
+				
+				}
+			}
+		
+		
+			for (i_ = 0; i_ < 9 && (k_ == 2); i_++)
+			for (n_ = 0; n_ < 9 &&( k_ == 2); n_++)
+			{
+				if (a_.x <= x[i_][n_] + w && a_.x >= x[i_][n_] && a_.y <= y[i_][n_] + h && a_.y >= y[i_][n_])
+				{
+
+					if ((i_ == i1 && ((n_ == n1 + 1) || (n_ == n1 - 1))) || (n_ == n1 && ((i_ == i1 + 1) || (i_ == i1 - 1))))
+					{
+						this->animation_move(i1, n1, i_, n_);
+						i2 = i_;
+						n2 = n_;
+						k_ = 3;
+						
+					}
+					else{
+						putimage_transparent(NULL, BP[i_][n_], x[i_][n_], y[i_][n_], BLACK);
+						putimage_transparent(NULL, P[i_][n_], x[i_][n_], y[i_][n_], BLACK);
+						k_ = 5;
+					}
+				}
+			}
+			if (k_ == 3){
+				oriMap.swap(n2, 8 - i2, n1, 8 - i1);
+				if (!g_checkMap(n2, 8 - i2, n1, 8 - i1, oriMap)){
+					this->animation_restore(i1,n1,i2,n2);
+					oriMap.swap(n2, 8 - i2, n1, 8 - i1);
+					k_ = 4;
+					putimage(0, 0, BK_);
+					
+				}
+				else{
+					putimage_transparent(NULL, BP[i2][n2], x[i2][n2], y[i2][n2], BLACK);
+					putimage_transparent(NULL, P[i2][n2], x[i2][n2], y[i2][n2], BLACK);
+				}
+				
+			}
+
+	}
+	delimage(BK_);
+
+	return k_;
 }
