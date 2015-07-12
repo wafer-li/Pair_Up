@@ -87,6 +87,11 @@ int removePiece(Map & map);
 */
 void repairPiece(Map & map);
 
-
+/*
+Friend function Deal_SpecialPiece
+As to the different SpecialType, it have different way
+Help ClearPiece function to change the Pieces' isClear
+*/
+void deal_SpecPiece(int x, int y, Map& map);
 
 #endif // !MAP_HEADER_FILE 
