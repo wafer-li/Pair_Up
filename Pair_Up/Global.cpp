@@ -2,11 +2,17 @@
 //___________________Coordinate_Common___________________
 const int Global::x_scr = 1476;
 const int Global::y_scr = 1016;
+const int Global::x_0 = 0;
+const int Global::y_0 = 0;
 //__________________Coordinate_Game____________________
 const int Global::x_map = 900;
 const int Global::y_map = 900;
 const int Global::x_piece = 100;
 const int Global::y_piece = 100;
+const int Global::x_g_b_exit = 327;
+const int Global::y_g_b_exit = 802;
+const int Global::x_g_b_pause = 85;
+const int Global::y_g_b_pause = 802;
 //L:left T:top B:botton
 const int Global::x_map_LT = 519;
 const int Global::x_map_LB = 519;

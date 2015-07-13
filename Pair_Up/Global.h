@@ -22,6 +22,12 @@ public:
 	const static int delay_change;             //fps
 	const static int delay_disappear;          //ms
 	const static int speed;
+	const static int x_0;
+	const static int y_0;
+	const static int x_g_b_exit;
+	const static int y_g_b_exit;
+	const static int x_g_b_pause;
+	const static int y_g_b_pause;
 //specType:	
 /*
 *0.ori-原始方块-什么都不做

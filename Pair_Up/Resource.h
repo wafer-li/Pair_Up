@@ -5,7 +5,7 @@ class Resource
 public:
 	Resource();
 	~Resource();
-//========Mu
+//_________________________________
 	PIMAGE newGameButton_basic;
 	PIMAGE newGameButton_move;
 	PIMAGE newGameButton_press;

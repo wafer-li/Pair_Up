@@ -222,10 +222,8 @@ int Animation::animation_change(int i_, int n, int aa, int bb, int cc, int dd, M
 			//////////////发生数据交换，判断是否能产生消除的交换/////////////////////////////////////////
 				if (k==1){
 				r = 1;
-				oriMap.swap(n1, 8 - i1, n2, 8 - i2);
 				if (!g_checkMap(n1, 8 - i1, n2, 8 - i2,oriMap)){
 					this->animation_restore(i1, n1, i2, n2);
-					oriMap.swap(n1, 8 - i1, n2, 8 - i2);
 					r = 0;
 				}
 			}
@@ -679,10 +677,8 @@ int Animation::animation_click(int i1, int n1, Map&oriMap)
 				}
 			}
 			if (k_ == 3){
-				oriMap.swap(n2, 8 - i2, n1, 8 - i1);
 				if (!g_checkMap(n2, 8 - i2, n1, 8 - i1, oriMap)){
 					this->animation_restore(i1,n1,i2,n2);
-					oriMap.swap(n2, 8 - i2, n1, 8 - i1);
 					k_ = 4;
 					putimage(0, 0, BK_);
 					
