@@ -1,9 +1,13 @@
 #ifndef __ANIMATION__
 #define __ANIMATION__
 #include"graphics15.h"
-#include<iostream>
-#include"Map.h"
+#include "Option.h"
 #include"Global.h"
+#include"Map.h"
+#include"gameMode.h"
+#include<string>
+#include<sstream>
+#include<iostream>
 class Animation
 {
 private:
@@ -20,12 +24,12 @@ private:
 	 PIMAGE BP[9][9];                //格子图
 	 PIMAGE BG;                      // 背景
 	 PIMAGE TYPE[6];                 //所有普通方块素材图片
-	 PIMAGE STYPE[6][4];                //特殊方块图片
+	 PIMAGE STYPE[6][5];                //特殊方块图片
 	 PIMAGE DP;                       //消除状态图
 	
 public:
 	Animation();
-	Animation(int startx, int starty, int wide, int high, Map map);                      //游戏区域起始点的横坐标 纵坐标 素材宽度 高度 Map
+	Animation(Option,Map map);                      //游戏区域起始点的横坐标 纵坐标 素材宽度 高度 Map
 	~Animation();
 	
 	int puanimation(int aa, int bb, int cc, int dd, Map&oriMap);                        //执行游戏功能的范围起始点X,Y,宽度，高度，

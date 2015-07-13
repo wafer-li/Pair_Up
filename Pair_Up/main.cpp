@@ -40,6 +40,7 @@
 #include "Piece.h"
 #include "Global.h"
 #include "Button.h"
+#include "resource.h"
 #include"Animation.h"
 #include "gameMode.h"
 #include "optionMode.h"
@@ -52,79 +53,58 @@
 //g_setMap();
 //g_replenishMap();
 
-void resource(Option);
-void resourceSkin(int);
+void resourceLoad(Option);
+void resourceLoadSkin(int);
 int gameMode();
 int leaderboardMode();//+
 int optionMode();//+
 int exitMode();
 int init(void);
-void meun(int);
+int meun(int);
+int start(void);
 //
 int start(void)
-{
-	int t = 0;
-	PIMAGE A = newimage();
-	PIMAGE B = newimage();
-	PIMAGE C = newimage();
-	PIMAGE D = newimage();
-	PIMAGE BK = newimage();
+{	
+	Resource res;
+	int mouseCheck= 0;
 
-	PIMAGE A2 = newimage();
-	PIMAGE B2 = newimage();
-	PIMAGE C2 = newimage();
-	PIMAGE D2 = newimage();
 
-	PIMAGE A3 = newimage();
-	PIMAGE B3 = newimage();
-	PIMAGE C3 = newimage();
-	PIMAGE D3 = newimage();
-	getimage(A, "resource\\exit.png", 0, 0);
-	getimage(B, "resource\\Option.png", 0, 0);
-	getimage(C, "resource\\newGame.png", 0, 0);
-	getimage(D, "resource\\leaderboard.png", 0, 0);
-	getimage(A2, "resource\\exit-m.png", 0, 0);
-	getimage(B2, "resource\\Option-m.png", 0, 0);
-	getimage(C2, "resource\\newGame-m.png", 0, 0);
-	getimage(D2, "resource\\leaderboard-m.png", 0, 0);
-	getimage(A3, "resource\\exit-on.png", 0, 0);
-	getimage(B3, "resource\\Option-on.png", 0, 0);
-	getimage(C3, "resource\\newGame-on.png", 0, 0);
-	getimage(D3, "resource\\leaderboard-on.png", 0, 0);
-	getimage(BK, "resource\\BK.png", 0, 0);
+	Button *button_menu = new Button(800, 400, 640, 120, 1, res.newGameButton_basic, res.newGameButton_move, res.newGameButton_press);
+	Button *button_menu2 = new Button(800, 521, 640, 120, 2, res.leaderboard_basic, res.leaderboard_move, res.leaderboard_press);
+	Button *button_menu3 = new Button(800, 642, 640, 120, 3, res.optionButton_basic,res.optionButton_move, res.optionButton_press);	
+	Button *button_menu4 = new Button(800, 763, 640, 120, 4, res.exitButton_basic, res.exitButton_move,res.exitButton_press);
 
-	Button *gg = new Button(800, 400, 640, 120, 1, C, C2, C3);
-	Button *gg2 = new Button(800, 521, 640, 120, 2, D, D2, D3);
-	Button *gg3 = new Button(800, 642, 640, 120, 3, B, B2, B3);
 	
-	Button *gg4 = new Button(800, 763, 640, 120, 4, A, A2, A3);
+	mouseCheck = Button::pubutton(0, 0, 1476, 1016, res.BK);
 
-	for (; t == 0;){
-		t = Button::pubutton(0, 0, 1476, 1016, BK);
+	delete(button_menu);
+	delete(button_menu2);
+	delete(button_menu3);
+	delete(button_menu4);
 
-	}
-	delete(gg);
-	delete(gg2);
-	delete(gg3);
-	delete(gg4);
-	delimage(A);
-	delimage(B);
-	delimage(C);
-	delimage(D);
-	delimage(A2);
-	delimage(B2);
-	delimage(C2);
-	delimage(D2);
-	delimage(BK);
+	delimage(res.newGameButton_basic);
+	delimage(res.newGameButton_move);
+	delimage(res.newGameButton_press);
+	delimage(res.exitButton_basic);
+	delimage(res.exitButton_move);
+	delimage(res.exitButton_press);
+	delimage(res.leaderboard_basic);
+	delimage(res.leaderboard_move);
+	delimage(res.leaderboard_press);
 
-	return t;
+	return mouseCheck;
 	
 }
+
+//Main Function
 int main(int argc, char*argv[])
 {
-
+	int condition = 1;
 	init();
-	meun(start());
+	while (condition)
+	{
+	condition = meun(start());
+	}
 	//yage_quit();
 	closegraph();
 	return 0;
@@ -132,26 +112,24 @@ int main(int argc, char*argv[])
 
 int init(void)
 {
-	initgraph(Global::x_scr, Global::x_scr);
 	srand((unsigned)time(0));
+	initgraph(Global::x_scr, Global::x_scr);
+	setrendermode(RENDER_AUTO);
+	//setrendermode(RENDER_MANUAL);
 	//yage_init(Global::x_scr, Global::y_scr);
 	return 0;
 }
 
 //NEED TO FIX:
 //CONDITION WILL ALWAYS BE 1 IT CAUSE INFINITY LOOP
-void meun(int playerChoose)
+int meun(int playerChoose)
 {
-	int condition = 1;
-
-	while (condition)
-	{
-
+	int condition = 0;
 		switch (playerChoose)
 		{
 		case 1:
-			condition = gameMode();
 			//start game
+			condition = gameMode();
 			break;
 		case 2:
 			//open record mode
@@ -169,11 +147,11 @@ void meun(int playerChoose)
 			condition = 1;
 			break;
 		}
-	}
+		return condition;
 }
 
 int gameMode()
-{
+{	
 	g_game();
 	return 1;
 }
@@ -195,13 +173,13 @@ int exitMode()
 	return 0;
 }
 
-void resource(Option option)
+void resourceLoad(Option option)
 {
 //	struct yage_canvas *Background = yage_canvas_load_image("Bk.png");
-	resourceSkin(option.getSkin());
+	resourceLoadSkin(option.getSkin());
 }
 
-void resourceSkin(int skin)
+void resourceLoadSkin(int skin)
 {
 	std::vector<struct yage_canvas *> pieceSkin;
 	std::string temp;

@@ -6,7 +6,7 @@
 #include"Animation.h"
 #include"Global.h"
 //gameMode entrance
-void g_game(void);
+void g_game();
 
 //swap two Piece
 void swapPiece(int x1, int y1, int x2, int y2, Map& map);
@@ -22,7 +22,7 @@ void g_P_S_R(Map&);
 
 //move the piece
 //等LDS的传上来我再分离它
-inline void g_playerMove(Map& oriMap,Animation*animation )
+inline void g_playerMove(Map& oriMap)
 {
 	/*
 	1.用户点下去
@@ -32,8 +32,6 @@ inline void g_playerMove(Map& oriMap,Animation*animation )
 	|-不可消除-换回数据-播放动画
 	|-可消除-g-P-S-R-
 	*/
-	animation->puanimation(0, 0, Global::x_scr, Global::y_scr, oriMap);
-
 }
 
 //create a new map

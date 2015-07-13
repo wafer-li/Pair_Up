@@ -10,13 +10,14 @@ void g_game()
 	//Piece.specType means special piece 
 	int restOfLive = 6; //初始生命值
 	int score = 0;
+	int exit_sign = 0;
 	bool isDeadMap = false;
 	bool isExpMax = false;
 	bool pauseGame = false;
-
+	Option option;
 	Map newMap = g_makeMap();
 	isDeadMap = newMap.g_isDeadMap();
-	Animation* newAnimation = new Animation(Global::x_map_LT, Global::y_map_LT, Global::x_piece, Global::y_piece, newMap);
+	Animation* newAnimation = new Animation(option, newMap);
 	
 	//NEED TO FIX: THE INFINITY LOOP!!!
 	newAnimation->animation_add();
@@ -36,6 +37,17 @@ void g_game()
 				}
 				else
 				{
+					/*
+					1.用户点下去
+					2.拖动-播放动画
+					|-不合法
+					|-合法-Map 交换数据(int,int,int,int,Map&)-bool g_checkMap(Map)-
+					|-不可消除-换回数据-播放动画
+					|-可消除-g-P-S-R-
+					*/
+
+					//g_checkMap(newMap);//Lc//////////////
+				
 					for (;;){
 						for (; g_checkMap(newMap) == 1;)
 						{
@@ -53,30 +65,13 @@ void g_game()
 						}
 
 						//g_playerMove(newMap,newAnimation);//g_playerMove()->Lds -> Lc //"="need of operator overlording
-						
-					
+
+
 						if (!newMap.g_isDeadMap()){
-							newAnimation->puanimation(0, 0, Global::x_scr, Global::y_scr, newMap);
+							exit_sign = newAnimation->puanimation(0, 0, Global::x_scr, Global::y_scr, newMap);
 
 						}
-					
-						
-						
-					
-						
 					}
-					/*
-					1.用户点下去
-					2.拖动-播放动画
-					|-不合法
-					|-合法-Map 交换数据(int,int,int,int,Map&)-bool g_checkMap(Map)-
-					|-不可消除-换回数据-播放动画
-					|-可消除-g-P-S-R-
-					*/
-
-					//g_checkMap(newMap);//Lc//////////////
-				
-					
 
 					//+isExpMax();
 					//nedOPT:in loops,this function"g_isDeadMap"will carry out twice with one loop

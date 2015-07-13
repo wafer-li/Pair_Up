@@ -1,18 +1,24 @@
 #include "Global.h"
+//___________________Coordinate_Common___________________
 const int Global::x_scr = 1476;
 const int Global::y_scr = 1016;
+//__________________Coordinate_Game____________________
 const int Global::x_map = 900;
 const int Global::y_map = 900;
 const int Global::x_piece = 100;
 const int Global::y_piece = 100;
+//L:left T:top B:botton
 const int Global::x_map_LT = 519;
 const int Global::x_map_LB = 519;
 const int Global::y_map_LT = 52;
 const int Global::y_map_LB = 952;
-const int Global:: delay_fall=50000;            //fps
+//__________________Coordinate_Menu___________________________
+//_________________Delay_____________________________________
+const int Global::delay_fall= 50000;            //fps
 const int Global::delay_add = 60000;             //fps
 const int Global::delay_change = 24000;          //fps
 const int Global::delay_disappear = 200;     //ms 
+const int Global::speed = 4;
 Global::Global()
 {
 }

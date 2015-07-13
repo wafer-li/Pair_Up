@@ -1,7 +1,5 @@
 #include"Animation.h"
-#include"gameMode.h"
-#include<string>
-#include<sstream>
+
 Animation::Animation(void)  //测试用
 {
 	int n = 0, i_ = 0;
@@ -44,45 +42,39 @@ Animation::Animation(void)  //测试用
 	}
 
 }
-Animation::Animation(int startx, int starty, int wide, int high,Map map)
+Animation::Animation(Option opt,Map map)
 {
 	int k_ = 0, i_ = 0, n_ = 0;
 	
+	std::string temp;
 	std::stringstream ss;
-	std::string Skin;
 
-	/////////////////////////////初始化各种类型素材图片////////////////////////////////
-	for (k_ = 0; k_ < 6; k_++){
-		TYPE[k_] = newimage();
-		
-	}
-	for (i_ = 0; i_ < 6;i_++)
-	for (k_ = 0; k_ < 4; k_++){
-		STYPE[i_][k_] = newimage();
-		ss << "resource\\skin1\\Skin1_Piece_" << i_+1 << "_" << k_ +1<< ".png";
-		ss >> Skin;
-		getimage(STYPE[i_][k_], Skin.c_str(), 0, 0);
+	/////////////////////////////初始化各种类型素材图片////////////////////////////////	
+
+	for (i_ = 0; i_ < 6; i_++){
+		TYPE[i_] = newimage();
+		ss << "resource\\skin" << opt.getSkin() << "\\Skin" << opt.getSkin() << "_Piece_" << i_ + 1 << "_0"<< ".png";
+		ss >> temp;
+		getimage(TYPE[i_], temp.c_str(), 0, 0);
 		ss.clear();
-
+		for (k_ = 0; k_ < 5; k_++){
+			STYPE[i_][k_] = newimage();
+			ss << "resource\\skin" << opt.getSkin() << "\\Skin" << opt.getSkin() << "_Piece_" << i_ + 1 << "_" << k_ + 1 << ".png";
+			ss >> temp;
+			getimage(STYPE[i_][k_], temp.c_str(), 0, 0);
+			ss.clear();
+		}
 	}
-
-	
 	BG = newimage();
 	DP = newimage();
-	getimage(TYPE[0], "resource\\skin1\\Skin1_Piece_1_0.png", 0, 0);
-	getimage(TYPE[1], "resource\\skin1\\Skin1_Piece_2_0.png", 0, 0);
-	getimage(TYPE[2], "resource\\skin1\\Skin1_Piece_3_0.png", 0, 0);
-	getimage(TYPE[3], "resource\\skin1\\Skin1_Piece_4_0.png", 0, 0);
-	getimage(TYPE[4], "resource\\skin1\\Skin1_Piece_5_0.png", 0, 0);
-	getimage(TYPE[5], "resource\\skin1\\Skin1_Piece_6_0.png", 0, 0);
-	getimage(DP, "resource\\skin1\\Skin1_Piece_Special_1.png", 0, 0);
-	
+	getimage(DP, "resource\\skin3\\Skin3_Piece_Special_1.png", 0, 0);
 	getimage(BG, "resource\\GBk3.png", 0, 0);
 
+	//加载6*5=30张皮肤 (6种方块每个有5种特殊方块）
 	
 	//////////////////////////////确定每个方块的参数//////////////////////////////
-	w = wide;
-	h = high;
+	w = Global::x_piece;
+	h = Global::y_piece;
 	for (i_ = 0; i_ < 9; i_++)
 	for (n_ = 0; n_ < 9; n_++)
 	{
@@ -93,8 +85,8 @@ Animation::Animation(int startx, int starty, int wide, int high,Map map)
 		else {
 			P[i_][n_] = TYPE[(map.getMaplists()[n_][8 - i_].getType()) - 1];
 		}
-		x[i_][n_] = startx + w*n_;
-		y[i_][n_] = starty + h*i_;
+		x[i_][n_] = Global::x_map_LT + w*n_;
+		y[i_][n_] = Global::y_map_LT + h*i_;
 		m[i_][n_] = 1;
 		d[i_][n_] = 0;
 	}
@@ -291,7 +283,7 @@ int Animation::animation_restore(int i1, int n1, int i2, int n2)
 	PIMAGE BK_ = newimage();
 	getimage(BK_, 0, 0, 1476, 1016);
 	if (i1 == i2&&n1<n2)
-	for (int k = 0; k <= w; k++, delay_fps(240))
+	for (int k = 0; k <= w; k += Global::speed, delay_fps(240))
 	{
 		for (; keystate(VK_LBUTTON););
 		putimage(0, 0, BK_);
@@ -300,7 +292,7 @@ int Animation::animation_restore(int i1, int n1, int i2, int n2)
 		putimage_transparent(NULL, P[i2][n2], x[i2][n2] - k, y[i2][n2], BLACK);
 	}
 	if (i1 == i2&&n1>n2)
-	for (int k = 0; k <= w; k++, delay_fps(240))
+	for (int k = 0; k <= w; k += Global::speed, delay_fps(240))
 	{
 		for (; keystate(VK_LBUTTON););
 		putimage(0, 0, BK_);
@@ -310,7 +302,7 @@ int Animation::animation_restore(int i1, int n1, int i2, int n2)
 		putimage_transparent(NULL, P[i2][n2], x[i2][n2]+ k, y[i2][n2], BLACK);
 	}
 	if (n1 == n2&&i1>i2)
-	for (int k = 0; k <= h; k++, delay_fps(240))
+	for (int k = 0; k <= h; k += Global::speed, delay_fps(240))
 	{
 		for (; keystate(VK_LBUTTON););
 	
@@ -321,7 +313,7 @@ int Animation::animation_restore(int i1, int n1, int i2, int n2)
 
 	}
 	if (n1 == n2&&i1<i2)
-	for (int k = 0; k <= h; k++, delay_fps(240))
+	for (int k = 0; k <= h; k += Global::speed, delay_fps(240))
 	{
 		for (; keystate(VK_LBUTTON););
 	
@@ -359,7 +351,7 @@ int Animation::animation_move(int i1, int n1, int i2, int n2)
 	getimage(BK_, 0, 0, 1476, 1016);
 	PIMAGE A = newimage();
 	if (i1 == i2&&n1<n2)
-	for (int k = 0; k <= w; k++, delay_fps(Global::delay_change))
+	for (int k = 0; k <= w; k += Global::speed, delay_fps(Global::delay_change))
 	{
 		
 		putimage(0, 0, BK_);
@@ -369,7 +361,7 @@ int Animation::animation_move(int i1, int n1, int i2, int n2)
 
 	}
 	if (i1 == i2&&n1>n2)
-	for (int k = 0; k <= w; k++, delay_fps(Global::delay_change))
+	for (int k = 0; k <= w; k += Global::speed, delay_fps(Global::delay_change))
 	{
 		putimage(0, 0, BK_);
 		
@@ -378,7 +370,7 @@ int Animation::animation_move(int i1, int n1, int i2, int n2)
 
 	}
 	if (n1 == n2&&i1>i2)
-	for (int k = 0; k <= h; k++, delay_fps(Global::delay_change))
+	for (int k = 0; k <= h; k += Global::speed, delay_fps(Global::delay_change))
 	{
 		putimage(0, 0, BK_);
 		putimage_transparent(NULL, P[i1][n1], x[i1][n1], y[i1][n1] - k, BLACK);
@@ -387,7 +379,7 @@ int Animation::animation_move(int i1, int n1, int i2, int n2)
 
 	}
 	if (n1 == n2&&i1<i2)
-	for (int k = 0; k <= h; k++, delay_fps(Global::delay_change))
+	for (int k = 0; k <= h; k += Global::speed, delay_fps(Global::delay_change))
 	{
 		putimage(0, 0, BK_);
 		putimage_transparent(NULL, P[i2][n2], x[i2][n2], y[i2][n2] - k, BLACK);
@@ -581,7 +573,7 @@ int Animation::animation_add(void)
 	int cc[9] = { 9, 9, 9, 9, 9, 9, 9, 9, 9 };
 
 
-	for (i_ = 0, n_ = 0, d_ = 0; d_ <= h * 9; d_ = d_++, i_ = 0, n_ = 0, c_ = 0, delay_fps(Global::delay_add))
+	for (i_ = 0, n_ = 0, d_ = 0; d_ <= h * 9; d_+=Global::speed, i_ = 0, n_ = 0, c_ = 0, delay_fps(Global::delay_add))
 	{
 
 		for (; keystate(VK_LBUTTON););
@@ -727,7 +719,7 @@ int Animation::animation_fall_add(Map&oriMap)
 	}
 	/////////////////////////////播放动画///////////////////////////
 
-	for (i_ = 0, n_ = 0, d_ = 0; d_ <= h * 9; d_ = d_++, i_ = 0, n_ = 0, c_ = 0, delay_fps(Global::delay_add))
+	for (i_ = 0, n_ = 0, d_ = 0; d_ <= h * 9; d_ += Global::speed, i_ = 0, n_ = 0, c_ = 0, delay_fps(Global::delay_add))
 	{
 
 		for (; keystate(VK_LBUTTON););

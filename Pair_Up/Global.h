@@ -21,6 +21,7 @@ public:
 	const static int delay_add;                //fps
 	const static int delay_change;             //fps
 	const static int delay_disappear;          //ms
+	const static int speed;
 //specType:	
 /*
 *0.ori-原始方块-什么都不做
