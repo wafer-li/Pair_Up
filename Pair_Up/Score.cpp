@@ -94,6 +94,7 @@ int Score::getLevel()
 }
 
 //The Interface for front-end
+//Might need a `while` loop
 bool Score::levelUp()
 {
 	bool flag = false;
