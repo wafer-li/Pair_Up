@@ -88,6 +88,7 @@ void l_leaderboard()
 	setbkmode(TRANSPARENT);
 	setfont(-100, -49, "Kingdom Hearts");
 	setcolor(EGERGB(255, 0, 0));
+	delay_ms(0);
 	/********************************************/
 	std::fstream rank2;
 	rank2.open("\\save\\rankingList.dat", std::ios::in);
@@ -98,79 +99,82 @@ void l_leaderboard()
 	std::multimap<int, std::string> rankMap;//get all the score
 	std::multimap<int, std::string>::iterator p;
 	std::stringstream temp;
-	for (; !rank2.eof();)
+	if (!rank2.fail())
 	{
-		rank2 >> userScore;
-		rank2 >> userName;
-		rankMap.insert(std::map<int, std::string>::value_type(userScore, userName));
-		//if there is a failue, try to read and write one by one
-	}
-	rank2.close();
-	//dispaly the score
-	if (rankMap.size() != 0)
-	{
-		p = rankMap.begin();
-		for (int i = 1; p != rankMap.end(); p++, i++)
+		for (; !rank2.eof();)
 		{
-			if (p->first > 0)
+			rank2 >> userScore;
+			rank2 >> userName;
+			rankMap.insert(std::map<int, std::string>::value_type(userScore, userName));
+			//if there is a failue, try to read and write one by one
+		}
+		rank2.close();
+		//dispaly the score
+		if (rankMap.size() != 0)
+		{
+			p = rankMap.begin();
+			for (int i = 1; p != rankMap.end(); p++, i++)
 			{
-				//five locations, so we need five judge for them
-				if ((rankMap.size() - i) == 0)
+				if (p->first > 0)
 				{
-					temp << p->first;
-					temp >> score;
-					outtextxy(288, 157, score.c_str());
-					temp.clear();
-					temp << p->second;
-					temp >> name;
-					outtextxy(668, 208, name.c_str());
-					temp.clear();
-				}
-				else if ((rankMap.size() - i) == 1)
-				{
-					temp << p->first;
-					temp >> score;
-					outtextxy(601, 309, score.c_str());
-					temp.clear();
-					temp << p->second;
-					temp >> name;
-					outtextxy(996, 358, name.c_str());
-					temp.clear();
-				}
-				else if ((rankMap.size() - i) == 2)
-				{
-					temp << p->first;
-					temp >> score;
-					outtextxy(631, 496, score.c_str());
-					temp.clear();
-					temp << p->second;
-					temp >> name;
-					outtextxy(1038, 540, name.c_str());
-					temp.clear();
-				}
-				else if ((rankMap.size() - i) == 3)
-				{
-					temp << p->first;
-					temp >> score;
-					outtextxy(704, 684, score.c_str());
-					temp.clear();
-					temp << p->second;
-					temp >> name;
-					outtextxy(1100, 722, name.c_str());
-					temp.clear();
-				}
-				else if ((rankMap.size() - i) == 4)
-				{
-					temp << p->first;
-					temp >> score;
-					outtextxy(623, 889, score.c_str());
-					temp.clear();
-					temp << p->second;
-					temp >> name;
-					outtextxy(1012, 933, name.c_str());
-					temp.clear();
-				}
+					//five locations, so we need five judge for them
+					if ((rankMap.size() - i) == 0)
+					{
+						temp << p->first;
+						temp >> score;
+						outtextxy(288, 157, score.c_str());
+						temp.clear();
+						temp << p->second;
+						temp >> name;
+						outtextxy(668, 208, name.c_str());
+						temp.clear();
+					}
+					else if ((rankMap.size() - i) == 1)
+					{
+						temp << p->first;
+						temp >> score;
+						outtextxy(601, 309, score.c_str());
+						temp.clear();
+						temp << p->second;
+						temp >> name;
+						outtextxy(996, 358, name.c_str());
+						temp.clear();
+					}
+					else if ((rankMap.size() - i) == 2)
+					{
+						temp << p->first;
+						temp >> score;
+						outtextxy(631, 496, score.c_str());
+						temp.clear();
+						temp << p->second;
+						temp >> name;
+						outtextxy(1038, 540, name.c_str());
+						temp.clear();
+					}
+					else if ((rankMap.size() - i) == 3)
+					{
+						temp << p->first;
+						temp >> score;
+						outtextxy(704, 684, score.c_str());
+						temp.clear();
+						temp << p->second;
+						temp >> name;
+						outtextxy(1100, 722, name.c_str());
+						temp.clear();
+					}
+					else if ((rankMap.size() - i) == 4)
+					{
+						temp << p->first;
+						temp >> score;
+						outtextxy(623, 889, score.c_str());
+						temp.clear();
+						temp << p->second;
+						temp >> name;
+						outtextxy(1012, 933, name.c_str());
+						temp.clear();
+					}
 
+				}
 			}
 		}
 	}
