@@ -49,10 +49,10 @@ void g_game()
 					//g_checkMap(newMap);//Lc//////////////
 				
 					for (;;){
-						for (; g_checkMap(newMap) == 1;)
+ 		  				for (; g_checkMap(newMap) == 1;)
 						{
 
-							clearPiece(newMap);
+ 							clearPiece(newMap);
 
 							newAnimation->animation_disappear(newMap);
 							//newAnimation->animation_fall(newMap);

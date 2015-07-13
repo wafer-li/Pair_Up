@@ -23,8 +23,9 @@ private:
 	 PIMAGE P[9][9];                 //方块图
 	 PIMAGE BP[9][9];                //格子图
 	 PIMAGE BG;                      // 背景
-	 PIMAGE TYPE[6];                 //所有普通方块素材图片
-	 PIMAGE STYPE[6][5];                //特殊方块图片
+	// PIMAGE TYPE[6];                 //所有普通方块素材图片
+	// PIMAGE STYPE[6][4];                //特殊方块图片
+	 PIMAGE TYPEALL[6][6];
 	 PIMAGE DP;                       //消除状态图
 	
 public:

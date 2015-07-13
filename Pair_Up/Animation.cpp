@@ -2,73 +2,53 @@
 
 Animation::Animation(void)  //测试用
 {
-	int n = 0, i_ = 0;
-	int w_ = 100, h_ = 100;
-	PIMAGE A = newimage();
-	getimage(A, "resource\\skin1\\Skin1_Piece_1_0.png", 0, 0);
-	PIMAGE B = newimage();
-	getimage(B, "resource\\skin1\\Skin1_Piece_3_0.png", 0, 0);
-	PIMAGE C = newimage();
-	getimage(C, "resource\\GBk3.png", 0, 0);
-
-	w = w_;
-	h = h_;
-	BG = C;
-	for (i_=0; i_ < 9;i_++)
-	for (n = 0; n < 9; n++)
-	{
-		x[i_][n] = 519+w * n;
-		y[i_][n] = 52+h * i_;
-		P[i_][n] = B;
-		m[i_][n] = 1;
-		d[i_][n] = 0;
-		if (i_ % 2){
-			P[i_][n] = A;
-			m[i_][n] = 0;
-		}
-	}
-	putimage(0, 0, BG);
-	for (i_ = 0; i_ < 9; i_++)
-	for (n = 0; n < 9; n++)
-	{
-		BP[i_][n] = newimage();
-		getimage(BP[i_][n], x[i_][n], y[i_][n],w, h);
-	}
-	for (i_ = 0; i_ < 9; i_++)
-	for (n = 0; n < 9; n++)
-	{
-	
-		putimage_transparent(NULL, P[i_][n], x[i_][n] , y[i_][n], BLACK);
-	}
 
 }
 Animation::Animation(Option opt,Map map)
 {
 	int k_ = 0, i_ = 0, n_ = 0;
-	
+
 	std::string temp;
 	std::stringstream ss;
 
 	/////////////////////////////初始化各种类型素材图片////////////////////////////////	
-
-	for (i_ = 0; i_ < 6; i_++){
-		TYPE[i_] = newimage();
-		ss << "resource\\skin" << opt.getSkin() << "\\Skin" << opt.getSkin() << "_Piece_" << i_ + 1 << "_0"<< ".png";
+	BG = newimage();
+	DP = newimage();
+	/*for (int i = 0; i != 6; i++){
+		TYPE[i] = newimage();
+		ss << "resource\\skin" << opt.getSkin() << "\\Skin" << opt.getSkin() << "_Piece_" << i+1 << "_0" << ".png";
 		ss >> temp;
-		getimage(TYPE[i_], temp.c_str(), 0, 0);
+		getimage(TYPE[i], temp.c_str(), 0, 0);
 		ss.clear();
-		for (k_ = 0; k_ < 5; k_++){
-			STYPE[i_][k_] = newimage();
-			ss << "resource\\skin" << opt.getSkin() << "\\Skin" << opt.getSkin() << "_Piece_" << i_ + 1 << "_" << k_ + 1 << ".png";
+		for (int k = 0; k != 5; k++){
+			STYPE[i][k] = newimage();
+			ss << "resource\\skin" << opt.getSkin() << "\\Skin" << opt.getSkin() << "_Piece_" << i << "_" << k+1 << ".png";
 			ss >> temp;
-			getimage(STYPE[i_][k_], temp.c_str(), 0, 0);
+			getimage(STYPE[i - 1][k], temp.c_str(), 0, 0);
+			ss.clear();
+		}
+	}	*/
+	for (int i = 0; i != 7; ++i){
+		for (int j = 0; j != 6; ++j)
+		{
+			TYPEALL[i][j] = newimage();
+			ss << "resource\\skin" << opt.getSkin() << "\\Skin" << opt.getSkin() << "_Piece_" << i + 1 << "_" << j << ".png";
+			ss >> temp;
+			getimage(TYPEALL[i][j], temp.c_str(), 0, 0);
 			ss.clear();
 		}
 	}
-	BG = newimage();
-	DP = newimage();
-	getimage(DP, "resource\\skin3\\Skin3_Piece_Special_1.png", 0, 0);
-	getimage(BG, "resource\\GBk3.png", 0, 0);
+
+	ss << "resource\\skin" << opt.getSkin() << "\\Skin" << opt.getSkin() << "_Piece_Special_" << opt.getSkin() << ".png";
+	ss >> temp;
+	getimage(DP, temp.c_str(), 0, 0);
+	ss.clear();
+	ss << "resource\\GBk" << opt.getBackground() << ".png";
+	ss >> temp;
+	getimage(BG, temp.c_str(), 0, 0);
+	ss.clear();
+
+
 
 	//加载6*5=30张皮肤 (6种方块每个有5种特殊方块）
 	
@@ -80,10 +60,12 @@ Animation::Animation(Option opt,Map map)
 	{
 		if (map.getMaplists()[n_][8 - i_].getSpecType() != 0)
 		{
-			P[i_][n_] = STYPE[(map.getMaplists()[n_][8 - i_].getType()) - 1][(map.getMaplists()[n_][8 - i_].getSpecType())-1 ];
+			//P[i_][n_] = STYPE[(map.getMaplists()[n_][8 - i_].getType()) - 1][(map.getMaplists()[n_][8 - i_].getSpecType())-1 ];
+			P[i_][n_] = TYPEALL[(map.getMaplists()[n_][8 - i_].getType()) - 1][(map.getMaplists()[n_][8 - i_].getSpecType())];
 		}
 		else {
-			P[i_][n_] = TYPE[(map.getMaplists()[n_][8 - i_].getType()) - 1];
+			//P[i_][n_] = TYPE[(map.getMaplists()[n_][8 - i_].getType()) - 1];
+			P[i_][n_] = TYPEALL[(map.getMaplists()[n_][8 - i_].getType()) - 1][0];
 		}
 		x[i_][n_] = Global::x_map_LT + w*n_;
 		y[i_][n_] = Global::y_map_LT + h*i_;
@@ -519,10 +501,12 @@ for (n_ = 0; n_ < 9; n_++)
 {
 	if (oriMap.getMaplists()[n_][8 - i_].getSpecType() != 0)
 	{
-		P[i_][n_] = STYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1][(oriMap.getMaplists()[n_][8 - i_].getSpecType())-1 ];
+		//P[i_][n_] = STYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1][(oriMap.getMaplists()[n_][8 - i_].getSpecType())-1 ];
+		P[i_][n_] = TYPEALL[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1][(oriMap.getMaplists()[n_][8 - i_].getSpecType())];
 	}
 	else {
-		P[i_][n_] = TYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1];
+		//P[i_][n_] = TYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1];
+		P[i_][n_] = TYPEALL[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1][0];
 	}
 
 
@@ -604,12 +588,13 @@ int Animation::animation_newmap(Map&oriMap)
 	{
 		if (oriMap.getMaplists()[n_][8 - i_].getSpecType() != 0)
 		{
-			P[i_][n_] = STYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1][(oriMap.getMaplists()[n_][8 - i_].getSpecType())-1 ];
+			//P[i_][n_] = STYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1][(oriMap.getMaplists()[n_][8 - i_].getSpecType())-1 ];
+			P[i_][n_] = TYPEALL[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1][(oriMap.getMaplists()[n_][8 - i_].getSpecType())];
 		}
 		else {
-			P[i_][n_] = TYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1];
-		}
-		
+		//P[i_][n_] = TYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1];
+		P[i_][n_] = TYPEALL[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1][0];
+	}
 		
 	
 		
@@ -704,10 +689,12 @@ int Animation::animation_fall_add(Map&oriMap)
 	{
 		if (oriMap.getMaplists()[n_][8 - i_].getSpecType() != 0)
 		{
-			P[i_][n_] = STYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1][(oriMap.getMaplists()[n_][8 - i_].getSpecType()) - 1];
+			//P[i_][n_] = STYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1][(oriMap.getMaplists()[n_][8 - i_].getSpecType())-1 ];
+			P[i_][n_] = TYPEALL[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1][(oriMap.getMaplists()[n_][8 - i_].getSpecType())];
 		}
 		else {
-			P[i_][n_] = TYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1];
+			//P[i_][n_] = TYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1];
+			P[i_][n_] = TYPEALL[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1][0];
 		}
 
 

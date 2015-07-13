@@ -3,7 +3,7 @@
 
 Option::Option()
 {
-	skin = 3;
+	skin = 1;
 	background = 0;
 }
 
