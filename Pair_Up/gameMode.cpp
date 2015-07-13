@@ -1,6 +1,7 @@
 #include "gameMode.h"
 #include "optionMode.h"
 #include "leaderboardMode.h"
+
 //gameMode entrance
 void g_game()
 {
@@ -8,7 +9,7 @@ void g_game()
 	//Piece.type means basic elements of piece
 	//Piece.specType means special piece 
 	int restOfLive = 6; //³õÊ¼ÉúÃüÖµ
-	int score = 0;
+	Score score;
 	bool isDeadMap = false;
 	bool isExpMax = false;
 	bool pauseGame = false;
@@ -62,7 +63,7 @@ void g_game()
 			}
 		}
 	}
-	l_inRanking(score);//record Game score,if the score is at the top 10 of leaderboard, congratulations and refresh the learboard
+	l_inRanking(score.getScore());//record Game score,if the score is at the top 10 of leaderboard, congratulations and refresh the learboard
 }
 
 //swap two Piece
@@ -139,7 +140,6 @@ bool g_checkMap(int index_x1, int index_y1, int index_x2, int index_y2, Map & th
 void g_P_S_R(Map& oriMap)
 {
 	//newMap[g_game] -> oriMap[g_P_S_R]
-	int *p = nullptr;
 
 	g_PairUp(oriMap);
 	//g_setMap();
@@ -168,14 +168,7 @@ void g_deleteMap(Map& deadMap)
 	delete &deadMap;
 }
 
-//return the score by the cleared number and the combo number
-int g_score(int num, int com)
+void g_changeScore(int num, int com,Score & score)
 {
-	if (num >= 3)
-	{
-		return int (30.0 * pow(1.5, num - 3) * com);
-	}
-	else
-		//it is possible that just clear 2 Piece even 1 piece
-		return 30;
+	score.changeScore(num, com);
 }
