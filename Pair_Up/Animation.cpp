@@ -429,22 +429,45 @@ int Animation::animation_disappear(Map&oriMap)
 		if (m[i_][n_] == 1)putimage_transparent(NULL,BP[i_][n_],x[i_][n_], y[i_][n_],BLACK);
 
 		}
-	for (i_ = 8; i_ > 0; i_--)
+	////////////////////////////数据处理//////////////////
+	for (n_ = 0; n_ < 9; n_++)
+	{
+		d_add[n_] = 0;
+	}
+
+
+	for (i_ = 8; i_ >=0; i_--)
 	for (n_ = 8; n_ >= 0; n_--)
 	{
 		
-		if (m[i_][n_] == 1)d[i_ - 1][n_] = d[i_][n_]+1;
-		if (m[i_][n_] == 0)d[i_ - 1][n_] = d[i_][n_];
+		if (i_ != 8){
+			if (m[i_][n_] == 1)d[i_][n_] = d[i_ + 1][n_] + 1;
+			if (m[i_][n_] == 0)d[i_][n_] = d[i_ + 1][n_];
+		}
+		if (i_ == 8){
+			if (m[i_][n_] == 1)d[i_][n_] = 1;
+			if (m[i_][n_] == 0)d[i_][n_] = 0;
+		}
+
 
 	}
+	for (i_ = 0; i_ <8; i_++)
+	for (n_ = 0; n_ < 9; n_++)
+	{
+		if ((m[i_][n_] == 1) && (m[i_ + 1][n_] == 1))
+		{
+			d_add[n_]++;
+			d[i_ + 1][n_] += d_add[n_];
+		}
+	}
 	
-	for (i_ = 0; i_ < 9; i_++)
+	/*for (i_ = 0; i_ < 9; i_++)
 	for (n_ = 0; n_ < 9; n_++)
 	{
 		if (m[i_][n_] == 1)d[i_][n_] = 0;
 
 	}
-	
+	*/
 	
 	return 0;
 }
@@ -683,4 +706,54 @@ int Animation::animation_click(int i1, int n1, Map&oriMap)
 	delimage(BK_);
 
 	return k_;
+}
+int Animation::animation_fall_add(Map&oriMap)
+{
+	int i_ = 0, n_ = 0, d_ = 0, c_ = 0;//c_用于判断动画是否结束
+	////////////////////更新数据////////////////////////////////
+	for (i_ = 0; i_ < 9; i_++)
+	for (n_ = 0; n_ < 9; n_++)
+	{
+		if (oriMap.getMaplists()[n_][8 - i_].getSpecType() != 0)
+		{
+			P[i_][n_] = STYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1][(oriMap.getMaplists()[n_][8 - i_].getSpecType()) - 1];
+		}
+		else {
+			P[i_][n_] = TYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1];
+		}
+
+
+
+	}
+	/////////////////////////////播放动画///////////////////////////
+
+	for (i_ = 0, n_ = 0, d_ = 0; d_ <= h * 9; d_ = d_++, i_ = 0, n_ = 0, c_ = 0, delay_fps(Global::delay_add))
+	{
+
+		for (; keystate(VK_LBUTTON););
+		putimage(0, 0, BG);
+		for (i_ = 0; i_ < 9; i_++)
+		{
+
+			for (n_ = 0; n_ < 9; n_++)
+			{
+
+				if ((d[i_][n_] * h>d_)&&(d[i_][n_]!=0))
+				{
+					
+					if (((y[i_][n_] - (d[i_][n_]) * h + d_) <= y[0][0]) && ((y[i_][n_] - (d[i_][n_]) * h + d_) >= (y[0][0] - h)))putimage(x[i_][n_], y[0][0], w, h, P[i_][n_], 0, (y[0][0] - (y[i_][n_] - (d[i_][n_]) * h + d_)));
+					if ((y[i_][n_] - (d[i_][n_]) * h + d_)>y[0][0])putimage_transparent(NULL, P[i_][n_], x[i_][n_], y[i_][n_] - (d[i_][n_]) * h + d_, BLACK);
+					c_++;
+				}
+				else { 
+					putimage_transparent(NULL, P[i_][n_], x[i_][n_], y[i_][n_], BLACK); 
+				}
+
+			}
+		}
+		if (c_ == 0)break;
+
+	}
+	flushmouse();
+	return 0;
 }

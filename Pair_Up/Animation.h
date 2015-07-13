@@ -38,5 +38,6 @@ public:
 	 int animation_add(Map&oriMap);
 	 int animation_newmap(Map&oriMap);
 	 int animation_click(int i1,int n1, Map&oriMap);
+	 int animation_fall_add(Map&oriMap);
 };
 #endif;
