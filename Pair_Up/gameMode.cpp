@@ -159,9 +159,22 @@ bool g_checkMap(Map & map)
 }
 
 //judege the Map for clearable(more effeciently but you need to tell me the Pieces' index which are changed)
+//GMT+9 2015/7/13 12:04, Update by Wafer
+//Swap the two Piece, judge isClearable
+//TRUE for Something Clearable, and do NOT Swap back
+//FALSE for Something Unclearable, and Swap back
 bool g_checkMap(int index_x1, int index_y1, int index_x2, int index_y2, Map & theMap)
 {
-	return (theMap.isPieceClearable(index_x1, index_y1) || theMap.isPieceClearable(index_x2, index_y2));
+	theMap.swap(index_x1, index_y1, index_x2, index_y2);
+	if (theMap.isPieceClearable(index_x1, index_y1) || theMap.isPieceClearable(index_x2, index_y2))
+	{
+		return true;
+	}
+	else
+	{
+		theMap.swap(index_x1, index_y1, index_x2, index_y2);
+		return false;
+	}
 }
 
 void g_P_S_R(Map& oriMap)
