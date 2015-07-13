@@ -15,7 +15,7 @@ void g_game()
 	bool isExpMax = false;
 	bool pauseGame = false;
 	Option option;
-	Map newMap = g_makeMap();
+	Map & newMap = g_makeMap();
 	isDeadMap = newMap.g_isDeadMap();
 	Animation* newAnimation = new Animation(option, newMap);
 	
@@ -186,7 +186,7 @@ void g_P_S_R(Map& oriMap)
 
 	g_replenishMap(oriMap);//Push_back//Tgf//book
 }
-Map g_makeMap()
+Map & g_makeMap()
 {	
 	Map *myMap = new Map();
 	Map &newMap = *myMap;
