@@ -20,8 +20,8 @@ public:
 
 	/* MENBER */
 
-	//initial & fill the map
-	void initMap();
+	//Funciton: initial & fill the map
+	//Update: Remove for unnecessary
 
 	//Swap
 	bool swap(int x1, int y1, int x2, int y2);

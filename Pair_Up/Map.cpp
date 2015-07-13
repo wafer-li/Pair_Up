@@ -9,6 +9,7 @@ Map::Map()
 	{
 		maplists[i] = std::deque<Piece>(MAX_SIZE);
 	}
+
 }
 
 //Dtor
@@ -19,19 +20,11 @@ Map::~Map()
 
 //Method
 
-//Initial the map
-void Map::initMap()
-{
-	for (int i = 0; i < MAX_SIZE; i++)
-	{
-		for (int j = 0; j < MAX_SIZE;j++)
-		{
-			Piece piece = Piece();
-			maplists[i].push_back(piece);
-		}
-	}
-}
-
+//Function: Initial the map
+//GMT+9 2015/7/14 1:40, modified by Wafer
+//Remove the initMap
+//For `deque<T>(int n)` will use the default data
+//to fill the deque
 
 //swap
 bool Map::swap(int x1,int y1,int x2,int y2)
