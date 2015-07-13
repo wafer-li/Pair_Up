@@ -28,7 +28,7 @@ Animation::Animation(Option opt,Map map)
 			ss.clear();
 		}
 	}	*/
-	for (int i = 0; i != 7; ++i){
+	for (int i = 0; i != 6; ++i){
 		for (int j = 0; j != 6; ++j)
 		{
 			TYPEALL[i][j] = newimage();
@@ -49,6 +49,7 @@ Animation::Animation(Option opt,Map map)
 	ss.clear();
 
 
+	
 
 	//加载6*5=30张皮肤 (6种方块每个有5种特殊方块）
 	
@@ -88,8 +89,10 @@ Animation::Animation(Option opt,Map map)
 		putimage_transparent(NULL, P[i_][n_], x[i_][n_], y[i_][n_], BLACK);
 	}
 	
-
+	
 }
+
+
 Animation::~Animation()
 {
 
