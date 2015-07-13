@@ -101,7 +101,7 @@ bool Map::isPieceClearable(int x, int y)
 			{
 				if (maplists[x][y] == maplists[x - 1][y] && maplists[x][y] == maplists[x - 2][y] &&
 					maplists[x - 1][y].getSpecType() !=Global::SpecType::unclearable &&
-					maplists[x + 2][y].getSpecType() !=Global::SpecType::unclearable)
+					maplists[x - 2][y].getSpecType() !=Global::SpecType::unclearable)
 				{
 					flag = true;
 				}
