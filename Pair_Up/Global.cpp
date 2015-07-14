@@ -30,6 +30,18 @@ const int Global::delay_change = 24000;          //fps
 const int Global::delay_disappear = 200;     //ms 
 const int Global::speed = 4;
 
+//_____________________GAME_______________________
+
+//Time
+//seconds
+const double Global::INIT_TIME = 30;	
+const double Global::ADDTIME_L1 = 15;
+const double Global::ADDTIME_L2 = 20;
+const double Global::ADDTIME_L3 = 25;
+const double Global::ADDTIME_L4 = 30;
+
+//PassScore
+const int Global::FIRST_PASSSCORE = 1000;
 
 Global::Global()
 {

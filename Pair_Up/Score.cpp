@@ -1,15 +1,16 @@
 #include "Score.h"
 #include<cmath>
 
-
 /* Ctor & Dtor */
 
-//The value of level1
+
+//Ctor
+//The data of level 1
 Score::Score()
 {
-	score = 0;
+	score = 0; 
+	passScore = Global::FIRST_PASSSCORE;
 	level = 1;
-	passScore = 1000;
 }
 
 

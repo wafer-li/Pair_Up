@@ -2,9 +2,16 @@
 
 #ifndef GAMEMODE_H
 #define GAMEMODE_H
+
+//Include Part
 #include"Map.h"
 #include"Animation.h"
 #include"Global.h"
+#include "Score.h"
+#include "optionMode.h"
+#include "leaderboardMode.h"
+#include "Time.h"
+
 //gameMode entrance
 void g_game();
 

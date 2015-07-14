@@ -1,13 +1,16 @@
 #ifndef SCORE_H
 #define SCORE_H
+
+#include "Global.h"
+
 class Score
 {
 private:
 	//Score
-	static int score;
+	int score;
 
 	//Level
-	static int level;
+	int level;
 
 	//PassScore
 	int passScore;

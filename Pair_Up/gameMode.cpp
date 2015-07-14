@@ -1,7 +1,5 @@
 #include "gameMode.h"
-#include "optionMode.h"
-#include "leaderboardMode.h"
-#include"Global.h"
+
 //gameMode entrance
 void g_game()
 {
@@ -22,6 +20,7 @@ void g_game()
 	newAnimation->animation_add();
 	while (restOfLive){
 		//+if(button.exit_inGame())
+
 		if (pauseGame){}
 		else{
 			if (isDeadMap)
@@ -54,8 +53,8 @@ void g_game()
 					newAnimation->animation_fall_add(newMap);
 				}
 
-
-				if (!(isDeadMap =newMap.g_isDeadMap()))
+				isDeadMap = newMap.g_isDeadMap();
+				if (!isDeadMap)
 				{
 					exit_sign = newAnimation->puanimation(0, 0, Global::x_scr, Global::y_scr, newMap);
 
