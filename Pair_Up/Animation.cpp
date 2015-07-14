@@ -14,21 +14,8 @@ Animation::Animation(Option opt,Map map)
 	/////////////////////////////初始化各种类型素材图片////////////////////////////////	
 	BG = newimage();
 	DP = newimage();
-	/*for (int i = 0; i != 6; i++){
-		TYPE[i] = newimage();
-		ss << "resource\\skin" << opt.getSkin() << "\\Skin" << opt.getSkin() << "_Piece_" << i+1 << "_0" << ".png";
-		ss >> temp;
-		getimage(TYPE[i], temp.c_str(), 0, 0);
-		ss.clear();
-		for (int k = 0; k != 5; k++){
-			STYPE[i][k] = newimage();
-			ss << "resource\\skin" << opt.getSkin() << "\\Skin" << opt.getSkin() << "_Piece_" << i << "_" << k+1 << ".png";
-			ss >> temp;
-			getimage(STYPE[i - 1][k], temp.c_str(), 0, 0);
-			ss.clear();
-		}
-	}	*/
-	for (int i = 0; i != 7; ++i){
+	
+	for (int i = 0; i != 6; ++i){
 		for (int j = 0; j != 6; ++j)
 		{
 			TYPEALL[i][j] = newimage();
@@ -49,6 +36,7 @@ Animation::Animation(Option opt,Map map)
 	ss.clear();
 
 
+	
 
 	//加载6*5=30张皮肤 (6种方块每个有5种特殊方块）
 	
@@ -88,8 +76,10 @@ Animation::Animation(Option opt,Map map)
 		putimage_transparent(NULL, P[i_][n_], x[i_][n_], y[i_][n_], BLACK);
 	}
 	
-
+	
 }
+
+
 Animation::~Animation()
 {
 

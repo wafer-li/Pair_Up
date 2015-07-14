@@ -15,29 +15,25 @@ void g_game()
 	bool isExpMax = false;
 	bool pauseGame = false;
 	Option option;
-	Map newMap = g_makeMap();
+	Map & newMap = g_makeMap();
 	isDeadMap = newMap.g_isDeadMap();
 	Animation* newAnimation = new Animation(option, newMap);
 	
-	//NEED TO FIX: THE INFINITY LOOP!!!
 	newAnimation->animation_add();
 	while (restOfLive){
 		//if(pair_Up)
 		//+if(button.exit_inGame())
 		if (pauseGame){}
 		else{
-			g_checkMap(newMap);
-			if (removePiece(newMap) == 0)
+			if (isDeadMap)
 			{
-				if (isDeadMap)
-				{
-					g_deleteMap(newMap);
-					Map newmap = g_makeMap();
-					newAnimation->animation_newmap(newMap);
-				}
-				else
-				{
-					/*
+				g_deleteMap(newMap);
+				Map newmap = g_makeMap();
+				newAnimation->animation_newmap(newMap);
+			}
+			else
+			{
+				/*
 					1.用户点下去
 					2.拖动-播放动画
 					|-不合法
@@ -46,47 +42,38 @@ void g_game()
 					|-可消除-g-P-S-R-
 					*/
 
-					//g_checkMap(newMap);//Lc//////////////
 				
-					for (;;){
- 		  				for (; g_checkMap(newMap) == 1;)
-						{
+				for (; g_checkMap(newMap) == 1;)
+				{
 
- 							clearPiece(newMap);
+					clearPiece(newMap);
 
-							newAnimation->animation_disappear(newMap);
-							//newAnimation->animation_fall(newMap);
-
-
-							g_P_S_R(newMap);
-							newAnimation->animation_fall_add(newMap);
-							//newAnimation->animation_add(newMap);
-							//newAnimation->animation_newmap(newMap);
-						}
-
-						//g_playerMove(newMap,newAnimation);//g_playerMove()->Lds -> Lc //"="need of operator overlording
+					newAnimation->animation_disappear(newMap);
+					//newAnimation->animation_fall(newMap);
 
 
-						if (!newMap.g_isDeadMap()){
-							exit_sign = newAnimation->puanimation(0, 0, Global::x_scr, Global::y_scr, newMap);
-
-						}
-					}
-
-					//+isExpMax();
-					//nedOPT:in loops,this function"g_isDeadMap"will carry out twice with one loop
-					//Update7-7:slove
-					isDeadMap = newMap.g_isDeadMap();
-					if (isDeadMap)
-					{
-						--restOfLive;
-					}
+					g_P_S_R(newMap);
+					newAnimation->animation_fall_add(newMap);
+					//newAnimation->animation_add(newMap);
+					//newAnimation->animation_newmap(newMap);
 				}
-			}
-			else
-			{
-				//g_P_S_R(newMap);
+
+				//g_playerMove(newMap,newAnimation);//g_playerMove()->Lds -> Lc //"="need of operator overlording
+
+
+				if (!newMap.g_isDeadMap()){
+					exit_sign = newAnimation->puanimation(0, 0, Global::x_scr, Global::y_scr, newMap);
+
+				}
+
 				//+isExpMax();
+				//nedOPT:in loops,this function"g_isDeadMap"will carry out twice with one loop
+				//Update7-7:slove
+				isDeadMap = newMap.g_isDeadMap();
+				if (isDeadMap)
+				{
+					--restOfLive;
+				}
 			}
 		}
 	}
@@ -99,8 +86,9 @@ void swapPiece(int x1, int y1, int x2, int y2, Map& map)
 	map.swap(x1, y1, x2, y2);
 }
 
-//judeg the Map for clearable
-//this function is not efficient, it would be more quickly if I can get the changed Pieces' index
+//Judge the Map for clearable
+//Judge the whole map
+//Do NOT change the Piece.isClearable
 bool g_checkMap(Map & map)
 {
 	//行检查
@@ -158,7 +146,7 @@ bool g_checkMap(Map & map)
 	return false;
 }
 
-//judege the Map for clearable(more effeciently but you need to tell me the Pieces' index which are changed)
+//Judgee the Map for clearable(more effeciently but you need to tell me the Pieces' index which are changed)
 //GMT+9 2015/7/13 12:04, Update by Wafer
 //Swap the two Piece, judge isClearable
 //TRUE for Something Clearable, and do NOT Swap back
@@ -186,7 +174,7 @@ void g_P_S_R(Map& oriMap)
 
 	g_replenishMap(oriMap);//Push_back//Tgf//book
 }
-Map g_makeMap()
+Map & g_makeMap()
 {	
 	Map *myMap = new Map();
 	Map &newMap = *myMap;

@@ -1,10 +1,14 @@
 #include "Option.h"
 
 
+//Ctor
+//Default setting:
+//Skin -> The LoveLive Skin
+//Background -> GBk3.png
 Option::Option()
 {
 	skin = 1;
-	background = 0;
+	background = 3;
 }
 
 Option::~Option()

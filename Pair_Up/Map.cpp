@@ -4,11 +4,14 @@
 //Ctor
 Map::Map()
 {
-	//Initial the map structure
+	//Initial the map
+	//The Ctor of deque will automatially fill
+	//the deque using the default object 
 	for (int i = 0; i < MAX_SIZE; i++)
 	{
 		maplists[i] = std::deque<Piece>(MAX_SIZE);
 	}
+
 }
 
 //Dtor
@@ -18,20 +21,6 @@ Map::~Map()
 }
 
 //Method
-
-//Initial the map
-void Map::initMap()
-{
-	for (int i = 0; i < MAX_SIZE; i++)
-	{
-		for (int j = 0; j < MAX_SIZE;j++)
-		{
-			Piece piece = Piece();
-			maplists[i].push_back(piece);
-		}
-	}
-}
-
 
 //swap
 bool Map::swap(int x1,int y1,int x2,int y2)
@@ -490,29 +479,6 @@ bool Map::g_isDeadMap_()
 		}
 	}
 	return true;
-}
-
-//isPass
-bool Map::getIsPass()
-{
-	return isPass;
-}
-
-void Map::setIsPass(bool flag)
-{
-	isPass = flag;
-}
-
-
-//PassScore
-int Map::getPassScore()
-{
-	return passScore;
-}
-
-void Map::setPassScore(int score)
-{
-	passScore = score;
 }
 
 //Maplists

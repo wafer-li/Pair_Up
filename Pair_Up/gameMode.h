@@ -35,7 +35,7 @@ inline void g_playerMove(Map& oriMap)
 }
 
 //create a new map
-Map g_makeMap();
+Map & g_makeMap();
 
 //Ïû³ı
 void g_PairUp(Map&);

@@ -22,7 +22,7 @@ Piece::Piece(void)
 		if (flag == 1499)
 			specType = 5;//unclear
 		if (flag == 1500)
-			specType = 6;//death
+			specType = 6;//addTime
 	}
 	type = flag % 6 + 1;
 	//Update7-7:tgf:特殊方块也是有基本属性的
