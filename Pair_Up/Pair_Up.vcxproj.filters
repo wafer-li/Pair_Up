@@ -69,6 +69,9 @@
     <ClInclude Include="test.h">
       <Filter>头文件\test</Filter>
     </ClInclude>
+    <ClInclude Include="messageBox.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -118,6 +121,9 @@
     </ClCompile>
     <ClCompile Include="ResourceIn.cpp">
       <Filter>源文件\test</Filter>
+    </ClCompile>
+    <ClCompile Include="messageBox.cpp">
+      <Filter>源文件</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

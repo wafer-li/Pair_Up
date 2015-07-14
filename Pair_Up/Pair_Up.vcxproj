@@ -70,6 +70,7 @@
     <ClInclude Include="Global.h" />
     <ClInclude Include="leaderboardMode.h" />
     <ClInclude Include="Map.h" />
+    <ClInclude Include="messageBox.h" />
     <ClInclude Include="Option.h" />
     <ClInclude Include="optionMode.h" />
     <ClInclude Include="Piece.h" />
@@ -87,6 +88,7 @@
     <ClCompile Include="Map_Friend.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
+    <ClCompile Include="messageBox.cpp" />
     <ClCompile Include="Option.cpp" />
     <ClCompile Include="optionMode.cpp" />
     <ClCompile Include="Piece.cpp" />
