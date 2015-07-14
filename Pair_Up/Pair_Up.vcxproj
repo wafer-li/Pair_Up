@@ -64,6 +64,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Animation.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="gameMode.h" />
     <ClInclude Include="Global.h" />
@@ -72,10 +73,14 @@
     <ClInclude Include="Option.h" />
     <ClInclude Include="optionMode.h" />
     <ClInclude Include="Piece.h" />
+    <ClInclude Include="Resource.h" />
+    <ClInclude Include="test.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Score.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Animation.cpp" />
+    <ClCompile Include="button.cpp" />
     <ClCompile Include="gameMode.cpp" />
     <ClCompile Include="Global.cpp" />
     <ClCompile Include="leaderboardMode.cpp" />
@@ -85,6 +90,8 @@
     <ClCompile Include="Option.cpp" />
     <ClCompile Include="optionMode.cpp" />
     <ClCompile Include="Piece.cpp" />
+    <ClCompile Include="Resource.cpp" />
+    <ClCompile Include="ResourceIn.cpp" />
     <ClCompile Include="Score.cpp" />
     <ClCompile Include="testClear.cpp" />
     <ClCompile Include="Time.cpp" />

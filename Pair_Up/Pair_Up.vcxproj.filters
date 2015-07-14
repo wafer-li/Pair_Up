@@ -25,6 +25,9 @@
     <Filter Include="资源文件\BackGround">
       <UniqueIdentifier>{979cb0f6-77cc-45c2-8534-e01479435d0a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="头文件\test">
+      <UniqueIdentifier>{b0ee5feb-5605-45fe-95e1-578bb2b5f48e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Map.h">
@@ -56,6 +59,15 @@
     </ClInclude>
     <ClInclude Include="Score.h">
       <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="test.h">
+      <Filter>头文件\test</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -94,6 +106,18 @@
     </ClCompile>
     <ClCompile Include="Score.cpp">
       <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Animation.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="button.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Resource.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceIn.cpp">
+      <Filter>源文件\test</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
