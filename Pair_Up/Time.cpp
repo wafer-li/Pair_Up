@@ -1,57 +1,26 @@
 #include "Time.h"
 
-
-Time::Time()
+int time_ege(int level)
 {
-	struct yage_timer *timer = NULL;
-}
-
-
-Time::~Time()
-{
-}
-
-double Time::time_yage_create(int level)
-{
-	int seconds_ = 30;
+	int totalSeconds = time(0) % 60;
+	int currentSeconds = 0;
+	int seconds = 30;
 	if (level >= 1 && level <= 3)
-	{
-		seconds_ += 15;
-	}
+		seconds += 15;
 	if (level >= 4 && level <= 6)
+		seconds += 20;
+	if (level >= 7 && level <= 9)
+		seconds += 20;
+	for (;;)
 	{
-		seconds_ += 20;
-	}
-	if (level >= 1 && level <= 9)
-	{
-		seconds_ += 25;
-	}
-	else
-		seconds_ += 30;
-	struct yage_timer *timer = yage_timer_create(seconds_);
-	struct yage_message msg;
-	while (yage_get_message(&msg, 0))
-	{
-		if (msg.type != kYageTimer)
-			continue;
-		if (msg.timer.type == kYageTimerRunning)
+		int currentSeconds = time(0) % 60;
+		int subtract = currentSeconds - totalSeconds;
+		if (subtract <= seconds)
 		{
-			//yage_clear();
-			return seconds_ - msg.timer.seconds;
-			//another way: return yage_timer_get_time_elapsed(timer);
+			return subtract;
+			delay_ms(1000);
 		}
 		else
-		{
-			yage_timer_stop(timer);
-		}
+			break;
 	}
-}
-
-void Time::time_yage_pause(struct yage_timer * timer)
-{
-	yage_timer_pause(timer);
-}
-void Time::time_yage_resume(struct yage_timer *timer)
-{
-	yage_timer_resume(timer);
 }
