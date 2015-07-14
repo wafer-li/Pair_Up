@@ -10,8 +10,7 @@ class Map{
 private:
 	static const int MAX_SIZE = 9;
 	std::deque<Piece> maplists[MAX_SIZE];//Use deque instead of list
-	bool isPass; //当前游戏是否过关
-	int passScore;
+
 protected:
 public:
 	/* Ctor & Dtor */
@@ -40,14 +39,6 @@ public:
 	//Only judge the single piece
 	//Do NOT change the Piece.isClear
 	bool isPieceClearable(int x, int y);
-
-	//-----bool isPass-----
-	bool getIsPass();
-	void setIsPass(bool flag);
-
-	//-----int passScore----
-	int getPassScore();
-	void setPassScore(int score);
 
 	//Maplists
 	std::deque<Piece> * getMaplists();
