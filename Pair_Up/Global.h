@@ -5,10 +5,20 @@
 class Global
 {
 public:
+	/* Ctor & Dtor */
 	Global();
 	~Global();
+
+
+	/* Global Variable */
+
+	//Common Coordinate
 	const static int x_scr ;
 	const static int y_scr ;
+	const static int x_0;
+	const static int y_0;
+
+	//Game Coordinate
 	const static int x_map ;
 	const static int y_map  ;
 	const static int x_piece ;
@@ -17,17 +27,22 @@ public:
 	const static int x_map_LB ;
 	const static int y_map_LT ;
 	const static int y_map_LB ;
+	const static int x_g_b_exit;
+	const static int y_g_b_exit;
+	const static int x_g_b_pause;
+	const static int y_g_b_pause;
+	const static int MAX_SIZE;
+
+
 	const static int delay_fall;               //fps
 	const static int delay_add;                //fps
 	const static int delay_change;             //fps
 	const static int delay_disappear;          //ms
 	const static int speed;
-	const static int x_0;
-	const static int y_0;
-	const static int x_g_b_exit;
-	const static int y_g_b_exit;
-	const static int x_g_b_pause;
-	const static int y_g_b_pause;
+
+
+
+
 //specType:	
 /*
 *0.ori-原始方块-什么都不做
