@@ -77,6 +77,8 @@
     <ClInclude Include="Option.h" />
     <ClInclude Include="optionMode.h" />
     <ClInclude Include="Piece.h" />
+	<ClInclude Include="Time.h" />
+    <ClInclude Include="Score.h" />
     <ClInclude Include="Resource.h" />
   </ItemGroup>
   <ItemGroup>
@@ -91,8 +93,10 @@
     <ClCompile Include="Option.cpp" />
     <ClCompile Include="optionMode.cpp" />
     <ClCompile Include="Piece.cpp" />
+    <ClCompile Include="Score.cpp" />
     <ClCompile Include="Resource.cpp" />
     <ClCompile Include="testClear.cpp" />
+    <ClCompile Include="Time.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="resource\20150710010620585_easyicon_net_110.08.png" />
