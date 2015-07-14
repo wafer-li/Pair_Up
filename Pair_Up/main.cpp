@@ -66,6 +66,7 @@ int start(void);
 int start(void)
 {	
 	Resource res;
+	flushmouse();
 	int mouseCheck= 0;
 
 
@@ -91,7 +92,6 @@ int start(void)
 	delimage(res.leaderboard_basic);
 	delimage(res.leaderboard_move);
 	delimage(res.leaderboard_press);
-	flushmouse();
 	return mouseCheck;
 	
 }
