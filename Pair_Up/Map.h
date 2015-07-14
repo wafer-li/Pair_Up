@@ -4,6 +4,7 @@
 //include parts
 #include <deque>
 #include "Piece.h"
+#include "Global.h"
 
 //Class
 class Map{

@@ -17,7 +17,6 @@ Map::Map()
 //Dtor
 Map::~Map()
 {
-	/* ... */
 }
 
 //Method
@@ -176,7 +175,7 @@ bool Map::isPieceClearable(int x, int y)
 //isDead
 bool Map::isDead(int x, int y)
 {
-	bool flag = false;
+	bool flag = true;
 	if (maplists[x][y].getSpecType() != Global::SpecType::unclearable)
 	{
 		//swap right
@@ -185,10 +184,6 @@ bool Map::isDead(int x, int y)
 			if (isPieceClearable(x + 1, y) || isPieceClearable(x, y))
 			{
 				flag = false;
-			}
-			else
-			{
-				flag = true;
 			}
 			//recover
 			swap(x, y, x + 1, y);
@@ -200,10 +195,6 @@ bool Map::isDead(int x, int y)
 			if (isPieceClearable(x, y + 1) || isPieceClearable(x, y))
 			{
 				flag = false;
-			}
-			else
-			{
-				flag = true;
 			}
 			//recover
 			swap(x, y, x, y + 1);
