@@ -7,27 +7,26 @@ Piece::Piece(void)
 {
 	isClear = 0;
 	specType = 0;//initialize it as a normal piece
-	int flag = rand() % 150 + 1;
-	if (flag >= 10)
+	int flag = rand() % 1500 + 1;
+	if (flag >= 1490)
 	{
 		//1490-1500   p:3 3 1 1 1 1
-		if (flag >= 10 && flag <= 143)
+		if (flag >= 1491 && flag < 1494)
 			specType = 1;//line
-		if (flag >= 14 && flag <= 149)
+		if (flag >= 1494 && flag < 1497)
 			specType = 2;//row
 		if (flag == 1497)
 			specType = 3;//box
 		if (flag == 1498)
 			specType = 4;//same color
-		if (flag >=1 && flag<60)
+		if (flag == 1499 || flag == 1500)
 			specType = 5;//unclear
 		//if (flag == 1500)
-		//	specType = 6;//addTime
+		//	specType = 6;//death
 	}
-	type = flag % 5 + 1;
+	type = flag % 6 + 1;
 	//Update7-7:tgf:特殊方块也是有基本属性的
 }
-
 
 Piece::~Piece(void)
 {

@@ -63,7 +63,7 @@ public:
 	*/
 	enum SpecType
 	{
-		origin, line,row,box,same_color,unclearable,death
+		origin, line,row,box,same_color,unclearable
 	};
 };
 
