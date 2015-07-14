@@ -44,6 +44,12 @@
 #include"Animation.h"
 #include "gameMode.h"
 #include "optionMode.h"
+
+//define NDEBUG
+#ifndef NDEBUG
+#include"test.h"
+#endif
+
 //接口函数列表
 //g_makeMap();
 //g_isDead();
@@ -69,13 +75,10 @@ int start(void)
 	flushmouse();
 	int mouseCheck= 0;
 
-
 	Button *button_menu = new Button(800, 400, 640, 120, 1, res.newGameButton_basic, res.newGameButton_move, res.newGameButton_press);
 	Button *button_menu2 = new Button(800, 521, 640, 120, 2, res.leaderboard_basic, res.leaderboard_move, res.leaderboard_press);
 	Button *button_menu3 = new Button(800, 642, 640, 120, 3, res.optionButton_basic,res.optionButton_move, res.optionButton_press);	
 	Button *button_menu4 = new Button(800, 763, 640, 120, 4, res.exitButton_basic, res.exitButton_move,res.exitButton_press);
-
-	
 	mouseCheck = Button::pubutton(0, 0, 1476, 1016, res.BK);
 
 	delete(button_menu);
@@ -97,12 +100,13 @@ int start(void)
 }
 
 //Main Function
-int main(int argc, char*argv[])
+int main(void)
 {
 	int condition = 1;
 	init();
 	while (condition)
 	{
+		//ResourceIn();//在DUBUG模式下启用这行禁用下行会检查当前图片输入序列
 	condition = meun(start());
 	}
 	//yage_quit();

@@ -26,11 +26,12 @@ Animation::Animation(Option opt,Map map)
 		}
 	}
 
-	ss << "resource\\skin" << opt.getSkin() << "\\Skin" << opt.getSkin() << "_Piece_Special_" << opt.getSkin() << ".png";
+	//ss << "resource\\skin" << opt.getSkin() << "\\Skin" << opt.getSkin() << "_Piece_Special_" << opt.getSkin() << ".png";
+	ss << "resource\\skin" << opt.getSkin() << "\\Skin" << opt.getSkin() << "_Piece_Clear.png";
 	ss >> temp;
 	getimage(DP, temp.c_str(), 0, 0);
 	ss.clear();
-	ss << "resource\\GBk" << opt.getBackground() << ".png";
+	ss << "resource\\BackGround\\GameBk" << opt.getBackground() << ".png";
 	ss >> temp;
 	getimage(BG, temp.c_str(), 0, 0);
 	ss.clear();
