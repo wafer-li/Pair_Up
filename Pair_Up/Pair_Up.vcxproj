@@ -38,19 +38,15 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>E:\Library\EGE2015\include;$(IncludePath)</IncludePath>
-    <LibraryPath>E:\Library\EGE2015\lib\vc2013\lib;$(LibraryPath)</LibraryPath>
-  </PropertyGroup>
+  <PropertyGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
-      <WarningLevel>Level4</WarningLevel>
+      <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>graphics13.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -68,7 +64,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="Animation.h" />
     <ClInclude Include="Button.h" />
     <ClInclude Include="gameMode.h" />
     <ClInclude Include="Global.h" />
@@ -77,14 +72,10 @@
     <ClInclude Include="Option.h" />
     <ClInclude Include="optionMode.h" />
     <ClInclude Include="Piece.h" />
-    <ClInclude Include="test.h" />
     <ClInclude Include="Time.h" />
     <ClInclude Include="Score.h" />
-    <ClInclude Include="Resource.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Animation.cpp" />
-    <ClCompile Include="button.cpp" />
     <ClCompile Include="gameMode.cpp" />
     <ClCompile Include="Global.cpp" />
     <ClCompile Include="leaderboardMode.cpp" />
@@ -94,11 +85,121 @@
     <ClCompile Include="Option.cpp" />
     <ClCompile Include="optionMode.cpp" />
     <ClCompile Include="Piece.cpp" />
-    <ClCompile Include="ResourceIn.cpp" />
     <ClCompile Include="Score.cpp" />
-    <ClCompile Include="Resource.cpp" />
     <ClCompile Include="testClear.cpp" />
     <ClCompile Include="Time.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resource\20150710010620585_easyicon_net_110.08.png" />
+    <Image Include="resource\20150710010634943_easyicon_net_536.png" />
+    <Image Include="resource\20150710085357196_easyicon_net_627.600562588.png" />
+    <Image Include="resource\BackGround\GameBk1.png" />
+    <Image Include="resource\BackGround\GameBk10.png" />
+    <Image Include="resource\BackGround\GameBk11.png" />
+    <Image Include="resource\BackGround\GameBk12.png" />
+    <Image Include="resource\BackGround\GameBk2.png" />
+    <Image Include="resource\BackGround\GameBk3.png" />
+    <Image Include="resource\BackGround\GameBk4.png" />
+    <Image Include="resource\BackGround\GameBk5.png" />
+    <Image Include="resource\BackGround\GameBk6.png" />
+    <Image Include="resource\BackGround\GameBk7.png" />
+    <Image Include="resource\BackGround\GameBk8.png" />
+    <Image Include="resource\BackGround\GameBk9.png" />
+    <Image Include="resource\Bk.png" />
+    <Image Include="resource\exit-m.png" />
+    <Image Include="resource\exit-on.png" />
+    <Image Include="resource\exit.png" />
+    <Image Include="resource\init.png" />
+    <Image Include="resource\leaderboard-m.png" />
+    <Image Include="resource\leaderboard-on.png" />
+    <Image Include="resource\leaderboard.png" />
+    <Image Include="resource\newGame-m.png" />
+    <Image Include="resource\newGame-on.png" />
+    <Image Include="resource\newGame.png" />
+    <Image Include="resource\Option-m.png" />
+    <Image Include="resource\Option-on.png" />
+    <Image Include="resource\Option.png" />
+    <Image Include="resource\option1.png" />
+    <Image Include="resource\option2.png" />
+    <Image Include="resource\PairupLeader.jpg" />
+    <Image Include="resource\skin1\Skin1_Piece_1_0.png" />
+    <Image Include="resource\skin1\Skin1_Piece_1_1.png" />
+    <Image Include="resource\skin1\Skin1_Piece_1_2.png" />
+    <Image Include="resource\skin1\Skin1_Piece_1_3.png" />
+    <Image Include="resource\skin1\Skin1_Piece_1_4.png" />
+    <Image Include="resource\skin1\Skin1_Piece_1_5.png" />
+    <Image Include="resource\skin1\Skin1_Piece_2_0.png" />
+    <Image Include="resource\skin1\Skin1_Piece_2_1.png" />
+    <Image Include="resource\skin1\Skin1_Piece_2_2.png" />
+    <Image Include="resource\skin1\Skin1_Piece_2_3.png" />
+    <Image Include="resource\skin1\Skin1_Piece_2_4.png" />
+    <Image Include="resource\skin1\Skin1_Piece_2_5.png" />
+    <Image Include="resource\skin1\Skin1_Piece_3_0.png" />
+    <Image Include="resource\skin1\Skin1_Piece_3_1.png" />
+    <Image Include="resource\skin1\Skin1_Piece_3_2.png" />
+    <Image Include="resource\skin1\Skin1_Piece_3_3.png" />
+    <Image Include="resource\skin1\Skin1_Piece_3_4.png" />
+    <Image Include="resource\skin1\Skin1_Piece_3_5.png" />
+    <Image Include="resource\skin1\Skin1_Piece_4_0.png" />
+    <Image Include="resource\skin1\Skin1_Piece_4_1.png" />
+    <Image Include="resource\skin1\Skin1_Piece_4_2.png" />
+    <Image Include="resource\skin1\Skin1_Piece_4_3.png" />
+    <Image Include="resource\skin1\Skin1_Piece_4_4.png" />
+    <Image Include="resource\skin1\Skin1_Piece_4_5.png" />
+    <Image Include="resource\skin1\Skin1_Piece_5_0.png" />
+    <Image Include="resource\skin1\Skin1_Piece_5_1.png" />
+    <Image Include="resource\skin1\Skin1_Piece_5_2.png" />
+    <Image Include="resource\skin1\Skin1_Piece_5_3.png" />
+    <Image Include="resource\skin1\Skin1_Piece_5_4.png" />
+    <Image Include="resource\skin1\Skin1_Piece_5_5.png" />
+    <Image Include="resource\skin1\Skin1_Piece_6_0.png" />
+    <Image Include="resource\skin1\Skin1_Piece_6_1.png" />
+    <Image Include="resource\skin1\Skin1_Piece_6_2.png" />
+    <Image Include="resource\skin1\Skin1_Piece_6_3.png" />
+    <Image Include="resource\skin1\Skin1_Piece_6_4.png" />
+    <Image Include="resource\skin1\Skin1_Piece_6_5.png" />
+    <Image Include="resource\skin1\Skin1_Piece_Clear.png" />
+    <Image Include="resource\skin1\Skin1_Piece_Special_1.png" />
+    <Image Include="resource\skin1\Skin1_Piece_Special_2.png" />
+    <Image Include="resource\skin3\Skin3_Piece_1_0.png" />
+    <Image Include="resource\skin3\Skin3_Piece_1_1.png" />
+    <Image Include="resource\skin3\Skin3_Piece_1_2.png" />
+    <Image Include="resource\skin3\Skin3_Piece_1_3.png" />
+    <Image Include="resource\skin3\Skin3_Piece_1_4.png" />
+    <Image Include="resource\skin3\Skin3_Piece_1_5.png" />
+    <Image Include="resource\skin3\Skin3_Piece_2_0.png" />
+    <Image Include="resource\skin3\Skin3_Piece_2_1.png" />
+    <Image Include="resource\skin3\Skin3_Piece_2_2.png" />
+    <Image Include="resource\skin3\Skin3_Piece_2_3.png" />
+    <Image Include="resource\skin3\Skin3_Piece_2_4.png" />
+    <Image Include="resource\skin3\Skin3_Piece_2_5.png" />
+    <Image Include="resource\skin3\Skin3_Piece_3_0.png" />
+    <Image Include="resource\skin3\Skin3_Piece_3_1.png" />
+    <Image Include="resource\skin3\Skin3_Piece_3_2.png" />
+    <Image Include="resource\skin3\Skin3_Piece_3_3.png" />
+    <Image Include="resource\skin3\Skin3_Piece_3_4.png" />
+    <Image Include="resource\skin3\Skin3_Piece_3_5.png" />
+    <Image Include="resource\skin3\Skin3_Piece_4_0.png" />
+    <Image Include="resource\skin3\Skin3_Piece_4_1.png" />
+    <Image Include="resource\skin3\Skin3_Piece_4_2.png" />
+    <Image Include="resource\skin3\Skin3_Piece_4_3.png" />
+    <Image Include="resource\skin3\Skin3_Piece_4_4.png" />
+    <Image Include="resource\skin3\Skin3_Piece_4_5.png" />
+    <Image Include="resource\skin3\Skin3_Piece_5_0.png" />
+    <Image Include="resource\skin3\Skin3_Piece_5_1.png" />
+    <Image Include="resource\skin3\Skin3_Piece_5_2.png" />
+    <Image Include="resource\skin3\Skin3_Piece_5_3.png" />
+    <Image Include="resource\skin3\Skin3_Piece_5_4.png" />
+    <Image Include="resource\skin3\Skin3_Piece_5_5.png" />
+    <Image Include="resource\skin3\Skin3_Piece_6_0.png" />
+    <Image Include="resource\skin3\Skin3_Piece_6_1.png" />
+    <Image Include="resource\skin3\Skin3_Piece_6_2.png" />
+    <Image Include="resource\skin3\Skin3_Piece_6_3.png" />
+    <Image Include="resource\skin3\Skin3_Piece_6_4.png" />
+    <Image Include="resource\skin3\Skin3_Piece_6_5.png" />
+    <Image Include="resource\skin3\Skin3_Piece_Clear.png" />
+    <Image Include="resource\skin3\Skin3_Piece_Special_1.png" />
+    <Image Include="resource\skin3\Skin3_Piece_Special_2.png" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

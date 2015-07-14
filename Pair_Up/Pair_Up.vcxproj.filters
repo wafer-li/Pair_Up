@@ -9,11 +9,21 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
+    <Filter Include="资源文件">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
     <Filter Include="源文件\test">
       <UniqueIdentifier>{6dbbc493-951b-4982-854c-3db981a1ba08}</UniqueIdentifier>
     </Filter>
-    <Filter Include="头文件\Test">
-      <UniqueIdentifier>{51299c01-c141-48a7-8637-c3e1dc89fa05}</UniqueIdentifier>
+    <Filter Include="资源文件\Skin 1">
+      <UniqueIdentifier>{70dba150-d1e9-493b-ba16-bd5c9b58d03c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Skin 3">
+      <UniqueIdentifier>{154f291f-1e54-4b88-a948-4b3215cfb4b8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\BackGround">
+      <UniqueIdentifier>{979cb0f6-77cc-45c2-8534-e01479435d0a}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -41,20 +51,11 @@
     <ClInclude Include="Global.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="Animation.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="Resource.h">
-      <Filter>头文件</Filter>
-    </ClInclude>
     <ClInclude Include="Time.h">
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Score.h">
       <Filter>头文件</Filter>
-    </ClInclude>
-    <ClInclude Include="test.h">
-      <Filter>头文件\Test</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -88,23 +89,343 @@
     <ClCompile Include="Global.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="button.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="Resource.cpp">
+    <ClCompile Include="Time.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Score.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
-    <ClCompile Include="Time.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
-    <ClCompile Include="ResourceIn.cpp">
-      <Filter>源文件\test</Filter>
-    </ClCompile>
-    <ClCompile Include="Animation.cpp">
-      <Filter>源文件</Filter>
-    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="resource\20150710010620585_easyicon_net_110.08.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="resource\20150710010634943_easyicon_net_536.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="resource\20150710085357196_easyicon_net_627.600562588.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="resource\Bk.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="resource\exit.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="resource\exit-m.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="resource\exit-on.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="resource\init.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="resource\leaderboard.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="resource\leaderboard-m.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="resource\leaderboard-on.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="resource\newGame.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="resource\newGame-m.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="resource\newGame-on.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="resource\Option.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="resource\option1.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="resource\option2.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="resource\Option-m.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="resource\Option-on.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="resource\PairupLeader.jpg">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="resource\BackGround\GameBk1.png">
+      <Filter>资源文件\BackGround</Filter>
+    </Image>
+    <Image Include="resource\BackGround\GameBk2.png">
+      <Filter>资源文件\BackGround</Filter>
+    </Image>
+    <Image Include="resource\BackGround\GameBk3.png">
+      <Filter>资源文件\BackGround</Filter>
+    </Image>
+    <Image Include="resource\BackGround\GameBk4.png">
+      <Filter>资源文件\BackGround</Filter>
+    </Image>
+    <Image Include="resource\BackGround\GameBk5.png">
+      <Filter>资源文件\BackGround</Filter>
+    </Image>
+    <Image Include="resource\BackGround\GameBk6.png">
+      <Filter>资源文件\BackGround</Filter>
+    </Image>
+    <Image Include="resource\BackGround\GameBk7.png">
+      <Filter>资源文件\BackGround</Filter>
+    </Image>
+    <Image Include="resource\BackGround\GameBk8.png">
+      <Filter>资源文件\BackGround</Filter>
+    </Image>
+    <Image Include="resource\BackGround\GameBk9.png">
+      <Filter>资源文件\BackGround</Filter>
+    </Image>
+    <Image Include="resource\BackGround\GameBk10.png">
+      <Filter>资源文件\BackGround</Filter>
+    </Image>
+    <Image Include="resource\BackGround\GameBk11.png">
+      <Filter>资源文件\BackGround</Filter>
+    </Image>
+    <Image Include="resource\BackGround\GameBk12.png">
+      <Filter>资源文件\BackGround</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_1_0.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_1_1.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_1_2.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_1_3.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_1_4.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_1_5.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_2_0.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_2_1.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_2_2.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_2_3.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_2_4.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_2_5.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_3_0.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_3_1.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_3_2.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_3_3.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_3_4.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_3_5.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_4_0.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_4_1.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_4_2.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_4_3.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_4_4.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_4_5.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_5_0.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_5_1.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_5_2.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_5_3.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_5_4.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_5_5.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_6_0.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_6_1.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_6_2.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_6_3.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_6_4.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_6_5.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_Clear.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_Special_1.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin3\Skin3_Piece_Special_2.png">
+      <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_1_0.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_1_1.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_1_2.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_1_3.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_1_4.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_1_5.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_2_0.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_2_1.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_2_2.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_2_3.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_2_4.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_2_5.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_3_0.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_3_1.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_3_2.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_3_3.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_3_4.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_3_5.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_4_0.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_4_1.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_4_2.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_4_3.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_4_4.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_4_5.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_5_0.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_5_1.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_5_2.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_5_3.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_5_4.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_5_5.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_6_0.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_6_1.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_6_2.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_6_3.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_6_4.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_6_5.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_Clear.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_Special_1.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\skin1\Skin1_Piece_Special_2.png">
+      <Filter>资源文件\Skin 1</Filter>
+    </Image>
   </ItemGroup>
 </Project>
