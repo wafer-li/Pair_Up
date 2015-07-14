@@ -77,7 +77,7 @@
     <ClInclude Include="Option.h" />
     <ClInclude Include="optionMode.h" />
     <ClInclude Include="Piece.h" />
-	<ClInclude Include="Time.h" />
+    <ClInclude Include="Time.h" />
     <ClInclude Include="Score.h" />
     <ClInclude Include="Resource.h" />
   </ItemGroup>
@@ -102,15 +102,22 @@
     <Image Include="resource\20150710010620585_easyicon_net_110.08.png" />
     <Image Include="resource\20150710010634943_easyicon_net_536.png" />
     <Image Include="resource\20150710085357196_easyicon_net_627.600562588.png" />
+    <Image Include="resource\BackGround\GameBk1.png" />
+    <Image Include="resource\BackGround\GameBk10.png" />
+    <Image Include="resource\BackGround\GameBk11.png" />
+    <Image Include="resource\BackGround\GameBk12.png" />
+    <Image Include="resource\BackGround\GameBk2.png" />
+    <Image Include="resource\BackGround\GameBk3.png" />
+    <Image Include="resource\BackGround\GameBk4.png" />
+    <Image Include="resource\BackGround\GameBk5.png" />
+    <Image Include="resource\BackGround\GameBk6.png" />
+    <Image Include="resource\BackGround\GameBk7.png" />
+    <Image Include="resource\BackGround\GameBk8.png" />
+    <Image Include="resource\BackGround\GameBk9.png" />
     <Image Include="resource\Bk.png" />
     <Image Include="resource\exit-m.png" />
     <Image Include="resource\exit-on.png" />
     <Image Include="resource\exit.png" />
-    <Image Include="resource\GBk1.png" />
-    <Image Include="resource\GBk2.png" />
-    <Image Include="resource\GBk3.png" />
-    <Image Include="resource\GBk4.png" />
-    <Image Include="resource\Gbk5.png" />
     <Image Include="resource\init.png" />
     <Image Include="resource\leaderboard-m.png" />
     <Image Include="resource\leaderboard-on.png" />
@@ -121,6 +128,8 @@
     <Image Include="resource\Option-m.png" />
     <Image Include="resource\Option-on.png" />
     <Image Include="resource\Option.png" />
+    <Image Include="resource\option1.png" />
+    <Image Include="resource\option2.png" />
     <Image Include="resource\PairupLeader.jpg" />
     <Image Include="resource\skin1\Skin1_Piece_1_0.png" />
     <Image Include="resource\skin1\Skin1_Piece_1_1.png" />

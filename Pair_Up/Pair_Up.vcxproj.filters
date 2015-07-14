@@ -22,6 +22,9 @@
     <Filter Include="资源文件\Skin 3">
       <UniqueIdentifier>{becfb9ad-f4a6-4b7f-9757-623ad5dce829}</UniqueIdentifier>
     </Filter>
+    <Filter Include="资源文件\Background">
+      <UniqueIdentifier>{d2fdfed6-2dd2-4768-b7ad-b72d085c4127}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Map.h">
@@ -52,6 +55,12 @@
       <Filter>头文件</Filter>
     </ClInclude>
     <ClInclude Include="Resource.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Time.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
+    <ClInclude Include="Score.h">
       <Filter>头文件</Filter>
     </ClInclude>
   </ItemGroup>
@@ -95,6 +104,12 @@
     <ClCompile Include="Resource.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="Score.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Time.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="resource\20150710010620585_easyicon_net_110.08.png">
@@ -116,21 +131,6 @@
       <Filter>资源文件</Filter>
     </Image>
     <Image Include="resource\exit-on.png">
-      <Filter>资源文件</Filter>
-    </Image>
-    <Image Include="resource\GBk1.png">
-      <Filter>资源文件</Filter>
-    </Image>
-    <Image Include="resource\GBk2.png">
-      <Filter>资源文件</Filter>
-    </Image>
-    <Image Include="resource\GBk3.png">
-      <Filter>资源文件</Filter>
-    </Image>
-    <Image Include="resource\GBk4.png">
-      <Filter>资源文件</Filter>
-    </Image>
-    <Image Include="resource\Gbk5.png">
       <Filter>资源文件</Filter>
     </Image>
     <Image Include="resource\init.png">
@@ -399,6 +399,48 @@
     </Image>
     <Image Include="resource\skin3\Skin3_Piece_Special_2.png">
       <Filter>资源文件\Skin 3</Filter>
+    </Image>
+    <Image Include="resource\BackGround\GameBk1.png">
+      <Filter>资源文件\Background</Filter>
+    </Image>
+    <Image Include="resource\BackGround\GameBk2.png">
+      <Filter>资源文件\Background</Filter>
+    </Image>
+    <Image Include="resource\BackGround\GameBk3.png">
+      <Filter>资源文件\Background</Filter>
+    </Image>
+    <Image Include="resource\BackGround\GameBk4.png">
+      <Filter>资源文件\Background</Filter>
+    </Image>
+    <Image Include="resource\BackGround\GameBk5.png">
+      <Filter>资源文件\Background</Filter>
+    </Image>
+    <Image Include="resource\BackGround\GameBk6.png">
+      <Filter>资源文件\Background</Filter>
+    </Image>
+    <Image Include="resource\BackGround\GameBk7.png">
+      <Filter>资源文件\Background</Filter>
+    </Image>
+    <Image Include="resource\BackGround\GameBk8.png">
+      <Filter>资源文件\Background</Filter>
+    </Image>
+    <Image Include="resource\BackGround\GameBk9.png">
+      <Filter>资源文件\Background</Filter>
+    </Image>
+    <Image Include="resource\BackGround\GameBk10.png">
+      <Filter>资源文件\Background</Filter>
+    </Image>
+    <Image Include="resource\BackGround\GameBk11.png">
+      <Filter>资源文件\Background</Filter>
+    </Image>
+    <Image Include="resource\BackGround\GameBk12.png">
+      <Filter>资源文件\Background</Filter>
+    </Image>
+    <Image Include="resource\option1.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="resource\option2.png">
+      <Filter>资源文件</Filter>
     </Image>
   </ItemGroup>
 </Project>
