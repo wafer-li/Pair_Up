@@ -91,7 +91,7 @@ int start(void)
 	delimage(res.leaderboard_basic);
 	delimage(res.leaderboard_move);
 	delimage(res.leaderboard_press);
-
+	flushmouse();
 	return mouseCheck;
 	
 }
@@ -147,6 +147,7 @@ int meun(int playerChoose)
 			condition = 1;
 			break;
 		}
+
 		return condition;
 }
 
