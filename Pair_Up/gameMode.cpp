@@ -21,7 +21,6 @@ void g_game()
 	
 	newAnimation->animation_add();
 	while (restOfLive){
-		//if(pair_Up)
 		//+if(button.exit_inGame())
 		if (pauseGame){}
 		else{
@@ -49,35 +48,28 @@ void g_game()
 					clearPiece(newMap);
 
 					newAnimation->animation_disappear(newMap);
-					//newAnimation->animation_fall(newMap);
 
 
 					g_P_S_R(newMap);
 					newAnimation->animation_fall_add(newMap);
-					//newAnimation->animation_add(newMap);
-					//newAnimation->animation_newmap(newMap);
 				}
 
-				//g_playerMove(newMap,newAnimation);//g_playerMove()->Lds -> Lc //"="need of operator overlording
 
-
-				if (!newMap.g_isDeadMap()){
+				if (!(isDeadMap =newMap.g_isDeadMap()))
+				{
 					exit_sign = newAnimation->puanimation(0, 0, Global::x_scr, Global::y_scr, newMap);
 
 				}
+				else
+				{
+					restOfLive--;
+				}
 
 				//+isExpMax();
-				//nedOPT:in loops,this function"g_isDeadMap"will carry out twice with one loop
-				//Update7-7:slove
-				isDeadMap = newMap.g_isDeadMap();
-				if (isDeadMap)
-				{
-					--restOfLive;
-				}
 			}
 		}
 	}
-	l_inRanking(score);//record Game score,if the score is at the top 10 of leaderboard, congratulations and refresh the learboard
+	l_inRanking(score);//Record score, disaplay in leaderboard if the top five
 }
 
 //swap two Piece

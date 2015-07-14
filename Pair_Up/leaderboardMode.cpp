@@ -13,7 +13,6 @@
 * if it is,write it into leaderboard
 */
 
-
 // this function judge the score,and save the date
 void l_inRanking(int score)
 {
