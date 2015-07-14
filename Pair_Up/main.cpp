@@ -53,8 +53,8 @@
 //g_setMap();
 //g_replenishMap();
 
-void resourceLoad(Option);
-void resourceLoadSkin(int);
+//void resourceLoad(Option);
+//void resourceLoadSkin(int);
 int gameMode();
 int leaderboardMode();//+
 int optionMode();//+
@@ -174,6 +174,8 @@ int exitMode()
 	return 0;
 }
 
+//yage_load_image
+/*
 void resourceLoad(Option option)
 {
 //	struct yage_canvas *Background = yage_canvas_load_image("Bk.png");
@@ -204,4 +206,4 @@ void resourceLoadSkin(int skin)
 		ss.clear();
 		//struct yage_canvas *specPiece2 = yage_canvas_load_image(temp.c_str());
 
-}
+}*/
