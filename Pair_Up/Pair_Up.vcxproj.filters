@@ -42,6 +42,9 @@
     <ClInclude Include="Global.h">
       <Filter>头文件</Filter>
     </ClInclude>
+    <ClInclude Include="Time.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
     <ClInclude Include="Score.h">
       <Filter>头文件</Filter>
     </ClInclude>
@@ -75,6 +78,9 @@
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Global.cpp">
+      <Filter>源文件</Filter>
+    </ClCompile>
+    <ClCompile Include="Time.cpp">
       <Filter>源文件</Filter>
     </ClCompile>
     <ClCompile Include="Score.cpp">
