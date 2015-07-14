@@ -178,7 +178,7 @@ void l_leaderboard()
 		}
 	}
 	mouse_msg m_temp;
-	for (; !((m_temp.is_left()) || (m_temp.is_right()));)
+	for (; !(m_temp.is_right());)
 	{
 		m_temp = getmouse();
 	}
