@@ -44,7 +44,6 @@
 #include"Animation.h"
 #include "gameMode.h"
 #include "optionMode.h"
-
 //define NDEBUG
 #ifndef NDEBUG
 #include"test.h"
@@ -74,12 +73,17 @@ int start(void)
 	Resource res;
 	flushmouse();
 	int mouseCheck= 0;
-
+	PIMAGE BK;	 
+	BK = newimage();	
+	getimage(BK, "resource\\BK.png", 0, 0);
+	putimage(0, 0,BK);
 	Button *button_menu = new Button(800, 400, 640, 120, 1, res.newGameButton_basic, res.newGameButton_move, res.newGameButton_press);
 	Button *button_menu2 = new Button(800, 521, 640, 120, 2, res.leaderboard_basic, res.leaderboard_move, res.leaderboard_press);
 	Button *button_menu3 = new Button(800, 642, 640, 120, 3, res.optionButton_basic,res.optionButton_move, res.optionButton_press);	
 	Button *button_menu4 = new Button(800, 763, 640, 120, 4, res.exitButton_basic, res.exitButton_move,res.exitButton_press);
-	mouseCheck = Button::pubutton(0, 0, 1476, 1016, res.BK);
+	
+	Button::setbutton(0, 0, Global::x_scr,Global::y_scr);
+	mouseCheck = Button::pubutton(0, 0, Global::x_scr, Global::y_scr);
 
 	delete(button_menu);
 	delete(button_menu2);

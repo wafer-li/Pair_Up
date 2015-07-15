@@ -7,7 +7,7 @@ Resource::Resource()
 	 optionButton_basic = newimage();
 	 newGameButton_basic = newimage();
 	 leaderboard_basic = newimage();
-	 BK = newimage();
+
 	 exitButton_move = newimage();
 	 optionButton_move = newimage();
 	 newGameButton_move = newimage();
@@ -29,7 +29,7 @@ Resource::Resource()
 	getimage(leaderboard_basic, "resource\\leaderboard.png", 0, 0);
 	getimage(leaderboard_move, "resource\\leaderboard-m.png", 0, 0);
 	getimage(leaderboard_press, "resource\\leaderboard-on.png", 0, 0);
-	getimage(BK, "resource\\BK.png", 0, 0);
+
 }
 
 

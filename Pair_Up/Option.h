@@ -1,5 +1,8 @@
 #ifndef OPTION_H
 #define OPTION_H
+#include <fstream>
+#include <sstream>
+#include <string>
 class Option
 {
 private:
