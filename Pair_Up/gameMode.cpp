@@ -9,7 +9,7 @@ void g_game()
 	//Piece.type means basic elements of piece
 	//Piece.specType means special piece 
 	int restOfLive = 6; //初始生命值
-	bool exit_sign = false;
+	int exit_sign = 0;
 	bool isDeadMap = false;
 	bool isExpMax = false;
 	bool pauseGame = false;
@@ -20,20 +20,20 @@ void g_game()
 	PIMAGE p_button_back = newimage();
 	PIMAGE p_button_stop = newimage();
 	getimage(p_button_back, "resource\\g_Exit.png", 0, 0);
-	getimage(p_button_stop, "resource\\g_ctn.png", 0, 0);
-	Button* button_stop = new Button(110, 700, 100, 100, 1, p_button_stop);
+	getimage(p_button_stop, "resource\\g_pause.png", 0, 0);
+	Button* button_stop = new Button(150, 700, 100, 100, 1, p_button_stop);
 	Button* button_back = new Button(300, 700, 100, 100, 2, p_button_back);
 
 	Button::setbutton(0, 650, 520, 200);
-	
-	
+
+
 	newAnimation->animation_add();
-	
+
 
 	Score score;
 	Time time;
 
-	while (restOfLive && !exit_sign)
+	while (restOfLive)
 	{
 		isDeadMap = newMap.g_isDeadMap();
 		//+if(button.exit_inGame())
@@ -42,23 +42,23 @@ void g_game()
 			if (isDeadMap)
 			{
 				g_deleteMap(newMap);
-				Map & newMap= g_makeMap();
+				Map & newMap = g_makeMap();
 				newAnimation->animation_newmap(newMap);
 			}
 			else
 			{
 				/*
-					1.用户点下去
-					2.拖动-播放动画
-					|-不合法
-					|-合法-Map 交换数据(int,int,int,int,Map&)-bool g_checkMap(Map)-
-					|-不可消除-换回数据-播放动画
-					|-可消除-g-P-S-R-
-					*/
+				1.用户点下去
+				2.拖动-播放动画
+				|-不合法
+				|-合法-Map 交换数据(int,int,int,int,Map&)-bool g_checkMap(Map)-
+				|-不可消除-换回数据-播放动画
+				|-可消除-g-P-S-R-
+				*/
 
-				
+
 				//Judge and Disappear loop
-				for (int combo = 1; g_checkMap(newMap) == 1;combo ++)
+				for (int combo = 0; g_checkMap(newMap) == 1; combo++)
 				{
 					int removeNum = 0;
 
@@ -75,19 +75,17 @@ void g_game()
 						continue;
 					}
 
-					newAnimation->animation_fall_add(newMap,score,time,combo);
+					newAnimation->animation_fall_add(newMap, score, time, combo);
 				}
 
 				isDeadMap = newMap.g_isDeadMap();
 				if (!isDeadMap)
 				{
-					time.resumeTime();
-					exit_sign = newAnimation->puanimation(0, 0, Global::x_scr, Global::y_scr, newMap, time);
-					time.pauseTime();
-					 if (exit_sign)
-					 {
-						 break;
-					 }
+					exit_sign = newAnimation->puanimation(519, 52, 519 + 900, 52 + 900, newMap, time);
+					if (exit_sign)
+					{
+						break;
+					}
 				}
 				else
 				{
@@ -113,7 +111,6 @@ void swapPiece(int x1, int y1, int x2, int y2, Map& map)
 //Judge the Map for clearable
 //Judge the whole map
 //Do NOT change the Piece.isClearable
-
 //Origin editor: Jushe
 //GMT+9 2015/7/13 14:30
 //Rewrite by Wafer
@@ -161,7 +158,7 @@ int g_P_S_R(Map& oriMap)
 	return removeNum;
 }
 Map & g_makeMap()
-{	
+{
 	Map *myMap = new Map();
 	Map &newMap = *myMap;
 	//Map newmap;
@@ -180,16 +177,4 @@ void g_replenishMap(Map& oriMap)
 void g_deleteMap(Map& deadMap)
 {
 	delete &deadMap;
-}
-
-//return the score by the cleared number and the combo number
-int g_score(int num, int com)
-{
-	if (num >= 3)
-	{
-		return int(30.0 * pow(1.5, num - 3) * com);
-	}
-	else
-		//it is possible that just clear 2 Piece even 1 piece
-		return 30;
 }
