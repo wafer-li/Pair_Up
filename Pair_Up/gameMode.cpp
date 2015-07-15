@@ -58,7 +58,7 @@ void g_game()
 
 				
 				//Judge and Disappear loop
-				for (int combo = 0; g_checkMap(newMap) == 1;combo ++)
+				for (int combo = 1; g_checkMap(newMap) == 1;combo ++)
 				{
 					int removeNum = 0;
 
