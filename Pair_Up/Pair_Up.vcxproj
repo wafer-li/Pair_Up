@@ -103,12 +103,6 @@
     <ClCompile Include="Time.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="..\..\..\..\Desktop\新建文件夹 (2)\Skin3_Piece_2_0.png" />
-    <Image Include="..\..\..\..\Desktop\新建文件夹 (2)\Skin3_Piece_2_1.png" />
-    <Image Include="..\..\..\..\Desktop\新建文件夹 (2)\Skin3_Piece_2_2.png" />
-    <Image Include="..\..\..\..\Desktop\新建文件夹 (2)\Skin3_Piece_2_3.png" />
-    <Image Include="..\..\..\..\Desktop\新建文件夹 (2)\Skin3_Piece_2_4.png" />
-    <Image Include="..\..\..\..\Desktop\新建文件夹 (2)\Skin3_Piece_2_5.png" />
     <Image Include="resource\BackGround\GameBk1.png" />
     <Image Include="resource\BackGround\GameBk10.png" />
     <Image Include="resource\BackGround\GameBk11.png" />
@@ -180,12 +174,24 @@
     <Image Include="resource\skin1\Skin1_Piece_Clear.png" />
     <Image Include="resource\skin1\Skin1_Piece_Special_1.png" />
     <Image Include="resource\skin1\Skin1_Piece_Special_2.png" />
-    <Image Include="resource\skin2\Skin3_Piece_1_0.png" />
-    <Image Include="resource\skin2\Skin3_Piece_1_1.png" />
-    <Image Include="resource\skin2\Skin3_Piece_1_2.png" />
-    <Image Include="resource\skin2\Skin3_Piece_1_3.png" />
-    <Image Include="resource\skin2\Skin3_Piece_1_4.png" />
-    <Image Include="resource\skin2\Skin3_Piece_1_5.png" />
+    <Image Include="resource\skin2\Skin2_Piece_1_0.png" />
+    <Image Include="resource\skin2\Skin2_Piece_1_1.png" />
+    <Image Include="resource\skin2\Skin2_Piece_1_2.png" />
+    <Image Include="resource\skin2\Skin2_Piece_1_3.png" />
+    <Image Include="resource\skin2\Skin2_Piece_1_4.png" />
+    <Image Include="resource\skin2\Skin2_Piece_1_5.png" />
+    <Image Include="resource\skin2\Skin2_Piece_2_0.png" />
+    <Image Include="resource\skin2\Skin2_Piece_2_1.png" />
+    <Image Include="resource\skin2\Skin2_Piece_2_2.png" />
+    <Image Include="resource\skin2\Skin2_Piece_2_3.png" />
+    <Image Include="resource\skin2\Skin2_Piece_2_4.png" />
+    <Image Include="resource\skin2\Skin2_Piece_2_5.png" />
+    <Image Include="resource\skin2\Skin2_Piece_4_0.png" />
+    <Image Include="resource\skin2\Skin2_Piece_4_1.png" />
+    <Image Include="resource\skin2\Skin2_Piece_4_2.png" />
+    <Image Include="resource\skin2\Skin2_Piece_4_3.png" />
+    <Image Include="resource\skin2\Skin2_Piece_4_4.png" />
+    <Image Include="resource\skin2\Skin2_Piece_4_5.png" />
     <Image Include="resource\skin3\Skin3_Piece_1_0.png" />
     <Image Include="resource\skin3\Skin3_Piece_1_1.png" />
     <Image Include="resource\skin3\Skin3_Piece_1_2.png" />
