@@ -78,7 +78,7 @@ int optionBK(){
 	return mouseCheck;
 }
 int optionSK(){
-	cleardevice;
+	cleardevice();
 	std::stringstream ss;
 	std::string temp;
 	int mouseCheck = 0;
