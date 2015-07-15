@@ -1,14 +1,15 @@
-#include "leaderboardMode.h"
-
 /*judge is the score at the top 10 of the game
 * if it is,write it into leaderboard
 */
 #include "graphics15.h"
+#include "leaderboardMode.h"
+#include "messageBox.h"
 #include <fstream>
 #include <map>
 #include <string>
 #include <sstream>
 #include <utility>
+
 /*judge is the score at the top 10 of the game
 * if it is,write it into leaderboard
 */
@@ -21,7 +22,6 @@ void l_inRanking(int score)
 	std::multimap<int, std::string> rankMap;//get all the score
 	std::string userName;
 	std::string Name;//get user's name
-	char ege_Name[100];//to get ege_name
 	int userScore;
 	std::multimap<int, std::string>::iterator p;
 	if (!rank1.fail())
@@ -36,12 +36,44 @@ void l_inRanking(int score)
 	}
 	rank1.close();
 	p = rankMap.begin();
-	if (rankMap.size() != 0)
+	if (rankMap.size() == 5)
 	{
 		if (score > (p->first))
 		{
-			ege::inputbox_getline("请输入你的名字", "没办法队员对于做漂亮输入框这件事弃疗了/n将就下好了(┬＿┬)↘", ege_Name, 100);
-			Name = ege_Name;
+
+			Name = messageBox();
+			if (Name.length() == 0)// If user close the messageBox
+			{
+				rank1.close();
+				return;
+			}
+			else
+			{
+				rankMap.insert(std::make_pair(score, Name));
+				//begin write the date
+				p = rankMap.begin();
+				rank1.open("\\save\\rankingList.dat", std::ios::out);
+				for (p++; p != rankMap.end(); p++)
+				{
+					userScore = p->first;
+					userName = p->second;
+					rank1 << ' ' << userScore;
+					rank1 << ' ' << userName;
+				}
+			}
+			rank1.close();
+		}
+	}
+	else
+	{
+		Name = messageBox();
+		if (Name.length() == 0)// If user close the messageBox
+		{
+			rank1.close();
+			return;
+		}
+		else
+		{
 			rankMap.insert(std::make_pair(score, Name));
 			//begin write the date
 			rank1.open("\\save\\rankingList.dat", std::ios::out);
@@ -51,26 +83,10 @@ void l_inRanking(int score)
 				userName = p->second;
 				rank1 << ' ' << userScore;
 				rank1 << ' ' << userName;
-			}
-		}
-		rank1.close();
-	}
-	else
-	{
-		ege::inputbox_getline("请输入你的名字", "没办法队员对于做漂亮输入框这件事弃疗了/n将就下好了(┬＿┬)↘", ege_Name, 100);
-		Name = ege_Name;
-		rankMap.insert(std::make_pair(score, Name));
-		//begin write the date
-		rank1.open("\\save\\rankingList.dat", std::ios::out);
-		for (p = rankMap.begin(); p != rankMap.end(); p++)
-		{
-			userScore = p->first;
-			userName = p->second;
-			rank1 << ' ' << userScore;
-			rank1 << ' ' << userName;
 
+			}
+			rank1.close();
 		}
-		rank1.close();
 	}
 }
 
