@@ -71,7 +71,6 @@ int start(void);
 int start(void)
 {	
 	Resource res;
-	flushmouse();
 	int mouseCheck= 0;
 	PIMAGE BK;	 
 	BK = newimage();	
@@ -99,6 +98,7 @@ int start(void)
 	delimage(res.leaderboard_basic);
 	delimage(res.leaderboard_move);
 	delimage(res.leaderboard_press);
+	flushmouse();
 	return mouseCheck;
 	
 }
@@ -122,6 +122,8 @@ int init(void)
 {
 	srand((unsigned)time(0));
 	initgraph(Global::x_scr, Global::x_scr);
+	setfont(-100, -49, "Cute");
+	setbkmode(TRANSPARENT);
 	setrendermode(RENDER_AUTO);
 	//setrendermode(RENDER_MANUAL);
 	//yage_init(Global::x_scr, Global::y_scr);

@@ -68,6 +68,10 @@ void g_game()
 				if (!isDeadMap)
 				{
 					exit_sign = newAnimation->puanimation(0, 0, Global::x_scr, Global::y_scr, newMap, time);
+					if (exit_sign)
+					{
+						break;
+					}
 				}
 				else
 				{
