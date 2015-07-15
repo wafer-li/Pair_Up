@@ -20,11 +20,12 @@ void g_game()
 	newAnimation->animation_add();
 	while (restOfLive){
 		//+if(button.exit_inGame())
-
+		isDeadMap = newMap.g_isDeadMap();
 		if (pauseGame){}
 		else{
 			if (isDeadMap)
 			{
+				restOfLive--;
 				g_deleteMap(newMap);
 				Map newmap = g_makeMap();
 				newAnimation->animation_newmap(newMap);
@@ -58,10 +59,6 @@ void g_game()
 				{
 					exit_sign = newAnimation->puanimation(0, 0, Global::x_scr, Global::y_scr, newMap);
 
-				}
-				else
-				{
-					restOfLive--;
 				}
 
 				//+isExpMax();

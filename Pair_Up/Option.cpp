@@ -7,8 +7,18 @@
 //Background -> GBk3.png
 Option::Option()
 {
-	skin = 1;
-	background = 3;
+	std::string strSK,strBG;
+	std::stringstream ssSK,ssBG;
+	std::ifstream ipSK;
+	std::ifstream ipBG;
+	ipSK.open("OptionSK.txt", std::ios::in);
+	ipBG.open("OptionBG.txt", std::ios::in);
+	ipSK >> strSK;
+	ipBG >> strBG;
+	ssSK << strSK;
+	ssBG << strBG;
+	ssSK >> this->skin;
+	ssBG >> this->background;
 }
 
 Option::~Option()

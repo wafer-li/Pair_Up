@@ -1,96 +1,147 @@
 #include"button.h"
-int Button::x[10] = {0};
-int Button::y[10] = { 0 };
-int Button::w[10] = { 0 };
-int Button::h[10] = { 0 };
-int Button::R[10] = { 0 };
-int Button:: i = 0;
-PIMAGE Button::P[10] = { NULL }; 
-PIMAGE Button::P2[10] = { NULL};
-PIMAGE Button::P3[10] = { NULL };
+int Button::button_x[20] = {0};
+int Button::button_y[20] = { 0 };
+int Button::button_w[20] = { 0 };
+int Button::button_h[20] = { 0 };
+int Button::button_R[20] = { 0 };
+int Button:: button_i = 0;
+PIMAGE Button::button_P[20] = { NULL }; 
+PIMAGE Button::button_P2[20] = { NULL};
+PIMAGE Button::button_P3[20] = { NULL };
+PIMAGE Button::button_RP =  NULL ;
+PIMAGE Button::button_allP = { NULL };
+PIMAGE Button::button_M[20] = { NULL };
+PIMAGE Button::button_O[20] = { NULL };
 Button::Button(int startx, int starty, int wide, int high, int Return, PIMAGE p, PIMAGE p2, PIMAGE p3) //ÆðÊ¼µãµÄºá×ø±ê ×Ý×ø±ê ¿í¶È ¸ß¶È ³£Ì¬Í¼ Ñ¡ÖÐÍ¼ µã»÷Í¼
 {
-	x[i] = startx;
-	y[i] = starty;
-	R[i] = Return;
-	w[i] = wide;
-	h[i] = high;
-	P[i] = p;
-	P2[i] = p2;
-	P3[i] = p3;
-	i++;
+	button_x[button_i] = startx;
+	button_y[button_i] = starty;
+	button_R[button_i] = Return;
+	button_w[button_i] = wide;
+	button_h[button_i] = high;
+	button_P[button_i] = p;
+	button_P2[button_i] = p2;
+	button_P3[button_i] = p3;
+	if (button_i == 0)
+	{
+		button_RP = newimage();
+		getimage(button_RP, Global::x_0, Global::y_0, Global::x_scr, Global::y_scr);
+	}
+	button_i++;
+	//putimage_transparent(NULL, p, startx, starty, BLACK);
+
+
+}
+Button::Button(int startx, int starty, int wide, int high, int Return, PIMAGE p) //ÆðÊ¼µãµÄºá×ø±ê ×Ý×ø±ê ¿í¶È ¸ß¶È ³£Ì¬Í¼ Ñ¡ÖÐÍ¼ µã»÷Í¼
+{
+	button_x[button_i] = startx;
+	button_y[button_i] = starty;
+	button_R[button_i] = Return;
+	button_w[button_i] = wide;
+	button_h[button_i] = high;
+	button_P[button_i] = p;
+	button_P2[button_i] = p;
+	button_P3[button_i] = p;
+	if (button_i == 0)
+	{
+		button_RP = newimage();
+		getimage(button_RP, Global::x_0, Global::y_0, Global::x_scr, Global::y_scr);
+	}
+	button_i++;
 	//putimage_transparent(NULL, p, startx, starty, BLACK);
 
 
 }
 Button::~Button()
 {
-	i--;
+	int j = 0;
+	for (j = 0; j < 20; j++)
+	{
+		button_x[j] = 0;
+		button_y[j] = 0;
+		button_w[j] = 0;
+		button_h[j] = 0;
+		button_R[j] = 0;
+	}
+	button_i--;
 	
 }
-int Button::pubutton(int aa,int bb,int cc,int dd,PIMAGE BK)//Ö´ÐÐº¯ÊýµÄ·¶Î§ÆðÊ¼µãX,Y,¿í¶È£¬¸ß¶È£¬Ö´ÐÐÇ°µÄ½ØÍ¼
+int Button::setbutton(int startx, int starty, int wide, int high)//Ö´ÐÐº¯ÊýµÄ·¶Î§ÆðÊ¼µãX,Y,¿í¶È£¬¸ß¶È,     /*±¾º¯Êý½«°´Å¥ÈýÌ¬Í¼ÕûºÏµ½±³¾°ÉÏ²¢ÖØÐÂ±£´æÍ¼Æ¬ÒÔ¼õÉÙÊä³öÍ¼Æ¬µÄ´ÎÊý*/
 {
 	int k = 0;
 	int nn = 0;
 	int uu = 0;
-	mouse_msg a;
-	PIMAGE q = BK;
-	
-	PIMAGE dd_ = newimage();
-	getimage(dd_, "resource\\init.png", 0, 0);
-	PIMAGE M_[4];
-	PIMAGE O_[4];
-	
-	putimage(0, 0, BK);
-	for (nn = 0; nn <i; nn++)
+
+	putimage(startx, starty, wide, high, button_RP, startx,starty);      //Êä³ö°´Å¥Ö´ÐÐÇøÓòÔ­Í¼
+	 button_allP = newimage();
+
+
+
+	for (nn = 0; nn <button_i; nn++)                          //½«Ñ¡ÖÐÌ¬ºÍ°´ÏÂÌ¬ÕûºÏµ½Ô­Í¼ÉÏÖØÐÂ±£´æ
 	{
-		M_[nn] = newimage();
-		O_[nn] = newimage();
-		getimage(M_[nn],0,0,1476,1016);
-		getimage(O_[nn], 0, 0, 1476, 1016);
-		
-		for (uu = 0; uu <i; uu++){
+		button_M[nn] = newimage();
+		button_O[nn] = newimage();
+		getimage(button_M[nn], startx, starty, wide, high);
+		getimage(button_O[nn], startx, starty, wide, high);
+
+		for (uu = 0; uu <button_i; uu++){
 			if (uu != nn){
-				putimage_transparent(M_[nn], P[uu], x[uu], y[uu], BLACK);
-				putimage_transparent(O_[nn], P[uu], x[uu], y[uu], BLACK);
+				putimage_transparent(button_M[nn], button_P[uu], button_x[uu], button_y[uu], BLACK);
+				putimage_transparent(button_O[nn], button_P[uu], button_x[uu], button_y[uu], BLACK);
 			}
-			
+
 		}
-		putimage_transparent(M_[nn], P2[nn], x[nn], y[nn], BLACK);
-		putimage_transparent(O_[nn], P3[nn], x[nn], y[nn], BLACK);
+		putimage_transparent(button_M[nn], button_P2[nn], button_x[nn], button_y[nn], BLACK);
+		putimage_transparent(button_O[nn], button_P3[nn], button_x[nn], button_y[nn], BLACK);
+
 
 	}
 
-	for (nn = 0; nn < i; nn++)
-	{
-		putimage_transparent(NULL, P[nn], x[nn], y[nn], BLACK);
+	for (nn = 0; nn < button_i; nn++)
+	{ 
+		putimage_transparent(NULL, button_P[nn], button_x[nn], button_y[nn], BLACK);           //½«³£Ì¬Êä³öµ½±³¾°ÉÏ
 	}
 
-	getimage(dd_, 0,0,1476,1016);
+	getimage(button_allP, startx, starty, wide, high);                   //½«³£Ì¬Í¼±£´æ
+
+	return 0;
+}
+int Button::pubutton(int startx, int starty, int wide, int high)//Ö´ÐÐº¯ÊýµÄ·¶Î§ÆðÊ¼µãX,Y,¿í¶È£¬¸ß¶È
+{
+	int k = 0;
+	int nn = 0;
+	int uu = 0;
+	mouse_msg mouse;
 	
+	flushmouse();
 	for (;;)
 	
 	{
 
-		a = getmouse();
-		putimage(0, 0, dd_);
+		mouse = getmouse();
 		
-		if (!(a.x <= cc&&a.x >= aa&&a.y <= dd&&a.y >= bb))break;//Êó±ê·¶Î§ÅÐ¶Ï
+		putimage(startx, starty, button_allP);
+		
+		if (!((mouse.x <= (startx + wide)) && (mouse.x >= startx) && (mouse.y <= (starty + high)) && (mouse.y >= starty)))
+		{
+			putimage(startx, starty, button_allP);
+			break;//Êó±ê·¶Î§²»ÔÚÖ´ÐÐÇøÓòÊ±ÍË³ö
+		}
 		for (nn = 0; nn < 10&&(k==0); nn++){
 
-			if (a.x <= x[nn] + w[nn] && a.x >= x[nn] && a.y <= y[nn] + h[nn] && a.y >= y[nn]){
+			if (mouse.x <= button_x[nn] + button_w[nn] && mouse.x >= button_x[nn] && mouse.y <= button_y[nn] + button_h[nn] && mouse.y >= button_y[nn]){
 				
-				putimage(0, 0, M_[nn]);
+				putimage(startx, starty, button_M[nn]);
 				
 			//°´Å¥Ñ¡ÖÐ×´Ì¬
 				//playmusic(A);   Ñ¡ÖÐÐ§¹ûÒô
 			}
 		}
 
-		if (a.is_left())k++;
+		if (mouse.is_left())k++;
 		for ( nn = 0; nn< 10 &&( k == 1); nn++){
-			if (a.x <= x[nn] + w[nn] && a.x >= x[nn] && a.y <= y[nn] + h[nn] && a.y >= y[nn]){
-				putimage(0, 0, O_[nn]);
+			if (mouse.x <= button_x[nn] + button_w[nn] && mouse.x >= button_x[nn] && mouse.y <= button_y[nn] + button_h[nn] &&mouse.y >= button_y[nn]){
+				putimage(startx, starty, button_O[nn]);
 				//°´Å¥°´ÏÂ×´Ì¬
 				
 			}
@@ -98,18 +149,12 @@ int Button::pubutton(int aa,int bb,int cc,int dd,PIMAGE BK)//Ö´ÐÐº¯ÊýµÄ·¶Î§ÆðÊ¼µ
 		if (k==2){
 			for ( nn = 0; nn < 10; nn++){
 				
-				if (a.x <= x[nn] + w[nn] && a.x >= x[nn] && a.y <= y[nn] + h[nn] && a.y >= y[nn])
+				if (mouse.x <= button_x[nn] + button_w[nn] && mouse.x >= button_x[nn] && mouse.y <= button_y[nn] + button_h[nn] && mouse.y >= button_y[nn])
 				{// playmusic(B); °´¼üÐ§¹ûÒô
-					for (uu = 0; uu < i; uu++)
-					{
-						delimage(M_[uu]);
-						delimage(O_[uu]);
-
-					}
-					delimage(dd_);
+					
 					
 
-					return R[nn];//ËÉ¿ª°´Å¥ºó·µ»ØÖµ
+					return button_R[nn];//ËÉ¿ª°´Å¥ºó·µ»ØÖµ
 				}
 			}
 			return 0;
@@ -118,5 +163,69 @@ int Button::pubutton(int aa,int bb,int cc,int dd,PIMAGE BK)//Ö´ÐÐº¯ÊýµÄ·¶Î§ÆðÊ¼µ
 		
 	}
 	
+	return 0;
+}
+int Button::pubutton(int startx, int starty, int wide, int high,int rectangle_)//Ö´ÐÐº¯ÊýµÄ·¶Î§ÆðÊ¼µãX,Y,¿í¶È£¬¸ß¶È
+{
+	int k = 0;
+	int nn = 0;
+	int uu = 0;
+	mouse_msg mouse;
+	setcolor(WHITE);
+	flushmouse();
+	for (;;)
+
+	{
+
+		mouse = getmouse();
+		putimage(startx, starty, button_allP);
+
+		if (!((mouse.x <= (startx + wide)) && (mouse.x >= startx) && (mouse.y <= (starty + high)) && (mouse.y >= starty)))
+		{
+			putimage(startx, starty, button_allP);
+			break;//Êó±ê·¶Î§²»ÔÚÖ´ÐÐÇøÓòÊ±ÍË³ö
+		}
+		for (nn = 0; nn < 10 && (k == 0); nn++){
+
+			if (mouse.x <= button_x[nn] + button_w[nn] && mouse.x >= button_x[nn] && mouse.y <= button_y[nn] + button_h[nn] && mouse.y >= button_y[nn]){
+
+				putimage(startx, starty, button_M[nn]);
+				rectangle(button_x[nn], button_y[nn], button_x[nn] + button_w[nn], button_y[nn] + button_h[nn]);
+				//°´Å¥Ñ¡ÖÐ×´Ì¬
+				//playmusic(A);   Ñ¡ÖÐÐ§¹ûÒô
+			}
+		}
+
+		if (mouse.is_left())k++;
+		for (nn = 0; nn< 10 && (k == 1); nn++){
+			if (mouse.x <= button_x[nn] + button_w[nn] && mouse.x >= button_x[nn] && mouse.y <= button_y[nn] + button_h[nn] && mouse.y >= button_y[nn]){
+				putimage(startx, starty, button_O[nn]);
+				rectangle(button_x[nn], button_y[nn], button_x[nn] + button_w[nn], button_y[nn] + button_h[nn]);
+				//°´Å¥°´ÏÂ×´Ì¬
+
+			}
+		}
+		if (k == 2){
+			for (nn = 0; nn < 10; nn++){
+
+				if (mouse.x <= button_x[nn] + button_w[nn] && mouse.x >= button_x[nn] && mouse.y <= button_y[nn] + button_h[nn] && mouse.y >= button_y[nn])
+				{// playmusic(B); °´¼üÐ§¹ûÒô
+					for (uu = 0; uu < button_i; uu++)
+					{
+						
+
+					}
+				
+
+
+					return button_R[nn];//ËÉ¿ª°´Å¥ºó·µ»ØÖµ
+				}
+			}
+			return 0;
+			k = 0;
+		}
+
+	}
+
 	return 0;
 }

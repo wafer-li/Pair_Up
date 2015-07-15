@@ -22,6 +22,6 @@ public:
 	PIMAGE leaderboard_move;
 	PIMAGE leaderboard_press;
 
-	PIMAGE BK;
+
 };
 
