@@ -198,6 +198,12 @@
     <Image Include="resource\skin2\Skin3_Piece_3_3.png" />
     <Image Include="resource\skin2\Skin3_Piece_3_4.png" />
     <Image Include="resource\skin2\Skin3_Piece_3_5.png" />
+    <Image Include="resource\skin2\Skin3_Piece_5_0.png" />
+    <Image Include="resource\skin2\Skin3_Piece_5_1.png" />
+    <Image Include="resource\skin2\Skin3_Piece_5_2.png" />
+    <Image Include="resource\skin2\Skin3_Piece_5_3.png" />
+    <Image Include="resource\skin2\Skin3_Piece_5_4.png" />
+    <Image Include="resource\skin2\Skin3_Piece_5_5.png" />
     <Image Include="resource\skin3\Skin3_Piece_1_0.png" />
     <Image Include="resource\skin3\Skin3_Piece_1_1.png" />
     <Image Include="resource\skin3\Skin3_Piece_1_2.png" />
