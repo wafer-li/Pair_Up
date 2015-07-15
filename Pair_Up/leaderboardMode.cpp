@@ -18,7 +18,7 @@
 void l_inRanking(int score)
 {
 	std::fstream rank1;
-	rank1.open("\\save\\rankingList.dat", std::ios::in);
+	rank1.open("save\\rankingList.dat", std::ios::in);
 	std::multimap<int, std::string> rankMap;//get all the score
 	std::string userName;
 	std::string Name;//get user's name
@@ -52,7 +52,7 @@ void l_inRanking(int score)
 				rankMap.insert(std::make_pair(score, Name));
 				//begin write the date
 				p = rankMap.begin();
-				rank1.open("\\save\\rankingList.dat", std::ios::out);
+				rank1.open("save\\rankingList.dat", std::ios::out);
 				for (p++; p != rankMap.end(); p++)
 				{
 					userScore = p->first;
@@ -76,7 +76,7 @@ void l_inRanking(int score)
 		{
 			rankMap.insert(std::make_pair(score, Name));
 			//begin write the date
-			rank1.open("\\save\\rankingList.dat", std::ios::out);
+			rank1.open("save\\rankingList.dat", std::ios::out);
 			for (p = rankMap.begin(); p != rankMap.end(); p++)
 			{
 				userScore = p->first;
@@ -98,15 +98,15 @@ void l_leaderboard()
 {
 	//界面初始化
 	PIMAGE image0 = newimage();
-	getimage(image0, "\\resource\\PairupLeader.jpg", 0, 0);
+	getimage(image0, "resource\\PairupLeader.jpg", 0, 0);
 	putimage(0, 0, image0);
 	setbkmode(TRANSPARENT);
-	setfont(-100, -49, "Kingdom Hearts");
+	//setfont(-100, -49, "Kingdom Hearts");
 	setcolor(EGERGB(255, 0, 0));
 	delay_ms(0);
 	/********************************************/
 	std::fstream rank2;
-	rank2.open("\\save\\rankingList.dat", std::ios::in);
+	rank2.open("save\\rankingList.dat", std::ios::in);
 	std::string userName;
 	int userScore;
 	std::string name;//username for UI

@@ -3,6 +3,8 @@
 //gameMode entrance
 void g_game()
 {
+	setfont(-40, -20, "Cute");
+	setbkmode(TRANSPARENT);
 	//partial variable
 	//Piece.type means basic elements of piece
 	//Piece.specType means special piece 
@@ -15,7 +17,19 @@ void g_game()
 	Option option;
 	Map & newMap = g_makeMap();
 	Animation* newAnimation = new Animation(option, newMap);
+	PIMAGE p_button_back = newimage();
+	PIMAGE p_button_stop = newimage();
+	getimage(p_button_back, "resource\\skin3\\Skin3_Piece_Special_1.png", 0, 0);
+	getimage(p_button_stop, "resource\\skin3\\Skin3_Piece_Special_2.png", 0, 0);
+	Button* button_stop = new Button(150, 700, 100, 100, 1, p_button_stop);
+	Button* button_back = new Button(300, 700, 100, 100, 2, p_button_back);
+
+	Button::setbutton(0, 650, 520, 200);
+	
+	
 	newAnimation->animation_add();
+	
+
 	Score score;
 	Time time;
 
@@ -67,7 +81,7 @@ void g_game()
 				isDeadMap = newMap.g_isDeadMap();
 				if (!isDeadMap)
 				{
-					 exit_sign = newAnimation->puanimation(0, 0, Global::x_scr, Global::y_scr, newMap,time);
+					 exit_sign = newAnimation->puanimation(519, 52, 519+900, 52+900,newMap,time);
 					 if (exit_sign)
 					 {
 						 break;

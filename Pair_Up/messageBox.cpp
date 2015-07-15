@@ -3,10 +3,10 @@
 std::string messageBox()
 {
 	PIMAGE im_input = newimage();
-	getimage(im_input, "\\resource\\InputBox.png", 0, 0);
+	getimage(im_input, "resource\\InputBox.png", 0, 0);
 	putimage(492, 338, im_input);
 	setbkmode(TRANSPARENT);
-	setfont(-36, -20, "Kingdom Hearts");
+    setfont(-36, -20, "Kingdom Hearts");
 	setcolor(EGERGB(0, 0, 0));
 	key_msg keyboard;
 	mouse_msg mouse;

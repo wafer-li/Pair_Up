@@ -7,8 +7,8 @@
 //Background -> GBk3.png
 Option::Option()
 {
-	skin = 1;
-	background = 3;
+	skin = 3;
+	background = 7;
 }
 
 Option::~Option()

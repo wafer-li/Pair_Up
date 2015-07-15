@@ -46,8 +46,8 @@ Animation::Animation(Option opt, Map map)
 	game_start = newimage();
 	game_stop = newimage();
 	getimage(game_stop, "resource\\BK.png", 0, 0);
-	getimage(game_start, "resource\\newGame.png", 0, 0);
-	getimage(game_exit, "resource\\exit.png", 0, 0);
+	getimage(game_start, "resource\\skin1\\Skin1_Piece_Special_2.png", 0, 0);
+	getimage(game_exit, "resource\\skin3\\Skin3_Piece_Special_2.png", 0, 0);
 	//加载6*5=30张皮肤 (6种方块每个有5种特殊方块）
 
 	//////////////////////////////确定每个方块的参数//////////////////////////////
@@ -103,7 +103,7 @@ int Animation::puanimation(int startx, int starty, int wide, int high, Map&oriMa
 	int disappear = 0;    //r用于是否产生消除判断
 	mouse_msg _a;   //鼠标信息机构体
 	int left = 0;     //存储鼠标左键信息数
-
+	int buttonr = 0;
 	PIMAGE BK_ = newimage();
 	getimage(BK_, x[0][0], y[0][0], Global::x_piece * 9, Global::y_piece*9);//保存进行用户操作前的游戏状态图片
 	int clock;
@@ -124,15 +124,21 @@ int Animation::puanimation(int startx, int starty, int wide, int high, Map&oriMa
 		}
 		for (; !mousemsg();)
 		{
-			putimage(0, 0,500,500,BG, 0, 0);
+			putimage(0, 200, 450, 100, BG, 0, 200);
 			clock = time.getRemainTime();
-			xyprintf(10, 10, "%d",clock);
+			xyprintf(70, 200, "Remain Time:%d",clock);       //鼠标不动时时间变动
 			if (clock <= 0){
 				flushmouse();
 				return 1;
 			}
 		}
 		_a = getmouse();
+		if (mousemsg()){
+			putimage(0, 200, 450, 100, BG, 0, 200);
+			clock = time.getRemainTime();
+			xyprintf(70, 200, "Remain Time:%d", clock);          //鼠标动时时间变动一次
+		}
+	
 		putimage(x[0][0], y[0][0], BK_);                //输出初始图片进行绘图（主要实现方框功能）
 		
 		
@@ -140,7 +146,15 @@ int Animation::puanimation(int startx, int starty, int wide, int high, Map&oriMa
 		if (!((_a.x <= (startx + wide)) && (_a.x >= startx)&&(_a.y <= (starty + high)) && (_a.y >= starty)))
 		{
 			
-			if (Button::pubutton(0, 0, x[0][0], Global::y_scr) == 1)this->animation_stop();
+			buttonr = Button::pubutton(0, 650, 520, 200,time,BG);
+			if (buttonr == 2)
+			{
+				time.pauseTime();
+				buttonr=this->animation_stop();
+				time.resumeTime();
+		
+			}
+				if (buttonr == 1)return buttonr;
 			                               //鼠标移出游戏区进入按键区
 		}
 		if (_a.is_left())left++;                           // 鼠标左键信息数
@@ -204,11 +218,20 @@ int Animation::animation_change(int i1, int n1, int startx, int starty, int wide
 	{
 		for (; !mousemsg();)
 		{
-			putimage(0, 0, 500, 500, BG, 0, 0);
+			putimage(0, 200, 450, 100, BG, 0, 200);
 			clock = time.getRemainTime();
-			xyprintf(10, 10, "%d", clock);
+			xyprintf(70, 200, "Remain Time:%d", clock);      //鼠标不动时时间变动
+			if (clock <= 0){
+				flushmouse();
+				return 1;
+			}
 		}
 		_a = getmouse();
+		if (mousemsg()){
+			putimage(0, 200, 450, 100, BG, 0, 200); 
+			clock = time.getRemainTime();
+			xyprintf(70, 200, "Remain Time:%d", clock);          //鼠标动时时间变动一次
+		}
 		if (!((_a.x <= (startx + wide)) && (_a.x >= startx) && (_a.y <= (starty + high)) && (_a.y >= starty)))  //鼠标是否在游戏区域范围
 		{
 			break;
@@ -539,11 +562,25 @@ int Animation::animation_click(int i1, int n1, Map&oriMap,Time&time)            
 	{
 		for (; !mousemsg();)
 		{
-			putimage(0, 0, 500, 500, BG, 0, 0);
+			putimage(0, 200, 450, 100, BG, 0, 200);
 			clock = time.getRemainTime();
-			xyprintf(10, 10, "%d", clock);
+			xyprintf(70, 200, "Remain Time:%d", clock); //鼠标不动时间变动
+			if (clock <= 0){
+				flushmouse();
+				return 1;
+			}
 		}
 		a_ = getmouse();
+		if (mousemsg()){
+			putimage(0, 200, 450, 100, BG, 0, 200);        //鼠标动时时间变动一次
+			clock = time.getRemainTime();
+			xyprintf(70, 200, "Remain Time:%d", clock);
+		}
+		if (mousemsg()){
+			putimage(0, 200, 450, 100, BG, 0, 200);
+			clock = time.getRemainTime();
+			xyprintf(70, 200, "Remain Time:%d", clock);
+		}
 		if (a_.is_left())left++;
 
 		for (i_ = 0; i_ < 9 && (left == 0);i_++)      //鼠标没点击时画框
@@ -632,9 +669,9 @@ int Animation::animation_fall_add(Map&oriMap,Score& score,Time& time)
 
 	}
 	//////////////////////////分数改变//////////////////////////////
-	putimage(0, 300, 500, 500, BG, 0, 300);
-	xyprintf(0, 500, "%d/%d", score.getScore(), score.getPassScore());
-	xyprintf(0, 600, "level %d", score.getLevel());
+	putimage(0, 400, 450, 300, BG, 0, 400);
+	xyprintf(70, 400, "%d/%d", score.getScore(), score.getPassScore());
+	xyprintf(70, 450, "level %d", score.getLevel());
 
 	/////////////////////////////播放动画///////////////////////////
 
@@ -699,10 +736,17 @@ int Animation::animation_stop()
 
 		setcolor(WHITE);
 
-		if (_a.x <= 500 && _a.x >= 200 && _a.y <= 500 && _a.y >= 200)  //判断鼠标当前所在方块
+		if (_a.x <= (Global::x_scr / 2) - 300 && _a.x >= (Global::x_scr / 2) - 400 && _a.y <= (Global::y_scr / 2)+100 && _a.y >= (Global::y_scr / 2))  //判断鼠标当前所在方块
 		{
 
-			rectangle(500, 500, 200, 200);
+			rectangle((Global::x_scr / 2) - 400, (Global::y_scr / 2), (Global::x_scr / 2) - 300, (Global::y_scr / 2)+100);
+
+
+		}
+		if (_a.x <= (Global::x_scr / 2) +100 && _a.x >= (Global::x_scr / 2)  && _a.y <= (Global::y_scr / 2) + 100 && _a.y >= (Global::y_scr / 2))  //判断鼠标当前所在方块
+		{
+
+			rectangle((Global::x_scr / 2), (Global::y_scr / 2), (Global::x_scr / 2)+100, (Global::y_scr / 2) + 100);
 
 
 		}
@@ -713,16 +757,27 @@ int Animation::animation_stop()
 				setcolor(WHITE);
 				if (left == 2)
 				{
-					if (_a.x <= 500 && _a.x >= 200 && _a.y <= 500 && _a.y >= 200)
+					if (_a.x <= (Global::x_scr / 2) - 300 && _a.x >= (Global::x_scr / 2) - 400 && _a.y <= (Global::y_scr / 2) + 100 && _a.y >= (Global::y_scr / 2))  //判断鼠标当前所在方块
 					{
-						rectangle(500, 500, 200, 200);
+
+						left = 1;
+
+						
+
+						break;
+					}
+					if (_a.x <= (Global::x_scr / 2) + 100 && _a.x >= (Global::x_scr / 2) && _a.y <= (Global::y_scr / 2) + 100 && _a.y >= (Global::y_scr / 2))  //判断鼠标当前所在方块
+					{
+
+						left = 0;
 
 
-						//重置左键信息
+				
 						break;
 					}
 
-					left = 0;
+
+					left = 0;//重置左键信息
 				}
 
 
