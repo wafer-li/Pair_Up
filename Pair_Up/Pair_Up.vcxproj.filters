@@ -28,6 +28,9 @@
     <Filter Include="头文件\test">
       <UniqueIdentifier>{b0ee5feb-5605-45fe-95e1-578bb2b5f48e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="资源文件\Skin 2">
+      <UniqueIdentifier>{fbf5ce97-2565-4099-a683-909479201432}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Map.h">
@@ -457,10 +460,23 @@
     <Image Include="resource\g_ctn.png">
       <Filter>资源文件</Filter>
     </Image>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="save\rankingList.dat">
-      <Filter>资源文件</Filter>
-    </None>
+    <Image Include="..\..\..\..\Desktop\新建文件夹 (2)\Skin3_Piece_2_5.png">
+      <Filter>资源文件\Skin 2</Filter>
+    </Image>
+    <Image Include="..\..\..\..\Desktop\新建文件夹 (2)\Skin3_Piece_2_0.png">
+      <Filter>资源文件\Skin 2</Filter>
+    </Image>
+    <Image Include="..\..\..\..\Desktop\新建文件夹 (2)\Skin3_Piece_2_1.png">
+      <Filter>资源文件\Skin 2</Filter>
+    </Image>
+    <Image Include="..\..\..\..\Desktop\新建文件夹 (2)\Skin3_Piece_2_2.png">
+      <Filter>资源文件\Skin 2</Filter>
+    </Image>
+    <Image Include="..\..\..\..\Desktop\新建文件夹 (2)\Skin3_Piece_2_3.png">
+      <Filter>资源文件\Skin 2</Filter>
+    </Image>
+    <Image Include="..\..\..\..\Desktop\新建文件夹 (2)\Skin3_Piece_2_4.png">
+      <Filter>资源文件\Skin 2</Filter>
+    </Image>
   </ItemGroup>
 </Project>

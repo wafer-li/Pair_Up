@@ -103,6 +103,12 @@
     <ClCompile Include="Time.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="..\..\..\..\Desktop\新建文件夹 (2)\Skin3_Piece_2_0.png" />
+    <Image Include="..\..\..\..\Desktop\新建文件夹 (2)\Skin3_Piece_2_1.png" />
+    <Image Include="..\..\..\..\Desktop\新建文件夹 (2)\Skin3_Piece_2_2.png" />
+    <Image Include="..\..\..\..\Desktop\新建文件夹 (2)\Skin3_Piece_2_3.png" />
+    <Image Include="..\..\..\..\Desktop\新建文件夹 (2)\Skin3_Piece_2_4.png" />
+    <Image Include="..\..\..\..\Desktop\新建文件夹 (2)\Skin3_Piece_2_5.png" />
     <Image Include="resource\BackGround\GameBk1.png" />
     <Image Include="resource\BackGround\GameBk10.png" />
     <Image Include="resource\BackGround\GameBk11.png" />
@@ -213,9 +219,6 @@
     <Image Include="resource\skin3\Skin3_Piece_Clear.png" />
     <Image Include="resource\skin3\Skin3_Piece_Special_1.png" />
     <Image Include="resource\skin3\Skin3_Piece_Special_2.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="save\rankingList.dat" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
