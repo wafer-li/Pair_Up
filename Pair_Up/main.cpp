@@ -44,12 +44,6 @@
 #include"Animation.h"
 #include "gameMode.h"
 #include "optionMode.h"
-
-//define NDEBUG
-#ifndef NDEBUG
-#include"test.h"
-#endif
-
 //接口函数列表
 //g_makeMap();
 //g_isDead();
@@ -72,14 +66,15 @@ int start(void);
 int start(void)
 {	
 	Resource res;
-	flushmouse();
 	int mouseCheck= 0;
-
+	putimage(0, 0, res.BK);
 	Button *button_menu = new Button(800, 400, 640, 120, 1, res.newGameButton_basic, res.newGameButton_move, res.newGameButton_press);
 	Button *button_menu2 = new Button(800, 521, 640, 120, 2, res.leaderboard_basic, res.leaderboard_move, res.leaderboard_press);
 	Button *button_menu3 = new Button(800, 642, 640, 120, 3, res.optionButton_basic,res.optionButton_move, res.optionButton_press);	
 	Button *button_menu4 = new Button(800, 763, 640, 120, 4, res.exitButton_basic, res.exitButton_move,res.exitButton_press);
-	mouseCheck = Button::pubutton(0, 0, 1476, 1016, res.BK);
+	
+	Button::setbutton(0, 0, 1476, 1016);
+	mouseCheck = Button::pubutton(0, 0, 1476, 1016, 1);
 
 	delete(button_menu);
 	delete(button_menu2);
@@ -95,18 +90,18 @@ int start(void)
 	delimage(res.leaderboard_basic);
 	delimage(res.leaderboard_move);
 	delimage(res.leaderboard_press);
+	flushmouse();
 	return mouseCheck;
 	
 }
 
 //Main Function
-int main(void)
+int main(int argc, char*argv[])
 {
 	int condition = 1;
 	init();
 	while (condition)
 	{
-		//ResourceIn();//在DUBUG模式下启用这行禁用下行会检查当前图片输入序列
 	condition = meun(start());
 	}
 	//yage_quit();
@@ -118,6 +113,8 @@ int init(void)
 {
 	srand((unsigned)time(0));
 	initgraph(Global::x_scr, Global::x_scr);
+	setfont(-100, -49, "Cute");
+	setbkmode(TRANSPARENT);
 	setrendermode(RENDER_AUTO);
 	//setrendermode(RENDER_MANUAL);
 	//yage_init(Global::x_scr, Global::y_scr);

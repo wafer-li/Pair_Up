@@ -1,27 +1,32 @@
 #include"Animation.h"
-
+#include"gameMode.h"
+#include<string>
+#include<sstream>
 Animation::Animation(void)  //测试用
 {
 
+
 }
-Animation::Animation(Option opt,Map map)
+Animation::Animation(Option opt, Map map)
 {
-	int k_ = 0, i_ = 0, n_ = 0;
-
-	std::string temp;
-	std::stringstream ss;
-
-	/////////////////////////////初始化各种类型素材图片////////////////////////////////	
-	BG = newimage();
-	DP = newimage();
+	int j_ = 0, i_ = 0, n_ = 0;
 	
-	for (int i = 0; i != 6; ++i){
-		for (int j = 0; j != 6; ++j)
+	std::stringstream ss;
+	std::string temp;
+
+	/////////////////////////////初始化各种类型素材图片////////////////////////////////
+	
+
+	
+	BG = newimage();
+	PIECE_D = newimage();
+	for ( i_ = 0; i_ != 6; ++i_){
+		for (j_ = 0; j_ != 6; ++j_)
 		{
-			TYPEALL[i][j] = newimage();
-			ss << "resource\\skin" << opt.getSkin() << "\\Skin" << opt.getSkin() << "_Piece_" << i + 1 << "_" << j << ".png";
+			TYPE[i_][j_] = newimage();
+			ss << "resource\\skin" << opt.getSkin() << "\\Skin" << opt.getSkin() << "_Piece_" << i_ + 1 << "_" << j_ << ".png";
 			ss >> temp;
-			getimage(TYPEALL[i][j], temp.c_str(), 0, 0);
+			getimage(TYPE[i_][j_], temp.c_str(), 0, 0);
 			ss.clear();
 		}
 	}
@@ -29,276 +34,306 @@ Animation::Animation(Option opt,Map map)
 	//ss << "resource\\skin" << opt.getSkin() << "\\Skin" << opt.getSkin() << "_Piece_Special_" << opt.getSkin() << ".png";
 	ss << "resource\\skin" << opt.getSkin() << "\\Skin" << opt.getSkin() << "_Piece_Clear.png";
 	ss >> temp;
-	getimage(DP, temp.c_str(), 0, 0);
+	getimage(PIECE_D, temp.c_str(), 0, 0);
 	ss.clear();
 	ss << "resource\\BackGround\\GameBk" << opt.getBackground() << ".png";
 	ss >> temp;
 	getimage(BG, temp.c_str(), 0, 0);
 	ss.clear();
 
-
-	
-
+	//////////////////////////////////////////加载暂停图片////////////////////////////
+	game_exit = newimage();
+	game_start = newimage();
+	game_stop = newimage();
+	getimage(game_stop, "resource\\BK.png", 0, 0);
+	getimage(game_start, "resource\\newGame.png", 0, 0);
+	getimage(game_exit, "resource\\exit.png", 0, 0);
 	//加载6*5=30张皮肤 (6种方块每个有5种特殊方块）
-	
+
 	//////////////////////////////确定每个方块的参数//////////////////////////////
 	w = Global::x_piece;
 	h = Global::y_piece;
 	for (i_ = 0; i_ < 9; i_++)
-	for (n_ = 0; n_ < 9; n_++)
-	{
-		if (map.getMaplists()[n_][8 - i_].getSpecType() != 0)
+		for (n_ = 0; n_ < 9; n_++)
 		{
-			//P[i_][n_] = STYPE[(map.getMaplists()[n_][8 - i_].getType()) - 1][(map.getMaplists()[n_][8 - i_].getSpecType())-1 ];
-			P[i_][n_] = TYPEALL[(map.getMaplists()[n_][8 - i_].getType()) - 1][(map.getMaplists()[n_][8 - i_].getSpecType())];
+			if (map.getMaplists()[n_][8 - i_].getSpecType() != 0)
+			{
+				//P[i_][n_] = STYPE[(map.getMaplists()[n_][8 - i_].getType()) - 1][(map.getMaplists()[n_][8 - i_].getSpecType())-1 ];
+				PIECE[i_][n_] = TYPE[(map.getMaplists()[n_][8 - i_].getType()) - 1][(map.getMaplists()[n_][8 - i_].getSpecType())];
+			}
+			else {
+				//P[i_][n_] = TYPE[(map.getMaplists()[n_][8 - i_].getType()) - 1];
+				PIECE[i_][n_] = TYPE[(map.getMaplists()[n_][8 - i_].getType()) - 1][0];
+			}
+			x[i_][n_] = Global::x_map_LT + w*n_;
+			y[i_][n_] = Global::y_map_LT + h*i_;
+			appear[i_][n_] = 1;
+			fall[i_][n_] = 0;
 		}
-		else {
-			//P[i_][n_] = TYPE[(map.getMaplists()[n_][8 - i_].getType()) - 1];
-			P[i_][n_] = TYPEALL[(map.getMaplists()[n_][8 - i_].getType()) - 1][0];
-		}
-		x[i_][n_] = Global::x_map_LT + w*n_;
-		y[i_][n_] = Global::y_map_LT + h*i_;
-		m[i_][n_] = 1;
-		d[i_][n_] = 0;
-	}
 	//////////////////////////////输出背景保存格子//////////////////////////////
 	putimage(0, 0, BG);
+	
 	for (i_ = 0; i_ < 9; i_++)
-	for (n_ = 0; n_ < 9; n_++)
-	{
-		BP[i_][n_] = newimage();
-		getimage(BP[i_][n_], x[i_][n_], y[i_][n_], w, h);
-	}
+		for (n_ = 0; n_ < 9; n_++)
+		{
+			PIECE_BG[i_][n_] = newimage();
+			getimage(PIECE_BG[i_][n_], x[i_][n_], y[i_][n_], w, h);
+		}
 	//////////////////////////////输出方块//////////////////////////////////////
 	for (i_ = 0; i_ < 9; i_++)
-	for (n_ = 0; n_ < 9; n_++)
-	{
+		for (n_ = 0; n_ < 9; n_++)
+		{
 
-		putimage_transparent(NULL, P[i_][n_], x[i_][n_], y[i_][n_], BLACK);
-	}
-	
-	
+			putimage_transparent(NULL, PIECE[i_][n_], x[i_][n_], y[i_][n_], BLACK);
+		}
+
+
+
 }
-
-
 Animation::~Animation()
 {
 
 }
-int Animation::puanimation(int aa, int bb, int cc, int dd, Map&oriMap)
+int Animation::puanimation(int startx, int starty, int wide, int high, Map&oriMap,Time& time)
 {
+
+	setcolor(WHITE);
 	
-	int n = 0, i_ = 0;
-	int r = 0;
-	mouse_msg _a;
-	int k = 0;
-	int c = 0;
-	PIMAGE BK__ = newimage();
-	getimage(BK__, 0, 0, 1476, 1016);
+	int n_ = 0, i_ = 0;  //n_，i_为数组下标用于范围判断
+	int disappear = 0;    //r用于是否产生消除判断
+	mouse_msg _a;   //鼠标信息机构体
+	int left = 0;     //存储鼠标左键信息数
+
+	PIMAGE BK_ = newimage();
+	getimage(BK_, x[0][0], y[0][0], Global::x_piece * 9, Global::y_piece*9);//保存进行用户操作前的游戏状态图片
+	int clock;
 	for (;;)
 	{
 
-		if ((r == 1)||(r==3)){
-			putimage(0, 0, BK__);
+		if ((disappear == 1) || (disappear == 3)){
+			putimage(x[0][0],y[0][0], BK_);           //发生交换产生消除时结束本函数接下来会进入消除函数
 			
 			break;
 
 		}
-		if (( r == 4)||(r==5)){
-			putimage(0, 0, BK__);
-			r = 0;
+		if ((disappear == 4) || (disappear == 5)){
+			putimage(x[0][0], y[0][0], BK_);  //发生交换但不能消除时用户操作继续，且将disappear重置
+			
+			disappear = 0;
 			
 		}
+		for (; !mousemsg();)
+		{
+			putimage(0, 0,500,500,BG, 0, 0);
+			clock = time.getRemainTime();
+			xyprintf(10, 10, "%d",clock);
+			if (clock <= 0){
+				flushmouse();
+				return 1;
+			}
+		}
 		_a = getmouse();
-		putimage(0, 0, BK__);
-	
+		putimage(x[0][0], y[0][0], BK_);                //输出初始图片进行绘图（主要实现方框功能）
 		
 		
-		if (!(_a.x <= cc&&_a.x >= aa&&_a.y <= dd&&_a.y >= bb))break;
-		if (_a.is_left())k++;
 		
+		if (!((_a.x <= (startx + wide)) && (_a.x >= startx)&&(_a.y <= (starty + high)) && (_a.y >= starty)))
+		{
+			
+			if (Button::pubutton(0, 0, x[0][0], Global::y_scr) == 1)this->animation_stop();
+			                               //鼠标移出游戏区进入按键区
+		}
+		if (_a.is_left())left++;                           // 鼠标左键信息数
 		
-		for (i_ = 0; i_ < 9 &&( k %2==0); i_++)
-		for (n = 0; n < 9 && (k%2==0); n++)
+		 ////////////////////////////////////////////左键信息为偶数时输出方框//////////////
+		for (i_ = 0; i_ < 9 && (left % 2 == 0); i_++)
+			for (n_ = 0; n_ < 9 && (left % 2 == 0); n_++)
 		{
 			
 			setcolor(WHITE);
 			
-			if (_a.x <= x[i_][n] + w && _a.x >= x[i_][n] && _a.y <= y[i_][n] + h && _a.y >= y[i_][n])
+			if (_a.x <= x[i_][n_] + w && _a.x >= x[i_][n_] && _a.y <= y[i_][n_] + h && _a.y >= y[i_][n_])  //判断鼠标当前所在方块
 			{
 				
-				rectangle(x[i_][n], y[i_][n], x[i_][n] + w, y[i_][n] + h);
+				rectangle(x[i_][n_], y[i_][n_], x[i_][n_] + w, y[i_][n_] + h);
 				
-			
+				
 			}
 		}
-		for (i_ = 0; i_ < 9 && (k % 2 == 1); i_++)
+		///////////////////////////////////////////左键信息为偶数时输出方框输出方块且进入交换函数///////////////////////
+		for (i_ = 0; i_ < 9 && (left % 2 == 1); i_++)
 		{
-			for (n = 0; n < 9 && (k % 2 == 1); n++)
+			for (n_ = 0; n_ < 9 && (left % 2 == 1); n_++)
 			{
 				setcolor(WHITE);
 
-				if (_a.x <= x[i_][n] + w && _a.x >= x[i_][n] && _a.y <= y[i_][n] + h && _a.y >= y[i_][n])
+				if (_a.x <= x[i_][n_] + w && _a.x >= x[i_][n_] && _a.y <= y[i_][n_] + h && _a.y >= y[i_][n_])
 				{
-					rectangle(x[i_][n], y[i_][n], x[i_][n] + w, y[i_][n] + h);
-					r = (this->animation_change(i_, n, aa, bb, cc, dd, oriMap));
-					delimage(BK__);
-					BK__ = newimage();
-					getimage(BK__, 0, 0, 1476, 1016);
+					rectangle(x[i_][n_], y[i_][n_], x[i_][n_] + w, y[i_][n_] + h);
+					disappear = (this->animation_change(i_, n_, startx,starty, wide, high, oriMap,time));         ////发生交换则r=1不交换则r=4
+					delimage(BK_);
+					BK_ = newimage();
+					getimage(BK_, x[0][0], y[0][0], Global::x_piece * 9, Global::y_piece * 9);
 
-					k = 0;
+					left = 0;                                               //重置左键信息
 
 				}
 
 			}
 		}
 
-		
+		//////////////////////////////////////////
 		
 	}
 	
-	delimage(BK__);
+	delimage(BK_);
 	return 0;
 }
-int Animation::animation_change(int i_, int n, int aa, int bb, int cc, int dd, Map&oriMap)
+int Animation::animation_change(int i1, int n1, int startx, int starty, int wide, int high, Map&oriMap,Time& time)
 {
 	mouse_msg _a;
 	int k = 0;
-	int i1 = i_,n1 = n;
-	int i2=i_, n2=n;
-	int r = 0;
+	int i_ = 0, n_ = 0;  //用于选中下标判断
+	int i2=i1, n2=n1;     //i2,n2用于储存被选中的第二个piece的下标
+	int disappear = 0;
+	int clock;
 	PIMAGE BK_ = newimage();
-	getimage(BK_, 0, 0, 1476, 1016);
+	getimage(BK_, x[0][0], y[0][0], Global::x_piece * 9, Global::y_piece * 9);
 	
 	for (;;)
 	{
-		
+		for (; !mousemsg();)
+		{
+			putimage(0, 0, 500, 500, BG, 0, 0);
+			clock = time.getRemainTime();
+			xyprintf(10, 10, "%d", clock);
+		}
 		_a = getmouse();
-		if (!(_a.x <= cc&&_a.x >= aa&&_a.y <= dd&&_a.y >= bb))break;
-		if (_a.is_left())
+		if (!((_a.x <= (startx + wide)) && (_a.x >= startx) && (_a.y <= (starty + high)) && (_a.y >= starty)))  //鼠标是否在游戏区域范围
+		{
+			break;
+		}
+		if (_a.is_left())                      //左键被松开
 		{
 			
-				if (!(_a.x <= x[i2][n2] + w && _a.x >= x[i2][n2] && _a.y <= y[i2][n2] + h && _a.y >= y[i2][n2]) && !(i1 != i2&&n1 != n2))
+				/*if (!(_a.x <= x[i2][n2] + w && _a.x >= x[i2][n2] && _a.y <= y[i2][n2] + h && _a.y >= y[i2][n2]) && !(i1 != i2&&n1 != n2))          //拖动操作中鼠标松开时离开正确对象格子后是否取消操作
 				{
 
 					this->animation_restore(i1, n1, i2, n2);
 					k = 0;
 				
-				}
-				if ((i1 == i2) && (n1 == n2))
+				}*/       
+				if ((i1 == i2) && (n1 == n2))          //当左键在原来点击的方块上松开时进入点击式操作函数
 				{
-					r=(this->animation_click(i1, n1, oriMap));
-					k = 0;
+					disappear=(this->animation_click(i1, n1, oriMap,time));
+					k = 0;                              
 					
 				}
 		
 			//////////////发生数据交换，判断是否能产生消除的交换/////////////////////////////////////////
 				if (k==1){
-				r = 1;
+				disappear = 1;
 				if (!g_checkMap(n1, 8 - i1, n2, 8 - i2,oriMap)){
 					this->animation_restore(i1, n1, i2, n2);
-					r = 0;
+					disappear = 0;
 				}
 			}
 			/////////////////////////////////////////////////////////////////////
-			putimage(x[i1][n1], y[i1][n1], BP[i1][n1]);
-			putimage(x[i2][n2], y[i2][n2], BP[i2][n2]);
-			putimage_transparent(NULL, P[i1][n1], x[i1][n1], y[i1][n1], BLACK);
-			putimage_transparent(NULL, P[i2][n2], x[i2][n2], y[i2][n2], BLACK);
+			putimage(x[i1][n1], y[i1][n1], PIECE_BG[i1][n1]);
+			putimage(x[i2][n2], y[i2][n2], PIECE_BG[i2][n2]);
+			putimage_transparent(NULL, PIECE[i1][n1], x[i1][n1], y[i1][n1], BLACK);
+			putimage_transparent(NULL, PIECE[i2][n2], x[i2][n2], y[i2][n2], BLACK);
+			delay_ms(0);
 			break;
 		}
 		
-		
+		/////////////////////////////////////左键没松开且离开了原来的格子 进入拖动操作//////////////////////////
 		for (i_ = 0; i_ < 9 && (k == 0); i_++)
-		for (n = 0; n < 9 &&( k == 0); n++)
+		for (n_ = 0; n_ < 9 &&( k == 0); n_++)
 		{
 			
 			
-			if (_a.x <= x[i_][n] + w && _a.x >= x[i_][n] && _a.y <= y[i_][n] + h && _a.y >= y[i_][n] && ((i_ <= i1 + 1 && i_ >= i1 - 1 && n == n1) || (n >= n1 - 1 && n <= n1 + 1 && i_ == i1)) && (_a.x <= cc&&_a.x >= aa&&_a.y <= dd&&_a.y >= bb))
+			if (_a.x <= x[i_][n_] + w && _a.x >= x[i_][n_] && _a.y <= y[i_][n_] + h && _a.y >= y[i_][n_] && ((i_ <= i1 + 1 && i_ >= i1 - 1 && n_ == n1) || (n_ >= n1 - 1 && n_ <= n1 + 1 && i_ == i1)) /*&& (_a.x <= startx&&_a.x >= aa&&_a.y <= dd&&_a.y >= bb)*/)
 			{
-				putimage(0, 0, BK_);
-			
+				putimage(x[0][0],y[0][0], BK_);
+				delay_ms(0);
 				i2 = i_;
-				n2 = n;
+				n2 = n_;
 				if (i2!=i1||n2!=n1){
-					putimage(0, 0, BK_);
+					putimage(x[0][0],y[0][0], BK_);
+					delay_ms(0);
 					this->animation_move(i1, n1, i2, n2);
 				
 					k = 1; 
-
-				}
-				
-				
-			
-				
+				}			
 			}
 		}
 		
 		
 	}
 	delimage(BK_);
-	return r;
+	return disappear;
 }
-int Animation::animation_restore(int i1, int n1, int i2, int n2)
+int Animation::animation_restore(int i1, int n1, int i2, int n2)   //交换回放，参数为两个方块的下标
 {
 	
 	
 	int k = 0;
 	int d = 0;
 	PIMAGE A = newimage();
-	putimage(x[i1][n1], y[i1][n1], BP[i1][n1]);
-	putimage(x[i2][n2], y[i2][n2], BP[i2][n2]);
+	putimage(x[i1][n1], y[i1][n1], PIECE_BG[i1][n1]);
+	putimage(x[i2][n2], y[i2][n2], PIECE_BG[i2][n2]);
 	setcolor(WHITE);
 	rectangle(x[i1][n1], y[i1][n1], x[i1][n1] + w, y[i1][n1] + h);
 	rectangle(x[i2][n2], y[i2][n2], x[i2][n2] + w, y[i2][n2] + h);
 	PIMAGE BK_ = newimage();
-	getimage(BK_, 0, 0, 1476, 1016);
+	getimage(BK_, x[0][0], y[0][0], Global::x_piece * 9, Global::y_piece * 9);
+	/////////////////四种情况///////////////////////////////////////////
 	if (i1 == i2&&n1<n2)
-	for (int k = 0; k <= w; k += Global::speed, delay_fps(240))
+		for (int k = 0; k <= w; k += Global::speed, delay_fps(Global::delay_change))
 	{
 		for (; keystate(VK_LBUTTON););
-		putimage(0, 0, BK_);
+		putimage(x[0][0], y[0][0], BK_);
 	
-		putimage_transparent(NULL, P[i1][n1], x[i1][n1] + k, y[i1][n1], BLACK);
-		putimage_transparent(NULL, P[i2][n2], x[i2][n2] - k, y[i2][n2], BLACK);
+		putimage_transparent(NULL, PIECE[i1][n1], x[i1][n1] + k, y[i1][n1], BLACK);
+		putimage_transparent(NULL, PIECE[i2][n2], x[i2][n2] - k, y[i2][n2], BLACK);
 	}
 	if (i1 == i2&&n1>n2)
-	for (int k = 0; k <= w; k += Global::speed, delay_fps(240))
+		for (int k = 0; k <= w; k += Global::speed, delay_fps(Global::delay_change))
 	{
 		for (; keystate(VK_LBUTTON););
-		putimage(0, 0, BK_);
+		putimage(x[0][0],y[0][0], BK_);
 		
 		
-		putimage_transparent(NULL, P[i1][n1], x[i1][n1] - k, y[i1][n1], BLACK);
-		putimage_transparent(NULL, P[i2][n2], x[i2][n2]+ k, y[i2][n2], BLACK);
+		putimage_transparent(NULL, PIECE[i1][n1], x[i1][n1] - k, y[i1][n1], BLACK);
+		putimage_transparent(NULL, PIECE[i2][n2], x[i2][n2] + k, y[i2][n2], BLACK);
 	}
 	if (n1 == n2&&i1>i2)
-	for (int k = 0; k <= h; k += Global::speed, delay_fps(240))
+		for (int k = 0; k <= h; k += Global::speed, delay_fps(Global::delay_change))
 	{
 		for (; keystate(VK_LBUTTON););
 	
-		putimage(0, 0, BK_);
+		putimage(x[0][0], y[0][0], BK_);
 		
-		putimage_transparent(NULL, P[i1][n1], x[i1][n1], y[i1][n1] - k, BLACK);
-		putimage_transparent(NULL, P[i2][n2], x[i2][n2], y[i2][n2] + k, BLACK);
+		putimage_transparent(NULL, PIECE[i1][n1], x[i1][n1], y[i1][n1] - k, BLACK);
+		putimage_transparent(NULL, PIECE[i2][n2], x[i2][n2], y[i2][n2] + k, BLACK);
 
 	}
 	if (n1 == n2&&i1<i2)
-	for (int k = 0; k <= h; k += Global::speed, delay_fps(240))
+		for (int k = 0; k <= h; k += Global::speed, delay_fps(Global::delay_change))
 	{
 		for (; keystate(VK_LBUTTON););
 	
-		putimage(0, 0, BK_);
-	
-		putimage_transparent(NULL, P[i2][n2], x[i2][n2], y[i2][n2] - k, BLACK);
-		putimage_transparent(NULL, P[i1][n1], x[i1][n1], y[i1][n1] + k, BLACK);
+		putimage(x[0][0], y[0][0], BK_);
+		putimage_transparent(NULL, PIECE[i2][n2], x[i2][n2], y[i2][n2] - k, BLACK);
+		putimage_transparent(NULL, PIECE[i1][n1], x[i1][n1], y[i1][n1] + k, BLACK);
 	
 	}
-	A = P[i1][n1];
-	P[i1][n1] = P[i2][n2];
-	P[i2][n2] = A;
-	putimage_transparent(NULL, P[i1][n1], x[i1][n1], y[i1][n1] , BLACK);
-	putimage_transparent(NULL, P[i2][n2], x[i2][n2], y[i2][n2] , BLACK);
+	A = PIECE[i1][n1];
+	PIECE[i1][n1] = PIECE[i2][n2];
+	PIECE[i2][n2] = A;
+	putimage_transparent(NULL, PIECE[i1][n1], x[i1][n1], y[i1][n1] , BLACK);
+	putimage_transparent(NULL, PIECE[i2][n2], x[i2][n2], y[i2][n2] , BLACK);
 
 	flushmouse();
 	
@@ -308,67 +343,67 @@ int Animation::animation_restore(int i1, int n1, int i2, int n2)
 	
 	return 0;
 }
-int Animation::animation_move(int i1, int n1, int i2, int n2)
+int Animation::animation_move(int i1, int n1, int i2, int n2)          //交换动画,参数为两个方块的下标
 {
 	
 	int d = 0;
 
-	putimage(x[i1][n1], y[i1][n1], BP[i1][n1]);
-	putimage(x[i2][n2], y[i2][n2], BP[i2][n2]);
+	putimage(x[i1][n1], y[i1][n1], PIECE_BG[i1][n1]);
+	putimage(x[i2][n2], y[i2][n2], PIECE_BG[i2][n2]);
 	setcolor(WHITE);
 	rectangle(x[i1][n1], y[i1][n1], x[i1][n1] + w, y[i1][n1] + h);
 	rectangle(x[i2][n2], y[i2][n2], x[i2][n2] + w, y[i2][n2] + h);
 	PIMAGE BK_ = newimage();
-	getimage(BK_, 0, 0, 1476, 1016);
-	PIMAGE A = newimage();
+	getimage(BK_, x[0][0], y[0][0], Global::x_piece * 9, Global::y_piece * 9);
+	PIMAGE A = newimage();//用于交换
 	if (i1 == i2&&n1<n2)
-	for (int k = 0; k <= w; k += Global::speed, delay_fps(Global::delay_change))
+	for (int k = 0; k <= w; k+=Global::speed, delay_fps(Global::delay_change))
 	{
 		
-		putimage(0, 0, BK_);
+		putimage(x[0][0], y[0][0], BK_);
 	
-		putimage_transparent(NULL, P[i1][n1], x[i1][n1] + k, y[i1][n1], BLACK);
-		putimage_transparent(NULL, P[i2][n2], x[i2][n2] - k, y[i2][n2], BLACK);
+		putimage_transparent(NULL, PIECE[i1][n1], x[i1][n1] + k, y[i1][n1], BLACK);
+		putimage_transparent(NULL, PIECE[i2][n2], x[i2][n2] - k, y[i2][n2], BLACK);
 
 	}
 	if (i1 == i2&&n1>n2)
-	for (int k = 0; k <= w; k += Global::speed, delay_fps(Global::delay_change))
+		for (int k = 0; k <= w; k += Global::speed, delay_fps(Global::delay_change))
 	{
-		putimage(0, 0, BK_);
+		putimage(x[0][0], y[0][0], BK_);
 		
-		putimage_transparent(NULL, P[i1][n1], x[i1][n1] - k, y[i1][n1], BLACK);
-		putimage_transparent(NULL, P[i2][n2], x[i2][n2] + k, y[i2][n2], BLACK);
+		putimage_transparent(NULL, PIECE[i1][n1], x[i1][n1] - k, y[i1][n1], BLACK);
+		putimage_transparent(NULL, PIECE[i2][n2], x[i2][n2] + k, y[i2][n2], BLACK);
 
 	}
 	if (n1 == n2&&i1>i2)
-	for (int k = 0; k <= h; k += Global::speed, delay_fps(Global::delay_change))
+		for (int k = 0; k <= h; k += Global::speed, delay_fps(Global::delay_change))
 	{
-		putimage(0, 0, BK_);
-		putimage_transparent(NULL, P[i1][n1], x[i1][n1], y[i1][n1] - k, BLACK);
-		putimage_transparent(NULL, P[i2][n2], x[i2][n2], y[i2][n2] + k, BLACK);
+		putimage(x[0][0], y[0][0], BK_);
+		putimage_transparent(NULL, PIECE[i1][n1], x[i1][n1], y[i1][n1] - k, BLACK);
+		putimage_transparent(NULL, PIECE[i2][n2], x[i2][n2], y[i2][n2] + k, BLACK);
 	
 
 	}
 	if (n1 == n2&&i1<i2)
-	for (int k = 0; k <= h; k += Global::speed, delay_fps(Global::delay_change))
+		for (int k = 0; k <= h; k += Global::speed, delay_fps(Global::delay_change))
 	{
-		putimage(0, 0, BK_);
-		putimage_transparent(NULL, P[i2][n2], x[i2][n2], y[i2][n2] - k, BLACK);
-		putimage_transparent(NULL, P[i1][n1], x[i1][n1], y[i1][n1] + k, BLACK);
+		putimage(x[0][0], y[0][0], BK_);
+		putimage_transparent(NULL, PIECE[i2][n2], x[i2][n2], y[i2][n2] - k, BLACK);
+		putimage_transparent(NULL, PIECE[i1][n1], x[i1][n1], y[i1][n1] + k, BLACK);
 	
 
 	}
-	A = P[i1][n1];
-	P[i1][n1] = P[i2][n2];
-	P[i2][n2] = A;
-	putimage_transparent(NULL, P[i1][n1], x[i1][n1], y[i1][n1], BLACK);
-	putimage_transparent(NULL, P[i2][n2], x[i2][n2], y[i2][n2], BLACK);
+	A = PIECE[i1][n1];
+	PIECE[i1][n1] = PIECE[i2][n2];
+	PIECE[i2][n2] = A;
+	putimage_transparent(NULL, PIECE[i1][n1], x[i1][n1], y[i1][n1], BLACK);
+	putimage_transparent(NULL, PIECE[i2][n2], x[i2][n2], y[i2][n2], BLACK);
 	
 	delimage(BK_);
 	//delete(A);
 	return 0;
 }
-int Animation::animation_disappear(Map&oriMap)
+int Animation::animation_disappear(Map&oriMap)   //消失动画
 {
 
 	int i_ = 0, n_ = 0;
@@ -376,11 +411,11 @@ int Animation::animation_disappear(Map&oriMap)
 	for (i_ = 0; i_ < 9; i_++)
 	for (n_ = 0; n_ < 9; n_++)
 	{
-		m[i_][n_] = (oriMap.getMaplists()[n_][8 - i_].getIsClear());
-		if (m[i_][n_] == 1)
+		appear[i_][n_] = (oriMap.getMaplists()[n_][8 - i_].getIsClear());
+		if (appear[i_][n_] == 1)
 		{
 			
-			putimage_transparent(NULL, DP, x[i_][n_], y[i_][n_], BLACK);
+			putimage_transparent(NULL, PIECE_D, x[i_][n_], y[i_][n_], BLACK);
 		}
 
 	}
@@ -389,38 +424,39 @@ int Animation::animation_disappear(Map&oriMap)
 	for (i_=0; i_ < 9; i_++)
 	for (n_=0; n_ < 9; n_++)
 		{
-		if (m[i_][n_] == 1)putimage_transparent(NULL,BP[i_][n_],x[i_][n_], y[i_][n_],BLACK);
+		if (appear[i_][n_] == 1)putimage_transparent(NULL,PIECE_BG[i_][n_],x[i_][n_], y[i_][n_],BLACK);
 
 		}
 	////////////////////////////数据处理//////////////////
-	for (n_ = 0; n_ < 9; n_++)
+	for (n_ = 0; n_ < 9; n_++)           //初始化补图掉落高度
 	{
-		d_add[n_] = 0;
+		fall_add[n_] = 0;
 	}
 
 
-	for (i_ = 8; i_ >=0; i_--)
+	for (i_ = 8; i_ >=0; i_--)              //确定掉落高度
 	for (n_ = 8; n_ >= 0; n_--)
 	{
 		
 		if (i_ != 8){
-			if (m[i_][n_] == 1)d[i_][n_] = d[i_ + 1][n_] + 1;
-			if (m[i_][n_] == 0)d[i_][n_] = d[i_ + 1][n_];
+			if (appear[i_][n_] == 1)fall[i_][n_] = fall[i_ + 1][n_] + 1;
+			if (appear[i_][n_] == 0)fall [i_][n_] = fall[i_ + 1][n_];
 		}
 		if (i_ == 8){
-			if (m[i_][n_] == 1)d[i_][n_] = 1;
-			if (m[i_][n_] == 0)d[i_][n_] = 0;
+			if (appear[i_][n_] == 1)fall[i_][n_] = 1;
+			if (appear[i_][n_] == 0)fall[i_][n_] = 0;
 		}
 
 
 	}
-	for (i_ = 0; i_ <8; i_++)
+	 
+	for (i_ = 0; i_ <8; i_++)              //为掉落高度附加补图加成
 	for (n_ = 0; n_ < 9; n_++)
 	{
-		if ((m[i_][n_] == 1) && (m[i_ + 1][n_] == 1))
+		if ((appear[i_][n_] == 1) && (appear[i_ + 1][n_] == 1))
 		{
-			d_add[n_]++;
-			d[i_ + 1][n_] += d_add[n_];
+			fall_add[n_]++;
+			fall[i_ + 1][n_] += fall_add[n_];
 		}
 	}
 	
@@ -434,144 +470,43 @@ int Animation::animation_disappear(Map&oriMap)
 	
 	return 0;
 }
-int Animation::animation_fall(Map&oriMap)
+
+
+
+
+
+int Animation::animation_add(void)        //新地图生成时调用的掉落动画
 {
-
-
-
-	int i_ = 0, n_ = 0, d_ = 0, c_ = 0;//c_用于判断动画是否结束
-	////////////////////动画输出////////////////////////////////////////
-	for (i_ = 0, n_ = 0, d_ = 0; d_ <= h * 9; d_++, i_ = 0, n_ = 0, c_ = 0, delay_fps(Global::delay_fall))
-	{
-		for (; keystate(VK_LBUTTON););
-		putimage(0, 0, BG);
-	for (i_ = 8; i_ >=0; i_--)
-	for (n_ = 8; n_ >=0; n_--)
-	{
-
-		
-		if (d_ < (h*d[i_][n_]) && (m[i_][n_] != 1)&&d[i_][n_]!=0){
-			putimage_transparent(NULL, P[i_][n_], x[i_][n_], y[i_][n_] + d_, BLACK);
-			c_++;
-		}
-		if (d_>=(h*d[i_][n_]) && (m[i_][n_] != 1))
-		{
-			putimage_transparent(NULL,P[i_][n_],x[i_][n_], y[i_][n_] + h*d[i_][n_], BLACK);
-		
-		}
-	}
-	
-	
-	if (c_ == 0)break;
-}
-	//////////////////////////////////调整数据////////////////////////////////////
-	for (i_ = 8; i_ >= 0; i_--)
-	for (n_ = 8; n_ >= 0; n_--)
-	{
-		if (m[i_][n_] == 1)d_add[n_]++;
-		if (d[i_][n_] != 0 && m[i_][n_] != 1){
-		P[i_ + d[i_][n_]][n_] = P[i_][n_];
-		m[i_ + d[i_][n_]][n_] = 0;
-
-		d[i_][n_] = 0;
-		m[i_][n_] = 1;
-	}
-	}
-	
-
-	return 0;
-}
-
-
-int Animation::animation_add(Map&oriMap)
-{
-int i_ = 0, n_ = 0, d_ = 0,c_=0;
-
-for (i_ = 0; i_ < 9; i_++)
-for (n_ = 0; n_ < 9; n_++)
-{
-	if (oriMap.getMaplists()[n_][8 - i_].getSpecType() != 0)
-	{
-		//P[i_][n_] = STYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1][(oriMap.getMaplists()[n_][8 - i_].getSpecType())-1 ];
-		P[i_][n_] = TYPEALL[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1][(oriMap.getMaplists()[n_][8 - i_].getSpecType())];
-	}
-	else {
-		//P[i_][n_] = TYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1];
-		P[i_][n_] = TYPEALL[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1][0];
-	}
-
-
-
-}
-
-
-
-for (i_ = 0, n_ = 0, d_ = 0; d_ <= h * 9; d_ = d_++, i_ = 0, n_ = 0, c_ = 0, delay_fps(Global::delay_add))
-{
-
-	for (; keystate(VK_LBUTTON););
-	putimage(0, 0, BG);
-	for (i_ = 0; i_ < 9; i_++)
-	{
-
-		for (n_ = 0; n_ < 9; n_++)
-		{
-
-			if (i_ <= (d_add[n_] - 1) && (d_add[n_] * h>d_))
-			{
-				if (((y[i_][n_] - (d_add[n_]) * h + d_) <= y[0][0]) && ((y[i_][n_] - (d_add[n_]) * h + d_) >= (y[0][0] - h)))putimage(x[i_][n_], y[0][0], w, h, P[i_][n_], 0, (y[0][0] - (y[i_][n_] - (d_add[n_]) * h + d_)));
-				if ((y[i_][n_] - (d_add[n_]) * h + d_)>y[0][0])putimage_transparent(NULL, P[i_][n_], x[i_][n_], y[i_][n_] - (d_add[n_]) * h + d_, BLACK);
-				c_++;
-			}
-			else putimage_transparent(NULL, P[i_][n_], x[i_][n_], y[i_][n_], BLACK);
-
-		}
-	}
-		if (c_ == 0)break;
-	
-}
-for (i_ = 0; i_ < 9; i_++)
-{
-	d_add[i_] = 0;
-}
-
-flushmouse();
-
-return 0;
-}
-
-int Animation::animation_add(void)
-{
-	int i_ = 0, n_ = 0, d_ = 0, c_ = 0;
+	int i_ = 0, n_ = 0, d_ = 0, c_ = 0;       //c_用于即时退出动画播放循环
 	int cc[9] = { 9, 9, 9, 9, 9, 9, 9, 9, 9 };
 
 
-	for (i_ = 0, n_ = 0, d_ = 0; d_ <= h * 9; d_+=Global::speed, i_ = 0, n_ = 0, c_ = 0, delay_fps(Global::delay_add))
+	for (i_ = 0, n_ = 0, d_ = 0; d_ <= h * 9; d_ += Global::speed, i_ = 0, n_ = 0, c_ = 0, delay_fps(Global::delay_add))
 	{
 
 		for (; keystate(VK_LBUTTON););
-		putimage(0, 0, BG);
+		putimage(x[0][0], y[0][0], Global::x_map, Global::y_map, BG,x[0][0], y[0][0]);
 		for (i_ = 0; i_ < 9; i_++)
 		for (n_ = 0; n_ < 9; n_++)
 		{
 
 			if (i_ <= (cc[n_] - 1) && (cc[n_] * h>d_))
 			{
-				if (((y[i_][n_] - (cc[n_]) * h + d_) <= y[0][0]) && ((y[i_][n_] - (cc[n_]) * h + d_) >= (y[0][0] - h)))putimage(x[i_][n_], y[0][0], w, h, P[i_][n_], 0, (y[0][0] - (y[i_][n_] - (cc[n_]) * h + d_)));
-				if ((y[i_][n_] - (cc[n_]) * h + d_)>y[0][0])putimage_transparent(NULL, P[i_][n_], x[i_][n_], y[i_][n_] - (cc[n_]) * h + d_, BLACK);
-				c_++;
+				if (((y[i_][n_] - (cc[n_]) * h + d_) <= y[0][0]) && ((y[i_][n_] - (cc[n_]) * h + d_) >= (y[0][0] - h)))putimage_transparent(NULL, PIECE[i_][n_], x[i_][n_], y[0][0], BLACK, 0, (y[0][0] - (y[i_][n_] - (cc[n_]) * h + d_)), w, (h - (y[0][0] - (y[i_][n_] - (cc[n_]) * h + d_))));
+				if ((y[i_][n_] - (cc[n_]) * h + d_)>y[0][0])putimage_transparent(NULL, PIECE[i_][n_], x[i_][n_], y[i_][n_] - (cc[n_]) * h + d_, BLACK);
+				c_++;        
 			}
-			else putimage_transparent(NULL, P[i_][n_], x[i_][n_], y[i_][n_], BLACK);
+			else putimage_transparent(NULL,PIECE[i_][n_], x[i_][n_], y[i_][n_], BLACK);
 
 		}
-		if (c_ == 0)break;
+		if (c_ == 0)break; //若c_仍为0则退出播放循环
 	}
 	
 	flushmouse();
 
 	return 0;
 }
-int Animation::animation_newmap(Map&oriMap)
+int Animation::animation_newmap(Map&oriMap)     //新地图动画
 {
 	int i_ = 0, n_ = 0;
 	for (i_ = 0; i_ < 9; i_++)
@@ -579,60 +514,64 @@ int Animation::animation_newmap(Map&oriMap)
 	{
 		if (oriMap.getMaplists()[n_][8 - i_].getSpecType() != 0)
 		{
-			//P[i_][n_] = STYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1][(oriMap.getMaplists()[n_][8 - i_].getSpecType())-1 ];
-			P[i_][n_] = TYPEALL[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1][(oriMap.getMaplists()[n_][8 - i_].getSpecType())];
+			//P[i_][n_] = STYPE[(map.getMaplists()[n_][8 - i_].getType()) - 1][(map.getMaplists()[n_][8 - i_].getSpecType())-1 ];
+			PIECE[i_][n_] = TYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1][(oriMap.getMaplists()[n_][8 - i_].getSpecType())];
 		}
 		else {
-		//P[i_][n_] = TYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1];
-		P[i_][n_] = TYPEALL[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1][0];
-	}
-		
-	
-		
+			//P[i_][n_] = TYPE[(map.getMaplists()[n_][8 - i_].getType()) - 1];
+			PIECE[i_][n_] = TYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1][0];
+		}		
 	}
 	
 	this->animation_add();
 	return 0;
 }
-int Animation::animation_click(int i1, int n1, Map&oriMap)
+int Animation::animation_click(int i1, int n1, Map&oriMap,Time&time)            //点击操作模式
 {
-	int i_ = 0, n_ = 0, k_ = 0;
+	int i_ = 0, n_ = 0, left = 0;
 	int i2 = 0, n2 = 0;
 	mouse_msg a_;
 	PIMAGE BK_ = newimage();
-	
-	getimage(BK_, 0, 0, 1476, 1016);
+	int clock;
+	getimage(BK_, x[0][0], y[0][0], Global::x_piece * 9, Global::y_piece * 9);
 	setcolor(WHITE);
-	for (;k_<3;)
+	for (;left<3;)
 	{
+		for (; !mousemsg();)
+		{
+			putimage(0, 0, 500, 500, BG, 0, 0);
+			clock = time.getRemainTime();
+			xyprintf(10, 10, "%d", clock);
+		}
 		a_ = getmouse();
-		if (a_.is_left())k_++;
-		for (i_ = 0; i_ < 9 && (k_ == 0);i_++)
-		for (n_ = 0; n_ < 9 && (k_ == 0); n_++)
+		if (a_.is_left())left++;
+
+		for (i_ = 0; i_ < 9 && (left == 0);i_++)      //鼠标没点击时画框
+		for (n_ = 0; n_ < 9 && (left == 0); n_++)
 		{
 			if (a_.x <= x[i_][n_] + w && a_.x >= x[i_][n_] && a_.y <= y[i_][n_] + h && a_.y >= y[i_][n_])
 			{
 
-				putimage(0, 0, BK_);
+				putimage(x[0][0],y[0][0], BK_);
 				rectangle(x[i_][n_], y[i_][n_], x[i_][n_] + w, y[i_][n_] + h);
 			}
 		}
 		
-			for (i_ = 0; i_ < 9 && (k_ == 1); i_++)
-			for (n_ = 0; n_ < 9 && (k_ == 1); n_++)
+			for (i_ = 0; i_ < 9 && (left == 1); i_++)       //鼠标按下继续画框
+			for (n_ = 0; n_ < 9 && (left == 1); n_++)
 			{
 				if (a_.x <= x[i_][n_] + w && a_.x >= x[i_][n_] && a_.y <= y[i_][n_] + h && a_.y >= y[i_][n_])
 				{
 
-					putimage(0, 0, BK_);
+					putimage(x[0][0], y[0][0], BK_);
 					rectangle(x[i_][n_], y[i_][n_], x[i_][n_] + w, y[i_][n_] + h);
 				
 				}
 			}
 		
 		
-			for (i_ = 0; i_ < 9 && (k_ == 2); i_++)
-			for (n_ = 0; n_ < 9 &&( k_ == 2); n_++)
+			for (i_ = 0; i_ < 9 && (left == 2); i_++)      //鼠标松开交换动画播放或者退出本次鼠标操作
+			for (n_ = 0; n_ < 9 &&( left == 2); n_++)
 			{
 				if (a_.x <= x[i_][n_] + w && a_.x >= x[i_][n_] && a_.y <= y[i_][n_] + h && a_.y >= y[i_][n_])
 				{
@@ -642,26 +581,27 @@ int Animation::animation_click(int i1, int n1, Map&oriMap)
 						this->animation_move(i1, n1, i_, n_);
 						i2 = i_;
 						n2 = n_;
-						k_ = 3;
+						left= 3;                     //能交换将left设为3进入回放判断
 						
 					}
 					else{
-						putimage_transparent(NULL, BP[i_][n_], x[i_][n_], y[i_][n_], BLACK);
-						putimage_transparent(NULL, P[i_][n_], x[i_][n_], y[i_][n_], BLACK);
-						k_ = 5;
+						putimage_transparent(NULL,PIECE_BG[i_][n_], x[i_][n_], y[i_][n_], BLACK);
+						putimage_transparent(NULL, PIECE[i_][n_], x[i_][n_], y[i_][n_], BLACK);
+						left = 5;                     //不能交换将left设为5退出本次鼠标操作流程
 					}
 				}
 			}
-			if (k_ == 3){
+
+			if (left == 3){                                          //鼠标松开后确定是否进行回放
 				if (!g_checkMap(n2, 8 - i2, n1, 8 - i1, oriMap)){
 					this->animation_restore(i1,n1,i2,n2);
-					k_ = 4;
-					putimage(0, 0, BK_);
+					left = 4;                                      //能交换则返回3否则返回4
+					putimage(x[0][0],y[0][0], BK_);
 					
 				}
 				else{
-					putimage_transparent(NULL, BP[i2][n2], x[i2][n2], y[i2][n2], BLACK);
-					putimage_transparent(NULL, P[i2][n2], x[i2][n2], y[i2][n2], BLACK);
+					putimage_transparent(NULL, PIECE[i2][n2], x[i2][n2], y[i2][n2], BLACK);
+					putimage_transparent(NULL, PIECE[i2][n2], x[i2][n2], y[i2][n2], BLACK);
 				}
 				
 			}
@@ -669,9 +609,9 @@ int Animation::animation_click(int i1, int n1, Map&oriMap)
 	}
 	delimage(BK_);
 
-	return k_;
+	return left;
 }
-int Animation::animation_fall_add(Map&oriMap)
+int Animation::animation_fall_add(Map&oriMap,Score& score,Time& time)
 {
 	int i_ = 0, n_ = 0, d_ = 0, c_ = 0;//c_用于判断动画是否结束
 	////////////////////更新数据////////////////////////////////
@@ -680,39 +620,47 @@ int Animation::animation_fall_add(Map&oriMap)
 	{
 		if (oriMap.getMaplists()[n_][8 - i_].getSpecType() != 0)
 		{
-			//P[i_][n_] = STYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1][(oriMap.getMaplists()[n_][8 - i_].getSpecType())-1 ];
-			P[i_][n_] = TYPEALL[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1][(oriMap.getMaplists()[n_][8 - i_].getSpecType())];
+			//P[i_][n_] = STYPE[(map.getMaplists()[n_][8 - i_].getType()) - 1][(map.getMaplists()[n_][8 - i_].getSpecType())-1 ];
+			PIECE[i_][n_] = TYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1][(oriMap.getMaplists()[n_][8 - i_].getSpecType())];
 		}
 		else {
-			//P[i_][n_] = TYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1];
-			P[i_][n_] = TYPEALL[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1][0];
+			//P[i_][n_] = TYPE[(map.getMaplists()[n_][8 - i_].getType()) - 1];
+			PIECE[i_][n_] = TYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1][0];
 		}
 
 
 
 	}
+	//////////////////////////分数改变//////////////////////////////
+	putimage(0, 300, 500, 500, BG, 0, 300);
+	xyprintf(0, 500, "%d/%d", score.getScore(), score.getPassScore());
+	xyprintf(0, 600, "level %d", score.getLevel());
+
 	/////////////////////////////播放动画///////////////////////////
 
 	for (i_ = 0, n_ = 0, d_ = 0; d_ <= h * 9; d_ += Global::speed, i_ = 0, n_ = 0, c_ = 0, delay_fps(Global::delay_add))
 	{
 
 		for (; keystate(VK_LBUTTON););
-		putimage(0, 0, BG);
+		putimage(x[0][0], y[0][0], Global::x_map, Global::y_map, BG, x[0][0], y[0][0]);
 		for (i_ = 0; i_ < 9; i_++)
 		{
 
 			for (n_ = 0; n_ < 9; n_++)
 			{
 
-				if ((d[i_][n_] * h>d_)&&(d[i_][n_]!=0))
+				if ((fall[i_][n_] * h>d_)&&(fall[i_][n_]!=0))
 				{
 					
-					if (((y[i_][n_] - (d[i_][n_]) * h + d_) <= y[0][0]) && ((y[i_][n_] - (d[i_][n_]) * h + d_) >= (y[0][0] - h)))putimage(x[i_][n_], y[0][0], w, h, P[i_][n_], 0, (y[0][0] - (y[i_][n_] - (d[i_][n_]) * h + d_)));
-					if ((y[i_][n_] - (d[i_][n_]) * h + d_)>y[0][0])putimage_transparent(NULL, P[i_][n_], x[i_][n_], y[i_][n_] - (d[i_][n_]) * h + d_, BLACK);
+					if (((y[i_][n_] - (fall[i_][n_]) * h + d_) <= y[0][0]) && ((y[i_][n_] - (fall[i_][n_]) * h + d_) >= (y[0][0] - h)))
+						putimage_transparent(NULL, PIECE[i_][n_], x[i_][n_], y[0][0], BLACK, 0, (y[0][0] - (y[i_][n_] - (fall[i_][n_]) * h + d_)),w ,(h - (y[0][0] - (y[i_][n_] - (fall[i_][n_]) * h + d_))));
+
+					if ((y[i_][n_] - (fall[i_][n_]) * h + d_)>y[0][0])
+						putimage_transparent(NULL, PIECE[i_][n_], x[i_][n_], y[i_][n_] - (fall[i_][n_]) * h + d_, BLACK);
 					c_++;
 				}
 				else { 
-					putimage_transparent(NULL, P[i_][n_], x[i_][n_], y[i_][n_], BLACK); 
+					putimage_transparent(NULL, PIECE[i_][n_], x[i_][n_], y[i_][n_], BLACK); 
 				}
 
 			}
@@ -722,4 +670,66 @@ int Animation::animation_fall_add(Map&oriMap)
 	}
 	flushmouse();
 	return 0;
+}
+int Animation::animation_stop()
+{
+	PIMAGE source = newimage();
+	getimage(source, 0, 0, Global::x_scr, Global::y_scr);    //保存暂停前画面;
+	cleardevice();
+	putimage(0, 0, game_stop);
+
+	putimage_transparent(NULL, game_start,(Global::x_scr/2)-400, (Global::y_scr/2), BLACK);
+	putimage_transparent(NULL, game_exit,(Global::x_scr / 2 ), (Global::y_scr / 2), BLACK);
+	mouse_msg _a;
+	int left = 0;
+	PIMAGE BK_ = newimage();
+	getimage(BK_,0, 0, Global::x_scr, Global::y_scr);
+	for (;;)
+	{
+
+		_a = getmouse();
+		putimage(0, 0, BK_);                //输出初始图片进行绘图（主要实现方框功能）
+
+
+
+		if (_a.is_left())left++;                           // 鼠标左键信息数
+
+		////////////////////////////////////////////左键信息为偶数时输出方框//////////////
+
+
+		setcolor(WHITE);
+
+		if (_a.x <= 500 && _a.x >= 200 && _a.y <= 500 && _a.y >= 200)  //判断鼠标当前所在方块
+		{
+
+			rectangle(500, 500, 200, 200);
+
+
+		}
+
+		///////////////////////////////////////////左键信息为偶数时输出方框输出方块且进入交换函数///////////////////////
+
+			{
+				setcolor(WHITE);
+				if (left == 2)
+				{
+					if (_a.x <= 500 && _a.x >= 200 && _a.y <= 500 && _a.y >= 200)
+					{
+						rectangle(500, 500, 200, 200);
+
+
+						//重置左键信息
+						break;
+					}
+
+					left = 0;
+				}
+
+
+				//////////////////////////////////////////
+
+			}
+	}
+			putimage(0, 0, source);
+	return left;
 }
