@@ -69,7 +69,7 @@ void Time::addTime(Score & score)
 	{
 		timeAmount += Global::ADDTIME_L3;
 	}
-	if (level > 10)
+	if (level >= 10)
 	{
 		timeAmount += Global::ADDTIME_L4;
 	}

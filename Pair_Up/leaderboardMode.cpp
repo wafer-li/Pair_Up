@@ -101,7 +101,7 @@ void l_leaderboard()
 	getimage(image0, "resource\\PairupLeader.jpg", 0, 0);
 	putimage(0, 0, image0);
 	setbkmode(TRANSPARENT);
-	//setfont(-100, -49, "Kingdom Hearts");
+	setfont(-100, -49, "Kingdom Hearts");
 	setcolor(EGERGB(255, 0, 0));
 	delay_ms(0);
 	/********************************************/
