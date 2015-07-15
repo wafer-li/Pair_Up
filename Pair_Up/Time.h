@@ -14,6 +14,9 @@ private:
 	double changePoint;
 	double startPoint;
 
+	//isStop
+	bool isStop;
+
 	/* Private Method */
 	int countRemainTime();
 
