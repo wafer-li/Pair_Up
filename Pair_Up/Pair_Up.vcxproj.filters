@@ -478,5 +478,23 @@
     <Image Include="..\..\..\..\Desktop\新建文件夹 (2)\Skin3_Piece_2_4.png">
       <Filter>资源文件\Skin 2</Filter>
     </Image>
+    <Image Include="resource\skin2\Skin3_Piece_1_5.png">
+      <Filter>资源文件\Skin 2</Filter>
+    </Image>
+    <Image Include="resource\skin2\Skin3_Piece_1_0.png">
+      <Filter>资源文件\Skin 2</Filter>
+    </Image>
+    <Image Include="resource\skin2\Skin3_Piece_1_1.png">
+      <Filter>资源文件\Skin 2</Filter>
+    </Image>
+    <Image Include="resource\skin2\Skin3_Piece_1_2.png">
+      <Filter>资源文件\Skin 2</Filter>
+    </Image>
+    <Image Include="resource\skin2\Skin3_Piece_1_3.png">
+      <Filter>资源文件\Skin 2</Filter>
+    </Image>
+    <Image Include="resource\skin2\Skin3_Piece_1_4.png">
+      <Filter>资源文件\Skin 2</Filter>
+    </Image>
   </ItemGroup>
 </Project>
