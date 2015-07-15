@@ -19,7 +19,7 @@ void g_game()
 	Score score;
 	Time time;
 
-	while (restOfLive && exit_sign)
+	while (restOfLive && !exit_sign)
 	{
 		isDeadMap = newMap.g_isDeadMap();
 		//+if(button.exit_inGame())
@@ -67,7 +67,9 @@ void g_game()
 				isDeadMap = newMap.g_isDeadMap();
 				if (!isDeadMap)
 				{
+					time.resumeTime();
 					exit_sign = newAnimation->puanimation(0, 0, Global::x_scr, Global::y_scr, newMap, time);
+					time.pauseTime();
 					if (exit_sign)
 					{
 						break;
@@ -95,63 +97,7 @@ void swapPiece(int x1, int y1, int x2, int y2, Map& map)
 //Judge the whole map
 //Do NOT change the Piece.isClearable
 
-//bool g_checkMap(Map & map)
-//{
-//	//行检查
-//	for (int i = 0; i < 9; i++)
-//	{
-//		for (int j = 0; j < 8; j++)
-//		{
-//			for (int k = 0;; k++)
-//			{
-//				if (k == 2)//k = 2意味着出现三个一块
-//				{
-//					return true;
-//				}
-//				if (j == 8)//防止第8和第9块同色时，继续比较而造成越界
-//					break;
-//				if (map.getMaplists()[i][j].getType() == map.getMaplists()[i][j + 1].getType())//方块检查后j++调整j值
-//				{
-//					j++;
-//					if (map.getMaplists()[i][j].getSpecType() == 5)//这里也进行了特殊方块检查
-//					{
-//						break;
-//					}
-//				}
-//				else
-//					break;//若方块颜色不对，那么不进行上述的状态调整过程
-//			}
-//		}
-//	}
-//	//列检查：方式相同
-//	for (int i = 0; i < 9; i++)
-//	{
-//		for (int j = 0; j < 8; j++)
-//		{
-//			for (int k = 0;; k++)
-//			{
-//				if (k == 2)
-//				{
-//					return true;
-//				}
-//				if (j == 8)
-//					break;
-//				if (map.getMaplists()[j][i].getType() == map.getMaplists()[j + 1][i].getType())
-//				{
-//					j++;
-//					if (map.getMaplists()[i][j].getSpecType() == 5)//这里也进行了特殊方块检查
-//					{
-//						break;
-//					}
-//				}
-//				else
-//					break;
-//			}
-//		}
-//	}
-//	return false;
-//}
-
+//Origin editor: Jushe
 //GMT+9 2015/7/13 14:30
 //Rewrite by Wafer
 bool g_checkMap(Map & map)
