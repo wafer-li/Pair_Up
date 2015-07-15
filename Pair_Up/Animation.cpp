@@ -708,7 +708,7 @@ int Animation::animation_fall_add(Map&oriMap,Score& score,Time& time,int combo)
 
 	}
 	//////////////////////////////////////////////////
-	if (combo != 0)this->animation_combo();
+	if (combo > 1)this->animation_combo();
 	flushmouse();
 	return 0;
 }
