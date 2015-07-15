@@ -19,9 +19,9 @@ void g_game()
 	Animation* newAnimation = new Animation(option, newMap);
 	PIMAGE p_button_back = newimage();
 	PIMAGE p_button_stop = newimage();
-	getimage(p_button_back, "resource\\skin3\\Skin3_Piece_Special_1.png", 0, 0);
-	getimage(p_button_stop, "resource\\skin3\\Skin3_Piece_Special_2.png", 0, 0);
-	Button* button_stop = new Button(150, 700, 100, 100, 1, p_button_stop);
+	getimage(p_button_back, "resource\\g_Exit.png", 0, 0);
+	getimage(p_button_stop, "resource\\g_ctn.png", 0, 0);
+	Button* button_stop = new Button(110, 700, 100, 100, 1, p_button_stop);
 	Button* button_back = new Button(300, 700, 100, 100, 2, p_button_back);
 
 	Button::setbutton(0, 650, 520, 200);

@@ -103,9 +103,6 @@
     <ClCompile Include="Time.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <Image Include="resource\20150710010620585_easyicon_net_110.08.png" />
-    <Image Include="resource\20150710010634943_easyicon_net_536.png" />
-    <Image Include="resource\20150710085357196_easyicon_net_627.600562588.png" />
     <Image Include="resource\BackGround\GameBk1.png" />
     <Image Include="resource\BackGround\GameBk10.png" />
     <Image Include="resource\BackGround\GameBk11.png" />
@@ -122,6 +119,9 @@
     <Image Include="resource\exit-m.png" />
     <Image Include="resource\exit-on.png" />
     <Image Include="resource\exit.png" />
+    <Image Include="resource\g_ctn.png" />
+    <Image Include="resource\g_Exit.png" />
+    <Image Include="resource\g_pause.png" />
     <Image Include="resource\init.png" />
     <Image Include="resource\leaderboard-m.png" />
     <Image Include="resource\leaderboard-on.png" />

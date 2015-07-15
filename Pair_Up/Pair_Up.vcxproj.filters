@@ -127,15 +127,6 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="resource\20150710010620585_easyicon_net_110.08.png">
-      <Filter>资源文件</Filter>
-    </Image>
-    <Image Include="resource\20150710010634943_easyicon_net_536.png">
-      <Filter>资源文件</Filter>
-    </Image>
-    <Image Include="resource\20150710085357196_easyicon_net_627.600562588.png">
-      <Filter>资源文件</Filter>
-    </Image>
     <Image Include="resource\Bk.png">
       <Filter>资源文件</Filter>
     </Image>
@@ -456,6 +447,15 @@
     </Image>
     <Image Include="resource\skin1\Skin1_Piece_Special_2.png">
       <Filter>资源文件\Skin 1</Filter>
+    </Image>
+    <Image Include="resource\g_Exit.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="resource\g_pause.png">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="resource\g_ctn.png">
+      <Filter>资源文件</Filter>
     </Image>
   </ItemGroup>
 </Project>
