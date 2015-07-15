@@ -796,7 +796,7 @@ int Animation::animation_combo()
 {
 	PIMAGE RE = newimage();
 	getimage(RE, 0, 0, 1476, 1016);
-	putimage_transparent(NULL, COMBO, 0, 0, BLACK);
+	putimage_transparent(NULL, COMBO, Global::x_map_LT, Global::y_map_LT, BLACK);
 	delay_ms(300);
 	putimage(0, 0, RE);
 	delimage(RE);
