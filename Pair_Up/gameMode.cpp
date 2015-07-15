@@ -7,7 +7,7 @@ void g_game()
 	//Piece.type means basic elements of piece
 	//Piece.specType means special piece 
 	int restOfLive = 6; //³õÊ¼ÉúÃüÖµ
-	int exit_sign = 0;
+	bool exit_sign = false;
 	bool isDeadMap = false;
 	bool isExpMax = false;
 	bool pauseGame = false;
@@ -19,7 +19,7 @@ void g_game()
 	Score score;
 	Time time;
 
-	while (restOfLive)
+	while (restOfLive && exit_sign)
 	{
 		isDeadMap = newMap.g_isDeadMap();
 		//+if(button.exit_inGame())
@@ -67,8 +67,7 @@ void g_game()
 				isDeadMap = newMap.g_isDeadMap();
 				if (!isDeadMap)
 				{
-					 newAnimation->puanimation(0, 0, Global::x_scr, Global::y_scr, newMap,time);
-
+					exit_sign = newAnimation->puanimation(0, 0, Global::x_scr, Global::y_scr, newMap, time);
 				}
 				else
 				{
