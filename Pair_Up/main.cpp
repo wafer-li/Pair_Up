@@ -72,10 +72,10 @@ int start(void)
 {	
 	Resource res;
 	int mouseCheck= 0;
-	PIMAGE BK;	 
-	BK = newimage();	
+	PIMAGE BK;
+	BK = newimage();
 	getimage(BK, "resource\\BK.png", 0, 0);
-	putimage(0, 0,BK);
+	putimage(0, 0, BK);
 	Button *button_menu = new Button(800, 400, 640, 120, 1, res.newGameButton_basic, res.newGameButton_move, res.newGameButton_press);
 	Button *button_menu2 = new Button(800, 521, 640, 120, 2, res.leaderboard_basic, res.leaderboard_move, res.leaderboard_press);
 	Button *button_menu3 = new Button(800, 642, 640, 120, 3, res.optionButton_basic,res.optionButton_move, res.optionButton_press);	
@@ -98,6 +98,7 @@ int start(void)
 	delimage(res.leaderboard_basic);
 	delimage(res.leaderboard_move);
 	delimage(res.leaderboard_press);
+	delimage(BK);
 	flushmouse();
 	return mouseCheck;
 	
@@ -108,6 +109,7 @@ int main(void)
 {
 	int condition = 1;
 	init();
+
 	while (condition)
 	{
 		//ResourceIn();//在DUBUG模式下启用这行禁用下行会检查当前图片输入序列
