@@ -13,7 +13,7 @@ void g_game()
 	bool isDeadMap = false;
 	bool isExpMax = false;
 	bool pauseGame = false;
-
+	
 	Option option;
 	Map & newMap = g_makeMap();
 	Animation* newAnimation = new Animation(option, newMap);
@@ -58,7 +58,7 @@ void g_game()
 
 				
 				//Judge and Disappear loop
-				for (int combo = 1; g_checkMap(newMap) == 1;combo ++)
+				for (int combo = 0; g_checkMap(newMap) == 1;combo ++)
 				{
 					int removeNum = 0;
 
@@ -75,7 +75,7 @@ void g_game()
 						continue;
 					}
 
-					newAnimation->animation_fall_add(newMap,score,time);
+					newAnimation->animation_fall_add(newMap,score,time,combo);
 				}
 
 				isDeadMap = newMap.g_isDeadMap();
@@ -97,6 +97,9 @@ void g_game()
 		}
 	}
 	l_inRanking(score.getScore());//Record score, disaplay in leaderboard if the top five
+	delete button_stop;
+	delete button_back;
+
 }
 
 //swap two Piece

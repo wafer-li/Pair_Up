@@ -31,6 +31,7 @@ private:
 	 PIMAGE game_stop;
 	 PIMAGE game_start;
 	 PIMAGE game_exit;
+	 PIMAGE COMBO;
 	
 public:
 	Animation();
@@ -47,7 +48,8 @@ public:
 	 int animation_add(Map&oriMap);
 	 int animation_newmap(Map&oriMap);
 	 int animation_click(int i1,int n1, Map&oriMap,Time&time);
-	 int animation_fall_add(Map&oriMap,Score& score,Time&time);
+	 int animation_fall_add(Map&oriMap,Score& score,Time&time,int combo);
 	 int animation_stop(void);
+	 int animation_combo();
 };
 #endif;

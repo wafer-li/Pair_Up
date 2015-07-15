@@ -65,6 +65,7 @@ Button::~Button()
 		button_h[j] = 0;
 		button_R[j] = 0;
 	}
+	cho = 0;
 	button_i--;
 	
 }

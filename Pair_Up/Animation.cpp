@@ -45,9 +45,11 @@ Animation::Animation(Option opt, Map map)
 	game_exit = newimage();
 	game_start = newimage();
 	game_stop = newimage();
+	COMBO = newimage();
 	getimage(game_stop, "resource\\BK.png", 0, 0);
 	getimage(game_start, "resource\\skin1\\Skin1_Piece_Special_2.png", 0, 0);
 	getimage(game_exit, "resource\\skin3\\Skin3_Piece_Special_2.png", 0, 0);
+	getimage(COMBO, "resource\\combo.png", 0, 0 );
 	//加载6*5=30张皮肤 (6种方块每个有5种特殊方块）
 
 	//////////////////////////////确定每个方块的参数//////////////////////////////
@@ -648,7 +650,7 @@ int Animation::animation_click(int i1, int n1, Map&oriMap,Time&time)            
 
 	return left;
 }
-int Animation::animation_fall_add(Map&oriMap,Score& score,Time& time)
+int Animation::animation_fall_add(Map&oriMap,Score& score,Time& time,int combo)
 {
 	int i_ = 0, n_ = 0, d_ = 0, c_ = 0;//c_用于判断动画是否结束
 	////////////////////更新数据////////////////////////////////
@@ -705,6 +707,8 @@ int Animation::animation_fall_add(Map&oriMap,Score& score,Time& time)
 		if (c_ == 0)break;
 
 	}
+	//////////////////////////////////////////////////
+	if (combo != 0)this->animation_combo();
 	flushmouse();
 	return 0;
 }
@@ -787,4 +791,14 @@ int Animation::animation_stop()
 	}
 			putimage(0, 0, source);
 	return left;
+}
+int Animation::animation_combo()
+{
+	PIMAGE RE = newimage();
+	getimage(RE, 0, 0, 1476, 1016);
+	putimage_transparent(NULL, COMBO, 0, 0, BLACK);
+	delay_ms(300);
+	putimage(0, 0, RE);
+	delimage(RE);
+	return 0;
 }
