@@ -59,7 +59,6 @@ public:
 	*3.box-消除3*3
 	*4.same_color-消除同色	
 	*5.unclear-不可消除
-	*6.death-直接死亡
 	*/
 	enum SpecType
 	{

@@ -7,7 +7,6 @@ void g_game()
 	//Piece.type means basic elements of piece
 	//Piece.specType means special piece 
 	int restOfLive = 6; //³õÊ¼ÉúÃüÖµ
-	int score = 0;
 	int exit_sign = 0;
 	bool isDeadMap = false;
 	bool isExpMax = false;
@@ -17,6 +16,8 @@ void g_game()
 	Map & newMap = g_makeMap();
 	Animation* newAnimation = new Animation(option, newMap);
 	newAnimation->animation_add();
+	Score score;
+	Time time;
 
 	while (restOfLive)
 	{
@@ -42,22 +43,31 @@ void g_game()
 					*/
 
 				
-				for (; g_checkMap(newMap) == 1;)
+				//Judge and Disappear loop
+				for (int combo = 1; g_checkMap(newMap) == 1;combo ++)
 				{
+					int removeNum = 0;
 
 					clearPiece(newMap);
 
 					newAnimation->animation_disappear(newMap);
+					removeNum = g_P_S_R(newMap);
 
+					//Change score & level and add time
+					score.changeScore(removeNum, combo);
+					while (score.levelUp())
+					{
+						time.addTime(score);
+						continue;
+					}
 
-					g_P_S_R(newMap);
-					newAnimation->animation_fall_add(newMap);
+					newAnimation->animation_fall_add(newMap,score,time);
 				}
 
 				isDeadMap = newMap.g_isDeadMap();
 				if (!isDeadMap)
 				{
-					 newAnimation->puanimation(0, 0, Global::x_scr, Global::y_scr, newMap);
+					 newAnimation->puanimation(0, 0, Global::x_scr, Global::y_scr, newMap,time);
 
 				}
 				else
@@ -69,7 +79,7 @@ void g_game()
 			}
 		}
 	}
-	l_inRanking(score);//Record score, disaplay in leaderboard if the top five
+	l_inRanking(score.getScore());//Record score, disaplay in leaderboard if the top five
 }
 
 //swap two Piece
@@ -175,14 +185,14 @@ bool g_checkMap(int index_x1, int index_y1, int index_x2, int index_y2, Map & th
 	}
 }
 
-void g_P_S_R(Map& oriMap)
+int g_P_S_R(Map& oriMap)
 {
-	//newMap[g_game] -> oriMap[g_P_S_R]
+	int removeNum = 0;
 
-	g_PairUp(oriMap);
-	//g_setMap();
-
+	removeNum = g_PairUp(oriMap);
 	g_replenishMap(oriMap);//Push_back//Tgf//book
+
+	return removeNum;
 }
 Map & g_makeMap()
 {	
@@ -191,9 +201,9 @@ Map & g_makeMap()
 	//Map newmap;
 	return newMap;
 }
-void g_PairUp(Map& oriMap)
+int g_PairUp(Map& oriMap)
 {
-	removePiece(oriMap);
+	return(removePiece(oriMap));
 }
 
 void g_replenishMap(Map& oriMap)

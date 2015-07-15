@@ -25,13 +25,13 @@ bool g_checkMap(Map & map);
 bool g_checkMap(int index_x1, int index_y1, int index_x2, int index_y2, Map & theMap);
 
 //Binding : Pair up,clear the Map,and replenish it
-void g_P_S_R(Map&);
+int g_P_S_R(Map&);
 
 //create a new map
 Map & g_makeMap();
 
 //Ïû³ı
-void g_PairUp(Map&);
+int g_PairUp(Map&);
 
 //²¹³ädeque
 void g_replenishMap(Map&);

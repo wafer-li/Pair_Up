@@ -35,7 +35,7 @@ public:
 	
 	//Score
 	int getScore();
-	void changeScore(int num, int com);
+	void changeScore(int num, int com = 1);
 
 	//PassScore
 	int getPassScore();
@@ -48,3 +48,18 @@ public:
 };
 
 #endif
+
+
+/*
+
+while(levelUp())
+{
+	disaplay animation
+
+}
+
+
+
+
+
+*/
