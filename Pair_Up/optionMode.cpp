@@ -6,6 +6,7 @@
 #include <string>
 #include <sstream>
 int optionBK(){
+	cleardevice;
 	std::stringstream ss;
 	std::string temp;
 	int mouseCheck = 0;
@@ -15,6 +16,7 @@ int optionBK(){
 	int w = 270, h = 200;
 	//渐增
 	int n_x = 300, n_y = 210;
+	int check = 0;
 	PIMAGE imageBG = newimage();
 	PIMAGE P_cut1 = newimage();
 	PIMAGE P_cut2 = newimage();
@@ -22,7 +24,6 @@ int optionBK(){
 	getimage(imageBG, "resource\\option1.png", 0, 0);
 	putimage(0, 0, imageBG);
 	PIMAGE P_BG[12];
-	delay_ms(0);
 	Button *B_BG[12];
 	Button *B_cut1 = new Button(153, 15, 120, 60, -1, P_cut1);
 	Button *B_cut2 = new Button(293, 15, 110, 60, -2, P_cut2);
@@ -52,17 +53,22 @@ int optionBK(){
 	while (mouseCheck != -1 && mouseCheck != -2 && mouseCheck != -3){
 		Button::setbutton(Global::x_0, Global::y_0, Global::x_scr, Global::y_scr);
 		mouseCheck = Button::pubutton(Global::x_0, Global::y_0, Global::x_scr, Global::y_scr, 1);
-		std::ofstream op;
 		if (1 <= mouseCheck && mouseCheck < 13){
-			op.open("OptionBG.txt", std::ios::out);
-			if (!op.fail()){
-				ss << mouseCheck;
-				ss >> temp;
-				op << temp;
-				op.close();
-			}
+			check = mouseCheck;
 		}
 	}
+	
+	if (1 <=check && check < 13){
+		std::ofstream op;
+		op.open("OptionBG.txt", std::ios::out);
+		if (!op.fail()){
+			ss << check;
+			ss >> temp;
+			op << temp;
+			op.close();
+		}
+	}
+	//________________________delete_mode____________________________
 	delete B_cut1;
 	delete B_cut2;
 	delete B_cut3;
@@ -82,6 +88,7 @@ int optionSK(){
 	std::stringstream ss;
 	std::string temp;
 	int mouseCheck = 0;
+	int trans = 0;
 	//基起点
 	int x1 = 150, y1 = 100;
 	//基高基长
@@ -95,7 +102,6 @@ int optionSK(){
 	getimage(imageSKIN, "resource\\option2.png", 0, 0);
 	putimage(0, 0, imageSKIN);
 	PIMAGE P_SK[4];
-	delay_ms(0);
 	Button *B_SK[4];
 	Button *B_cut1 = new Button(153, 15, 120, 60, -1, P_cut1);
 	Button *B_cut2 = new Button(293, 15, 110, 60, -2, P_cut2);
@@ -115,21 +121,22 @@ int optionSK(){
 	{
 		B_SK[i] = new Button(x1 + (i - 2) * n_x, y1 + 1 * n_y, w, h - 10, i + 1, P_SK[i]);
 	}
-
-
-
+	//___________________init______________________________
 	while (mouseCheck != -1 && mouseCheck != -2 && mouseCheck != -3){
 		Button::setbutton(Global::x_0, Global::y_0, Global::x_scr, Global::y_scr);
 		mouseCheck = Button::pubutton(Global::x_0, Global::y_0, Global::x_scr, Global::y_scr, 1);
+		if (1 <= mouseCheck && mouseCheck < 5)
+			trans = mouseCheck;
+
+	}
 		std::ofstream op;
-		if (1 <= mouseCheck && mouseCheck < 5){
-			op.open("OptionSK.txt", std::ios::out);
-			if (!op.fail()){
-				ss << mouseCheck;
-				ss >> temp;
-				op << temp;
-				op.close();
-			}
+	if (1 <= trans && trans < 5){
+		op.open("OptionSK.txt", std::ios::out);
+		if (!op.fail()){
+			ss << trans;
+			ss >> temp;
+			op << temp;
+			op.close();
 		}
 	}
 
