@@ -12,6 +12,8 @@ PIMAGE Button::button_RP =  NULL ;
 PIMAGE Button::button_allP = { NULL };
 PIMAGE Button::button_M[20] = { NULL };
 PIMAGE Button::button_O[20] = { NULL };
+PIMAGE Button::chose = NULL;
+int Button::cho = 0;
 Button::Button(int startx, int starty, int wide, int high, int Return, PIMAGE p, PIMAGE p2, PIMAGE p3) //起始点的横坐标 纵坐标 宽度 高度 常态图 选中图 点击图
 {
 	button_x[button_i] = startx;
@@ -63,6 +65,7 @@ Button::~Button()
 		button_h[j] = 0;
 		button_R[j] = 0;
 	}
+	cho = 0;
 	button_i--;
 	
 }
@@ -165,18 +168,29 @@ int Button::pubutton(int startx, int starty, int wide, int high)//执行函数的范围
 	
 	return 0;
 }
-int Button::pubutton(int startx, int starty, int wide, int high,int rectangle_)//执行函数的范围起始点X,Y,宽度，高度
+int Button::pubutton(int startx, int starty, int wide, int high,Time&time,PIMAGE bg)//执行函数的范围起始点X,Y,宽度，高度
 {
 	int k = 0;
 	int nn = 0;
 	int uu = 0;
 	mouse_msg mouse;
-	setcolor(WHITE);
+	int clock = 0;
+
+	setcolor(WHITE); 
 	flushmouse();
 	for (;;)
 
 	{
-
+		for (; !mousemsg();)
+		{
+			putimage(0, 200, 450, 100, bg, 0, 200);
+			clock = time.getRemainTime();
+			xyprintf(70, 200, "Remain Time:%d", clock);       //鼠标不动时时间变动
+			if (clock <= 0){
+				flushmouse();
+				return 1;
+			}
+		}
 		mouse = getmouse();
 		putimage(startx, starty, button_allP);
 
@@ -185,11 +199,11 @@ int Button::pubutton(int startx, int starty, int wide, int high,int rectangle_)/
 			putimage(startx, starty, button_allP);
 			break;//鼠标范围不在执行区域时退出
 		}
-		for (nn = 0; nn < 10 && (k == 0); nn++){
+		for (nn = 0; nn < 20 && (k == 0); nn++){
 
 			if (mouse.x <= button_x[nn] + button_w[nn] && mouse.x >= button_x[nn] && mouse.y <= button_y[nn] + button_h[nn] && mouse.y >= button_y[nn]){
 
-				putimage(startx, starty, button_M[nn]);
+				
 				rectangle(button_x[nn], button_y[nn], button_x[nn] + button_w[nn], button_y[nn] + button_h[nn]);
 				//按钮选中状态
 				//playmusic(A);   选中效果音
@@ -197,9 +211,9 @@ int Button::pubutton(int startx, int starty, int wide, int high,int rectangle_)/
 		}
 
 		if (mouse.is_left())k++;
-		for (nn = 0; nn< 10 && (k == 1); nn++){
+		for (nn = 0; nn< 20 && (k == 1); nn++){
 			if (mouse.x <= button_x[nn] + button_w[nn] && mouse.x >= button_x[nn] && mouse.y <= button_y[nn] + button_h[nn] && mouse.y >= button_y[nn]){
-				putimage(startx, starty, button_O[nn]);
+				
 				rectangle(button_x[nn], button_y[nn], button_x[nn] + button_w[nn], button_y[nn] + button_h[nn]);
 				//按钮按下状态
 
@@ -210,12 +224,80 @@ int Button::pubutton(int startx, int starty, int wide, int high,int rectangle_)/
 
 				if (mouse.x <= button_x[nn] + button_w[nn] && mouse.x >= button_x[nn] && mouse.y <= button_y[nn] + button_h[nn] && mouse.y >= button_y[nn])
 				{// playmusic(B); 按键效果音
-					for (uu = 0; uu < button_i; uu++)
-					{
-						
-
-					}
+					
 				
+
+
+					return button_R[nn];//松开按钮后返回值
+				}
+			}
+			return 0;
+			k = 0;
+		}
+
+	}
+
+	return 0;
+}
+int Button::pubutton(int startx, int starty, int wide, int high, int rectangle_)//执行函数的范围起始点X,Y,宽度，高度，方框模式
+{
+	int k = 0;
+	int nn = 0;
+	int uu = 0;
+	mouse_msg mouse;
+
+	flushmouse();
+
+	for (;;)
+
+	{
+
+		mouse = getmouse();
+		if (cho == 0)putimage(startx, starty, button_allP);
+		if (cho == 1)putimage(startx, starty, chose);
+
+		if (!((mouse.x <= (startx + wide)) && (mouse.x >= startx) && (mouse.y <= (starty + high)) && (mouse.y >= starty)))
+		{
+			if (cho == 0)putimage(startx, starty, button_allP);
+			if (cho == 1)putimage(startx, starty, chose);
+			break;//鼠标范围不在执行区域时退出
+		}
+		for (nn = 0; nn < 20 && (k == 0); nn++){
+
+			if (mouse.x <= button_x[nn] + button_w[nn] && mouse.x >= button_x[nn] && mouse.y <= button_y[nn] + button_h[nn] && mouse.y >= button_y[nn]){
+				setcolor(WHITE);
+				if (cho == 0)putimage(startx, starty, button_allP);
+				if (cho == 1)putimage(startx, starty, chose);
+				rectangle(button_x[nn], button_y[nn], button_x[nn] + button_w[nn], button_y[nn] + button_h[nn]);
+				//按钮选中状态
+				//playmusic(A);   选中效果音
+			}
+		}
+
+		if (mouse.is_left())k++;
+		for (nn = 0; nn< 20 && (k == 1); nn++){
+			if (mouse.x <= button_x[nn] + button_w[nn] && mouse.x >= button_x[nn] && mouse.y <= button_y[nn] + button_h[nn] && mouse.y >= button_y[nn]){
+				putimage(startx, starty, button_allP);
+				setcolor(RED);
+				rectangle(button_x[nn], button_y[nn], button_x[nn] + button_w[nn], button_y[nn] + button_h[nn]);
+
+				//按钮按下状态
+
+			}
+		}
+		if (k == 2){
+			for (nn = 0; nn < 20; nn++){
+
+				if (mouse.x <= button_x[nn] + button_w[nn] && mouse.x >= button_x[nn] && mouse.y <= button_y[nn] + button_h[nn] && mouse.y >= button_y[nn])
+				{// playmusic(B); 按键效果音
+					putimage(startx, starty, button_allP);
+					setcolor(RED);
+					rectangle(button_x[nn], button_y[nn], button_x[nn] + button_w[nn], button_y[nn] + button_h[nn]);
+					delimage(chose);
+					chose = newimage();
+					getimage(chose, startx, starty, wide, high);
+					cho = 1;
+
 
 
 					return button_R[nn];//松开按钮后返回值

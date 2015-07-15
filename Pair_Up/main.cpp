@@ -122,8 +122,7 @@ int init(void)
 {
 	srand((unsigned)time(0));
 	initgraph(Global::x_scr, Global::x_scr);
-	setfont(-100, -49, "Cute");
-	setbkmode(TRANSPARENT);
+	
 	setrendermode(RENDER_AUTO);
 	//setrendermode(RENDER_MANUAL);
 	//yage_init(Global::x_scr, Global::y_scr);
