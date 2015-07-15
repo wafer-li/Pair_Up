@@ -514,5 +514,23 @@
     <Image Include="resource\skin2\Skin2_Piece_4_5.png">
       <Filter>资源文件\Skin 2</Filter>
     </Image>
+    <Image Include="resource\skin2\Skin3_Piece_3_4.png">
+      <Filter>资源文件\Skin 2</Filter>
+    </Image>
+    <Image Include="resource\skin2\Skin3_Piece_3_5.png">
+      <Filter>资源文件\Skin 2</Filter>
+    </Image>
+    <Image Include="resource\skin2\Skin3_Piece_3_0.png">
+      <Filter>资源文件\Skin 2</Filter>
+    </Image>
+    <Image Include="resource\skin2\Skin3_Piece_3_1.png">
+      <Filter>资源文件\Skin 2</Filter>
+    </Image>
+    <Image Include="resource\skin2\Skin3_Piece_3_2.png">
+      <Filter>资源文件\Skin 2</Filter>
+    </Image>
+    <Image Include="resource\skin2\Skin3_Piece_3_3.png">
+      <Filter>资源文件\Skin 2</Filter>
+    </Image>
   </ItemGroup>
 </Project>
