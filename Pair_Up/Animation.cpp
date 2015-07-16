@@ -708,7 +708,7 @@ int Animation::animation_fall_add(Map&oriMap,Score& score,Time& time,int combo)
 	if (newtime > lasttime)
 	{
 		putimage(0, 200, 510, 100, BG, 0, 200);
-		xyprintf(70, 200, "Remain time:");
+		xyprintf(70, 200, "Remain Time:");
 		xyprintf(80, 250, "%d+%d Add ! ", lasttime,newtime-lasttime);
 	}
 	
