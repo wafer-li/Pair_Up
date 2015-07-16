@@ -65,7 +65,7 @@ void g_game()
 
 					clearPiece(newMap);
 
-					newAnimation->animation_disappear(newMap);
+					newAnimation->animation_disappear(newMap,time);
 					removeNum = g_P_S_R(newMap);
 
 					//Change score & level and add time
