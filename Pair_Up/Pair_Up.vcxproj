@@ -251,6 +251,11 @@
     <Image Include="resource\skin3\Skin3_Piece_Special_1.png" />
     <Image Include="resource\skin3\Skin3_Piece_Special_2.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="resource\skin1\bgm.mp3" />
+    <Media Include="resource\skin1\combo.wav" />
+    <Media Include="resource\skin1\disappear.wav" />
+  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

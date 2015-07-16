@@ -31,6 +31,12 @@
     <Filter Include="资源文件\Skin 2">
       <UniqueIdentifier>{fbf5ce97-2565-4099-a683-909479201432}</UniqueIdentifier>
     </Filter>
+    <Filter Include="资源文件\Music">
+      <UniqueIdentifier>{338eaa7b-1e56-4abb-939c-a64b26735cfc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="资源文件\Music\Skin 1">
+      <UniqueIdentifier>{a681626e-ede3-41f4-a78d-4e9ca4094db9}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Map.h">
@@ -571,5 +577,16 @@
     <Image Include="resource\skin2\Skin2_Piece_3_0.png">
       <Filter>资源文件\Skin 2</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <Media Include="resource\skin1\combo.wav">
+      <Filter>资源文件\Music</Filter>
+    </Media>
+    <Media Include="resource\skin1\disappear.wav">
+      <Filter>资源文件\Music</Filter>
+    </Media>
+    <Media Include="resource\skin1\bgm.mp3">
+      <Filter>资源文件\Music\Skin 1</Filter>
+    </Media>
   </ItemGroup>
 </Project>
