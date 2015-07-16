@@ -21,8 +21,6 @@ Piece::Piece(void)
 			specType = 4;//same color
 		if (flag == 1499 || flag == 1500)
 			specType = 5;//unclear
-		//if (flag == 1500)
-		//	specType = 6;//death
 	}
 	type = flag % 6 + 1;
 	//Update7-7:tgf:特殊方块也是有基本属性的
