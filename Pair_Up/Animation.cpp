@@ -53,7 +53,6 @@ Animation::Animation(Option opt, Map map)
 	ss.clear();
 
 
-
 	//////////////////////////////////////////º”‘ÿ‘›Õ£Õº∆¨////////////////////////////
 	game_exit = newimage();
 	game_start = newimage();
