@@ -693,13 +693,15 @@ int Animation::animation_fall_add(Map&oriMap, Score& score, Time& time, int comb
 		}
 	//////////////////////////分数改变//////////////////////////////
 	int newlevel = score.getLevel();
-	putimage(0, 400, 450, 300, BG, 0, 400);
-	xyprintf(70, 400, "%d/%d", score.getScore(), score.getPassScore());
+	putimage(0, 400, 500, 300, BG, 0, 400);
+	xyprintf(70, 400, "Now: %d", score.getScore());
+	xyprintf(70, 450, "Goal: %d", score.getPassScore());
+
 	if ((newlevel > lastlevel) && (newlevel != 1))
 	{
-		xyprintf(70, 450, "level %d up！", score.getLevel());
+		xyprintf(70, 500, "level %d up！", score.getLevel());
 	}
-	else{ xyprintf(70, 450, "level %d", score.getLevel()); }
+	else{ xyprintf(70, 500, "level %d", score.getLevel()); }
 	lastlevel = newlevel;
 	/////////////////////////////播放动画///////////////////////////
 
