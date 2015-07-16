@@ -32,6 +32,10 @@ private:
 	 PIMAGE game_start;
 	 PIMAGE game_exit;
 	 PIMAGE COMBO;
+	 MUSIC music_disappear;
+	 MUSIC music_combo;
+	 MUSIC music_bgm;
+	
 	
 public:
 	Animation();
@@ -51,5 +55,7 @@ public:
 	 int animation_fall_add(Map&oriMap,Score& score,int combo);
 	 int animation_stop(void);
 	 int animation_combo();
+	 void music_stop();
+	 void music_start();
 };
 #endif;

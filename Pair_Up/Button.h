@@ -22,6 +22,8 @@ private:
 	static PIMAGE button_O[20];     //按下状态截图
 	static PIMAGE chose;           //红框截图
 	static int cho;   //用于选中判断
+	static MUSIC music_button_m;
+	static MUSIC music_button_o;
 public:
 	
 	Button(int startx, int starty, int wide, int high, int Return, PIMAGE p, PIMAGE p2, PIMAGE p3);//按钮起始点的横坐标 纵坐标 宽度 高度 常态图 选中图 点击图

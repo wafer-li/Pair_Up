@@ -2,7 +2,7 @@
 
 //gameMode entrance
 void g_game()
-{	
+{
 	//initialize font
 	setfont(-40, -20, "Cute");
 	setbkmode(TRANSPARENT);
@@ -15,7 +15,7 @@ void g_game()
 	bool isDeadMap = false;
 	bool isExpMax = false;
 	bool pauseGame = false;
-
+	
 	Option option;
 	Map & newMap = g_makeMap();
 	Animation* newAnimation = new Animation(option, newMap);
@@ -27,10 +27,10 @@ void g_game()
 	Button* button_back = new Button(300, 700, 100, 100, 2, p_button_back);
 
 	Button::setbutton(0, 650, 520, 200);
-
-
+	
+	newAnimation->music_start();
 	newAnimation->animation_add();
-
+	
 
 	Score score;
 	Time time;
@@ -39,7 +39,8 @@ void g_game()
 	{
 		isDeadMap = newMap.g_isDeadMap();
 		//+if(button.exit_inGame())
-
+		if (pauseGame){}
+		else{
 			if (isDeadMap)
 			{
 				if (!time.isStop())
@@ -53,15 +54,15 @@ void g_game()
 			else
 			{
 				/*
-				1.用户点下去
-				2.拖动-播放动画
-				|-不合法
-				|-合法-Map 交换数据(int,int,int,int,Map&)-bool g_checkMap(Map)-
-				|-不可消除-换回数据-播放动画
-				|-可消除-g-P-S-R-
-				*/
+					1.用户点下去
+					2.拖动-播放动画
+					|-不合法
+					|-合法-Map 交换数据(int,int,int,int,Map&)-bool g_checkMap(Map)-
+					|-不可消除-换回数据-播放动画
+					|-可消除-g-P-S-R-
+					*/
 
-
+				
 				//Judge and Disappear loop
 				for (int combo = 1; g_checkMap(newMap) == 1; combo++)
 				{
@@ -92,10 +93,10 @@ void g_game()
 					}
 					exit_sign = newAnimation->puanimation(519, 52, 519 + 900, 52 + 900, newMap, time);
 					time.pauseTime();
-					if (exit_sign)
-					{
-						break;
-					}
+					 if (exit_sign)
+					 {
+						 break;
+					 }
 				}
 				else
 				{
@@ -105,9 +106,12 @@ void g_game()
 				//+isExpMax();
 			}
 		}
+	}
+	newAnimation->music_stop();
 	l_inRanking(score.getScore());//Record score, disaplay in leaderboard if the top five
 	delete button_stop;
 	delete button_back;
+	delete newAnimation;
 
 }
 
@@ -167,7 +171,7 @@ int g_P_S_R(Map& oriMap)
 	return removeNum;
 }
 Map & g_makeMap()
-{
+{	
 	Map *myMap = new Map();
 	Map &newMap = *myMap;
 	//Map newmap;

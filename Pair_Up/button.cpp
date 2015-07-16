@@ -14,6 +14,8 @@ PIMAGE Button::button_M[20] = { NULL };
 PIMAGE Button::button_O[20] = { NULL };
 PIMAGE Button::chose = NULL;
 int Button::cho = 0;
+MUSIC Button::music_button_o;
+MUSIC Button::music_button_m;
 Button::Button(int startx, int starty, int wide, int high, int Return, PIMAGE p, PIMAGE p2, PIMAGE p3) //起始点的横坐标 纵坐标 宽度 高度 常态图 选中图 点击图
 {
 	button_x[button_i] = startx;
@@ -24,6 +26,8 @@ Button::Button(int startx, int starty, int wide, int high, int Return, PIMAGE p,
 	button_P[button_i] = p;
 	button_P2[button_i] = p2;
 	button_P3[button_i] = p3;
+	music_button_m.OpenFile("resource//button_m.wav");
+	music_button_o.OpenFile("resource//button_o.mp3");
 	if (button_i == 0)
 	{
 		button_RP = newimage();
@@ -135,7 +139,7 @@ int Button::pubutton(int startx, int starty, int wide, int high)//执行函数的范围
 			if (mouse.x <= button_x[nn] + button_w[nn] && mouse.x >= button_x[nn] && mouse.y <= button_y[nn] + button_h[nn] && mouse.y >= button_y[nn]){
 				
 				putimage(startx, starty, button_M[nn]);
-				
+				music_button_m.Play(0);
 			//按钮选中状态
 				//playmusic(A);   选中效果音
 			}
@@ -153,10 +157,9 @@ int Button::pubutton(int startx, int starty, int wide, int high)//执行函数的范围
 			for ( nn = 0; nn < 10; nn++){
 				
 				if (mouse.x <= button_x[nn] + button_w[nn] && mouse.x >= button_x[nn] && mouse.y <= button_y[nn] + button_h[nn] && mouse.y >= button_y[nn])
-				{// playmusic(B); 按键效果音
-					
-					
-
+				{
+					music_button_o.Play(0);
+					// playmusic(B); 按键效果音
 					return button_R[nn];//松开按钮后返回值
 				}
 			}
