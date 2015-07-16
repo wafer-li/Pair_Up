@@ -81,7 +81,7 @@ void g_game()
 						continue;
 					}
 
-					newAnimation->animation_fall_add(newMap, score, combo);
+					newAnimation->animation_fall_add(newMap, score,time, combo);
 				}
 
 				isDeadMap = newMap.g_isDeadMap();

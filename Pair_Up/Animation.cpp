@@ -671,34 +671,48 @@ int Animation::animation_click(int i1, int n1, Map&oriMap,Time&time)            
 
 	return left;
 }
-int Animation::animation_fall_add(Map&oriMap,Score& score, int combo)
+int Animation::animation_fall_add(Map&oriMap, Score& score, Time& time, int combo)
 {
 	int i_ = 0, n_ = 0, d_ = 0, c_ = 0;//c_用于判断动画是否结束
 	////////////////////更新数据////////////////////////////////
 	for (i_ = 0; i_ < 9; i_++)
-	for (n_ = 0; n_ < 9; n_++)
-	{
-		if (oriMap.getMaplists()[n_][8 - i_].getSpecType() != 0)
+		for (n_ = 0; n_ < 9; n_++)
 		{
-			//P[i_][n_] = STYPE[(map.getMaplists()[n_][8 - i_].getType()) - 1][(map.getMaplists()[n_][8 - i_].getSpecType())-1 ];
-			PIECE[i_][n_] = TYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1][(oriMap.getMaplists()[n_][8 - i_].getSpecType())];
+			if (oriMap.getMaplists()[n_][8 - i_].getSpecType() != 0)
+			{
+				//P[i_][n_] = STYPE[(map.getMaplists()[n_][8 - i_].getType()) - 1][(map.getMaplists()[n_][8 - i_].getSpecType())-1 ];
+				PIECE[i_][n_] = TYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1][(oriMap.getMaplists()[n_][8 - i_].getSpecType())];
+			}
+			else {
+				//P[i_][n_] = TYPE[(map.getMaplists()[n_][8 - i_].getType()) - 1];
+				PIECE[i_][n_] = TYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1][0];
+			}
+
+
+
 		}
-		else {
-			//P[i_][n_] = TYPE[(map.getMaplists()[n_][8 - i_].getType()) - 1];
-			PIECE[i_][n_] = TYPE[(oriMap.getMaplists()[n_][8 - i_].getType()) - 1][0];
-		}
-
-
-
-	}
 	//////////////////////////分数改变//////////////////////////////
 	int newlevel = score.getLevel();
 	putimage(0, 400, 450, 300, BG, 0, 400);
-	xyprintf(70, 400, "Now:%d", score.getScore());
-	xyprintf(70, 550, "Atp:%d", score.getPassScore());
-	xyprintf(70, 600, "level %d", score.getLevel());
-
+	xyprintf(70, 400, "%d/%d", score.getScore(), score.getPassScore());
+	if ((newlevel > lastlevel) && (newlevel != 1))
+	{
+		xyprintf(70, 450, "level %d up！", score.getLevel());
+	}
+	else{ xyprintf(70, 450, "level %d", score.getLevel()); }
+	lastlevel = newlevel;
 	/////////////////////////////播放动画///////////////////////////
+
+	/////////////////////////加时间动画//////////////////////////////
+	int newtime = time.getRemainTime();
+	if (newtime > lasttime)
+	{
+		putimage(0, 200, 510, 100, BG, 0, 200);
+		xyprintf(70, 200, "Remain Time:");
+		xyprintf(80, 250, "%d+%d Add ! ", lasttime, newtime - lasttime);
+	}
+
+	/////////////掉落动画//////////////////////////////////////////////
 
 	for (i_ = 0, n_ = 0, d_ = 0; d_ <= h * 9; d_ += Global::speed, i_ = 0, n_ = 0, c_ = 0, delay_fps(Global::delay_add))
 	{
@@ -711,18 +725,18 @@ int Animation::animation_fall_add(Map&oriMap,Score& score, int combo)
 			for (n_ = 0; n_ < 9; n_++)
 			{
 
-				if ((fall[i_][n_] * h>d_)&&(fall[i_][n_]!=0))
+				if ((fall[i_][n_] * h>d_) && (fall[i_][n_] != 0))
 				{
-					
+
 					if (((y[i_][n_] - (fall[i_][n_]) * h + d_) <= y[0][0]) && ((y[i_][n_] - (fall[i_][n_]) * h + d_) >= (y[0][0] - h)))
-						putimage_transparent(NULL, PIECE[i_][n_], x[i_][n_], y[0][0], BLACK, 0, (y[0][0] - (y[i_][n_] - (fall[i_][n_]) * h + d_)),w ,(h - (y[0][0] - (y[i_][n_] - (fall[i_][n_]) * h + d_))));
+						putimage_transparent(NULL, PIECE[i_][n_], x[i_][n_], y[0][0], BLACK, 0, (y[0][0] - (y[i_][n_] - (fall[i_][n_]) * h + d_)), w, (h - (y[0][0] - (y[i_][n_] - (fall[i_][n_]) * h + d_))));
 
 					if ((y[i_][n_] - (fall[i_][n_]) * h + d_)>y[0][0])
 						putimage_transparent(NULL, PIECE[i_][n_], x[i_][n_], y[i_][n_] - (fall[i_][n_]) * h + d_, BLACK);
 					c_++;
 				}
-				else { 
-					putimage_transparent(NULL, PIECE[i_][n_], x[i_][n_], y[i_][n_], BLACK); 
+				else {
+					putimage_transparent(NULL, PIECE[i_][n_], x[i_][n_], y[i_][n_], BLACK);
 				}
 
 			}
