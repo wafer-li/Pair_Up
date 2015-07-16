@@ -3,6 +3,7 @@
 //gameMode entrance
 void g_game()
 {
+	setcolor(WHITE);
 	setfont(-40, -20, "Cute");
 	setbkmode(TRANSPARENT);
 	//partial variable
