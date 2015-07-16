@@ -2,9 +2,11 @@
 
 //gameMode entrance
 void g_game()
-{
+{	
+	//initialize font
 	setfont(-40, -20, "Cute");
 	setbkmode(TRANSPARENT);
+	setcolor(EGERGB(255,255,255));
 	//partial variable
 	//Piece.type means basic elements of piece
 	//Piece.specType means special piece 
