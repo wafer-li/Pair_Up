@@ -5,6 +5,7 @@ void g_game()
 {
 	setfont(-40, -20, "Cute");
 	setbkmode(TRANSPARENT);
+	setcolor(WHITE);
 	//partial variable
 	//Piece.type means basic elements of piece
 	//Piece.specType means special piece 
@@ -13,22 +14,22 @@ void g_game()
 	bool isDeadMap = false;
 	bool isExpMax = false;
 	bool pauseGame = false;
-	
+
 	Option option;
 	Map & newMap = g_makeMap();
 	Animation* newAnimation = new Animation(option, newMap);
 	PIMAGE p_button_back = newimage();
 	PIMAGE p_button_stop = newimage();
-	getimage(p_button_back, "resource\\skin3\\Skin3_Piece_Special_1.png", 0, 0);
-	getimage(p_button_stop, "resource\\skin3\\Skin3_Piece_Special_2.png", 0, 0);
+	getimage(p_button_back,"resource\\g_ctn.png" , 0, 0);
+	getimage(p_button_stop, "resource\\g_Exit.png", 0, 0);
 	Button* button_stop = new Button(150, 700, 100, 100, 1, p_button_stop);
 	Button* button_back = new Button(300, 700, 100, 100, 2, p_button_back);
 
 	Button::setbutton(0, 650, 520, 200);
-	
-	
+
+	newAnimation->music_start();
 	newAnimation->animation_add();
-	
+
 
 	Score score;
 	Time time;
@@ -42,23 +43,23 @@ void g_game()
 			if (isDeadMap)
 			{
 				g_deleteMap(newMap);
-				Map & newMap= g_makeMap();
+				Map & newMap = g_makeMap();
 				newAnimation->animation_newmap(newMap);
 			}
 			else
 			{
 				/*
-					1.用户点下去
-					2.拖动-播放动画
-					|-不合法
-					|-合法-Map 交换数据(int,int,int,int,Map&)-bool g_checkMap(Map)-
-					|-不可消除-换回数据-播放动画
-					|-可消除-g-P-S-R-
-					*/
+				1.用户点下去
+				2.拖动-播放动画
+				|-不合法
+				|-合法-Map 交换数据(int,int,int,int,Map&)-bool g_checkMap(Map)-
+				|-不可消除-换回数据-播放动画
+				|-可消除-g-P-S-R-
+				*/
 
-				
+
 				//Judge and Disappear loop
-				for (int combo = 0; g_checkMap(newMap) == 1;combo ++)
+				for (int combo = 1; g_checkMap(newMap) == 1; combo++)
 				{
 					int removeNum = 0;
 
@@ -75,17 +76,19 @@ void g_game()
 						continue;
 					}
 
-					newAnimation->animation_fall_add(newMap,score,time,combo);
+					newAnimation->animation_fall_add(newMap, score, time, combo);
 				}
 
 				isDeadMap = newMap.g_isDeadMap();
 				if (!isDeadMap)
 				{
-					 exit_sign = newAnimation->puanimation(519, 52, 519+900, 52+900,newMap,time);
-					 if (exit_sign)
-					 {
-						 break;
-					 }
+					time.resumeTime();
+					exit_sign = newAnimation->puanimation(519, 52, 519 + 900, 52 + 900, newMap, time);
+					time.pauseTime();
+					if (exit_sign)
+					{
+						break;
+					}
 				}
 				else
 				{
@@ -96,9 +99,11 @@ void g_game()
 			}
 		}
 	}
+	newAnimation->music_stop();
 	l_inRanking(score.getScore());//Record score, disaplay in leaderboard if the top five
 	delete button_stop;
 	delete button_back;
+	delete newAnimation;
 
 }
 
@@ -111,64 +116,7 @@ void swapPiece(int x1, int y1, int x2, int y2, Map& map)
 //Judge the Map for clearable
 //Judge the whole map
 //Do NOT change the Piece.isClearable
-
-//bool g_checkMap(Map & map)
-//{
-//	//行检查
-//	for (int i = 0; i < 9; i++)
-//	{
-//		for (int j = 0; j < 8; j++)
-//		{
-//			for (int k = 0;; k++)
-//			{
-//				if (k == 2)//k = 2意味着出现三个一块
-//				{
-//					return true;
-//				}
-//				if (j == 8)//防止第8和第9块同色时，继续比较而造成越界
-//					break;
-//				if (map.getMaplists()[i][j].getType() == map.getMaplists()[i][j + 1].getType())//方块检查后j++调整j值
-//				{
-//					j++;
-//					if (map.getMaplists()[i][j].getSpecType() == 5)//这里也进行了特殊方块检查
-//					{
-//						break;
-//					}
-//				}
-//				else
-//					break;//若方块颜色不对，那么不进行上述的状态调整过程
-//			}
-//		}
-//	}
-//	//列检查：方式相同
-//	for (int i = 0; i < 9; i++)
-//	{
-//		for (int j = 0; j < 8; j++)
-//		{
-//			for (int k = 0;; k++)
-//			{
-//				if (k == 2)
-//				{
-//					return true;
-//				}
-//				if (j == 8)
-//					break;
-//				if (map.getMaplists()[j][i].getType() == map.getMaplists()[j + 1][i].getType())
-//				{
-//					j++;
-//					if (map.getMaplists()[i][j].getSpecType() == 5)//这里也进行了特殊方块检查
-//					{
-//						break;
-//					}
-//				}
-//				else
-//					break;
-//			}
-//		}
-//	}
-//	return false;
-//}
-
+//Origin editor: Jushe
 //GMT+9 2015/7/13 14:30
 //Rewrite by Wafer
 bool g_checkMap(Map & map)
@@ -215,7 +163,7 @@ int g_P_S_R(Map& oriMap)
 	return removeNum;
 }
 Map & g_makeMap()
-{	
+{
 	Map *myMap = new Map();
 	Map &newMap = *myMap;
 	//Map newmap;
@@ -234,16 +182,4 @@ void g_replenishMap(Map& oriMap)
 void g_deleteMap(Map& deadMap)
 {
 	delete &deadMap;
-}
-
-//return the score by the cleared number and the combo number
-int g_score(int num, int com)
-{
-	if (num >= 3)
-	{
-		return int(30.0 * pow(1.5, num - 3) * com);
-	}
-	else
-		//it is possible that just clear 2 Piece even 1 piece
-		return 30;
 }
