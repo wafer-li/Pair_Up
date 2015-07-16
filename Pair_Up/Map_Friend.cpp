@@ -246,13 +246,13 @@ void deal_SpecPiece(int i, int n, Map& map)
 				}
 			}
 		if ((i > 0) && (n > 0))
-			if (map.maplists[i - 1][n].getSpecType() == 5)
+			if (map.maplists[i - 1][n - 1].getSpecType() == 5)
 			{
-				map.maplists[i - 1][n].setIsClear(0);
+				map.maplists[i - 1][n - 1].setIsClear(0);
 			}
 			else
 			{
-				if (map.maplists[i - 1][n].getIsClear() == 1)// don not need to judge itself
+				if (map.maplists[i - 1][n - 1].getIsClear() == 1)// don not need to judge itself
 				{
 				}
 				else
