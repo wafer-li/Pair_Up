@@ -13,7 +13,6 @@ void g_game()
 	int restOfLive = 6; //³õÊ¼ÉúÃüÖµ
 	int exit_sign = 0;
 	bool isDeadMap = false;
-	bool isExpMax = false;
 	bool pauseGame = false;
 
 	Option option;
