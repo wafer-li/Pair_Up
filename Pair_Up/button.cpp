@@ -164,7 +164,6 @@ int Button::pubutton(int startx, int starty, int wide, int high)//Ö´ÐÐº¯ÊýµÄ·¶Î§
 				}
 			}
 			return 0;
-			k = 0;
 		}
 		
 	}
@@ -237,7 +236,6 @@ int Button::pubutton(int startx, int starty, int wide, int high,Time&time,PIMAGE
 				}
 			}
 			return 0;
-			k = 0;
 		}
 
 	}
@@ -309,7 +307,6 @@ int Button::pubutton(int startx, int starty, int wide, int high, int rectangle_)
 				}
 			}
 			return 0;
-			k = 0;
 		}
 
 	}
