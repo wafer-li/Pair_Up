@@ -690,8 +690,9 @@ int Animation::animation_fall_add(Map&oriMap,Score& score, int combo)
 	}
 	//////////////////////////分数改变//////////////////////////////
 	putimage(0, 400, 450, 300, BG, 0, 400);
-	xyprintf(70, 400, "%d/%d", score.getScore(), score.getPassScore());
-	xyprintf(70, 450, "level %d", score.getLevel());
+	xyprintf(70, 400, "Now:%d", score.getScore());
+	xyprintf(70, 550, "Atp:%d", score.getPassScore());
+	xyprintf(70, 600, "level %d", score.getLevel());
 
 	/////////////////////////////播放动画///////////////////////////
 
