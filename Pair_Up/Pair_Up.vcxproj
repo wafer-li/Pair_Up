@@ -47,11 +47,15 @@
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
+      <BrowseInformation>true</BrowseInformation>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>graphics13.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <Bscmake>
+      <PreserveSbr>true</PreserveSbr>
+    </Bscmake>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -292,6 +296,15 @@
     <Media Include="resource\skin1\bgm.mp3" />
     <Media Include="resource\skin1\combo.wav" />
     <Media Include="resource\skin1\disappear.wav" />
+    <Media Include="resource\skin2\bgm.mp3" />
+    <Media Include="resource\skin2\combo.wav" />
+    <Media Include="resource\skin2\disappear.wav" />
+    <Media Include="resource\skin3\bgm.mp3" />
+    <Media Include="resource\skin3\combo.wav" />
+    <Media Include="resource\skin3\disappear.wav" />
+    <Media Include="resource\skin4\bgm.mp3" />
+    <Media Include="resource\skin4\combo.wav" />
+    <Media Include="resource\skin4\disappear.wav" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

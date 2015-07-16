@@ -702,14 +702,41 @@
     </Image>
   </ItemGroup>
   <ItemGroup>
-    <Media Include="resource\skin1\combo.wav">
-      <Filter>资源文件\Music</Filter>
-    </Media>
-    <Media Include="resource\skin1\disappear.wav">
-      <Filter>资源文件\Music</Filter>
-    </Media>
     <Media Include="resource\skin1\bgm.mp3">
       <Filter>资源文件\Music\Skin 1</Filter>
+    </Media>
+    <Media Include="resource\skin1\combo.wav">
+      <Filter>资源文件\Music\Skin 1</Filter>
+    </Media>
+    <Media Include="resource\skin1\disappear.wav">
+      <Filter>资源文件\Music\Skin 1</Filter>
+    </Media>
+    <Media Include="resource\skin4\bgm.mp3">
+      <Filter>资源文件\Music\Skin 4</Filter>
+    </Media>
+    <Media Include="resource\skin4\combo.wav">
+      <Filter>资源文件\Music\Skin 4</Filter>
+    </Media>
+    <Media Include="resource\skin4\disappear.wav">
+      <Filter>资源文件\Music\Skin 4</Filter>
+    </Media>
+    <Media Include="resource\skin3\bgm.mp3">
+      <Filter>资源文件\Music\Skin 3</Filter>
+    </Media>
+    <Media Include="resource\skin3\combo.wav">
+      <Filter>资源文件\Music\Skin 3</Filter>
+    </Media>
+    <Media Include="resource\skin3\disappear.wav">
+      <Filter>资源文件\Music\Skin 3</Filter>
+    </Media>
+    <Media Include="resource\skin2\bgm.mp3">
+      <Filter>资源文件\Music\Skin 2</Filter>
+    </Media>
+    <Media Include="resource\skin2\combo.wav">
+      <Filter>资源文件\Music\Skin 2</Filter>
+    </Media>
+    <Media Include="resource\skin2\disappear.wav">
+      <Filter>资源文件\Music\Skin 2</Filter>
     </Media>
   </ItemGroup>
 </Project>
