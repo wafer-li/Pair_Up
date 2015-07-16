@@ -15,7 +15,7 @@ void g_game()
 	bool isDeadMap = false;
 	bool isExpMax = false;
 	bool pauseGame = false;
-	
+
 	Option option;
 	Map & newMap = g_makeMap();
 	Animation* newAnimation = new Animation(option, newMap);
@@ -27,10 +27,10 @@ void g_game()
 	Button* button_back = new Button(300, 700, 100, 100, 2, p_button_back);
 
 	Button::setbutton(0, 650, 520, 200);
-	
+
 	newAnimation->music_start();
 	newAnimation->animation_add();
-	
+
 
 	Score score;
 	Time time;
@@ -54,15 +54,15 @@ void g_game()
 			else
 			{
 				/*
-					1.用户点下去
-					2.拖动-播放动画
-					|-不合法
-					|-合法-Map 交换数据(int,int,int,int,Map&)-bool g_checkMap(Map)-
-					|-不可消除-换回数据-播放动画
-					|-可消除-g-P-S-R-
-					*/
+				1.用户点下去
+				2.拖动-播放动画
+				|-不合法
+				|-合法-Map 交换数据(int,int,int,int,Map&)-bool g_checkMap(Map)-
+				|-不可消除-换回数据-播放动画
+				|-可消除-g-P-S-R-
+				*/
 
-				
+
 				//Judge and Disappear loop
 				for (int combo = 1; g_checkMap(newMap) == 1; combo++)
 				{
@@ -70,7 +70,7 @@ void g_game()
 
 					clearPiece(newMap);
 
-					newAnimation->animation_disappear(newMap);
+					newAnimation->animation_disappear(newMap,time);
 					removeNum = g_P_S_R(newMap);
 
 					//Change score & level and add time
@@ -89,14 +89,14 @@ void g_game()
 				{
 					if (time.isStop())
 					{
-						time.resumeTime();
+					time.resumeTime();
 					}
 					exit_sign = newAnimation->puanimation(519, 52, 519 + 900, 52 + 900, newMap, time);
 					time.pauseTime();
-					 if (exit_sign)
-					 {
-						 break;
-					 }
+					if (exit_sign)
+					{
+						break;
+					}
 				}
 				else
 				{
@@ -171,7 +171,7 @@ int g_P_S_R(Map& oriMap)
 	return removeNum;
 }
 Map & g_makeMap()
-{	
+{
 	Map *myMap = new Map();
 	Map &newMap = *myMap;
 	//Map newmap;

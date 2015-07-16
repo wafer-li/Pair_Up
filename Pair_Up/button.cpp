@@ -186,9 +186,11 @@ int Button::pubutton(int startx, int starty, int wide, int high,Time&time,PIMAGE
 	{
 		for (; !mousemsg();)
 		{
-			putimage(0, 200, 450, 100, bg, 0, 200);
+		
+			putimage(0, 200, 510, 100, bg, 0, 200);
 			clock = time.getRemainTime();
-			xyprintf(70, 200, "Remain Time:%d", clock);       //鼠标不动时时间变动
+			xyprintf(70, 200, "Remain Time:");
+			xyprintf(70, 250, "%d", clock);      //鼠标不动时时间变动
 			if (clock <= 0){
 				flushmouse();
 				return 1;
