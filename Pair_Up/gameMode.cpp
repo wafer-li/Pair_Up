@@ -75,13 +75,18 @@ void g_game()
 						continue;
 					}
 
-					newAnimation->animation_fall_add(newMap, score, time, combo);
+					newAnimation->animation_fall_add(newMap, score, combo);
 				}
 
 				isDeadMap = newMap.g_isDeadMap();
 				if (!isDeadMap)
 				{
+					if (time.isStop())
+					{
+						time.resumeTime();
+					}
 					exit_sign = newAnimation->puanimation(519, 52, 519 + 900, 52 + 900, newMap, time);
+					time.pauseTime();
 					if (exit_sign)
 					{
 						break;
