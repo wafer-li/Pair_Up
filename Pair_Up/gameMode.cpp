@@ -39,8 +39,6 @@ void g_game()
 	{
 		isDeadMap = newMap.g_isDeadMap();
 		//+if(button.exit_inGame())
-		if (pauseGame){}
-		else{
 			if (isDeadMap)
 			{
 				if (!time.isStop())
@@ -105,7 +103,6 @@ void g_game()
 
 				//+isExpMax();
 			}
-		}
 	}
 	newAnimation->music_stop();
 	l_inRanking(score.getScore());//Record score, disaplay in leaderboard if the top five
