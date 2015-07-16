@@ -49,9 +49,9 @@ int optionBK(){
 		B_BG[i] = new Button(x1 + (i - 8) * n_x, y1 + 2 * n_y, w, h - 10, i + 1, P_BG[i]);
 	}
 
-
+	Button::setbutton(Global::x_0, Global::y_0, Global::x_scr, Global::y_scr);
 	while (mouseCheck != -1 && mouseCheck != -2 && mouseCheck != -3){
-		Button::setbutton(Global::x_0, Global::y_0, Global::x_scr, Global::y_scr);
+		
 		mouseCheck = Button::pubutton(Global::x_0, Global::y_0, Global::x_scr, Global::y_scr, 1);
 		if (1 <= mouseCheck && mouseCheck < 13){
 			check = mouseCheck;
@@ -121,9 +121,10 @@ int optionSK(){
 	{
 		B_SK[i] = new Button(x1 + (i - 2) * n_x, y1 + 1 * n_y, w, h - 10, i + 1, P_SK[i]);
 	}
-	//___________________init______________________________
+	//___________________init______________________________		
+	Button::setbutton(Global::x_0, Global::y_0, Global::x_scr, Global::y_scr);
 	while (mouseCheck != -1 && mouseCheck != -2 && mouseCheck != -3){
-		Button::setbutton(Global::x_0, Global::y_0, Global::x_scr, Global::y_scr);
+
 		mouseCheck = Button::pubutton(Global::x_0, Global::y_0, Global::x_scr, Global::y_scr, 1);
 		if (1 <= mouseCheck && mouseCheck < 5)
 			trans = mouseCheck;
