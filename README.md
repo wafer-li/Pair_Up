@@ -2,4 +2,4 @@
 A simple game
 
 Base on:
-[EGE](http://xege.org/)
+[EGE](https://github.com/misakamm/xege)
