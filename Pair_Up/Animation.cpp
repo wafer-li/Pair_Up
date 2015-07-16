@@ -709,7 +709,7 @@ int Animation::animation_fall_add(Map&oriMap,Score& score,Time& time,int combo)
 	{
 		putimage(0, 200, 510, 100, BG, 0, 200);
 		xyprintf(70, 200, "Remain time:");
-		xyprintf(80, 250, "Add ! %d+%d", lasttime,newtime-lasttime);
+		xyprintf(80, 250, "%d+%d Add ! ", lasttime,newtime-lasttime);
 	}
 	
 	/////////////µôÂä¶¯»­//////////////////////////////////////////////
