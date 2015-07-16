@@ -36,6 +36,7 @@ private:
 	 MUSIC music_combo;
 	 MUSIC music_bgm;
 	
+	
 public:
 	Animation();
 	Animation(Option opt , Map map);                
