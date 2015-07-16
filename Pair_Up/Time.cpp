@@ -32,7 +32,7 @@ int Time::countRemainTime()
 	}
 	else    //The Time is pause
 	{
-		remainTimeBuffer = timeAmount - (stopPoint - startPoint);
+		remainTimeBuffer = timeAmount - ((stopPoint - pauseTimeBuffer) - startPoint);
 	}
 	return int(remainTimeBuffer + 0.5);
 }
