@@ -41,6 +41,10 @@ void g_game()
 		else{
 			if (isDeadMap)
 			{
+				if (!time.isStop())
+				{
+					time.pauseTime();
+				}
 				g_deleteMap(newMap);
 				Map & newMap = g_makeMap();
 				newAnimation->animation_newmap(newMap);
