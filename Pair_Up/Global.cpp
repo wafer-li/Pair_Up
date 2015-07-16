@@ -34,11 +34,11 @@ const int Global::speed = 4;
 
 //Time
 //seconds
-const double Global::INIT_TIME = 30;	
-const double Global::ADDTIME_L1 = 15;
-const double Global::ADDTIME_L2 = 20;
-const double Global::ADDTIME_L3 = 25;
-const double Global::ADDTIME_L4 = 30;
+const double Global::INIT_TIME = 60;	
+const double Global::ADDTIME_L1 = 30;
+const double Global::ADDTIME_L2 = 40;
+const double Global::ADDTIME_L3 = 50;
+const double Global::ADDTIME_L4 = 60;
 
 //PassScore
 const int Global::FIRST_PASSSCORE = 1000;

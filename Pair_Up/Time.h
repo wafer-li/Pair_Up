@@ -13,9 +13,12 @@ private:
 	double stopPoint;
 	double changePoint;
 	double startPoint;
+	double resumePoint;
+
+	double pauseTimeBuffer;
 
 	//isStop
-	bool isStop;
+	bool stopFlag;
 
 	/* Private Method */
 	int countRemainTime();
@@ -33,6 +36,9 @@ public:
 
 	//ResumeTime
 	void resumeTime();
+
+	//isStop
+	bool isStop();
 
 	//addTime
 	//When level up

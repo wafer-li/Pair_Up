@@ -32,6 +32,12 @@ private:
 	 PIMAGE game_start;
 	 PIMAGE game_exit;
 	 PIMAGE COMBO;
+	 MUSIC music_disappear;
+	 MUSIC music_combo;
+	 MUSIC music_bgm;
+	 int lasttime;
+	 int lastlevel;
+	
 	
 public:
 	Animation();
@@ -42,14 +48,16 @@ public:
 	int animation_change(int i1, int n1, int startx, int starty, int wide, int high, Map&oriMap,Time&time);   //i1 n1为方块下标 i1为行 n1为列
 	 int animation_restore(int i1, int n1, int i2, int n2);
 	 int animation_move(int i1, int n1, int i2, int n2);
-	 int animation_disappear(Map&oriMap);
+	 int animation_disappear(Map&oriMap,Time&time);
 	 int animation_fall(Map&oriMap);
 	 int animation_add(void);
 	 int animation_add(Map&oriMap);
 	 int animation_newmap(Map&oriMap);
 	 int animation_click(int i1,int n1, Map&oriMap,Time&time);
-	 int animation_fall_add(Map&oriMap,Score& score,Time&time,int combo);
+	 int animation_fall_add(Map&oriMap,Score& score,int combo);
 	 int animation_stop(void);
 	 int animation_combo();
+	 void music_stop();
+	 void music_start();
 };
 #endif;

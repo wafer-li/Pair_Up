@@ -8,21 +8,19 @@ Piece::Piece(void)
 	isClear = 0;
 	specType = 0;//initialize it as a normal piece
 	int flag = rand() % 1500 + 1;
-	if (flag >= 1490)
+	if (flag >= 1400)
 	{
 		//1490-1500   p:3 3 1 1 1 1
-		if (flag >= 1491 && flag < 1494)
+		if (flag >= 1400 && flag < 1430)
 			specType = 1;//line
-		if (flag >= 1494 && flag < 1497)
+		if (flag >= 1430 && flag < 1460)
 			specType = 2;//row
-		if (flag == 1497)
+		if (flag >= 1460 && flag < 1480)
 			specType = 3;//box
-		if (flag == 1498)
+		if (flag >= 1480 && flag < 1495)
 			specType = 4;//same color
-		if (flag == 1499 || flag == 1500)
+		if (flag >= 1495 && flag < 1501)
 			specType = 5;//unclear
-		//if (flag == 1500)
-		//	specType = 6;//death
 	}
 	type = flag % 6 + 1;
 	//Update7-7:tgf:特殊方块也是有基本属性的

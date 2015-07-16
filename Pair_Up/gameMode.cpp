@@ -3,8 +3,10 @@
 //gameMode entrance
 void g_game()
 {
+	//initialize font
 	setfont(-40, -20, "Cute");
 	setbkmode(TRANSPARENT);
+	setcolor(EGERGB(255,255,255));
 	//partial variable
 	//Piece.type means basic elements of piece
 	//Piece.specType means special piece 
@@ -26,7 +28,7 @@ void g_game()
 
 	Button::setbutton(0, 650, 520, 200);
 
-
+	newAnimation->music_start();
 	newAnimation->animation_add();
 
 
@@ -41,6 +43,10 @@ void g_game()
 		else{
 			if (isDeadMap)
 			{
+				if (!time.isStop())
+				{
+					time.pauseTime();
+				}
 				g_deleteMap(newMap);
 				Map & newMap = g_makeMap();
 				newAnimation->animation_newmap(newMap);
@@ -64,7 +70,7 @@ void g_game()
 
 					clearPiece(newMap);
 
-					newAnimation->animation_disappear(newMap);
+					newAnimation->animation_disappear(newMap,time);
 					removeNum = g_P_S_R(newMap);
 
 					//Change score & level and add time
@@ -75,13 +81,18 @@ void g_game()
 						continue;
 					}
 
-					newAnimation->animation_fall_add(newMap, score, time, combo);
+					newAnimation->animation_fall_add(newMap, score, combo);
 				}
 
 				isDeadMap = newMap.g_isDeadMap();
 				if (!isDeadMap)
 				{
+					if (time.isStop())
+					{
+					time.resumeTime();
+					}
 					exit_sign = newAnimation->puanimation(519, 52, 519 + 900, 52 + 900, newMap, time);
+					time.pauseTime();
 					if (exit_sign)
 					{
 						break;
@@ -96,9 +107,11 @@ void g_game()
 			}
 		}
 	}
+	newAnimation->music_stop();
 	l_inRanking(score.getScore());//Record score, disaplay in leaderboard if the top five
 	delete button_stop;
 	delete button_back;
+	delete newAnimation;
 
 }
 

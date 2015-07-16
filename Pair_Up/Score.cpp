@@ -79,7 +79,7 @@ int Score::getScore()
 //The Interface that support for front-end 
 void Score::changeScore(int num, int com)
 {
-	score += int((30 * pow(1.5, num - 3) * com) + 0.5);
+	score += int((35 * pow(1.55, com) *(num-2)) + 0.5);
 }
 
 //PassScore

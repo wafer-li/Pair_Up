@@ -17,7 +17,6 @@ Animation::Animation(Option opt, Map map)
 	/////////////////////////////≥ı ºªØ∏˜÷÷¿‡–ÕÀÿ≤ƒÕº∆¨////////////////////////////////
 	
 
-	
 	BG = newimage();
 	PIECE_D = newimage();
 	for ( i_ = 0; i_ != 6; ++i_){
@@ -30,8 +29,6 @@ Animation::Animation(Option opt, Map map)
 			ss.clear();
 		}
 	}
-
-	//ss << "resource\\skin" << opt.getSkin() << "\\Skin" << opt.getSkin() << "_Piece_Special_" << opt.getSkin() << ".png";
 	ss << "resource\\skin" << opt.getSkin() << "\\Skin" << opt.getSkin() << "_Piece_Clear.png";
 	ss >> temp;
 	getimage(PIECE_D, temp.c_str(), 0, 0);
@@ -40,6 +37,21 @@ Animation::Animation(Option opt, Map map)
 	ss >> temp;
 	getimage(BG, temp.c_str(), 0, 0);
 	ss.clear();
+	///////////“Ù–ß/////////////////////////
+	ss << "resource\\skin" << opt.getSkin() << "\\bgm.mp3";
+	ss >> temp;
+	music_bgm.OpenFile(temp.c_str());
+	ss.clear();
+	ss << "resource\\skin" << opt.getSkin() << "\\disappear.wav";
+	ss >> temp;
+	music_disappear.OpenFile(temp.c_str());
+	ss.clear();
+	
+	ss << "resource\\skin" << opt.getSkin() << "\\combo.wav";
+	ss >> temp;
+	music_combo.OpenFile(temp.c_str());
+	ss.clear();
+
 
 	//////////////////////////////////////////º”‘ÿ‘›Õ£Õº∆¨////////////////////////////
 	game_exit = newimage();
@@ -47,8 +59,8 @@ Animation::Animation(Option opt, Map map)
 	game_stop = newimage();
 	COMBO = newimage();
 	getimage(game_stop, "resource\\BK.png", 0, 0);
-	getimage(game_start, "resource\\skin1\\Skin1_Piece_Special_2.png", 0, 0);
-	getimage(game_exit, "resource\\skin3\\Skin3_Piece_Special_2.png", 0, 0);
+	getimage(game_exit, "resource\\g_ctn.png", 0, 0); 
+	getimage(game_start, "resource\\g_Exit.png", 0, 0);
 	getimage(COMBO, "resource\\combo.png", 0, 0 );
 	//º”‘ÿ6*5=30’≈∆§∑Ù (6÷÷∑ΩøÈ√ø∏ˆ”–5÷÷Ãÿ ‚∑ΩøÈ£©
 
@@ -94,7 +106,9 @@ Animation::Animation(Option opt, Map map)
 }
 Animation::~Animation()
 {
-
+	music_bgm.Close();
+	music_combo.Close();
+	music_disappear.Close();
 }
 int Animation::puanimation(int startx, int starty, int wide, int high, Map&oriMap,Time& time)
 {
@@ -109,6 +123,8 @@ int Animation::puanimation(int startx, int starty, int wide, int high, Map&oriMa
 	PIMAGE BK_ = newimage();
 	getimage(BK_, x[0][0], y[0][0], Global::x_piece * 9, Global::y_piece*9);//±£¥ÊΩ¯––”√ªß≤Ÿ◊˜«∞µƒ”Œœ∑◊¥Ã¨Õº∆¨
 	int clock;
+	if (music_bgm.GetPlayStatus() == MUSIC_MODE_STOP)music_bgm.Play(0);
+	flushmouse();
 	for (;;)
 	{
 
@@ -126,19 +142,22 @@ int Animation::puanimation(int startx, int starty, int wide, int high, Map&oriMa
 		}
 		for (; !mousemsg();)
 		{
-			putimage(0, 200, 450, 100, BG, 0, 200);
+			putimage(0, 200, 510, 100, BG, 0, 200);
 			clock = time.getRemainTime();
-			xyprintf(70, 200, "Remain Time:%d",clock);       // Û±Í≤ª∂Ø ± ±º‰±‰∂Ø
+			xyprintf(70, 200, "Remain Time:");
+			xyprintf(70, 250, "%d",clock);       // Û±Í≤ª∂Ø ± ±º‰±‰∂Ø
 			if (clock <= 0){
 				flushmouse();
 				return 1;
 			}
+
 		}
 		_a = getmouse();
 		if (mousemsg()){
-			putimage(0, 200, 450, 100, BG, 0, 200);
+			putimage(0, 200, 510, 100, BG, 0, 200);
 			clock = time.getRemainTime();
-			xyprintf(70, 200, "Remain Time:%d", clock);          // Û±Í∂Ø ± ±º‰±‰∂Ø“ª¥Œ
+			xyprintf(70, 200, "Remain Time:");
+			xyprintf(70, 250, "%d", clock);          // Û±Í∂Ø ± ±º‰±‰∂Ø“ª¥Œ
 		}
 	
 		putimage(x[0][0], y[0][0], BK_);                // ‰≥ˆ≥ı ºÕº∆¨Ω¯––ªÊÕº£®÷˜“™ µœ÷∑ΩøÚπ¶ƒ‹£©
@@ -220,9 +239,10 @@ int Animation::animation_change(int i1, int n1, int startx, int starty, int wide
 	{
 		for (; !mousemsg();)
 		{
-			putimage(0, 200, 450, 100, BG, 0, 200);
+			putimage(0, 200, 510, 100, BG, 0, 200);
 			clock = time.getRemainTime();
-			xyprintf(70, 200, "Remain Time:%d", clock);      // Û±Í≤ª∂Ø ± ±º‰±‰∂Ø
+			xyprintf(70, 200, "Remain Time:");
+			xyprintf(70, 250, "%d", clock);     // Û±Í≤ª∂Ø ± ±º‰±‰∂Ø
 			if (clock <= 0){
 				flushmouse();
 				return 1;
@@ -230,9 +250,10 @@ int Animation::animation_change(int i1, int n1, int startx, int starty, int wide
 		}
 		_a = getmouse();
 		if (mousemsg()){
-			putimage(0, 200, 450, 100, BG, 0, 200); 
+			putimage(0, 200, 510, 100, BG, 0, 200);
 			clock = time.getRemainTime();
-			xyprintf(70, 200, "Remain Time:%d", clock);          // Û±Í∂Ø ± ±º‰±‰∂Ø“ª¥Œ
+			xyprintf(70, 200, "Remain Time:");
+			xyprintf(70, 250, "%d", clock);        // Û±Í∂Ø ± ±º‰±‰∂Ø“ª¥Œ
 		}
 		if (!((_a.x <= (startx + wide)) && (_a.x >= startx) && (_a.y <= (starty + high)) && (_a.y >= starty)))  // Û±Í «∑Ò‘⁄”Œœ∑«¯”Ú∑∂Œß
 		{
@@ -428,7 +449,7 @@ int Animation::animation_move(int i1, int n1, int i2, int n2)          //Ωªªª∂Øª
 	//delete(A);
 	return 0;
 }
-int Animation::animation_disappear(Map&oriMap)   //œ˚ ß∂Øª≠
+int Animation::animation_disappear(Map&oriMap,Time&time)   //œ˚ ß∂Øª≠
 {
 
 	int i_ = 0, n_ = 0;
@@ -444,6 +465,7 @@ int Animation::animation_disappear(Map&oriMap)   //œ˚ ß∂Øª≠
 		}
 
 	}
+	music_disappear.Play(0);
 	delay_ms(Global::delay_disappear);
 
 	for (i_=0; i_ < 9; i_++)
@@ -452,6 +474,7 @@ int Animation::animation_disappear(Map&oriMap)   //œ˚ ß∂Øª≠
 		if (appear[i_][n_] == 1)putimage_transparent(NULL,PIECE_BG[i_][n_],x[i_][n_], y[i_][n_],BLACK);
 
 		}
+	
 	//////////////////////////// ˝æ›¥¶¿Ì//////////////////
 	for (n_ = 0; n_ < 9; n_++)           //≥ı ºªØ≤πÕºµÙ¬‰∏ﬂ∂»
 	{
@@ -492,7 +515,7 @@ int Animation::animation_disappear(Map&oriMap)   //œ˚ ß∂Øª≠
 
 	}
 	*/
-	
+	lasttime = time.getRemainTime();
 	return 0;
 }
 
@@ -564,9 +587,10 @@ int Animation::animation_click(int i1, int n1, Map&oriMap,Time&time)            
 	{
 		for (; !mousemsg();)
 		{
-			putimage(0, 200, 450, 100, BG, 0, 200);
+			putimage(0, 200, 510, 100, BG, 0, 200);
 			clock = time.getRemainTime();
-			xyprintf(70, 200, "Remain Time:%d", clock); // Û±Í≤ª∂Ø ±º‰±‰∂Ø
+			xyprintf(70, 200, "Remain Time:");
+			xyprintf(70, 250, "%d", clock); // Û±Í≤ª∂Ø ±º‰±‰∂Ø
 			if (clock <= 0){
 				flushmouse();
 				return 1;
@@ -574,15 +598,12 @@ int Animation::animation_click(int i1, int n1, Map&oriMap,Time&time)            
 		}
 		a_ = getmouse();
 		if (mousemsg()){
-			putimage(0, 200, 450, 100, BG, 0, 200);        // Û±Í∂Ø ± ±º‰±‰∂Ø“ª¥Œ
+			putimage(0, 200, 510, 100, BG, 0, 200);
 			clock = time.getRemainTime();
-			xyprintf(70, 200, "Remain Time:%d", clock);
+			xyprintf(70, 200, "Remain Time:");
+			xyprintf(70, 250, "%d", clock);
 		}
-		if (mousemsg()){
-			putimage(0, 200, 450, 100, BG, 0, 200);
-			clock = time.getRemainTime();
-			xyprintf(70, 200, "Remain Time:%d", clock);
-		}
+		
 		if (a_.is_left())left++;
 
 		for (i_ = 0; i_ < 9 && (left == 0);i_++)      // Û±Í√ªµ„ª˜ ±ª≠øÚ
@@ -650,7 +671,7 @@ int Animation::animation_click(int i1, int n1, Map&oriMap,Time&time)            
 
 	return left;
 }
-int Animation::animation_fall_add(Map&oriMap,Score& score,Time& time,int combo)
+int Animation::animation_fall_add(Map&oriMap,Score& score, int combo)
 {
 	int i_ = 0, n_ = 0, d_ = 0, c_ = 0;//c_”√”⁄≈–∂œ∂Øª≠ «∑ÒΩ· ¯
 	////////////////////∏¸–¬ ˝æ›////////////////////////////////
@@ -671,9 +692,11 @@ int Animation::animation_fall_add(Map&oriMap,Score& score,Time& time,int combo)
 
 	}
 	//////////////////////////∑÷ ˝∏ƒ±‰//////////////////////////////
+	int newlevel = score.getLevel();
 	putimage(0, 400, 450, 300, BG, 0, 400);
-	xyprintf(70, 400, "%d/%d", score.getScore(), score.getPassScore());
-	xyprintf(70, 450, "level %d", score.getLevel());
+	xyprintf(70, 400, "Now:%d", score.getScore());
+	xyprintf(70, 550, "Atp:%d", score.getPassScore());
+	xyprintf(70, 600, "level %d", score.getLevel());
 
 	/////////////////////////////≤•∑≈∂Øª≠///////////////////////////
 
@@ -797,8 +820,17 @@ int Animation::animation_combo()
 	PIMAGE RE = newimage();
 	getimage(RE, 0, 0, 1476, 1016);
 	putimage_transparent(NULL, COMBO, Global::x_map_LT, Global::y_map_LT, BLACK);
+	music_combo.Play(0);
 	delay_ms(300);
 	putimage(0, 0, RE);
 	delimage(RE);
 	return 0;
+}
+void Animation::music_stop()
+{
+	this->music_bgm.Stop();
+}
+void Animation::music_start()
+{
+	this->music_bgm.Play(0);
 }
