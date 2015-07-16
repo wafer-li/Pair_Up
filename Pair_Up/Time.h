@@ -15,6 +15,8 @@ private:
 	double startPoint;
 	double resumePoint;
 
+	double pauseTimeBuffer;
+
 	//isStop
 	bool stopFlag;
 

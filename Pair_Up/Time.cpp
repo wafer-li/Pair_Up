@@ -11,6 +11,8 @@ Time::Time()
 	timeAmount = Global::INIT_TIME;
 	resumePoint = 0.0;
 
+	pauseTimeBuffer = 0.0;
+
 	//stopFlag
 	stopFlag= false;
 }
@@ -26,7 +28,7 @@ int Time::countRemainTime()
 	changePoint = fclock();
 	if (!stopFlag)
 	{
-		remainTimeBuffer = timeAmount - ((changePoint - (resumePoint - stopPoint)) - startPoint);
+		remainTimeBuffer = timeAmount - ((changePoint - pauseTimeBuffer) - startPoint);
 	}
 	else    //The Time is pause
 	{
@@ -53,6 +55,7 @@ void Time::resumeTime()
 {
 	stopFlag = false;
 	resumePoint = fclock();
+	pauseTimeBuffer += resumePoint - stopPoint;
 }
 
 bool Time::isStop()
