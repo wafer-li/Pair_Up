@@ -6,7 +6,7 @@
 #include <string>
 #include <sstream>
 int optionBK(){
-	cleardevice;
+	cleardevice();
 	std::stringstream ss;
 	std::string temp;
 	int mouseCheck = 0;

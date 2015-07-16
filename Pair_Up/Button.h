@@ -3,7 +3,7 @@
 #include"graphics15.h"
 #include<iostream>
 #include"Global.h"
-#include"Time.h";
+#include"Time.h"
 class Button
 {
 private:
