@@ -60,7 +60,7 @@ std::string messageBox()
 				{
 					userInput = userInput.substr(0, userInput.length() - 1);
 				}
-				putimage(492, 338, im_input);
+				putimage_transparent(NULL, im_input, 492, 338, BLACK);
 				outtextxy(84 + 492, 78 + 338, userInput.c_str());
 			}
 		}

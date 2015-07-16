@@ -33,6 +33,10 @@ void clearPiece(Map & map){
 				else if (map.maplists[i][j].getType() == map.maplists[i][j + 1].getType())//方块检查后j++调整j值
 				{
 					j++;
+					if (map.maplists[i][j].getSpecType() == 5)
+					{
+						break;
+					}
 				}
 				else
 					break;//若方块颜色不对，那么不进行上述的状态调整过程
@@ -69,6 +73,10 @@ void clearPiece(Map & map){
 				else if (map.maplists[j][i].getType() == map.maplists[j + 1][i].getType())//color 的判断方法有待斟酌
 				{
 					j++;
+					if (map.maplists[j][i].getSpecType() == 5)
+					{
+						break;
+					}
 				}
 				else
 					break;
