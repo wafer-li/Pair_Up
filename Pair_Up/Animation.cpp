@@ -17,7 +17,6 @@ Animation::Animation(Option opt, Map map)
 	/////////////////////////////初始化各种类型素材图片////////////////////////////////
 	
 
-	
 	BG = newimage();
 	PIECE_D = newimage();
 	for ( i_ = 0; i_ != 6; ++i_){
@@ -30,8 +29,6 @@ Animation::Animation(Option opt, Map map)
 			ss.clear();
 		}
 	}
-
-	//ss << "resource\\skin" << opt.getSkin() << "\\Skin" << opt.getSkin() << "_Piece_Special_" << opt.getSkin() << ".png";
 	ss << "resource\\skin" << opt.getSkin() << "\\Skin" << opt.getSkin() << "_Piece_Clear.png";
 	ss >> temp;
 	getimage(PIECE_D, temp.c_str(), 0, 0);
@@ -40,6 +37,22 @@ Animation::Animation(Option opt, Map map)
 	ss >> temp;
 	getimage(BG, temp.c_str(), 0, 0);
 	ss.clear();
+	///////////音效/////////////////////////
+	ss << "resource\\skin" << opt.getSkin() << "\\bgm.mp3";
+	ss >> temp;
+	music_bgm.OpenFile(temp.c_str());
+	ss.clear();
+	ss << "resource\\skin" << opt.getSkin() << "\\disappear.wav";
+	ss >> temp;
+	music_disappear.OpenFile(temp.c_str());
+	ss.clear();
+
+	ss << "resource\\skin" << opt.getSkin() << "\\combo.wav";
+	ss >> temp;
+	music_combo.OpenFile(temp.c_str());
+	ss.clear();
+
+
 
 	//////////////////////////////////////////加载暂停图片////////////////////////////
 	game_exit = newimage();
@@ -47,8 +60,8 @@ Animation::Animation(Option opt, Map map)
 	game_stop = newimage();
 	COMBO = newimage();
 	getimage(game_stop, "resource\\BK.png", 0, 0);
-	getimage(game_start, "resource\\skin1\\Skin1_Piece_Special_2.png", 0, 0);
-	getimage(game_exit, "resource\\skin3\\Skin3_Piece_Special_2.png", 0, 0);
+	getimage(game_start, "resource\\g_ctn.png", 0, 0);
+	getimage(game_exit, "resource\\g_Exit.png", 0, 0);
 	getimage(COMBO, "resource\\combo.png", 0, 0 );
 	//加载6*5=30张皮肤 (6种方块每个有5种特殊方块）
 
@@ -94,7 +107,9 @@ Animation::Animation(Option opt, Map map)
 }
 Animation::~Animation()
 {
-
+	music_bgm.Close();
+	music_combo.Close();
+	music_disappear.Close();
 }
 int Animation::puanimation(int startx, int starty, int wide, int high, Map&oriMap,Time& time)
 {
@@ -109,6 +124,8 @@ int Animation::puanimation(int startx, int starty, int wide, int high, Map&oriMa
 	PIMAGE BK_ = newimage();
 	getimage(BK_, x[0][0], y[0][0], Global::x_piece * 9, Global::y_piece*9);//保存进行用户操作前的游戏状态图片
 	int clock;
+	if (music_bgm.GetPlayStatus() == MUSIC_MODE_STOP)music_bgm.Play(0);
+	flushmouse();
 	for (;;)
 	{
 
@@ -444,6 +461,7 @@ int Animation::animation_disappear(Map&oriMap)   //消失动画
 		}
 
 	}
+	music_disappear.Play(0);
 	delay_ms(Global::delay_disappear);
 
 	for (i_=0; i_ < 9; i_++)
@@ -452,6 +470,7 @@ int Animation::animation_disappear(Map&oriMap)   //消失动画
 		if (appear[i_][n_] == 1)putimage_transparent(NULL,PIECE_BG[i_][n_],x[i_][n_], y[i_][n_],BLACK);
 
 		}
+	
 	////////////////////////////数据处理//////////////////
 	for (n_ = 0; n_ < 9; n_++)           //初始化补图掉落高度
 	{
@@ -797,8 +816,17 @@ int Animation::animation_combo()
 	PIMAGE RE = newimage();
 	getimage(RE, 0, 0, 1476, 1016);
 	putimage_transparent(NULL, COMBO, Global::x_map_LT, Global::y_map_LT, BLACK);
+	music_combo.Play(0);
 	delay_ms(300);
 	putimage(0, 0, RE);
 	delimage(RE);
 	return 0;
+}
+void Animation::music_stop()
+{
+	this->music_bgm.Stop();
+}
+void Animation::music_start()
+{
+	this->music_bgm.Play(0);
 }
