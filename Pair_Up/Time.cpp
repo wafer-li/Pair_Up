@@ -9,9 +9,10 @@ Time::Time()
 	stopPoint = 0.0;
 	changePoint = 0.0;
 	timeAmount = Global::INIT_TIME;
+	resumePoint = 0.0;
 
-	//isStop
-	isStop= false;
+	//stopFlag
+	stopFlag= false;
 }
 
 Time::~Time()
@@ -23,9 +24,9 @@ int Time::countRemainTime()
 {
 	double  remainTimeBuffer;
 	changePoint = fclock();
-	if (!isStop)
+	if (!stopFlag)
 	{
-		remainTimeBuffer = timeAmount - ((changePoint - stopPoint) - startPoint);
+		remainTimeBuffer = timeAmount - ((changePoint - (resumePoint - stopPoint)) - startPoint);
 	}
 	else    //The Time is pause
 	{
@@ -44,13 +45,19 @@ int Time::getRemainTime()
 //Pause the RemainTime subtract
 void Time::pauseTime()
 {
+	stopFlag = true;
 	stopPoint = fclock();
-	isStop = true;
 }
 
 void Time::resumeTime()
 {
-	isStop = false;
+	stopFlag = false;
+	resumePoint = fclock();
+}
+
+bool Time::isStop()
+{
+	return stopFlag;
 }
 
 void Time::addTime(Score & score)

@@ -650,7 +650,7 @@ int Animation::animation_click(int i1, int n1, Map&oriMap,Time&time)            
 
 	return left;
 }
-int Animation::animation_fall_add(Map&oriMap,Score& score,Time& time,int combo)
+int Animation::animation_fall_add(Map&oriMap,Score& score, int combo)
 {
 	int i_ = 0, n_ = 0, d_ = 0, c_ = 0;//c_用于判断动画是否结束
 	////////////////////更新数据////////////////////////////////

@@ -17,6 +17,10 @@ Map::Map()
 //Dtor
 Map::~Map()
 {
+	for (int i = 0; i < MAX_SIZE; i++)
+	{
+		maplists[i].~deque<Piece>();
+	}
 }
 
 //Method
