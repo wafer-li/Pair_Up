@@ -35,9 +35,9 @@ void g_game()
 	Time time;
 
 	while (restOfLive)
-	{
+	{	//如果是死图则重置地图
 		isDeadMap = newMap.g_isDeadMap();
-		//+if(button.exit_inGame())
+		
 			if (isDeadMap)
 			{
 				if (!time.isStop())
@@ -46,6 +46,7 @@ void g_game()
 				}
 				g_deleteMap(newMap);
 				Map & newMap = g_makeMap();
+				//匹配动画
 				newAnimation->animation_newmap(newMap);
 			}
 			else
@@ -66,21 +67,24 @@ void g_game()
 					int removeNum = 0;
 
 					clearPiece(newMap);
-
+					//如果有能消除的 则消除
 					newAnimation->animation_disappear(newMap,time);
+					//补充地图
 					removeNum = g_P_S_R(newMap);
 
 					//Change score & level and add time
 					score.changeScore(removeNum, combo);
 					while (score.levelUp())
-					{
+					{	
+						//升级加时间
 						time.addTime(score);
 						continue;
 					}
-
+					//匹配动画
 					newAnimation->animation_fall_add(newMap, score,time, combo);
 				}
 
+				//死旗
 				isDeadMap = newMap.g_isDeadMap();
 				if (!isDeadMap)
 				{

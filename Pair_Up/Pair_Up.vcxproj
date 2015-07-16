@@ -39,8 +39,8 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <IncludePath>C:\Users\lds\Desktop\Pair_Up-master\ege15\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\lds\Desktop\Pair_Up-master\ege15\lib\vc2013\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>E:\Library\EGE2015\include;$(IncludePath)</IncludePath>
+    <LibraryPath>E:\Library\EGE2015\\lib\vc2013\lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
