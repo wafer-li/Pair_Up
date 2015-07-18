@@ -71,6 +71,16 @@ Button::~Button()
 	}
 	cho = 0;
 	button_i--;
+	delimage(button_M[button_i]);
+	delimage(button_O[button_i]);
+
+	if (button_i == 0)
+	{
+		delimage(button_allP);
+		delimage(button_RP);
+
+
+	}
 	
 }
 int Button::setbutton(int startx, int starty, int wide, int high)//执行函数的范围起始点X,Y,宽度，高度,     /*本函数将按钮三态图整合到背景上并重新保存图片以减少输出图片的次数*/
